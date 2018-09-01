@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+<meta name="verify-v1" content="to5fyZrE21N0BBaJ4y+1ouSV7VAwf34HKcfayE7S+CQ=" />
+
+<meta name="description" content="NSA logo maker. Roll your own logo by adjusting the texts in the logo of various major brands."/>
+
+
+<meta name="keywords" content="personalize, logo, heineken. beer, label, corona, budweiser"/>
+
+
+<link rel="shortcut icon" href="/static/base/img/favicon.ico"/>
+<title>NSA Logo | Festisite</title>
+
+<link rel="stylesheet" href="/static/CACHE/css/a6392bb67c62.css" type="text/css" />
+
+
+
+
+
+
+
+</head>
+<body>
+
+<div class="genr-page-frame">
+
+  <div class="genr-page-sidebar">
+    <div class="navbar genr-navbar-aside genr-navbar-aside-generatorgroups">
+      <div class="navbar-header">
+        <a class="navbar-brand">Logo</a>
+      </div>
+    </div>
+
+    <div id="genr_groups" class="genr-thumbbrowser">
+      <ul class="thumbrow">
+        
+        
+        <li><a data-group="money" data-instance="us_dollar_1"   href="/money/us_dollar_1/" title="A huge collection of free money templates. Many foreign currencies are supported. Have fun creating your own play money."><span class="grt grt-index grt-index-money" ></span>Money</a></li>
+        
+        
+        
+        <li><a data-group="cardgame" data-instance="queen_spades"   href="/cardgame/queen_spades/" title="A free, personalizable, deck of cards template. Simply upload a photo of yourself and become the King of Clubs or Queen of Hearts."><span class="grt grt-index grt-index-cardgame" ></span>Cardgame</a></li>
+        
+        
+        
+        <li><a data-group="logo" data-instance="nasa" class="selected"  href="/logo/nasa/" title="Create your own logo, or adjust the texts of various well known logos."><span class="grt grt-index grt-index-logo" ></span>Logo</a></li>
+        
+        
+        
+        <li><a data-group="profile-pictures" data-instance="instagram"   href="/profile-pictures/instagram/" title="Create yourself an original profile picture using these free templates."><span class="grt grt-index grt-index-profile-pictures" ></span>Profile Pictures</a></li>
+        
+        
+        
+        <li><a data-group="animated-gifs" data-instance="endless-face-zoom"   href="/animated-gifs/endless-face-zoom/" title="Easily create original animated GIFs based on your own photo."><span class="grt grt-index grt-index-animated-gifs" ></span>Animated GIFs</a></li>
+        
+        
+        
+        <li><a data-group="posters" data-instance="uncle-sam-wants-you"   href="/posters/uncle-sam-wants-you/" title="Various free poster templates. For example, create your own &quot;WANTED!&quot; poster."><span class="grt grt-index grt-index-posters" ></span>Posters</a></li>
+        
+        
+        
+        <li><a data-group="documents" data-instance="drivers-license/usa/new-york"   href="/documents/drivers-license/usa/new-york/" title="Templates that allow you to create fake play versions of official documents."><span class="grt grt-index grt-index-documents" ></span>Documents</a></li>
+        
+        
+        
+        <li><a data-group="traffic-signs" data-instance="interstate-shield"   href="/traffic-signs/interstate-shield/" title="Free adjustable traffic sign templates. Create a stop sign with your photo in it!"><span class="grt grt-index grt-index-traffic-signs" ></span>Traffic Signs</a></li>
+        
+        
+        
+        
+        
+        <li><a data-group="poemgen" data-instance="love"   href="/love/poems/" title="Stuck in a writer&#39;s block? Try our automated poem generators!"><span class="grt grt-index grt-index-poemgen" ></span>Poems</a></li>
+        
+        
+        
+        <li><a data-group="partyprinter" data-instance="rebus"   href="/rebus/" title="Spice up your texts using various text effects: turn text into a rebus or spiralling heart."><span class="grt grt-index grt-index-partyprinter" ></span>Text Layout</a></li>
+        
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="genr-page-content genr-generatorspage">
+    <div class="genr-page-frame">
+      <!-- Sidebar -->
+      <div class="genr-page-sidebar navbar-inverse">
+        <div class="navbar genr-navbar-aside genr-navbar-aside-generators">
+          <div class="navbar-header">
+        <button id="otoggle" type="button" class="pull-left navbar-toggle">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand">Logo</a>
+
+          </div>
+        </div>
+
+        <div id="genr_instances" class="genr-thumbbrowser">
+          <ul class="thumbrow">
+            
+            <li><a data-group="logo" data-instance="budweiser"  href="/logo/budweiser/" title="Budweiser"><span class="grt grt-logo grt-logo-budweiser"></span>Budweiser</a></li>
+            
+            <li><a data-group="logo" data-instance="burger-king"  href="/logo/burger-king/" title="Burger King"><span class="grt grt-logo grt-logo-burger-king"></span>Burger King</a></li>
+            
+            <li><a data-group="logo" data-instance="bengals"  href="/logo/bengals/" title="Cincinnati Bengals"><span class="grt grt-logo grt-logo-bengals"></span>Bengals</a></li>
+            
+            <li><a data-group="logo" data-instance="converse-all-star"  href="/logo/converse-all-star/" title="Converse All Star"><span class="grt grt-logo grt-logo-converse-all-star"></span>Converse</a></li>
+            
+            <li><a data-group="logo" data-instance="corona_extra"  href="/logo/corona_extra/" title="Corona"><span class="grt grt-logo grt-logo-corona_extra"></span>Corona Extra</a></li>
+            
+            <li><a data-group="logo" data-instance="costa-coffee"  href="/logo/costa-coffee/" title="Costa Coffee"><span class="grt grt-logo grt-logo-costa-coffee"></span>Costa</a></li>
+            
+            <li><a data-group="logo" data-instance="maker"  href="/logo/maker/" title="DIY White Label"><span class="grt grt-logo grt-logo-maker"></span>DIY Logo</a></li>
+            
+            <li><a data-group="logo" data-instance="broncos"  href="/logo/broncos/" title="Denver Broncos"><span class="grt grt-logo grt-logo-broncos"></span>Broncos</a></li>
+            
+            <li><a data-group="logo" data-instance="dominos_pizza"  href="/logo/dominos_pizza/" title="Domino&#39;s Pizza"><span class="grt grt-logo grt-logo-dominos_pizza"></span>Domino&#39;s</a></li>
+            
+            <li><a data-group="logo" data-instance="emirates"  href="/logo/emirates/" title="Emirates"><span class="grt grt-logo grt-logo-emirates"></span>Emirates</a></li>
+            
+            <li><a data-group="logo" data-instance="fc-barcelona"  href="/logo/fc-barcelona/" title="FC Barcelona"><span class="grt grt-logo grt-logo-fc-barcelona"></span>FC Barcelona</a></li>
+            
+            <li><a data-group="logo" data-instance="facebook"  href="/logo/facebook/" title="Facebook"><span class="grt grt-logo grt-logo-facebook"></span>Facebook</a></li>
+            
+            <li><a data-group="logo" data-instance="ferrari"  href="/logo/ferrari/" title="Ferrari"><span class="grt grt-logo grt-logo-ferrari"></span>Ferrari</a></li>
+            
+            <li><a data-group="logo" data-instance="ford"  href="/logo/ford/" title="Ford"><span class="grt grt-logo grt-logo-ford"></span>Ford</a></li>
+            
+            <li><a data-group="logo" data-instance="google"  href="/logo/google/" title="Google"><span class="grt grt-logo grt-logo-google"></span>Google</a></li>
+            
+            <li><a data-group="logo" data-instance="google-classic"  href="/logo/google-classic/" title="Google Classic"><span class="grt grt-logo grt-logo-google-classic"></span>Google Classic</a></li>
+            
+            <li><a data-group="logo" data-instance="packers"  href="/logo/packers/" title="Green Bay Packers"><span class="grt grt-logo grt-logo-packers"></span>Packers</a></li>
+            
+            <li><a data-group="logo" data-instance="harvard"  href="/logo/harvard/" title="Harvard"><span class="grt grt-logo grt-logo-harvard"></span>Harvard</a></li>
+            
+            <li><a data-group="logo" data-instance="heineken"  href="/logo/heineken/" title="Heineken"><span class="grt grt-logo grt-logo-heineken"></span>Heineken</a></li>
+            
+            <li><a data-group="logo" data-instance="instagram"  href="/logo/instagram/" title="Instagram"><span class="grt grt-logo grt-logo-instagram"></span>Instagram</a></li>
+            
+            <li><a data-group="logo" data-instance="kfc"  href="/logo/kfc/" title="KFC"><span class="grt grt-logo grt-logo-kfc"></span>KFC</a></li>
+            
+            <li><a data-group="logo" data-instance="lego"  href="/logo/lego/" title="Lego"><span class="grt grt-logo grt-logo-lego"></span>Lego</a></li>
+            
+            <li><a data-group="logo" data-instance="mall_of_america"  href="/logo/mall_of_america/" title="Mall of America"><span class="grt grt-logo grt-logo-mall_of_america"></span>Mall of America</a></li>
+            
+            <li><a data-group="logo" data-instance="manchester-united"  href="/logo/manchester-united/" title="Manchester United"><span class="grt grt-logo grt-logo-manchester-united"></span>Manchester United</a></li>
+            
+            <li><a data-group="logo" data-instance="vikings"  href="/logo/vikings/" title="Minnesota Vikings"><span class="grt grt-logo grt-logo-vikings"></span>Vikings</a></li>
+            
+            <li><a data-group="logo" data-instance="modelo-especial"  href="/logo/modelo-especial/" title="Modelo Especial"><span class="grt grt-logo grt-logo-modelo-especial"></span>Modelo Especial</a></li>
+            
+            <li><a data-group="logo" data-instance="nasa"  href="/logo/nasa/" title="NASA"><span class="grt grt-logo grt-logo-nasa"></span>NASA</a></li>
+            
+            <li><a data-group="logo" data-instance="nsa" class="selected" href="/logo/nsa/" title="NSA"><span class="grt grt-logo grt-logo-nsa"></span>NSA</a></li>
+            
+            <li><a data-group="logo" data-instance="national_guard"  href="/logo/national_guard/" title="National Guard"><span class="grt grt-logo grt-logo-national_guard"></span>National Guard</a></li>
+            
+            <li><a data-group="logo" data-instance="nike"  href="/logo/nike/" title="Nike"><span class="grt grt-logo grt-logo-nike"></span>Nike</a></li>
+            
+            <li><a data-group="logo" data-instance="patriots"  href="/logo/patriots/" title="Patriots"><span class="grt grt-logo grt-logo-patriots"></span>Patriots</a></li>
+            
+            <li><a data-group="logo" data-instance="prada"  href="/logo/prada/" title="Prada"><span class="grt grt-logo grt-logo-prada"></span>Prada</a></li>
+            
+            <li><a data-group="logo" data-instance="super-mario"  href="/logo/super-mario/" title="Super Mario"><span class="grt grt-logo grt-logo-super-mario"></span>Super Mario</a></li>
+            
+            <li><a data-group="logo" data-instance="tpb"  href="/logo/tpb/" title="The Pirate Bay"><span class="grt grt-logo grt-logo-tpb"></span>Pirate Bay</a></li>
+            
+            <li><a data-group="logo" data-instance="tsingtao"  href="/logo/tsingtao/" title="Tsingtao Beer"><span class="grt grt-logo grt-logo-tsingtao"></span>Tsingtao</a></li>
+            
+            <li><a data-group="logo" data-instance="versace"  href="/logo/versace/" title="Versace"><span class="grt grt-logo grt-logo-versace"></span>Versace</a></li>
+            
+            <li><a data-group="logo" data-instance="whiskey-label"  href="/logo/whiskey-label/" title="Whiskey Label"><span class="grt grt-logo grt-logo-whiskey-label"></span>Whiskey Label</a></li>
+            
+            <li><a data-group="logo" data-instance="wimbledon"  href="/logo/wimbledon/" title="Wimbledon"><span class="grt grt-logo grt-logo-wimbledon"></span>Wimbledon</a></li>
+            
+            <li><a data-group="logo" data-instance="youtube"  href="/logo/youtube/" title="YouTube"><span class="grt grt-logo grt-logo-youtube"></span>YouTube</a></li>
+            
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Page Content -->
+      <div class="genr-page-content genr-mainpage">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button id="menu-toggle" type="button" class="navbar-toggle collapsed pull-left">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <h1 class="navbar-brand">NSA</h1>
+
+              
+              <p class="hide">NSA logo maker. Roll your own logo by adjusting the texts in the logo of various major brands.
+              </p>
+              
+
+              
+              <div class="visible-xs">
+                <a id="edit-button" class="genr-navaction pull-right btn btn-primary" href="#">Edit</a>
+                <a style="display: none" id="done-button" class="genr-navaction pull-right btn btn-success" href="#">Finish</a>
+              </div>
+              
+            </div>
+
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="mailto:info@festisite.com">Contact</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+        <div class="genr-canvas">
+          <div class="container-fluid">
+
+            <div class="row">
+              <div class="col-lg-9">
+
+
+                <div class="visible-md visible-lg genr-panel genr-panel-adbar">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 468x15, gemaakt 14-5-10 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:15px"
+     data-ad-client="ca-pub-6852649428294230"
+     data-ad-slot="4411396025"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+
+                <div class="visible-sm visible-xs genr-panel genr-panel-adbar">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Mobile link units -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:200px;height:90px"
+     data-ad-client="ca-pub-6852649428294230"
+     data-ad-slot="7993358926"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+
+                
+
+                <div style="" class="genr-panel genr-panel-canvas genr-logo genr-logo-nsa  genr-panel-partylogo ">
+                  
+<div class="gc-canvas" id="ig-canvas" data-def="{&quot;canvas&quot;: {&quot;height&quot;: 450, &quot;width&quot;: 450, &quot;scale_to_fit&quot;: true, &quot;background&quot;: &quot;#ffffff&quot;}, &quot;overlay&quot;: {&quot;img&quot;: {&quot;src&quot;: &quot;/static/partylogo/img/logos/nsa.png&quot;}}, &quot;fb_app_id&quot;: &quot;109994749071449&quot;, &quot;generator&quot;: {&quot;id&quot;: &quot;nsa&quot;, &quot;name&quot;: &quot;NSA&quot;}, &quot;urls&quot;: {&quot;share_twitter&quot;: &quot;/share/twitter/login/&quot;}}"></div>
+
+
+
+
+
+                  
+                </div>
+
+              </div>
+
+              <div class="col-lg-3">
+                <div class="visible-lg">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Festisite Genr Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6852649428294230"
+     data-ad-slot="4291326527"
+     data-ad-format="vertical"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+                <div class="visible-md hidden-lg genr-panel genr-panel-adbar">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 468x15, gemaakt 14-5-10 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:15px"
+     data-ad-client="ca-pub-6852649428294230"
+     data-ad-slot="4411396025"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="genr-toolbar genr-logo-nsa">
+            
+<form id="partylogo-form" method="post" action="/logo/nsa/">
+  <input type='hidden' name='csrfmiddlewaretoken' value='q4BPL9mAXdgd2jN6Ae7p87KN0XzxfXWhjXp3fUvaHG842teKsH7rB6lCO0YpuXpo' />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-lg-8">
+        <div class="form-horizontal">
+          
+<div class="row">
+  
+
+  <div
+     
+     class="col-md-12"
+     
+     >
+    
+
+    
+    <input id="id_nsa" placeholder="National Security Agency" name="nsa" class="form-control" type="text" value="National Security Agency"/>
+    
+  </div>
+  
+</div>
+
+<div class="row">
+  
+
+  <div
+     
+     class="col-md-12"
+     
+     >
+    
+
+    
+    <input id="id_usa" placeholder="United States of America" name="usa" class="form-control" type="text" value="United States of America"/>
+    
+  </div>
+  
+</div>
+
+<div class="row hidden-lg">
+  <div class="col-md-12 text-right">
+    <button type="button" class="btn btn-primary genr-btn-download">Download</button>
+  </div>
+</div>
+
+
+
+
+
+        </div>
+      </div>
+      <div class="col-lg-4 visible-lg" id="download-controls">
+        <input type="hidden" name="final" value=""/>
+        <button id="download-button" type="button" class="btn btn-primary btn-lg genr-btn-download">Download</button>
+
+        <div class="checkbox">
+          <label for="id_hires">
+            <input id="id_hires" type="checkbox" name="hires"/>
+            High-resolution
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="/static/CACHE/js/d72a225471c8.js"></script>
+
+<script type="text/javascript">
+$(function() {
+var opts = {
+group: 'logo',
+generator: 'nsa',
+fb_app_id: '109994749071449',
+group_urls: {
+
+"money": '/money/us_dollar_1/'
+,
+
+"cardgame": '/cardgame/queen_spades/'
+,
+
+"logo": '/logo/nasa/'
+,
+
+"profile-pictures": '/profile-pictures/instagram/'
+,
+
+"animated-gifs": '/animated-gifs/endless-face-zoom/'
+,
+
+"posters": '/posters/uncle-sam-wants-you/'
+,
+
+"documents": '/documents/drivers-license/usa/new-york/'
+,
+
+"traffic-signs": '/traffic-signs/interstate-shield/'
+,
+
+"iphone": '/iphone/'
+,
+
+"poemgen": '/love/poems/'
+,
+
+"partyprinter": '/rebus/'
+
+
+}
+};
+genr.init(opts);
+
+
+ });
+</script>
+
+
+<div class="genr-popover" id="genr-imgpicker-dialog">
+<div class="dlg">
+  <a href="#" class="close">&times;</a>
+<div class="genr-arrow"></div>
+
+  <h1 class="genr-imgpicker-all">
+    <a class="genr-imgpicker-modesel" data-mode="color" href="#">Color</a>
+    or <a class="genr-imgpicker-modesel" data-mode="img" href="#">Image</a></h1>
+  <h1 class="genr-imgpicker-img">Upload Photo</h1>
+  <h1 class="genr-imgpicker-color">Color</h1>
+
+  <div class="genr-imgpicker-mode-color">
+    <div class="preview">
+      <div style="text-align:center">
+        <div class="genr-imgpicker-photo-wrap">
+          <div class="genr-palette-wrap">
+            <div class="genr-palette">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dlg-controls">
+    </div>
+
+
+  </div>
+
+  <div class="genr-imgpicker-mode-img">
+    <div id="genr-imgpicker-preview" class="preview">
+      <div class="genr-imgpicker-photo-wrap"><div id="genr-imgpicker-face-rect" class="genr-face-rect"></div><div id="genr-imgpicker-photo" class="photo"></div></div>
+      <img id="genr-imgpicker-spinner" class="spinner" src="/static/genr/img/spinner.gif" alt=""/>
+    </div>
+
+    <form class="genr-imgpicker-upload" action="" method="post" enctype="multipart/form-data">
+      <input type='hidden' name='csrfmiddlewaretoken' value='q4BPL9mAXdgd2jN6Ae7p87KN0XzxfXWhjXp3fUvaHG842teKsH7rB6lCO0YpuXpo' />
+        <input type="hidden" name="tpl" value=""/>
+        <input type="hidden" name="is_ajax" value="1" />
+        <input type="hidden" name="slot"/>
+      <div class="dlg-controls">
+        <label class="btn btn-primary">
+        <input type="file" name="image"/>
+        Upload
+        </label>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(event) {
+    window.cookieChoices && cookieChoices.showCookieConsentBar && cookieChoices.showCookieConsentBar(
+        (window.cookieOptions && cookieOptions.msg) || 'We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information you’ve provided to them or they’ve collected from your use of their services.',
+        (window.cookieOptions && cookieOptions.close) || 'Got it',
+        (window.cookieOptions && cookieOptions.learn) || 'Learn more',
+        (window.cookieOptions && cookieOptions.link) || 'http://www.intenct.info/about/privacy/');
+});
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84379-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+</body>
+</html>

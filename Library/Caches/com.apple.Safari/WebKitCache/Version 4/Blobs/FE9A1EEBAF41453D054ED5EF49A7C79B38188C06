@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var o=t[n]={exports:{}};e[n][0].call(o.exports,function(t){var o=e[n][1][t];return r(o||t)},o,o.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(e,t,n){function r(){}function o(e,t,n){return function(){return i(e,[f.now()].concat(u(arguments)),t?null:this,n),t?void 0:this}}var i=e("handle"),a=e(2),u=e(3),c=e("ee").get("tracer"),f=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,t){s[t]=o(d+t,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),t.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,t){var n={},r=this,o="function"==typeof t;return i(l+"tracer",[f.now(),e,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],n),o)try{return t.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],n),e}finally{c.emit("fn-end",[f.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){m[t]=o(l+t)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,f.now()])}},{}],2:[function(e,t,n){function r(e,t){var n=[],r="",i=0;for(r in e)o.call(e,r)&&(n[i]=t(r,e[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],3:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,o=n-t||0,i=Array(o<0?0:o);++r<o;)i[r]=e[t+r];return i}t.exports=r},{}],4:[function(e,t,n){t.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,t,n){function r(){}function o(e){function t(e){return e&&e instanceof r?e:e?c(e,u,i):i()}function n(n,r,o,i){if(!d.aborted||i){e&&e(n,r,o);for(var a=t(o),u=m(n),c=u.length,f=0;f<c;f++)u[f].apply(a,r);var p=s[y[n]];return p&&p.push([b,n,r,a]),a}}function l(e,t){v[e]=m(e).concat(t)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(n)}function g(e,t){f(e,function(e,n){t=t||"feature",y[n]=t,t in s||(s[t]=[])})}var v={},y={},b={on:l,emit:n,get:w,listeners:m,context:t,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",c=e("gos"),f=e(2),s={},p={},d=t.exports=o();d.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(o.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[t]=r,r}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){o.buffer([e],r),o.emit(e,t,n)}var o=e("ee").get("handle");t.exports=r,r.ee=o},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!x++){var e=h.info=NREUM.info,t=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return s.abort();f(y,function(t,n){e[t]||(e[t]=n)}),c("mark",["onload",a()+h.offset],null,"api");var n=d.createElement("script");n.src="https://"+e.agent,t.parentNode.insertBefore(n,t)}}function o(){"complete"===d.readyState&&i()}function i(){c("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),c=e("handle"),f=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1071.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=t.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),c("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>
+
+		<!-- HTML5 shim and Respond.js. Brings IE 8 into the 21st century. -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<title>
+			Python Central | Python Programming Examples, Tutorials and Recipes		</title>
+
+		<link rel="profile" href="https://gmpg.org/xfn/11" />
+		<link rel="pingback" href="https://www.pythoncentral.io/xmlrpc.php" />
+		<link rel="stylesheet" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+		
+		
+<!-- This site is optimized with the Yoast SEO plugin v6.3.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Python Central is a one-stop resource for Python programmers. It&#039;s a treasure trove of know-how about the Python programming language - check us out today!"/>
+<link rel="canonical" href="https://www.pythoncentral.io/" />
+<link rel="next" href="https://www.pythoncentral.io/page/2/" />
+<link rel="publisher" href="https://plus.google.com/PythoncentralIo"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Python Central" />
+<meta property="og:description" content="Python Programming Examples, Tutorials and Recipes" />
+<meta property="og:url" content="https://www.pythoncentral.io/" />
+<meta property="og:site_name" content="Python Central" />
+<meta property="og:image" content="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="Python Central is a one-stop resource for Python programmers. It&#039;s a treasure trove of know-how about the Python programming language - check us out today!" />
+<meta name="twitter:title" content="Python Central | Python Programming Examples, Tutorials and Recipes" />
+<meta name="twitter:site" content="@PythonCentral" />
+<meta name="twitter:image" content="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif" />
+<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/www.pythoncentral.io\/","name":"Python Central","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.pythoncentral.io\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s25033.pcdn.co\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.7"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='yarppWidgetCss-css'  href='https://s25033.pcdn.co/wp-content/plugins/yet-another-related-posts-plugin/style/widget.css?ver=4.9.7' type='text/css' media='all' />
+<link rel='stylesheet' id='cdv8-gdpr-cookieconsent-csslib-css'  href='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css?ver=4.9.7' type='text/css' media='all' />
+<link rel='stylesheet' id='twitter-bootstrap-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/bootstrap/css/bootstrap.min.css?ver=3.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-style-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/css/style.min.css?ver=2.1' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-style-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/style.css?ver=1.0' type='text/css' media='all' />
+            <script>
+                if (document.location.protocol != "https:") {
+                    document.location = document.URL.replace(/^http:/i, "https:");
+                }
+            </script>
+            <script type='text/javascript' src='https://s25033.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/bootstrap/js/bootstrap.min.js?ver=3.1.1'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/typeahead/typeahead.jquery.min.js?ver=0.10.1'></script>
+<link rel='https://api.w.org/' href='https://www.pythoncentral.io/wp-json/' />
+    <link rel="apple-touch-icon" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" type="image/png" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/favicon.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/favicon.ico">
+    <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		<style type="text/css" id="wp-custom-css">
+			/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+
+.container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
+margin-right: 0px;
+margin-left: 0px;
+}
+
+#div-gpt-ad-1510621959781-3 {
+margin-top:1em;
+text-align:center;
+}
+
+.ul, ol{
+overflow: hidden;
+}
+
+.alert-info{
+overflow:hidden;
+}
+		</style>
+	
+<!-- Adsense -->
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+	var width = window.outerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	if (width < 366) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [300, 250], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [300, 250], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [320, 100], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 750) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [336, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [320, 100], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 990) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [720, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [728, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 1200) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [940, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Sidebar_300x600', [300, 600], 'div-gpt-ad-1510621959781-2').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [940, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [848, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Sidebar_300x600', [300, 600], 'div-gpt-ad-1510621959781-2').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [940, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	}
+   	googletag.pubads().collapseEmptyDivs();
+    	googletag.enableServices();
+  });
+</script>
+<!-- Adsense End -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-65994140-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- TODO move out of inline, into scss -->
+<style>
+h1.bolder{
+  font-size: 21px;
+  color: #444;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+}
+
+</style>
+	</head>
+
+	<body data-rsssl=1 class="home blog">
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- Facebook SDK end -->
+
+		<header id="header" role="banner" class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+
+
+		        <div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<a title="Python Central" href="https://www.pythoncentral.io">
+						<img alt="Python Central Logo"
+							 src="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.svg"
+							 onerror="this.onerror = null; this.src = 'https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif'"
+							 id="logo" class="non-responsive">
+					</a>
+		        </div>
+
+				<nav id="primary-nav" class="collapse navbar-collapse">
+					<ul id="menu-top-menu" class="nav navbar-nav"><li id="menu-item-2886" class="menu-item-2886"><a title="Python Tips &#038; Tricks" href="https://www.pythoncentral.io/category/python-tips-tricks-hacks-idioms/"><span class="glyphicon "></span>&nbsp;Tips &#038; Tricks</a></li>
+<li id="menu-item-2875" class="menu-item-2875"><a title="Python How Tos" href="https://www.pythoncentral.io/category/python-how-tos/"><span class="glyphicon "></span>&nbsp;How Tos</a></li>
+<li id="menu-item-2876" class="menu-item-2876 dropdown"><a href="https://www.pythoncentral.io/category/python-library-tutorials/"><span class="glyphicon "></span>&nbsp;Libraries <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3379" class="menu-item-3379"><a title="Python SQLAlchemy Tutorial" href="https://www.pythoncentral.io/series/python-sqlalchemy-database-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;SQLAlchemy</a></li>
+	<li id="menu-item-3374" class="menu-item-3374"><a title="Python Django Tutorial" href="https://www.pythoncentral.io/series/python-django-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Django</a></li>
+	<li id="menu-item-3373" class="menu-item-3373"><a title="Python PySide/PyQt Tutorial" href="https://www.pythoncentral.io/series/python-pyside-pyqt-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;PySide / PyQt</a></li>
+	<li id="menu-item-3371" class="menu-item-3371"><a title="Python SQLite Tutorial" href="https://www.pythoncentral.io/series/python-sqlite-database-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;SQLite</a></li>
+	<li id="menu-item-3369" class="menu-item-3369"><a title="Python Android Scripting Layer (SL4A) Tutorial" href="https://www.pythoncentral.io/series/python-sl4a-android-scripting-layer-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Android Scripting Layer (SL4A)</a></li>
+</ul>
+</li>
+<li id="menu-item-2867" class="menu-item-2867 dropdown"><a title="Python Tutorials" href="https://www.pythoncentral.io/category/python-tutorials/"><span class="glyphicon "></span>&nbsp;Tutorials <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3376" class="menu-item-3376"><a title="Encoding and Decoding Python Strings" href="https://www.pythoncentral.io/series/python-encoding-decoding-strings/"><span class="glyphicon glyphicon-book"></span>&nbsp;Encoding and Decoding</a></li>
+	<li id="menu-item-3375" class="menu-item-3375"><a title="Python Regular Expressions" href="https://www.pythoncentral.io/series/python-regular-expressions-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Regular Expressions</a></li>
+	<li id="menu-item-3378" class="menu-item-3378"><a title="Python Classes Tutorial" href="https://www.pythoncentral.io/series/python-classes-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Classes</a></li>
+</ul>
+</li>
+<li id="menu-item-2872" class="menu-item-2872 dropdown"><a title="Python Recipes" href="https://www.pythoncentral.io/category/python-recipes/"><span class="glyphicon "></span>&nbsp;Recipes <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3377" class="menu-item-3377"><a title="Python Recursive File and Directory Manipulation" href="https://www.pythoncentral.io/series/python-recursive-file-and-directory-manipulation/"><span class="glyphicon glyphicon-book"></span>&nbsp;Recursion</a></li>
+</ul>
+</li>
+<li id="menu-item-2887" class="menu-item-2887"><a title="Python Tools" href="https://www.pythoncentral.io/category/python-related-tools/"><span class="glyphicon "></span>&nbsp;Tools</a></li>
+<li id="menu-item-3301" class="menu-item-3301"><a title="Python API Tutorials" href="https://www.pythoncentral.io/category/python-api/"><span class="glyphicon "></span>&nbsp;API</a></li>
+<li id="menu-item-31" class="menu-item-31 dropdown"><a title="About Python Cenral" href="https://www.pythoncentral.io/about/"><span class="glyphicon "></span>&nbsp;About <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-874" class="menu-item-874"><a title="Python Central Frequently Asked Questions" href="https://www.pythoncentral.io/frequently-asked-questions/"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;FAQ</a></li>
+	<li id="menu-item-2854" class="menu-item-2854"><a title="Provide Feedback or Report Issues to Python Central" target="_blank" href="https://pythoncentral.uservoice.com/"><span class="glyphicon glyphicon-link"></span>&nbsp;Feedback &#038; Issues</a></li>
+</ul>
+</li>
+</ul>				</nav>
+			</div>
+
+		</header>
+
+		<div role="document" id="content">
+
+<!-- /21552082/PYT_Header -->
+<div class='container'>
+	<div id='div-gpt-ad-1510621959781-3'>
+		<script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-3'); });
+		</script>
+	</div>
+</div>
+
+			
+<div style="padding: 10px; width: 450px; margin: 0 auto;">
+
+<!-- brano ad -->
+
+</div>
+
+<div class="container">
+				<div class="row">
+
+<div role="main" id="main" class="col-lg-9">
+	<section id="primary">
+		<div class="page-header">
+			<h1 id="homepage-header">Python Programming Guides and Tutorials</h1>
+		</div>
+
+		<div id="homepage-content">
+			<div class="row"><div class="col-sm-6">				<h2 class="cat-0">
+					<a href="https://www.pythoncentral.io/category/python-tips-tricks-hacks-idioms/"
+					   title="View all posts in Python Tips and Tricks">Python Tips and Tricks</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/python-starter-tips/' title='Python Starter Tips: Beginner&#039;s Guide to Writing Simple and Effective Code'>Python Starter Tips: Beginner's Guide to Writing Simple and Effective Code</a></li><li><a href='https://www.pythoncentral.io/search-implementations-linear-binary/' title='Search implementations: Linear and Binary'>Search implementations: Linear and Binary</a></li><li><a href='https://www.pythoncentral.io/use-queue-beginners-guide/' title='How to use Queue: A beginner&#039;s guide'>How to use Queue: A beginner's guide</a></li><li><a href='https://www.pythoncentral.io/stack-tutorial-python-implementation/' title='Stack Tutorial: An implementation beginner&#039;s guide'>Stack Tutorial: An implementation beginner's guide</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-tips-tricks-hacks-idioms/" class="read-more"
+				   title="Read more posts in Python Tips and Tricks">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div><div class="col-sm-6">				<h2 class="cat-1">
+					<a href="https://www.pythoncentral.io/category/python-library-tutorials/"
+					   title="View all posts in Python Library Tutorials">Python Library Tutorials</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/series/python-sqlalchemy-database-tutorial/' title='Python SQLAlchemy Tutorial'>Python SQLAlchemy Tutorial</a></li><li><a href='https://www.pythoncentral.io/series/python-pyside-pyqt-tutorial/' title='Python PySide/PyQt Tutorial'>Python PySide/PyQt Tutorial</a></li><li><a href='https://www.pythoncentral.io/series/python-django-tutorial/' title='Python Django Tutorial'>Python Django Tutorial</a></li><li><a href='https://www.pythoncentral.io/series/python-sqlite-database-tutorial/' title='Python SQLite Tutorial'>Python SQLite Tutorial</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-library-tutorials/" class="read-more"
+				   title="Read more posts in Python Library Tutorials">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div></div><div class="row"><div class="col-sm-6">				<h2 class="cat-2">
+					<a href="https://www.pythoncentral.io/category/python-related-tools/"
+					   title="View all posts in Python Tools">Python Tools</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/priority-queue-beginners-guide/' title='Priority Queue: A beginner&#039;s guide'>Priority Queue: A beginner's guide</a></li><li><a href='https://www.pythoncentral.io/stack-tutorial-python-implementation/' title='Stack Tutorial: An implementation beginner&#039;s guide'>Stack Tutorial: An implementation beginner's guide</a></li><li><a href='https://www.pythoncentral.io/html-parser/' title='HTML Parser: How to scrap HTML content'>HTML Parser: How to scrap HTML content</a></li><li><a href='https://www.pythoncentral.io/how-to-pickle-unpickle-tutorial/' title='How to Pickle: A Pickling and Unpickling Tutorial'>How to Pickle: A Pickling and Unpickling Tutorial</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-related-tools/" class="read-more"
+				   title="Read more posts in Python Tools">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div><div class="col-sm-6">				<h2 class="cat-3">
+					<a href="https://www.pythoncentral.io/category/python-recipes/"
+					   title="View all posts in Python Recipes">Python Recipes</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/embed-interactive-python-interpreter-console/' title='How to Embed an interactive Python interpreter console'>How to Embed an interactive Python interpreter console</a></li><li><a href='https://www.pythoncentral.io/validate-python-function-parameters-and-return-types-with-decorators/' title='Validate Python Function Parameter &amp; Return Types with Decorators'>Validate Python Function Parameter & Return Types with Decorators</a></li><li><a href='https://www.pythoncentral.io/finding-duplicate-files-with-python/' title='Finding Duplicate Files with Python'>Finding Duplicate Files with Python</a></li><li><a href='https://www.pythoncentral.io/how-to-movecopy-a-file-or-directory-folder-with-a-progress-bar-in-python/' title='How to Move/Copy a File or Directory (Folder) with a Progress Bar in Python'>How to Move/Copy a File or Directory (Folder) with a Progress Bar in Python</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-recipes/" class="read-more"
+				   title="Read more posts in Python Recipes">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div></div><div class="row"><div class="col-sm-6">				<h2 class="cat-4">
+					<a href="https://www.pythoncentral.io/category/python-how-tos/"
+					   title="View all posts in Python How To&#039;s">Python How To's</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/reverse-singly-linked-list/' title='How To Reverse a Singly Linked List'>How To Reverse a Singly Linked List</a></li><li><a href='https://www.pythoncentral.io/find-remove-node-linked-lists/' title='Singly Linked List: How To Find and Remove a Node'>Singly Linked List: How To Find and Remove a Node</a></li><li><a href='https://www.pythoncentral.io/singly-linked-list-insert-node/' title='Singly Linked List: How To Insert and Print Node'>Singly Linked List: How To Insert and Print Node</a></li><li><a href='https://www.pythoncentral.io/python-reverse-list-place/' title='List in Python: How To Implement in Place Reversal'>List in Python: How To Implement in Place Reversal</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-how-tos/" class="read-more"
+				   title="Read more posts in Python How To&#039;s">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div><div class="col-sm-6">				<h2 class="cat-5">
+					<a href="https://www.pythoncentral.io/category/python-tutorials/"
+					   title="View all posts in Python Tutorials">Python Tutorials</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/series/python-regular-expressions-tutorial/' title='Python Regular Expressions Tutorial'>Python Regular Expressions Tutorial</a></li><li><a href='https://www.pythoncentral.io/series/python-recursive-file-and-directory-manipulation/' title='Python Recursive File and Directory Manipulation'>Python Recursive File and Directory Manipulation</a></li><li><a href='https://www.pythoncentral.io/series/python-encoding-decoding-strings/' title='Encoding and Decoding Python Strings Series'>Encoding and Decoding Python Strings Series</a></li><li><a href='https://www.pythoncentral.io/series/python-classes-tutorial/' title='Python Classes Tutorial'>Python Classes Tutorial</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-tutorials/" class="read-more"
+				   title="Read more posts in Python Tutorials">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div></div><div class="row"><div class="col-sm-12">				<h2 class="cat-6">
+					<a href="https://www.pythoncentral.io/category/python-api/"
+					   title="View all posts in Python API References">Python API References</a>
+				</h2>
+
+				<ul>
+					<li><a href='https://www.pythoncentral.io/pythons-string-replace-method-replacing-python-strings/' title='Python&#039;s string.replace() Method - Replacing Python Strings'>Python's string.replace() Method - Replacing Python Strings</a></li><li><a href='https://www.pythoncentral.io/pythons-range-function-explained/' title='Python&#039;s range() Function Explained'>Python's range() Function Explained</a></li><li><a href='https://www.pythoncentral.io/pythons-time-sleep-pause-wait-sleep-stop-your-code/' title='Python&#039;s time.sleep() - Pause, Stop, Wait or Sleep your Python Code'>Python's time.sleep() - Pause, Stop, Wait or Sleep your Python Code</a></li>				</ul>
+				<a href="https://www.pythoncentral.io/category/python-api/" class="read-more"
+				   title="Read more posts in Python API References">Read More <span class="glyphicon glyphicon-share-alt"></span></a>
+				</div>		</div>
+		</div>
+	</section>
+</div>
+
+<div id='sidebar2' style='max-width=100%; overflow:hidden'>
+
+<section id="article-downloads-navigation" class="hidden-print" style='width:100%; margin: 0; padding: 0 1em 1em 1em; float: left;'>
+	<h1 class='bolder'>Signup for new content</h1>
+	<form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=PythonCentral', 'popupwindow', 'scrollbars=yes,width=550,height=520'); return true">
+			<div class="input-group">
+				<input type="email" name="email" placeholder="E-Mail address..." class="form-control">
+				<input type="hidden" value="PythonCentral" name="uri">
+				<input type="hidden" name="loc" value="en_US">
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-default">Subscribe</button>
+				</span>
+			</div>
+	</form>
+</section>
+
+
+
+<section id="article-downloads-navigation" class="hidden-print" style='width: 100%; margin: 2em 0 0 0; padding: 0 0 1em 1em; float: left;'>
+	<h1 class='bolder'>Latest Articles</h1>
+
+	<div class="lines-wrapper">
+		<ul class="nav nav-list">
+		<li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/reverse-singly-linked-list/' title='How To Reverse a Singly Linked List'>How To Reverse a Singly Linked List</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/find-remove-node-linked-lists/' title='Singly Linked List: How To Find and Remove a Node'>Singly Linked List: How To Find and Remove a Node</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/singly-linked-list-insert-node/' title='Singly Linked List: How To Insert and Print Node'>Singly Linked List: How To Insert and Print Node</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/python-reverse-list-place/' title='List in Python: How To Implement in Place Reversal'>List in Python: How To Implement in Place Reversal</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/quick-sort-implementation-guide/' title='Quick Sort: A Tutorial and Implementation Guide'>Quick Sort: A Tutorial and Implementation Guide</a></li>		</ul>
+	</div>
+
+	<div class="clearfix"></div>
+</section>
+
+<br />
+
+<section class="sidebar-ad" style='width: 100%; background-color: #eef5fc; border-top: 5px solid #3774a6; border-bottom: 1px solid #ccdbe6; margin: 2em 0 0 0em; padding: 0em; float: left;'>
+	<!-- /21552082/PYT_Sidebar_300x600 -->
+	<div id='div-gpt-ad-1510621959781-2'>
+		<script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-2'); });
+		</script>
+	</div>
+</section>
+
+<section id="article-downloads-navigation" class="hidden-print" style='width: 100%; margin: 2em 0 0 0em; padding: 0 0 1em 1em; float: left;'>
+
+	<h1 class='bolder'>Social</h1>
+	<div style="display: flex;">
+		<a href="https://twitter.com/PythonCentral" target="_blank" title="Python Central on Twitter">
+			<i style="color: #355c7c; margin-right:0.8em; margin-left:0.2em;" class="fa fa-3x fa-twitter-square" aria-hidden="true" title="Twitter"></i>
+		</a>
+		<a href="https://plus.google.com/117103316424864449594/posts" target="_blank" title="Python Central on Google Plus">
+			<i style="color: #355c7c; margin-right:0.8em;" class="fa fa-3x fa-google-plus-square" aria-hidden="true" title="Google Plus"></i>
+		</a>
+
+		<a href="https://www.facebook.com/PythonCentral" target="_blank" title="Python Central on Facebook">
+			<i style="color: #355c7c; margin-right:0.8em;" class="fa fa-3x fa-facebook-square" aria-hidden="true" title="Facebook"></i>
+		</a>
+
+		<a href="https://feeds.feedburner.com/PythonCentral" target="_blank" title="Python Central's RSS Feed">
+			<i style="color: #355c7c;" class="fa fa-3x fa-rss-square" aria-hidden="true" title="RSS"></i>
+		</a>
+	</div>
+	<div style="margin-top: 1em; padding: 10px 0px;">
+		Python is a beautiful language.
+	</div>
+</section>
+
+</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="hidden-print" id="footer">
+			<div class="container">
+				<div class="row">
+					<div id="footer-menu" class="col-md-6 col-sm-7">
+															<nav id="footer-nav">
+										<div class="menu-bottom-menu-container"><ul id="menu-bottom-menu" class="list-inline"><li id="menu-item-847" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-847"><a title="Python Central Home" href="https://www.pythoncentral.io/">Home</a></li>
+<li id="menu-item-848" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-848"><a title="About Python Central" href="https://www.pythoncentral.io/about/">About</a></li>
+<li id="menu-item-878" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-878"><a title="Frequently Asked Questions about Python Central" href="https://www.pythoncentral.io/frequently-asked-questions/">FAQ</a></li>
+<li id="menu-item-2855" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2855"><a title="Contact Python Central" target="_blank" href="/cdn-cgi/l/email-protection#e4878b8a90858790a4949d908c8b8a87818a90968588ca8d8b">Contact</a></li>
+<li id="menu-item-4082" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4082"><a href="https://www.pythoncentral.io/python-central-privacy-policy/">Python Central Privacy Policy</a></li>
+</ul></div>									</nav>
+													</div>
+
+					<div id="copyright" class="col-md-6 col-sm-5 text-right">
+						<span>
+							&copy; Copyright 2018 - 
+							<a href="https://www.pythoncentral.io" title="Python Programming Examples, Tutorials and Recipes">Python Central</a>.
+						</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var cdv8Gdpr = {"popupBackgroundColor":"#edeff5","popupTextColor":"#838391","btnBackgroundColor":"#4b81e8","bannerMessage":"This website uses cookies to ensure you get the best experience on our website.","dismissBtnText":"Accept!","policyLinkText":"Read Our Privacy Policy","policyLinkTextURL":"https:\/\/www.pythoncentral.io\/python-central-privacy-policy\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/plugins/gdpr-enhancements-master/assets/js/cdv8-gdpr.js'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-includes/js/wp-embed.min.js?ver=4.9.7'></script>
+
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({article:'auto'});
+  !function (e, f, u, i) {
+    if (!document.getElementById(i)){
+      e.async = 1;
+      e.src = u;
+      e.id = i;
+      f.parentNode.insertBefore(e, f);
+    }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/pythoncentral/loader.js',
+  'tb_loader_script');
+  if(window.performance && typeof window.performance.mark == 'function')
+    {window.performance.mark('tbl_ic');}
+</script>
+
+
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({flush: true});
+</script>
+
+	<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"267e0eb6b8","applicationID":"113621077","transactionName":"NQFQZktQXkICV0FdWwxLc1FNWF9fTF1bUFEa","queueTime":0,"applicationTime":122,"atts":"GUZTEANKTUw=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

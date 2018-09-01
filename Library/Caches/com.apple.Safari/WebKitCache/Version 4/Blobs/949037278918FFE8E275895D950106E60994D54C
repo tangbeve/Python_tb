@@ -1,0 +1,1931 @@
+﻿var cps_site_version = '', site_status = '', site_type = '', new_script = ''
+// check site version
+function checksite() {
+    //if (cps_site_url.includes("shopify")) { cps_site_version = "Shopify"; }
+    //else if (cps_site_url.includes("mybigcommerce")) { cps_site_version = "Bigcommerce"; }
+    if (cps_site_url.includes("secondipity")) { cps_site_version = "Secondipity"; }
+    else if (cps_site_url.includes("fleet-electronics")) { cps_site_version = "Fleet"; }
+    else if (cps_site_url.includes("dashcam")) { cps_site_version = "Dashcam_Falcon"; }
+    else if (cps_site_url.includes("thewearablesstore")) { cps_site_version = "wearables"; }
+    else if (cps_site_url.includes("topdawg")) { cps_site_version = "Top_Dawg"; }
+    else if (cps_site_url.includes("misthub")) { cps_site_version = "misthub"; }
+    else if (cps_site_url.includes("heartrate")) { cps_site_version = "heartrate"; }
+    else if (cps_site_url.includes("dailysale")) { cps_site_version = "dailysale"; }
+    else if (cps_site_url.includes("refurb4less")) { cps_site_version = "refurb"; }
+    else if (cps_site_url.includes("dailysteals")) { cps_site_version = "dailysteals"; }
+    else if (cps_site_url.includes("digitaldjgear")) { cps_site_version = "digitaldjgear"; }
+    else if (cps_site_url.includes("mac-warehouse")) { cps_site_version = "mac-warehouse"; }
+    else if (cps_site_url.includes("allthatcellular")) { cps_site_version = "allthatcellular"; }
+    else if (cps_site_url.includes("plottermaster")) { cps_site_version = "plotter"; }
+    else if (cps_site_url.includes("6ave")) { cps_site_version = "6ave"; }
+    else if (cps_site_url.includes("jungleoutlet")) { cps_site_version = "jungleoutlet"; }
+    else if (cps_site_url.includes("pawnamerica")) { cps_site_version = "Pawn_America"; }  
+    else if (cps_site_url.includes("besafegps")) { cps_site_version = "besafegps"; }
+    else if (cps_site_url.includes("hideflifestyle")) { cps_site_version = "hideflifestyle"; }
+    else if (cps_site_url.includes("pcmag")) { cps_site_version = "pcmag"; }
+    else if (cps_site_url.includes("wellbots")) { cps_site_version = "wellbots"; }
+    else if (cps_site_url.includes("jeproaudio")) { cps_site_version = "jeproaudio"; }
+    else if (cps_site_url.includes("garagebaggerstereo")) { cps_site_version = "garage_bagger"; }
+    else if (cps_site_url.includes("parkergwen")) { cps_site_version = "parkergwen"; }
+    else if (cps_site_url.includes("1sale") || cps_dealer_key === '4730') { cps_site_version = "1sale"; }
+    else { cps_site_version = ""; console.log(cps_site_url) }
+
+    console.log(cps_site_version + ' site');
+    return cps_site_version
+};
+
+//run integration - with second conditional check 
+function runfile() {
+    if (new_script === " True ") {
+        console.log('inside NEW script');
+        ///* Config */
+        //import { config } from 'config';
+
+        ///* Utils */
+        //import { checkSite } from './utils/checkSite' // check site version
+        //import { cpsShopifyWarranty } from './utils/shopifyWarranty'
+
+        ////run integration - with second conditional check 
+        //function runfile() {
+
+            // Shopify
+            if (site_status == " True " && site_type == "1 ") {
+                jQuery.getScript('https://www.cpscentral.com/admside/js/Integrations/Shopify/master.js', function () {
+                    console.log('got Shopify script');
+                });
+            } //end if shopify 
+
+            // Bigcommerce
+            else if (site_status == " True " && site_type == "2 ") {
+                jQuery.getScript('https://www.cpscentral.com/admside/js/Integrations/Bigcommerce/master.js', function () {
+                    console.log('got Bigcommerce script');
+                });
+            } //end if bigcommerce 
+
+            // Magento
+            else if (site_status == " True " && site_type == "3 ") {
+                jQuery.getScript('https://www.cpscentral.com/admside/js/Integrations/Magento/master.js', function () {
+                    console.log('got Magento script');
+                });
+            } //end if magento
+
+            //Yahoo
+            else if (site_status == " True " && site_type == "6 ") {
+                jQuery.getScript('https://www.cpscentral.com/admside/js/Integrations/Yahoo/master.js', function () {
+                    console.log('got Yahoo script');
+                });
+            } //end if yahoo store
+
+            //Prestashop
+            else if (site_status == " True " && site_type == "8 ") {
+                jQuery.getScript('https://www.cpscentral.com/admside/js/Integrations/Prestashop/master.js', function () {
+                    console.log('got Prestashop script');
+                });
+            } //end if prestashop store
+
+            else {
+                console.log("Site not Live - No Warranites");
+            }
+
+    } else {
+        // Shopify
+        if (site_status == " True " && site_type == "1 ") {
+            var selected = false;
+            var selected_warranty_id = 0;
+
+            // Display the warranties in the shopping cart 
+            function cps_shopify_warranty(warranties) {
+                var html = ''; var page = ''; var data = ''; var before = ''; var after = ''; var addclass = ''; var addstyle = ''; var title = ''; var title2 = ''
+
+                if (cps_site_url.includes("misthub")) {
+                    page = 'vape-warranty-information';
+                    before = '<strong>'; after = '</strong>';
+                    data = 'target="_blank"';
+                } else if (cps_site_version === "jungleoutlet") {
+                    page = '/protect-your-product-with-an-extended-warranty ';
+                    before = ''; after = '';
+                    data = 'target="_blank"';
+                } else {
+                    page = 'warranty-information';
+                    before = ''; after = '';
+                    data = 'data-toggle="modal" data-target="#mymodal"';
+                }
+
+                if (warranties.length > 0) {
+                    if (cps_site_version === "pcmag") { addstyle = 'style="display:inline; width:100%; margin-bottom:2em;"' } else { addstyle = '' }
+                    html = '<div class="cps" data-toggle="tooltip" data-placement="left" title="Covers Manufacturer Defects and Accidental Damages" ' + addstyle + ' >';
+
+                    if (cps_site_version === "dailysteals" || cps_site_version === "mac-warehouse" || cps_site_version === "jeproaudio" || cps_site_version === "garage_bagger" || cps_site_version === "parkergwen") { //dropdown select
+                        if (cps_site_version === "garage_bagger") { html += '<br>' } else if (cps_site_version === "parkergwen") { } else { html += '<br><br>' }
+                        if (cps_site_version === "dailysteals") { html += '<label style="font-family:Poppins;font-weight:bold;">Warranty: </label>' }
+                        if (cps_site_version === "parkergwen") { html += '<label style="font-family:kelson_sanslight;font-size:16px;;">WARRANTY: </label>' }
+                        if (cps_site_version === "jeproaudio") { addclass = 'form-field-input form-field-select form-field-filled' }
+                        if (cps_site_version === "garage_bagger") { addstyle = 'style="width:auto;"' } else if (cps_site_version === "parkergwen") { addstyle = 'style="width:50%;font-size: 15px;"' }
+                        title = 'Extended Warranty ', title2 = ' Warranty' 
+
+                        html += '<select class="cps_warranty ' + addclass + '" name="cps" ' + addstyle + ' >';
+                        html += '<option value="">Select a' + title2 + ' </option>';
+
+                        for (i = 0; i < warranties.length; i++) {
+                            html += '<option value="' + warranties[i].variantid + '">' + warranties[i].years + ' <a href="/about-the-warranty/" style="color:blue;"> Year ' + title + '</a> (+$' + warranties[i].itemprice + ')</option>';
+                        };
+                        html += '<option value="0">No thanks </option>';
+                        html += '</select>';
+                        if (cps_site_version === "dailysteals" || cps_site_version === "parkergwen") { html += '<br>'; }
+
+                    } else if (cps_site_version === "pcmag"){ //custom for pcmag since they requested so many changes
+                        html += '<br>'
+                        html += '<select class="cps_warranty" name="cps" >';
+
+                        //if (cps_current_variant === "12454393511959" || cps_current_variant === "7367911309335" || cps_current_variant === "7367914553367" || cps_current_variant === "7367912718359" || cps_item_id === "557684228119" || cps_item_id === "1396413267991") { //default to warranty for special SKUs
+                        if (data_dict.pvs[0].value.price > 10000 ) { //greater than $100 before division = 10,000
+                            html += '<option value="' + warranties[1].variantid + '">' + warranties[1].years + ' <a href="/about-the-warranty/" style="color:blue;"> Year Extended Warranty </a> (+$' + warranties[1].itemprice + ')</option>';
+                            html += '<option value="' + warranties[0].variantid + '">' + warranties[0].years + ' <a href="/about-the-warranty/" style="color:blue;"> Year Extended Warranty </a> (+$' + warranties[0].itemprice + ')</option>';
+                            html += '<option value="">Default Warranty</option>';
+                        } else {
+                            html += '<option value="">Warranty Upgrade Options </option>';
+                            for (i = 0; i < warranties.length; i++) {
+                                html += '<option value="' + warranties[i].variantid + '">' + warranties[i].years + ' <a href="/about-the-warranty/" style="color:blue;"> Year Extended Warranty </a> (+$' + warranties[i].itemprice + ')</option>';
+                            };
+                        }
+                        html += '</select>';
+                        html += '<div style="margin-right:12em;"><br><a href="/pages/warranty-information/" style="color:blue;font-size:13px;padding-left:5px;" target="_blank">(Extended Warranty Details)</a></div><br><br>'; 
+
+                    } else { //radio buttons 
+                        if (cps_site_version === "1sale") { } else { html += '<br>' };
+                        if (cps_site_version === "1sale") { html += '<label id="1sale-lable" >Add a <a href="/pages/warranty-information"style="color:blue;" target="_blank">Protection Plan </a></label>'; } else { html += '<label>Select a Warranty </label>'; };
+                        if (cps_site_version === "jungleoutlet" || cps_site_version === "besafegps") { } else { html += '<br>' };
+                        for (i = 0; i < warranties.length; i++) {
+                            var price = warranties[i].itemprice
+                            var years_text = '', title_text = ''   
+                            if (warranties[i].years > 1) { years_text = 'Years' } else { years_text = 'Year' }
+
+                            if (cps_site_version === "1sale") {
+                                html += '<label style="font-weight: normal;"><input class="cps_warranty" type="radio" name="cps" value="' + warranties[i].variantid + '"> Include ' + warranties[i].years + ' ' + years_text + ' of Accidental Protection for ' + before + ' $' + price + after + '</label><br>';
+                                //html += '<label style="font-weight: normal;"><input class="cps_warranty" type="radio" name="cps" value="0"> No Thanks </label><br>';                      
+                            } else { 
+                                html += '<input class="cps_warranty" type="radio" name="cps" value="' + warranties[i].variantid + '"> Include ' + warranties[i].years + ' <a class="link" href="/pages/' + page + '"style="color:blue; " ' + data + '>' + years_text + ' of Warranty Protection</a> for ' + before + ' $' + price + after + '<br>';
+                            };
+                        };
+                        html += '<label style="font-weight: normal;"><input class="cps_warranty no-thanks" type="radio" name="cps" value="0"> No Thanks </label><br>';                      
+                    };
+
+                    if (cps_site_version === "pcmag") { } else { html += '<br>'; }
+                    html += '</div>';
+                    html += '<style>';
+                    html += '.cps_warranty:hover {color:dark-blue;} important!';
+                    html += '</style>';
+                    console.log("Added Warranty");
+                };
+                $('#cps_cart').html(html);
+
+                if (cps_site_version === "1sale") {
+                    var html2 = '<h3 style="margin-bottom: 0px;">Don\'t Forget to Add a Warranty!</h3>';
+                    $('.no-thanks').val(1); // this allows them to select no thanks from the modal and not get cuaght in a loop that opens another modal bc val = 0 
+                    //$('.#1sale-lable').hide(); 
+
+                    var html3 = '<button type="submit" name="add" id="AddToCart" class="btn btn-danger btn-lg addcart"><span id="AddToCartText" style ="font-family:gibsonregular"> Checkout</span></button>'
+                    html3 += '<br><br>'
+                    html3 += '<div class="rte">'
+                    html3 += '<p> <b>PROTECT YOUR PRODUCT WITH AN EXTENDED WARRANTY</b></p><ul>'
+                    html3 += '<li style="font-weight: 400;"><span style="font-weight: 400;">Full Coverage from Date of Purchase</span></li>'
+                    html3 += '<li style="font-weight: 400;"><span style="font-weight: 400;">100% Parts and Labor Coverage</span></li>'
+                    html3 += '<li style="font-weight: 400;"><span style="font-weight: 400;">Includes Accidental Damage</span></li>'
+                    html3 += '<li style="font-weight: 400;"><span style="font-weight: 400;">5 Days or Less for Product Repair or Replacement</span></li>'
+                    html3 += '</ul><br></div>'
+                    html3 += '<a href="/pages/warranty-information" style="color:blue;" target="_blank"> Learn More </a>'
+
+                    console.log(html2 + html + html3)
+                    $('#cps_cart_modal').html(html2 + html + html3);
+                };
+
+                // check if there is a warranty selected (add the listener after the html is already on the page)
+                $('.link').click(function () {
+                    if (cps_site_url.includes("misthub") || cps_site_version === "jungleoutlet") { } else { window.location = "/" + page }
+                });
+
+                $('.cps_warranty').click(function () {
+                    if (cps_site_version === "Dashcam_Falcon" || cps_site_version === "garage_bagger") { 
+                        //nothing 
+                    } else if ($(this).val() > 0) { //greater than 0
+                        console.log("Selected Warranty");
+                        //first set everything else cps, then set id
+                        $('.cps_warranty').attr('name', 'cps');
+
+                        if (cps_site_version === "dailysteals" || cps_site_version === "mac-warehouse" || cps_site_version === "jungleoutlet" || cps_site_version === "besafegps" || cps_site_version === "jeproaudio" || cps_site_version === "pcmag" || cps_site_version === "1sale" || cps_site_version === "parkergwen") {
+                            //$('[name="id"]').attr('name', 'id[]'); //need to also change their other id to id[] so multiple can be added to cart
+                            console.log("No change")
+                        } else if (cps_site_version === "misthub") {
+                            $(this).attr('name', 'ids');
+                            console.log("misthub - changed to ids")
+                        } else {
+                            $(this).attr('name', 'id[]');
+                            console.log("changed to id[]")
+                        };
+                        console.log("<0 : " + $(this).val())
+                        selected = true;
+                    } else {
+                        $('.cps_warranty').attr('name', 'cps');
+                        console.log($(this).val())
+                        selected = false;
+                        console.log("Selected No Thanks");
+                    };
+                    selected_warranty_id = $(this).val();
+                    console.log("Selected warranty-id " + selected_warranty_id)
+                });
+                return selected_warranty_id;
+            };
+
+            if (typeof (cps_item_description) != "undefined") { //nothing
+            } else {
+                cps_item_description = ''
+            };
+            if (typeof (cps_current_variant) != "undefined" && cps_current_variant != "" && cps_current_variant.length > 0) { //nothing
+            } else {
+                cps_current_variant = cps_product_variants[0].key
+            };
+
+            // Get Warranites
+            var data_dict = {
+                "dealer_key": cps_dealer_key, "item_id": cps_item_id, "category1": cps_category1, "item_tags": cps_item_tags, "item_desc": cps_item_description,
+                "item_model": cps_item_model, "item_url": cps_item_url, "cur_var": cps_current_variant, "pvs": cps_product_variants, "site_version": cps_site_version
+            };
+
+            var limit = 0;
+            if (data_dict.pvs.length < 10) {
+                limit = data_dict.pvs.length;
+            } else {
+                limit = 10;
+            };
+
+            // only capture first 10 so call doesnt error out if its too long
+            while (data_dict.pvs.length > limit) {
+                data_dict.pvs.pop();
+            };
+
+            //remove the current from the data_dict to shorten call length 
+            for (i = 0; i <= limit - 1; i++) {
+                var pvs2 = {};
+                pvs2.price = data_dict.pvs[i].value.price;
+                pvs2.sku = data_dict.pvs[i].value.sku;
+                data_dict.pvs[i].value = pvs2;
+            };
+
+            console.log(data_dict);
+
+            var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var warranties = [];
+            console.log($().jquery);
+
+            //make the call to get warranties
+            $.ajax({
+                type: "POST",
+                url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_warranty_shopify',
+                dataType: 'jsonp',
+                data: data_dict,
+                success: function (data) {
+
+                    if (data.response.data.length > 0) {
+                        for (i = 0; i < data.response.data.length; i++) {
+                            var warranty = {
+                                has_warranty: true,
+                                id: data.response.data[i].id,
+                                itemprice: data.response.data[i].itemprice,
+                                variantid: data.response.data[i].variantid,
+                                warrantycode: data.response.data[i].warrantycode,
+                                years: data.response.data[i].years,
+                            };
+                            warranties.push(warranty);
+                        }
+                        console.log("Got Warranty");
+                    } else {
+                        console.log("No Warranties");
+                    };
+                    // call funtion to add warranties to the page
+                    setTimeout(cps_shopify_warranty(warranties), 1000);
+                }
+            });
+
+            // put document.ready to make sure the HTML is there before we add the listener
+            $(document).ready(function () {
+                $.urlParam = function (name) {
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    if (results == null) {
+                        return null;
+                    }
+                    else {
+                        return results[1] || 0;
+                    };
+                };
+
+                // check if the product varriant changed 
+                $('#productSelect-option-0, #product-select-option-0, .single-option-selector').change(function () {
+                    //Get new variant 
+                    var cps_new_variant = $('#productSelect').val();
+                    if (cps_site_url.includes("misthub") || cps_site_url.includes("test-store")) {
+                        console.log("Get new varriant")
+                        var cps_new_variant = $.urlParam('variant'); //this is to get the variant from the link becuase it is the only place where it changes 
+                    };
+                    console.log("Changed Product Variant to: " + cps_new_variant);
+
+                    //Get new warranties
+                    var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var new_warranties = [];
+                    $.ajax({
+                        type: "POST",
+                        url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_new_warranty_shopify&new_variant=' + cps_new_variant + '&dealerid=' + cps_dealer_key,
+                        dataType: 'jsonp',
+                        data: data_dict,
+                        success: function (data) {
+
+                            if (data.response.data.length > 0) {
+                                for (i = 0; i < data.response.data.length; i++) {
+                                    var warranty = {
+                                        has_warranty: true,
+                                        id: data.response.data[i].id,
+                                        itemprice: data.response.data[i].itemprice,
+                                        variantid: data.response.data[i].variantid,
+                                        warrantycode: data.response.data[i].warrantycode,
+                                        years: data.response.data[i].years,
+                                    };
+                                    new_warranties.push(warranty);
+                                }
+                                console.log("Got New Warranty");
+                            } else {
+                                console.log("No New Warranties");
+                            };
+                            setTimeout(cps_shopify_warranty(new_warranties), 1000);
+                        }
+                    });
+                });
+            });
+
+            //checkout for wearables  
+
+            $('#AddToCart').click(function () {
+                if (cps_site_version === "wearables") {
+                    console.log(selected_warranty_id)
+
+                    //if there is no warranty selected add popup
+                    if (selected === false || selected_warranty_id == 0) {
+                        console.log("Added popup - no warranty selected");
+
+                        if (warranties.length > 0) {
+                            html = '<div class="cps cps-popup-div" data-toggle="tooltip" data-placement="left" title="Covers manufacturer defects and accidental damages">';
+                            html += '<label>Select A Warranty </label><br>';
+                            for (i = 0; i < warranties.length; i++) {
+                                html += '<input id="cps_warranty_popup" type="radio" name="cps" value="' + warranties[i].variantid + '"> ' + warranties[i].years + ' Years of Warranty Protection ($' + warranties[i].itemprice + ')<br>';
+                            };
+                            html += '<br>';
+                            html += '<button id="cps_add_warranty_popup" class="button solid" type="button">Add Warranty</button>';
+                            html += '</div>';
+                            html += '<br><br>';
+                            console.log("Added Warranty popup");
+                        };
+                        $('#cps_popup').html(html);
+                    };
+                };
+            });
+
+            //Popup checkout for wearables  
+
+            $('.template-product').on('click', '#cps_add_warranty_popup', function () {
+                if (cps_site_version === "wearables") {
+                    var selected_warranty_popup = $("#cps_warranty_popup").val();
+                    console.log("Popup selected warranty: " + selected_warranty_popup);
+
+                    if (selected_warranty_popup !== '0') {
+                        console.log("adding warranty item id " + $("#cps_warranty_popup").val() + "to cart from popup...");
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '/cart/add.js?quantity=' + $("#Quantity").val() + '&id=' + $.trim($("#cps_warranty_popup").val()),
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log("Added: (" + response.title + "), to Cart");
+                                $(".cps-popup-div").html("Added Warranty");
+                            }
+                        });
+                    };
+                };
+            });
+
+
+            //checkout for fleet 
+
+            function fleet_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=' + $("#Quantity").val() + '&id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $('.add_to_cart').click(function () {
+                if (cps_site_version === "Fleet") {
+                    var selected_warranty = $(".cps_warranty");
+                    //if there is a warranty selected at checkout add to cart with ajax call
+                    if (selected_warranty.is(':checked')) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(fleet_ajax_checkout, 1500);
+                    };
+
+                    //if there is a warranty selected at checkout send the value to cps               
+                    if ($("#cps_warranty").val() > 0) {
+                        console.log("sending warranty item id " + $("#cps_warranty").val() + " to CPS ...");
+                        $.ajax({
+                            url: 'https://www.cpscentral.com/vendor_product.ashx?value=add_warranty_shopify&item_id=' + selected_warranty_id,
+                            dataType: 'jsonp',
+                            success: function (data) {
+                                console.log(data.response.status);
+                            }
+                        });
+                    };
+                };
+            });
+
+            //checkout for Dashcam / Falcon  
+
+            function falcon_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=' + $("#Quantity").val() + '&id=' + selected_warranty_id,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $('#add-to-cart').click(function (e) {
+                if (cps_site_version === "Dashcam_Falcon") {
+                    var selected_warranty = $(".cps_warranty");
+                    //if there is a warranty selected at checkout add to cart with ajax call
+                    if (selected_warranty.is(':checked')) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(falcon_ajax_checkout, 1500);
+                    };
+
+                    //if there is a warranty selected at checkout send the value to cps               
+                    if ($("#cps_warranty").val() > 0) {
+                        console.log("sending warranty item id " + $("#cps_warranty").val() + " to CPS ...");
+                        $.ajax({
+                            url: 'https://www.cpscentral.com/vendor_product.ashx?value=add_warranty_shopify&item_id=' + selected_warranty_id,
+                            dataType: 'jsonp',
+                            success: function (data) {
+                                console.log(data.response.status);
+                            }
+                        });
+                    };
+                };
+            });
+
+            //checkout for Misthub  
+            function misthub_ajax_checkout() {
+                console.log("selected warranty id " + selected_warranty_id)
+                Shopify.addItemFromFormStart('add-item-form-cps', selected_warranty_id);
+                console.log("Added to Cart");
+
+                //remove form and reset the value of variant 
+                $('#add-item-form-cps').remove()
+                console.log("removing form:");
+
+                var temp = selected_warranty_id;
+                selected_warranty_id = 0;
+                selected_warranty_id = temp;
+                console.log('reset everything');
+                return false;
+            };
+
+            $('.addtocart').click(function (e) {
+                console.log("clicked button")
+                if (cps_site_url.includes("misthub")) {
+
+                    var selected_warranty = $(".cps_warranty");
+                    //console.log("selected warranty " + selected_warranty)
+                    console.log("selected warranty id " + selected_warranty_id)
+
+                    //if there is a warranty selected at checkout add to cart with ajax call
+                    if (selected_warranty.is(':checked') && selected_warranty_id > 0) {
+                        //first we add the form with the varriant to the page 
+                        console.log("adding form to page ...");
+                        var html2 = ''
+                        html2 += '<form id="add-item-form-cps" action="/cart/add" method="post">'
+                        html2 += '<input type="hidden" name="id" value="' + selected_warranty_id + '"></form>'
+                        $('body').append(html2);
+                        console.log("Form added to page");
+                        //then we use this to add it to cart using the form
+                        setTimeout(misthub_ajax_checkout, 500);
+                    };
+                };
+            });
+
+
+            //checkout for dailysteals
+            var testing = 0
+            function dailysteals_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=' + $("#Quantity").val() + '&id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                        $('#PageContainer').click()// close it 
+                    }
+                });
+                return false;
+            };
+
+            $('#AddToCart-').click(function () {
+                testing += 1;
+                if (cps_site_version === "dailysteals" && testing < 2) {
+                    var selected_warranty = $(".cps_warranty");
+                    selected_warranty_id = $('.cps_warranty').val()
+
+                    //if there is a warranty selected, from the product page, at checkout - add to cart with ajax call
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(dailysteals_ajax_checkout, 100);
+                    }
+
+                };
+            });
+
+
+            //checkout for mac-warehouse
+
+            function mac_warehouse_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=' + $("#Quantity").val() + '&id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $(".addToCart").click(function () {
+                if (cps_site_version === "mac-warehouse") {
+                    var selected_warranty = $(".cps_warranty");
+                    selected_warranty_id = $('.cps_warranty').val()
+
+                    //if there is a warranty selected, from the product page, at checkout - add to cart with ajax call
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(mac_warehouse_ajax_checkout, 500);
+                    }
+
+                };
+            });
+
+
+            //checkout for besafegps
+
+            function besafegps_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $("#AddToCart-product-template").click(function () {
+                if (cps_site_version === "besafegps") {
+                    var selected_warranty = $(".cps_warranty");
+                    //selected_warranty_id = $('.cps_warranty').val()
+
+                    //if there is a warranty selected, from the product page, at checkout - add to cart with ajax call
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(besafegps_ajax_checkout, 1);
+                    }
+
+                };
+            });
+
+            //checkout for jungleoutlet
+
+            $("#addToCart-product-template").click(function () {
+                if (cps_site_version === "jungleoutlet") {
+                    console.log("Inside add to cart call");
+                    var serializeddata = $('#addToCart-product-template').closest('form').find('input,select').serializeArray()
+                    var formdata = ""
+                    for (i = 0; i < serializeddata.length; i++) {
+                        formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                    }
+                    console.log("serialized form data: " + formdata);
+
+                    $.ajax({ //first add product to cart 
+                        type: 'POST',
+                        url: '/cart/add',
+                        data: formdata,
+                        dataType: 'html',
+                        success: function (response) {
+                            console.log("added product...DONE");
+                            //console.log('action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity);
+
+                            if (selected_warranty_id > 0) {
+                                console.log("adding warranty...");
+                                //second add warranty to cart 
+                                $.ajax({
+                                    url: '/cart/add',
+                                    dataType: 'html',
+                                    type: 'post',
+                                    data: 'id=' + selected_warranty_id,
+                                    success: function (data) {
+                                        console.log("Added successfully");
+                                    },
+                                    error: function (a, b, c) {
+                                        console.log("Added error" + c);
+                                    },
+                                    complete: function () {
+                                        //window.location.href = '/cart';
+                                        $('.header-cart-btn').click();
+                                    }
+                                });
+                            };
+                        },
+                        complete: function () {
+                            $('.header-cart-btn').click();
+                        },
+                        error: function () {
+                            window.location.reload();
+                        }
+                    });
+
+                    return false;
+                };
+            });
+           
+            
+            //checkout for pcmag
+
+            $("#AddToCart-product-template").click(function () {
+                if (cps_site_version === "pcmag") {
+                    console.log("Inside add to cart call");
+                    $('.cps_warranty').click()
+                    console.log("Clicked add to cart");
+
+                    var serializeddata = $('#AddToCart-product-template').closest('form').find('input,select').serializeArray()
+                    var formdata = ""
+                    for (i = 0; i < serializeddata.length; i++) {
+                        formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                    }
+                    console.log("serialized form data: " + formdata);
+
+                    $.ajax({ //first add product to cart 
+                        type: 'POST',
+                        url: '/cart/add',
+                        data: formdata,
+                        dataType: 'html',
+                        success: function (response) {
+                            console.log("added product, adding warranty...");
+                            //console.log('action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity);
+
+                            //second add warranty to cart 
+                            $.ajax({
+                                url: '/cart/add',
+                                dataType: 'html',
+                                type: 'post',
+                                data: 'id=' + selected_warranty_id,
+                                success: function (data) {
+                                    console.log("Added successfully");
+                                },
+                                error: function (a, b, c) {
+                                    console.log("Added error" + c);
+                                },
+                                complete: function () {
+                                    window.location.href = '/cart';
+                                }
+                            });
+                        },
+                        complete: function () {
+                        },
+                        error: function () {
+                            window.location.reload();
+                        }
+                    });
+
+                    return false;
+
+                };
+            });
+
+            //not sure why, but we need 2 different selectors here, consolodating into a function did not work
+            $("#AddToCart-metro-template").click(function () {
+                if (cps_site_version === "pcmag") {
+                    console.log("Inside add to cart call");
+                    $('.cps_warranty').click()
+                    console.log("Clicked add to cart");
+
+                    var serializeddata = $('#AddToCart-metro-template').closest('form').find('input,select').serializeArray()
+                    var formdata = ""
+                    for (i = 0; i < serializeddata.length; i++) {
+                        formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                    }
+                    console.log("serialized form data: " + formdata);
+
+                    $.ajax({ //first add product to cart 
+                        type: 'POST',
+                        url: '/cart/add',
+                        data: formdata,
+                        dataType: 'html',
+                        success: function (response) {
+                            console.log("added product, adding warranty...");
+
+                            //second add warranty to cart 
+                            $.ajax({
+                                url: '/cart/add',
+                                dataType: 'html',
+                                type: 'post',
+                                data: 'id=' + selected_warranty_id,
+                                success: function (data) {
+                                    console.log("Added successfully");
+                                },
+                                error: function (a, b, c) {
+                                    console.log("Added error" + c);
+                                },
+                                complete: function () {
+                                    window.location.href = '/cart';
+                                }
+                            });
+                        },
+                        complete: function () {
+                        },
+                        error: function () {
+                            window.location.reload();
+                        }
+                    });
+
+                    return false;
+                };
+            });
+
+            //checkout for jeproaudio
+
+            function jeproaudio_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $(".product-form--atc-button").click(function () {
+                if (cps_site_version === "jeproaudio") {
+                    var selected_warranty = $(".cps_warranty");
+                    //selected_warranty_id = $('.cps_warranty').val()
+
+                    //if there is a warranty selected, from the product page, at checkout - add to cart with ajax call
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(jeproaudio_ajax_checkout, 1);
+                    }
+
+                };
+        });
+
+        //checkout for parkergwen
+
+            $("#AddToCart-product-template").click(function () {
+                if (cps_site_version === "parkergwen") {
+                    console.log("Inside add to cart call");
+                    var serializeddata = $('#AddToCart-product-template').closest('form').find('input,select').serializeArray()
+                    var formdata = ""
+                    for (i = 0; i < serializeddata.length; i++) {
+                        if (serializeddata[i].name == 'cps') { } else { // do not include cps var since it errors out with qty > 1
+                            formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                        }
+                    }
+                    console.log("serialized form data: " + formdata);
+
+                    $.ajax({ //first add product to cart 
+                        type: 'POST',
+                        url: '/cart/add',
+                        data: formdata,
+                        dataType: 'html',
+                        success: function (response) {
+                            console.log("added product...DONE");
+
+                            if (selected_warranty_id > 0) {
+                                console.log("adding warranty...");
+                                //second add warranty to cart 
+                                $.ajax({
+                                    url: '/cart/add',
+                                    dataType: 'html',
+                                    type: 'POST',
+                                    data: 'quantity=' + $("#quantity").val() + '&id=' + $.trim(selected_warranty_id),
+                                    success: function (data) {
+                                        console.log("Added successfully");
+                                    },
+                                    error: function () {
+                                        console.log("Added error");
+                                        window.location.href = '/cart';
+                                    },
+                                    complete: function () {
+                                        window.location.href = '/cart';
+                                    }
+                                });
+                            } else {
+                                window.location.href = '/cart';
+                            }
+                        },
+                        complete: function () {
+                            //$('.header-cart-btn').click();
+                        },
+                        error: function (xhr, textStatus, error) {
+                            console.log('Error was thrown')
+                            console.log(xhr);
+                            console.log(xhr.statusText);
+                            //console.log(textStatus);
+                            //console.log(error);
+
+                            //submit the form without warranty (will auto redirect to cart)
+                            $('.product-form-product-template').submit()
+                        }
+                    });
+
+                    return false;
+                };
+            });
+
+            //checkout for garage_bagger
+
+            function garage_bagger_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=' + $("#quantity").val() + '&id=' + $.trim(selected_warranty_id),
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $("#add-to-cart").click(function () {
+                if (cps_site_version === "garage_bagger") {
+                    var selected_warranty = $(".cps_warranty");
+                    //selected_warranty_id = $('.cps_warranty').val()
+
+                    //if there is a warranty selected, from the product page, at checkout - add to cart with ajax call
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(garage_bagger_ajax_checkout, 500);
+                    }
+
+                };
+            });
+
+
+            //checkout for 1sale
+
+            var showpopup = true;
+            $(document).on("click", "#AddToCart", function (event) {
+                if (cps_site_version === "1sale") {
+                    event.preventDefault();
+                    console.log("Inside add to cart call");
+                    console.log(selected_warranty_id);
+
+                    //if there is already warranty selected - add both prod and warranty to cart
+                    if (selected_warranty_id > 0) {
+                        var serializeddata = $('#AddToCartForm').closest('form').find('input,select').serializeArray()
+                        var formdata = ""
+                        for (i = 0; i < serializeddata.length; i++) {
+                            formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                        }
+                        console.log("serialized form data: " + formdata);
+
+                        $.ajax({ //first add product to cart 
+                            type: 'POST',
+                            url: '/cart/add',
+                            data: formdata,
+                            dataType: 'html',
+                            success: function (response) {
+                                console.log("added product...DONE");
+                                //console.log('action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity);
+
+                                if (selected_warranty_id > 0) {
+                                    console.log("adding warranty...");
+                                    //second add warranty to cart 
+                                    $.ajax({
+                                        url: '/cart/add',
+                                        dataType: 'html',
+                                        type: 'POST',
+                                        data: 'id=' + selected_warranty_id,
+                                        success: function (data) {
+                                            console.log("Added successfully");
+                                        },
+                                        error: function () {
+                                            console.log("Added error");
+                                            window.location.href = '/cart';
+                                        },
+                                        complete: function () {
+                                            window.location.href = '/cart';
+                                            //$('.header-cart-btn').click();
+                                        }
+                                    });
+                                } else {
+                                    window.location.href = '/cart';
+                                }
+                            },
+                            complete: function () {
+                                //$('.header-cart-btn').click();
+                            },
+                            error: function () {
+                                window.location.reload();
+                            }
+                        });
+
+                        // popup if no warranty is added on click 
+                    } else if (showpopup) {
+                        showpopup = false;
+                        var modal = document.getElementById('myModal');
+                        var close = document.getElementsByClassName("close")[0];
+                        console.log("got modal");
+
+                        modal.style.display = "block";
+                        console.log('opened modal');
+                        $('.no-thanks').val(1); // this allows them to select no thanks from the modal and not get cuaght in a loop that opens another modal bc val = 0 
+                        $('#1sale-lable').hide()
+
+                        // Close modal - when the user clicks on <span> (x)
+                        close.onclick = function () {
+                            modal.style.display = "none";
+                            console.log('closed modal');
+                            //if they close it just add the product, aka submit form 
+                            $('#AddToCartForm').submit()
+                            console.log('Form submitted with product');
+                        }
+                        //if a user clicks checkout buttonon modal it will reevealuate the above condition
+                        // if they click it with nothing selected it will just submit the form from conditional above
+                        // if the click it with no thanks it will run the above ajax calls without warranty
+                        // if the click it with a warranty it will run the above ajax calls with warranty
+                    } else {
+                        // if they click it with nothing selected it will just submit the form from conditional above
+                        $('#AddToCartForm').submit()
+                        console.log('Form submitted with product');
+
+                    };
+                    return false;
+                };
+                return false;
+            });
+
+            //checkout for test-site  
+            function testsite_ajax_checkout() {
+                console.log("Adding now:");
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/add.js?quantity=1&id=' + selected_warranty_id,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added: (" + response.title + "), to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $('#AddToCart-product-template').click(function (e) {
+                if (cps_site_url.includes("test-store")) {
+                    var selected_warranty = $(".cps_warranty");
+
+                    //if there is a warranty selected at checkout add to cart with ajax call
+                    if (selected_warranty.is(':checked')) {
+                        console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                        setTimeout(testsite_ajax_checkout, 1);
+                    };
+
+                    // //if there is a warranty selected at checkout send the value to cps               
+                    if ($("#cps_warranty").val() > 0) {
+                        console.log("sending warranty item id " + $("#cps_warranty").val() + " to CPS ...");
+
+                        $.ajax({
+                            url: 'https://www.cpscentral.com/vendor_product.ashx?value=add_warranty_shopify&item_id=' + selected_warranty_id,
+                            dataType: 'jsonp',
+                            success: function (data) {
+                                console.log(data.response.status);
+                            }
+                        });
+                    };
+                };
+            });
+
+        } //end if shopify 
+
+
+
+        // Bigcommerce
+        else if (site_status == " True " && site_type == "2 ") {
+            var selected = false; var selected_warranty_id = 0;
+
+            // Display the warranties in the shopping cart 
+            function cps_BC_warranty(warranties) {
+                var html = '';
+                if (warranties.length > 0) {
+                    var color = "", link = ""
+                    if (cps_site_version === "wellbots") {
+                        link += '/cps-insurance/';
+                    } else {
+                        link += '/about-the-warranty/';
+                    }
+
+                    html = '<div class="cps" data-toggle="tooltip" style="line-height: 21px;" data-placement="left" title="Covers manufacturer defects and accidental damages">';
+                    if (cps_site_version !== "wellbots") { html += '<br>'; };
+                    html += '<br>';
+                    html += '<label><strong>Select A Warranty: </strong></label>';
+                    if (cps_site_version !== "wellbots") { html += '<br>'; };
+                    if (cps_site_version === "6ave") {
+                        html += '<br>';
+                        color = "red";
+                    }
+                    for (i = 0; i < warranties.length; i++) {
+                        html += '<input class="cps_warranty" type="radio" name="cps" style="margin-bottom:7px; " value="' + warranties[i].itemid + '"> Include <a href="' + link + '" target="_blank" data-toggle="modal" data-target="#myModal" style="color:#428bca;"> ' + warranties[i].years + '   Years of Warranty Protection </a> for <span style="color:' + color + ';"> $' + warranties[i].itemprice + '</span><br>';
+                    }
+                    html += '<input class="cps_warranty" type="radio" name="cps" style="margin-bottom:7px; value="0"> No Thanks <br>';
+                    if (cps_site_version !== "wellbots") { html += '<br>'; };
+                    html += '</div>';
+                    console.log("Added Warranty");
+                };
+                //only add to the page if there is an add to cart button
+                if ($('.AddCartButton, .add-to-cart').length == 0) {
+                    $('#cps_cart').html("");
+                } else {
+                    $('#cps_cart').html(html);
+                };
+
+                // check if there is a warranty selected (add the listener after the html is already on the page)
+                $('.cps_warranty').click(function () {
+                    if ($(this).is(':checked')) {
+                        //first set everything else cps, then set id
+                        //$('.cps_warranty').attr('name', 'cps');
+                        //$(this).attr('name', 'id[]');
+
+                        selected = true;
+                        selected_warranty_id = $(this).val();
+                        console.log("Selected BC Warranty: " + selected_warranty_id);
+                    };
+                });
+            };
+
+            if (cps_site_version === "refurb") {
+                var cps_item_description = ''
+            } else if (cps_item_description === undefined || cps_item_description === null) {
+                var cps_item_description = ''
+            };
+
+            // Get Warranites
+            var data_dict = {
+                "cps_dealer_key": cps_dealer_key, "cps_item_id": cps_item_id, "cps_category1": cps_category1, "cps_item_tags": cps_item_tags, "cps_item_description": cps_item_description,
+                "cps_item_model": cps_item_model, "cps_item_url": cps_item_url, "cps_current_variant": cps_current_variant, "cps_product_sku": cps_product_sku, "cps_product_price": cps_product_price,
+                "cps_site_version": cps_site_version
+            };
+            console.log(data_dict);
+            var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var warranties = [];
+
+            $.ajax({
+                type: "POST",
+                url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_warranty_bigcom',
+                dataType: 'jsonp',
+                data: data_dict,
+                success: function (data) {
+
+                    if (data.response.data.length > 0) {
+                        for (i = 0; i < data.response.data.length; i++) {
+                            var warranty = {
+                                has_warranty: true,
+                                id: data.response.data[i].id,
+                                itemprice: data.response.data[i].itemprice,
+                                itemid: data.response.data[i].itemid,
+                                warrantycode: data.response.data[i].warrantycode,
+                                years: data.response.data[i].years,
+                            };
+                            warranties.push(warranty);
+                        };
+                        console.log("Got Warranty");
+                        console.log(warranties);
+                    } else {
+                        console.log("No Warranties");
+                    };
+                    setTimeout(cps_BC_warranty(warranties), 500);
+                }
+            });
+
+            // check if the product sku changed 
+            $('.productAttributeList').click(function () {
+                var cps_old_product_sku = $('.VariationProductSKU').html().trim();
+
+                setTimeout(function () {
+                    // this is now a new value after it loads and changes 
+                    var cps_new_product_sku = $('.VariationProductSKU').html().trim();
+                    var cps_new_product_price = $('.VariationProductPrice').html().trim();
+                    cps_new_product_price = cps_new_product_price.substring(1, cps_new_product_price.length);
+
+                    if (cps_new_product_sku !== cps_old_product_sku) {
+                        console.log("Changed Product SKU from: " + cps_old_product_sku + " to: " + cps_new_product_sku + " and Price to: " + cps_new_product_price);
+                        //Get new warranties
+                        var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var new_warranties = [];
+                        $.ajax({
+                            type: "POST",
+                            url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_new_warranty_bigcom&cps_item_id=' + cps_item_id + '&cps_new_price=' + cps_new_product_price + '&cps_dealer_key=' + cps_dealer_key,
+                            dataType: 'jsonp',
+                            success: function (data) {
+
+                                if (data.response.data.length > 0) {
+                                    for (i = 0; i < data.response.data.length; i++) {
+                                        var warranty = {
+                                            has_warranty: true,
+                                            id: data.response.data[i].id,
+                                            itemprice: data.response.data[i].itemprice,
+                                            itemid: data.response.data[i].itemid,
+                                            warrantycode: data.response.data[i].warrantycode,
+                                            years: data.response.data[i].years,
+                                        };
+                                        new_warranties.push(warranty);
+                                    };
+                                    console.log("Got New Warranty");
+                                } else {
+                                    console.log("No New Warranties");
+                                };
+                                //console.log(new_warranties)
+
+                                if (cps_site_version !== "wellbots") {
+                                    setTimeout(cps_BC_warranty(new_warranties), 1);
+                                };
+
+                            }
+                        });
+                    };
+                }, 1000);
+            });
+
+
+            // check if there is warranty selected and ...
+            $('.AddCartButton, .add-to-cart').click(function () {
+                var selected_warranty = $(".cps_warranty");
+
+                //if there is a warranty selected at checkout add to cart with ...
+                if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                    console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+
+                    function cps_add_warranty_cart() {
+                        console.log('Adding now...');
+                        console.log('BC URL: ' + '/cart.php?action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity)
+
+                        $.ajax({
+                            type: 'POST',
+                            // adding the correct quantity of WARRANTIES 
+                            url: '/cart.php',
+                            data: 'action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity,
+                            dataType: 'html',
+                            success: function (response) {
+                                console.log("Added: (" + response + "), to Cart");
+                            }
+                        });
+                    };
+
+                    if (cps_site_version === "refurb" || cps_site_version === "6ave" || cps_site_version === "wellbots") {
+                        var quantity = $('#qty_').val();
+                    } else {
+                        var quantity = $('#text_qty_').val();
+                    };
+                    console.log("Qty: " + quantity)
+
+
+                    if (cps_site_version === "wellbots") {
+                        if (check_add_to_cart($('.add-to-cart').closest('form'), false)) {
+
+                            console.log("Inside add to cart call");
+                            var serializeddata = $('.add-to-cart').closest('form').find('input,select').serializeArray()
+                            var formdata = ""
+                            for (i = 0; i < serializeddata.length; i++) {
+                                formdata += serializeddata[i].name + "=" + serializeddata[i].value + "&"
+                            }
+                            console.log("serialized form data: " + formdata);
+
+                            $.ajax({ //first add product to cart 
+                                type: 'POST',
+                                url: $('.add-to-cart').closest('form').attr('action'),
+                                data: formdata,
+                                dataType: 'html',
+                                success: function (response) {
+                                    console.log("added product, adding warranty...");
+                                    console.log('action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity);
+
+                                    //second add warranty to cart 
+                                    $.ajax({
+                                        url: $('.add-to-cart').closest('form').attr('action'),
+                                        dataType: 'html',
+                                        type: 'post',
+                                        data: 'action=add&product_id=' + selected_warranty_id + '&qty[]=' + quantity,
+                                        success: function (data) {
+                                            console.log("Added successfully");
+                                        },
+                                        error: function (a, b, c) {
+                                            console.log("Added error" + c);
+                                        },
+                                        complete: function () {
+                                            window.location.href = '/cart.php';
+                                        }
+                                    });
+                                },
+                                complete: function () {
+                                }
+                            });
+                        }
+                        return false;
+                    } else {
+                        // wait to add warranty to cart after product is added, but get variables first 
+                        setTimeout(cps_add_warranty_cart, 750);
+                    }
+
+                };
+            });
+
+        } //end if bigcommerce 
+
+
+
+        // Magento
+        else if (site_status == " True " && site_type == "3 ") {
+
+            function bindOnClickEvent_Magento() {
+                //var dailysale_attempts = 0;
+                //function Dailysale_AddToCart() {
+                //    dailysale_attempts += 1
+                //    console.log('Attempt # ' + dailysale_attempts);
+                //    if (jQuery('.success-msg').length) {
+                //        console.log('Attempt # ' + dailysale_attempts + ' SUCCESS');
+                //        dailysale_attempts = 0;
+                //        AddtoCart();
+
+                //    } else if (dailysale_attempts < 50) {
+                //        setTimeout(function () { Dailysale_AddToCart(); }, 200);
+                //    }
+                //}
+
+                //all the add to cart button variations call the add to cart function
+                jQuery('.btn-cart, .trolly_price').on('click', function (e) {
+                    if (cps_site_version === "dailysale") {
+                        //Dailysale_AddToCart();
+                        // do nothing, they add the warranty on their side
+                    } else {
+                        setTimeout(function () {
+                            try {
+                                AddtoCart();
+                            } catch (e) {
+                            }
+                        }, 10)
+                    };
+
+                });
+            }
+            bindOnClickEvent_Magento();
+
+            var selected = false; var selected_warranty_id = 0; var popup_selected_warranty_id = 0;
+            var cps_warranty = jQuery('.cps_warranty'); var cps_cart = ""
+
+            if (cps_site_version === "hideflifestyle") {
+                cps_cart = jQuery('.product_info_wrap')
+            } else {
+                cps_cart = jQuery('#cps_cart');
+            }
+
+            function createPopup(title, text, callback, size) {
+                var html = '<div class="modal fade" id="myModalcps"><div class="modal-dialog"><div class="modal-content" style="width:800px;padding:50px;"><div class="modal-header"><span type="button" style="color:black;" class="close2 close-popup" data-dismiss="modal" aria-hidden="true">&times;</span><h4 style="color:black;font-size:30px;" class="modal-title popup-title">' + title + '</h4><h6><img style="height:22px;" src="http://www.cpscentral.com/images/logo.jpg" />   Consumer Priority Service </h6></div><div class="modal-body">' + text + '</div></div></div></div>';
+                jQuery('body').append(html);
+                jQuery('#myModalcps').modal //{ backdrop: 'static' }); - this comment will close the modal on the background click 
+            }
+
+            //check if there is warranty selected and ...
+            function AddtoCart() {
+                if (cps_site_version === "dailysale") {
+                    selected_warranty_id = jQuery('.cps_warranty').val()
+                } else {
+                    selected_warranty_id = jQuery('input[name="cps"]:checked').val()
+                };
+
+                if (cps_site_version === "dailysale") {
+                    var quantity = jQuery('.qty').val();
+                } else {
+                    var quantity = jQuery('#qty').val();
+                }
+
+                if (typeof (quantity) != "undefined") {
+                    console.log("Qty: " + quantity);
+                } else {
+                    quantity = 1
+                    console.log("Qty set to 1");
+                }
+
+                var formkey = jQuery('[name="form_key"]').val()
+                console.log("Form key: " + formkey)
+
+                //if there is a warranty selected at checkout add to cart with ...
+                if (selected_warranty_id > 0 || selected === true) {
+                    console.log("adding warranty item id " + selected_warranty_id + " to cart ...");
+                    var url = '';
+
+                    if (cps_site_version === "dailysale") {
+                        //console.log('Called - CPS add to cart for DS');
+                        ////dailysale
+                        //url = 'https://www.dailysale.com/checkout/cart/add/';
+                        //url += 'uenc/aHR0cDovL3d3dy5kYWlseXNhbGUuY29tL2lyb2JvdC1yb29tYmEtNjQ1LXZhY3V1bS1jbGVhbmluZy1yb2JvdC5odG1s/product/'; // this is a key
+                        ////url += '30468';
+                        //url += selected_warranty_id;
+                        //url += '/form_key/' + formkey + '/'; // this is a key for checkout
+                        //console.log("URL:" + url);
+                        //var dict = {
+                        //    "form_key": "f2fdjkcbxek0o4xs", "product": selected_warranty_id, "related_product": "", "options": 0, "qty": quantity, "qty": quantity //, "isAjax": 1
+                        //};
+
+                    } else if (cps_site_version === "digitaldjgear") {
+                        //digitaldjgear
+                        url = 'https://www.digitaldjgear.com/checkout/cart/add/';
+                        url += 'uenc/aHR0cDovL2JldGEuZGlnaXRhbGRqZ2Vhci5jb20vcXNjLWFkczUyLmh0bWw,/product/'; // this is a key
+                        url += selected_warranty_id;
+                        url += '/form_key/' + formkey + '/'; // this is a key for beta.digitaldjgear
+                        console.log("DJ URL:" + url);
+                        var dict = {
+                            "form_key": formkey, "product": selected_warranty_id, "related_product": "", "qty": quantity, "qty": quantity, "return_url": "" //, "isAjax": 1
+                        };
+
+                    } else if (cps_site_version === "hideflifestyle") {
+                        //hideflifestyle
+                        url = 'http://www.hideflifestyle.com/checkout/cart/add/';
+                        url += 'uenc/aHR0cDovL3d3dy5oaWRlZmxpZmVzdHlsZS5jb20vci0yNnBmLXBvd2VyZWQtZmxvb3Itc3RhbmRpbmctc3BlYWtlcnM_X19fU0lEPVU,/product/'; // this is a key
+                        url += selected_warranty_id;
+                        url += '/form_key/' + formkey + '/';
+                        console.log("HiDef URL:" + url);
+                        var dict = {
+                            //"form_key": formkey, "product": selected_warranty_id, "related_product": "", "qty": quantity //, "return_url": "", "isAjax": 1
+                        };
+
+                    } else if (cps_site_version === "plotter") {
+                        //plotter
+                        url = 'https://plottermaster.com/ajaxcartsuper/ajaxcart/add/';
+                        url += 'uenc/aHR0cHM6Ly9wbG90dGVybWFzdGVyLmNvbS9ocC1kZXNpZ25qZXQtdDEyMDAtbWZwLTQ0LWNxNjUzYS1yZWNlcnRpZmllZC5odG1sP19fX1NJRD1V/product/'; // this is a key
+                        url += selected_warranty_id;
+                        url += '/form_key/' + formkey + '/';
+                        console.log("Plotter URL:" + url);
+
+                        var dict = {
+                            "form_key": formkey, "product": selected_warranty_id, "related_product": "", "qty": quantity, "qty": quantity, "return_url": "" //, "isAjax": 1
+                        };
+                    }
+                    jQuery.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'post',
+                        data: dict,
+                        success: function (data) {
+                            console.log("Added successfully");
+                            console.log(data);
+                            jQuery('#ajax_loader').hide();
+                        }
+                    });
+
+                } else if (popup_selected_warranty_id > 0) {
+                    console.log("adding warranty item id " + popup_selected_warranty_id + " to cart from popup...");
+
+                    // //need to find a way to add the warranty to the cart // //
+                    function popup_cps_add_warranty_cart() {
+
+                        try {
+                            jQuery.ajax({
+                                url: url,
+                                dataType: 'json',
+                                type: 'post',
+                                data: dict,
+                                success: function (data) {
+                                    console.log("Added successfully");
+                                    jQuery('#ajax_loader').hide();
+                                }
+                            });
+                        } catch (e) {
+                        };
+
+                        popup_selected_warranty_id = 0
+                        //End of our new ajax code
+                    };
+                    //first we submit their form to add the product
+                    //productAddToCartForm.submit(this);
+
+                    // wait to add warranty to cart after product is added, but get variables first 
+                    setTimeout(popup_cps_add_warranty_cart, 1);
+                    console.log('Called - CPS Popup add to cart');
+                };
+            };
+
+            // Display the warranties in the shopping cart 
+            function cps_add_warranty(warranties) {
+                var html = '';
+                var link = '';
+
+                if (cps_site_version === "hideflifestyle") {
+                    link = "/inside-hidef/about-the-warranty/"
+                } else {
+                    link = "/about-the-warranty/"
+                }
+
+                if (warranties.length > 0) {
+                    html = '<div class="cps" data-toggle="tooltip" data-placement="left" title="Covers manufacturer defects and accidental damages">';
+                    if (cps_site_version === "dailysale") { //dropdown select
+                        html += '<label style="font-size:14px;">Warranty: </label> <span id="about-warranty-link" class="about-warranty-link" style="font-size:11px; text-decoration: underline;">More Info </span> ';
+                        html += '<select class="chb cps_warranty" name="cps">';
+                        html += '<option value="">Select a warranty </option>';
+                        for (i = 0; i < warranties.length; i++) {
+                            html += '<option value="' + warranties[i].itemid + '">' + warranties[i].years + ' <a href="' + link + '" style="color:blue;">Year Extended Warranty </a> (+$' + warranties[i].itemprice + ')</option>';
+                        };
+                        html += '<option value="0">No Thanks</option>';
+                        html += '</select>';
+                        html += '<br>';
+                    } else { //square radio buttons 
+                        html += '<label><strong>Select A Warranty: </strong></label><br>';
+                        for (i = 0; i < warranties.length; i++) {
+                            html += '<input data-waschecked="" class="chb cps_warranty" type="checkbox" name="cps" value="' + warranties[i].itemid + '"> Include <a href="' + link + '" class="link-popup" id="' + i + '" style="color:#3399cc !important;">' + warranties[i].years + '-Year Warranty Protection Plan</a> for $' + warranties[i].itemprice + '<br>';
+                        };
+                        //html += '<input class="chb cps_warranty" type="checkbox" name="cps" value="0"> No Thanks <br>';
+                    };
+                    html += '<br>';
+                    html += '</div>';
+
+                    var c = jQuery(html); // create a html object
+                    c.change(function () { //add the listener to the html object for the select dropdown and checkboxes
+                        selected = true;
+                        console.log("Selected Warranty");
+                    });
+
+                    // check if there is a warranty selected
+                    c.find("[type=checkbox]").click(function () { //add the listener to the html object for the checkboxes
+                        //selected = true;
+                        //add radio buttons functionality for checkbobxes - only one at a time 
+                        jQuery(".chb").prop('checked', false);
+                        jQuery(this).prop('checked', true);
+
+                        //add double click functionality for checkbobxes 
+                        var button = jQuery(this);
+                        if (button.data('waschecked') == true) { // if this was previously checked
+                            button.prop('checked', false);
+                            button.data('waschecked', false);
+                        }
+                        else
+                            button.data('waschecked', true);
+                        // remove was checked from other radios
+                        button.siblings('input[type="checkbox"]').data('waschecked', false);
+                    });
+
+                    if (cps_site_version === "hideflifestyle") {
+                        cps_cart.prepend(c); // append the object and the html to the page 
+                    } else {
+                        cps_cart.html("")
+                        cps_cart.append(c); // append the object and the html to the page 
+                    }
+                    console.log("Added Warranty");
+                }
+                jQuery(".chb").css('margin', '0');
+            }
+
+            if ((cps_site_version === "dailysale") && (cps_item_price == '')) {
+                cps_item_price = jQuery('#product_addtocart_form .our-price .price').text().trim().substring(1).replace(/,/g, '');
+                cps_product_price = cps_item_price
+            }
+            jQuery('#product_addtocart_form .price-default').text().trim().substring(1)
+
+            // Get Warranties
+            var data_dict = {
+                "cps_dealer_key": cps_dealer_key, "cps_item_id": cps_item_id, "cps_item_model": cps_item_model.substring(0, 500).replace(/"/g, '\\"').trim(), "cps_item_url": cps_site_url, "cps_product_sku": cps_product_sku, "cps_product_price": cps_product_price,
+                "cps_item_price": cps_item_price, "cps_site_version": cps_site_version, "cps_category1": cps_category1,
+            };
+            console.log(data_dict);
+            var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var warranties = [];
+
+            jQuery.ajax({
+                type: "POST",
+                url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_warranty_magento',
+                dataType: 'jsonp',
+                data: data_dict,
+                success: function (data) {
+                    if (data.response.data.length > 0) {
+                        for (i = 0; i < data.response.data.length; i++) {
+                            var warranty = {
+                                has_warranty: true,
+                                id: data.response.data[i].id,
+                                itemprice: data.response.data[i].itemprice,
+                                itemid: data.response.data[i].itemid,
+                                warrantycode: data.response.data[i].warrantycode,
+                                years: data.response.data[i].years,
+                            };
+                            warranties.push(warranty);
+                        };
+                        console.log("Got Warranty");
+                        console.log(warranties);
+                    } else {
+                        console.log("No Warranties");
+                    };
+                    setTimeout(cps_add_warranty(warranties), 500);
+                }
+            });
+
+            // check if the product varriant changed - only for dailysale ($j)
+            if (cps_site_version === "dailysale") {
+                $j('.super-attribute-select').change(function () {
+                    //Get new item id  
+                    var cps_new_item = $j('[name="product"]').val();
+                    var cps_new_price = $j('#product_addtocart_form .price-default').text().trim().substring(1)
+                    console.log("Changed Item ID to: " + cps_new_item);
+
+                    //Get new warranties
+                    var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = '';
+                    var new_warranties = [];
+                    $j.ajax({
+                        type: "POST",
+                        url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_new_warranty_magento&new_item_id=' + cps_new_item + '&new_item_price=' + cps_new_price + '&dealerid=' + cps_dealer_key,
+                        dataType: 'jsonp',
+                        data: data_dict,
+                        success: function (data) {
+
+                            if (data.response.data.length > 0) {
+                                for (i = 0; i < data.response.data.length; i++) {
+                                    var warranty = {
+                                        has_warranty: true,
+                                        id: data.response.data[i].id,
+                                        itemprice: data.response.data[i].itemprice,
+                                        itemid: data.response.data[i].itemid,
+                                        warrantycode: data.response.data[i].warrantycode,
+                                        years: data.response.data[i].years,
+                                    };
+                                    new_warranties.push(warranty);
+                                }
+                                console.log("Got New Warranty");
+                                console.log(new_warranties)
+                            } else {
+                                console.log("No New Warranties");
+                            };
+                            //console.log(new_warranties)
+                            setTimeout(cps_add_warranty(new_warranties), 1000);
+                        }
+                    });
+                });
+            }
+
+        } //end if magento
+
+
+
+        //Yahoo
+        else if (site_status == " True " && site_type == "6 ") {
+            $(document).ready(function () {
+                console.log("inside " + cps_site_version + " site");
+
+                var selected = false; var selected_warranty_id = 0; var data_dict = {}; var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0;
+                var warrantycode = ''; var years = ''; var warranties = [];
+
+                // Display the warranties in the shopping cart 
+                function cps_YH_warranty(warranties) {
+                    var html = '';
+                    if (warranties.length > 0) {
+                        html = ""
+                        html += '<input name="multiple-add" type="hidden" value="1">'
+                        html += '<input name="vwquantity2" type="hidden" value="1">'
+                        html += '<img style="width:4em;margin-right:2em;float:left;" src="http://cpscentral.com/dealer/images/ecom-logo.jpg" />'
+                        html += '<div style="width:100%; text-align:left;" class="cps">';
+                        //html += '<br>';
+                        html += '<label>Cover drops, spills and cracked screens with a <strong> Care Plan: </strong></label><br><br>';
+                        for (i = 0; i < warranties.length; i++) {
+                            //WITH question mark tooltip
+                            //html += '<input style="margin:0;" class="cps_warranty" type="radio" name="vwitem2" value="' + warranties[i].itemcode + '"> Add <strong>' + warranties[i].years + '-Year</strong> Mobile Phone <a href="/about-warranty.html" target="_blank" style="color:blue;"> Protection</a><strong> $' + warranties[i].itemprice + '</strong> <img style="width:1em;padding-bottom:5px;font-size:14px;" data-toggle="tooltip" data-placement="right" title="Covers manufacturer defects and accidental damages, $' + warranties[0].itemdeductible + ' Deductible may apply" src="https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519660-164_QuestionMark-128.png" /><br>';
+                            //WITHOUT question mark tooltip
+                            html += '<input style="margin:0;" class="cps_warranty" type="radio" name="vwitem2" value="' + warranties[i].itemcode + '"> Add <strong>' + warranties[i].years + '-Year</strong> Mobile Phone <a href="/about-warranty.html" target="_blank" style="color:blue;"> Protection</a><strong> $' + warranties[i].itemprice + '</strong> <br>';
+                        }
+                        //html += '<input style="margin:0;" class="cps_warranty" type="radio" name="cps" value="0"> No Thanks <br>';
+                        //html += '<br>';
+                        html += '</div>';
+                        html += '<hr>';
+                        console.log("Added Warranty");
+                    };
+                    $('.qty-box').before(html);
+
+                    //change vwitem to vwitem 1 since we added <input name="multiple-add"
+                    $("[name='vwitem']").attr('name', 'vwitem1');
+                    $("[name='vwquantity']").attr('name', 'vwquantity1');
+
+                    // check if there is a warranty selected (add the listener after the html is already on the page)
+                    $('.cps_warranty').click(function () {
+                        if ($(this).is(':checked')) {
+                            //update a hidden variable called vwquantity2 to be equal that of vwquantity1
+                            var quantity = $("input[name=vwquantity1]").val();
+                            $("[name='vwquantity2']").val(quantity)
+                            console.log("updated qty 2 to " + quantity)
+
+                            selected = true;
+                            selected_warranty_id = $(this).val();
+                            console.log("Selected YH Warranty");
+                            //warranties will automatically be added from the pages add to cart function since we changed variables on the page
+                        };
+                    });
+                };
+
+                //reset all the variables after 1 second 
+                function get_variables() {
+                    cps_dealer_key = '1444';
+                    cps_category1 = 'Cell Phone';
+                    cps_item_description = $(".prod-desc-content").text().substr(0, 100);
+                    cps_item_model = $(".page-head").text().trim();
+                    cps_item_url = window.location.href;
+                    cps_site_url = window.location.href;
+                    cps_product_price = $(".det-sale-price").text().trim();
+                    cps_product_price = cps_product_price.substring(13, cps_product_price.length);
+                    cps_product_sku = $(".left-item-num").not(".item-condition").text();
+                    cps_product_sku = cps_product_sku.substring(6, cps_product_sku.length);
+                    cps_item_code = $("[name='vwitem']").val();
+                    cps_quantity = $("[name='vwquantity']").val();
+                    cps_current_variant = '';
+                    cps_item_tags = ''
+                    cps_item_options = ''
+
+                    // Get Warranites
+                    data_dict = {
+                        "cps_dealer_key": cps_dealer_key, "cps_item_code": cps_item_code, "cps_category1": cps_category1, "cps_item_tags": cps_item_tags, "cps_item_description": cps_item_description,
+                        "cps_item_model": cps_item_model, "cps_item_url": cps_item_url, "cps_current_variant": cps_current_variant, "cps_product_sku": cps_product_sku, "cps_product_price": cps_product_price,
+                        "cps_site_version": cps_site_version
+                    };
+                    console.log(data_dict);
+                };
+                get_variables()
+
+                if (cps_product_price > 0) {
+                    console.log('checking for warranties...');
+                    $.ajax({
+                        type: "POST",
+                        url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_warranty_yahoo',
+                        dataType: 'jsonp',
+                        data: data_dict,
+                        success: function (data) {
+                            if (data.response.data.length > 0) {
+                                for (i = 0; i < data.response.data.length; i++) {
+                                    var warranty = {
+                                        has_warranty: true,
+                                        id: data.response.data[i].id,
+                                        itemprice: data.response.data[i].itemprice,
+                                        itemdeductible: data.response.data[i].itemdeductible,
+                                        itemcode: data.response.data[i].itemcode,
+                                        warrantycode: data.response.data[i].warrantycode,
+                                        years: data.response.data[i].years,
+                                    };
+                                    warranties.push(warranty);
+                                };
+                                console.log("Got Warranty");
+                                console.log(warranties);
+
+                                setTimeout(cps_YH_warranty(warranties), 1000);
+                            } else {
+                                console.log("No Warranties");
+                            };
+                        }
+                    });
+                }
+
+                // check if the qty changed and update qty 2 
+                $("input[name=vwquantity1]").change(function () {
+                    var new_quantity = $("input[name=vwquantity1]").val();
+                    $("[name='vwquantity2']").val(quantity)
+                    console.log("updated Qty 2 to " + new_quantity);
+                });
+
+                // check if there is warranty selected and ...
+                $('.det-addtocart').click(function () {
+                    var selected_warranty = $(".cps_warranty");
+                    //if there is a warranty selected at checkout add to cart with ...
+                    if (selected_warranty.is(':checked') || selected_warranty_id > 0) {
+                        console.log("adding warranty item code " + selected_warranty_id + " to cart ...");
+                        //  warranties will automatically be added from the pages add to cart function since we changed variables on the page //  //
+                    };
+                });
+
+            });
+        } //end if yahoo store
+
+
+
+        //Prestashop
+        else if (site_status == " True " && site_type == "8 ") {
+            console.log('Inside PrestaShop Cart');
+            var selected = false; selected_warranty_var_id = 0; selected_warranty_item_id = 0;
+
+            // Function to display the warranties in the shopping cart 
+            function cps_prestashop_warranty(warranties) {
+                var html = ''; var page = ''; var data = ''; var before = ''; var after = '';
+                page = '/warranty-information';
+                data = 'target="_blank"';
+
+                if (warranties.length > 0) {
+                    html = '<div class="cps" data-toggle="tooltip" data-placement="left" title="covers manufacturer defects and accidental damages">';
+                    html += '<select class="cps_warranty" name="cps" style="width:80%;color:#666666;">';
+                    html += '<option value="">Select a Warranty </option>';
+                    for (i = 0; i < warranties.length; i++) {
+                        html += '<option data-itemid = "' + warranties[i].itemid + '" value="' + warranties[i].variantid + '">' + warranties[i].years + ' <a href="/pages/' + page + '"style="color:blue; " ' + data + '>year extended warranty </a> (+$' + warranties[i].itemprice + ')</option>';
+                    };
+                    html += '<option value="0">No thanks</option>';
+                    html += '</select>';
+                    html += '<br>'
+                    html += '<br>'
+
+                    console.log("Added Warranty");
+                    $('#cps_cart').html(html);
+                };
+                //    //radio buttons 
+                //    html += '<br>';
+                //    html += '<label>Select a warranty </label><br>';
+                //    for (i = 0; i < warranties.length; i++) {
+                //        html += '<input class="cps_warranty" type="radio" name="cps" value="' + warranties[i].variantid + '"> Include ' + warranties[i].years + ' <a class="link" href="/pages/' + page + '"style="color:blue; " ' + data + '>years of warranty protection</a> for ' + before + ' $' + warranties[i].itemprice + after + '<br>';
+                //    };
+                //    html += '<input class="cps_warranty" type="radio" name="cps" value="0"> No thanks <br>';
+                //    //};
+                //    html += '<br>';
+                //    html += '</div>';
+                //    html += '<style>';
+                //    html += '.cps_warranty:hover {color:dark-blue;} important!';
+                //    html += '</style>';
+
+
+                // check if there is a warranty selected (add the listener after the html is already on the page)
+                $('.cps_warranty').change(function () {
+                    if ($(this).val() > 0) { //greater than 0
+                        //first set everything else cps, then set id
+                        $('.cps_warranty').attr('name', 'cps');
+                        //$(this).attr('name', 'id[]');
+                        //console.log('Changed to id[]')
+                        selected = true;
+                        console.log("Selected Warranty");
+                    } else {
+                        $('.cps_warranty').attr('name', 'cps');
+                        //console.log($(this).val())
+                        selected = false;
+                        console.log("Selected No Thanks");
+                    };
+                    selected_warranty_var_id = $(this).val();
+                    selected_warranty_item_id = $('.cps_warranty').find(':selected').data('itemid');
+                    console.log("selected warranty var id " + selected_warranty_var_id)
+                    console.log("selected warranty item id " + selected_warranty_item_id)
+                });
+                return selected_warranty_var_id;
+            };
+
+            if (typeof (cps_item_description) != "undefined") { } else { cps_item_description = '' };
+
+            // Get Warranites
+            var data_dict = {
+                "dealer_key": cps_dealer_key, "item_url": cps_item_url, "cur_var": cps_current_variant, "item_id": cps_item_id, "item_desc": cps_item_description,
+                "item_model": cps_item_model, "category1": cps_category1, "site_version": cps_site_version, "pvs": cps_product_variants, "item_tags": ""
+            };
+
+            // only capture first 10 so call doesnt error out if its too long
+            var limit = 0;
+            if (data_dict.pvs.length < 10) {
+                limit = data_dict.pvs.length;
+            } else {
+                limit = 10;
+            };
+
+            while (data_dict.pvs.length > limit) {
+                data_dict.pvs.pop(); // remove the last value in the array
+            };
+
+            //remove the current from the data_dict to shorten call length 
+            for (i = 0; i <= limit - 1; i++) {
+                var pvs2 = {};
+                pvs2.price = data_dict.pvs[i].value.price;
+                pvs2.sku = data_dict.pvs[i].value.sku;
+                data_dict.pvs[i].value = pvs2;
+            };
+
+            console.log(data_dict);
+
+            var has_warranty = false; var itemid = 0; var id = ''; var msrp = ''; var warrantycid = 0; var warrantycode = ''; var years = ''; var warranties = [];
+
+            console.log($().jquery);
+
+            //make the call to get warranties
+            $.ajax({
+                type: "POST",
+                url: 'https://www.cpscentral.com/vendor_product.ashx?value=get_warranty_prestashop',
+                dataType: 'jsonp',
+                data: data_dict,
+                success: function (data) {
+
+                    if (data.response.data.length > 0) {
+                        for (i = 0; i < data.response.data.length; i++) {
+                            var warranty = {
+                                has_warranty: true,
+                                id: data.response.data[i].id,
+                                itemprice: data.response.data[i].itemprice,
+                                itemid: data.response.data[i].itemid,
+                                variantid: data.response.data[i].variantid,
+                                warrantycode: data.response.data[i].warrantycode,
+                                years: data.response.data[i].years,
+                            };
+                            warranties.push(warranty);
+                        }
+                        console.log("Got Warranty");
+                    } else {
+                        console.log("No Warranties");
+                    };
+                    // call funtion to add warranties to the page
+                    setTimeout(cps_prestashop_warranty(warranties), 1000);
+                }
+            });
+
+            //checkout for Pawn America  
+            function pawn_america_ajax_checkout() {
+                console.log("Adding now:");
+                var token = '8dbed317f2d7b10426d6a96dae75f745'
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart?add=1&action=update&token=' + token + '&id_product=' + selected_warranty_item_id + '&group[5]=' + selected_warranty_var_id,
+                    dataType: 'json',
+                    success: function (response) {
+                        console.log("Added to Cart");
+                    }
+                });
+                return false;
+            };
+
+            $('.add-to-cart').click(function (e) {
+                if (cps_site_version === "Pawn_America") {
+
+                    //if there is a warranty selected at checkout add to cart with ajax call
+                    if (selected_warranty_var_id > 0 && selected_warranty_item_id > 0) {
+                        console.log("adding warranty item id " + selected_warranty_item_id + " and var id " + selected_warranty_var_id + " to cart ...");
+                        setTimeout(pawn_america_ajax_checkout, 1000);
+                    };
+
+                    //if there is a warranty selected at checkout send the value to cps               
+                    if (selected_warranty_var_id > 0 && selected_warranty_item_id > 0) {
+                        console.log("sending warranty to CPS ...");
+                        $.ajax({
+                            url: 'https://www.cpscentral.com/vendor_product.ashx?value=add_warranty_shopify&item_id=' + selected_warranty_var_id,
+                            dataType: 'jsonp',
+                            success: function (data) {
+                                console.log(data.response.status);
+                            }
+                        });
+                    };
+                };
+            });
+
+        } //end if prestashop store
+
+
+
+        else {
+            console.log("Site not Live - No Warranites");
+        }
+    };
+};
+
+
+
+//---------------------------------------------------------------------------------------------------------////
+
+
+//Code starts here - 
+checksite(); // check site version
+
+jQuery.ajax({
+    url: 'https://www.cpscentral.com/vendor_product.ashx?value=check_site&cps_site_version=' + cps_site_version,
+    dataType: 'jsonp',
+    success: function (data) {
+        site_status = data.response.status
+        site_type = data.response.type
+        new_script = data.response.newscript
+
+        if (site_status) {
+            console.log('CPS Integration');
+            runfile() //run integration script
+        } else {
+            console.log('Dead Integration');
+        };
+
+    }
+});

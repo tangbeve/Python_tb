@@ -1,0 +1,2853 @@
+/* Ephox PowerPaste plugin
+ *
+ * Copyright 2010-2012 Ephox Corporation.  All rights reserved.
+ *
+ * Version: 1.0.1.22
+ */
+(function () {
+  if (this.ephox)
+    var old = this.ephox.bolt;
+
+var defs = {}; // id -> {dependencies, definition, instance (possibly undefined)}
+
+var register = function (id) {
+  var module = dem(id);
+  var fragments = id.split('.');
+  var target = Function('return this;')();
+  for (var i = 0; i < fragments.length - 1; ++i) {
+    if (target[fragments[i]] === undefined)
+      target[fragments[i]] = {};
+    target = target[fragments[i]];
+  }
+  target[fragments[fragments.length - 1]] = module;
+};
+
+var instantiate = function (id) {
+  var dependencies = defs[id].dependencies;
+  var definition = defs[id].definition;
+  var instances = [];
+  for (var i = 0; i < dependencies.length; ++i)
+    instances.push(dem(dependencies[i]));
+  defs[id].instance = definition.apply(null, instances);
+  if (defs[id].instance === undefined)
+     throw 'required module [' + id + '] could not be defined (definition function returned undefined)';
+};
+
+var def = function (id, dependencies, definition) {
+  if (typeof id !== 'string')
+    throw 'invalid module definition, module id must be defined and be a string';
+  if (dependencies === undefined)
+    throw 'invalid module definition, dependencies must be specified';
+  if (definition === undefined)
+    throw 'invalid module definition, definition function must be specified';
+  defs[id] = {
+    dependencies: dependencies,
+    definition: definition,
+    instance: undefined
+  };
+};
+
+var dem = function (id) {
+  if (defs[id] === undefined)
+    throw 'required module [' + id + '] is not defined';
+  if (defs[id].instance === undefined)
+    instantiate(id);
+  return defs[id].instance;
+};
+
+var req = function (ids, callback) {
+  var instances = [];
+  for (var i = 0; i < ids.length; ++i)
+    instances.push(dem(ids[i]));
+  callback.apply(null, callback);
+};
+
+var ephox = this.ephox || {};
+
+ephox.bolt = {
+  module: {
+    api: {
+      define: def,
+      require: req,
+      demand: dem
+    }
+  }
+};
+
+
+/*jsc
+["ephox.powerpaste.wordimport.CommonFilters","ephox.powerpaste.wordimport.WordImport","ephox.powerpaste.wordimport.WordOnlyFilters","ephox.powerpaste.data.tokens.Tokenizer","ephox.powerpaste.data.tokens.Token","ephox.powerpaste.data.tokens.Helper","ephox.powerpaste.data.tokens.Serializer","ephox.powerpaste.data.tokens.Attributes","ephox.powerpaste.data.tokens.Filter","ephox.powerpaste.data.Insert","ephox.powerpaste.tinymce.Util","ephox.powerpaste.tinymce.BrowserFilters","ephox.powerpaste.tinymce.Clipboard","ephox.powerpaste.tinymce.Settings","ephox.powerpaste.PowerPaste","ephox.powerpaste.filters.StripMetaAndLinkElements","ephox.powerpaste.filters.InferListTags","ephox.powerpaste.filters.StripFormattingAttributes","ephox.powerpaste.filters.StripScripts","ephox.powerpaste.filters.StripEmptyStyleAttributes","ephox.powerpaste.filters.Text","ephox.powerpaste.filters.StripNamespaceDeclarations","ephox.powerpaste.filters.StripVMLAttributes","ephox.powerpaste.filters.StripNoAttributeA","ephox.powerpaste.filters.StripOPTags","ephox.powerpaste.filters.StripEmptyInlineElements","ephox.powerpaste.filters.StripBookmarks","ephox.powerpaste.filters.StripLangAttribute","ephox.powerpaste.filters.StripImages","ephox.powerpaste.filters.StripTocLinks","ephox.powerpaste.filters.FilterInlineStyles","ephox.powerpaste.filters.list.Lists","ephox.powerpaste.filters.list.ListStates","ephox.powerpaste.filters.list.Emitter","ephox.powerpaste.filters.list.ListTypes","ephox.powerpaste.filters.list.CommentHeuristics","ephox.powerpaste.filters.StripClassAttributes","ephox.powerpaste.PastePlugin"]
+jsc*/
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.tinymce.Util',
+
+  [
+  ],
+
+  function () {
+    var bind = function(func, t) {
+      return function() {
+        return func.apply(t, arguments);
+      };
+    };
+
+    // Useful utilities that may exist in libraries but aren't as common.
+    // Currently we're providing our own implementation for these but want to track them.
+    var ephoxGetComputedStyle = function(node) {
+      if (node.ownerDocument.defaultView) {
+        return node.ownerDocument.defaultView.getComputedStyle(node, null);
+      }
+      return node.currentStyle || {};
+    };
+
+    var log = function(msg) {
+      if (typeof(console) !== 'undefined' && console.log) {
+        console.log(msg);
+      }
+    };
+
+    var compose = function(funs) {
+      var args = Array.prototype.slice.call(funs).reverse();
+      return function(input) {
+        var r = input;
+        for (var i = 0; i < args.length; i++) {
+          var fun = args[i];
+          r = fun(r);
+        }
+        return r;
+      };
+    };
+
+    var extend = function(obj) {
+      tinymce.each(Array.prototype.slice.call(arguments, 1), function(element){
+        for (var prop in element) {
+          obj[prop] = element[prop];
+        }
+      });
+      return obj;
+    };
+
+    return {
+      each: tinymce.each,
+      trim: tinymce.trim,
+      bind: bind,
+      extend: extend,
+      ephoxGetComputedStyle: ephoxGetComputedStyle,
+      log: log,
+      compose: compose
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Attributes',
+
+  [
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Util) {
+    var isAttrSpecified = function(attr) {
+      return attr.specified !== false || (attr.nodeName === 'name' && attr.nodeValue !== '');
+    };
+
+    var combineFilters = function(filter1, filter2) {
+      if (!filter1 || !filter2) {
+        return filter1 || filter2;
+      }
+      return function(name, value) {
+        return filter2(name, filter1(name, value));
+      };
+    };
+
+    var manager = function(node) {
+      var attributeCount = 0;
+      var attributes;
+      var getCachedAttributes = function() {
+        return attributes;
+      };
+
+      var getAttributeMutableFunction;
+      var getAttributes = function() {
+        return getAttributeMutableFunction();
+      };
+
+      getAttributeMutableFunction = function() {
+        attributes = {};
+        attributeCount = 0;
+        // Load from native.
+        Util.each(node.attributes, function(attr) {
+          var name = attr.nodeName, value = attr.nodeValue;
+          if (isAttrSpecified(attr)) {
+            if (value !== null && value !== undefined) {
+              attributes[name] = value;
+              attributeCount++;
+            }
+          }
+        });
+        if (attributes['style'] === undefined && node.style.cssText) {
+          attributes['style'] = node.style.cssText;
+          attributeCount++;
+        }
+        getAttributeMutableFunction = getCachedAttributes;
+        return attributes;
+      };
+
+      var getAttributeCount = function() {
+        getAttributeMutableFunction();
+        return attributeCount;
+      };
+
+      var unappliedFilter;
+      var unfilteredGetAttributes;
+
+      var filter = function(f) {
+        if (!unappliedFilter) {
+          unfilteredGetAttributes = getAttributeMutableFunction;
+        }
+
+        unappliedFilter = combineFilters(unappliedFilter, f);
+        // Defer applying the filter until we absolutely have to.
+        getAttributeMutableFunction = function() {
+          getAttributeMutableFunction = unfilteredGetAttributes;
+          eachAttribute(function(name, value) {
+            var newValue = unappliedFilter(name, value);
+            if (newValue === null) {
+              if (name === 'class') {
+                node.className = "";
+              } else {
+                node.removeAttribute(name, 2);
+              }
+              delete attributes[name];
+              attributeCount--;
+            } else if (newValue !== value) {
+              if (name === 'class') {
+                node.className = newValue;
+              } else {
+                node.setAttribute(name, newValue);
+              }
+              attributes[name] = newValue;
+            }
+          });
+          getAttributeMutableFunction = getCachedAttributes;
+          return attributes;
+        };
+      };
+
+      var get = function(name) {
+        return getAttributeMutableFunction()[name];
+      };
+
+      var eachAttribute = function(callback) {
+        Util.each(getAttributeMutableFunction(), function(value, name) {
+          callback(name, value);
+        });
+      };
+
+      return {
+        get: get,
+        each: eachAttribute,
+        filter: filter,
+        getAttributes: getAttributes,
+        getAttributeCount: getAttributeCount
+      };
+    };
+    return {
+      manager: manager
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Token',
+
+  [
+    'ephox.powerpaste.data.tokens.Attributes',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Attributes, Util, TokenTypes) {
+    var START_ELEMENT_TYPE = 'startElement';
+    var END_ELEMENT_TYPE = 'endElement';
+    var TEXT_TYPE = 'text';
+    var COMMENT_TYPE = 'comment';
+
+    var attributeManager = Attributes.manager;
+
+    /**
+     * Converts a style name from the CSS version (e.g. text-align) to the
+     * DOM property equivalent (textAlign).
+     *
+     * @param name the style name to convert.
+     * @returns the style name in DOM form.
+     */
+    var convertStyleName = function(name) {
+      return name.replace(/-(.)/g, function(regex, capture) {
+        return capture.toUpperCase();
+      });
+    };
+
+    /**
+     * Converts a style name from the DOM version (e.g. textAlign) to the
+     * CSS equivalent (text-align). This is the reverse of convertStyleName.
+     *
+     * @param name the style name to convert.
+     * @returns the style name in CSS form.
+     */
+    var convertStyleNameBack = function(name) {
+      return name.replace(/([A-Z])/g, function(regex, capture) {
+        return '-' + capture.toLowerCase();
+      });
+    };
+
+    // This is shared across all instances because if we ever see an mso- style in the normal iteration
+    // we can be certain they are included and don't need the extra check.
+    var seenMsoStyle = false;
+    var eachNativeStyle = function(node, syntheticStyles, callback) {
+      var i, len = node.style.length, name, value, styles;
+      styles = syntheticStyles || node.getAttribute("style");
+      if (styles === undefined || styles === null || !styles.split) {
+        styles = node.style.cssText;
+      }
+      Util.each(styles.split(';'), function(declaration) {
+        var idx = declaration.indexOf(':');
+        if (idx > 0) {
+          name = Util.trim(declaration.substring(0, idx));
+          if (name.toUpperCase() === name) {
+            name = name.toLowerCase();
+          }
+          name = convertStyleNameBack(name);
+          value = Util.trim(declaration.substring(idx + 1));
+          if (!seenMsoStyle) seenMsoStyle = name.indexOf('mso-') === 0;
+          callback(name, value);
+        }
+      });
+      if (!seenMsoStyle) {
+        // IE9 preserves unknown styles but provides no way to iterate them.
+        // To deal with that, we look for the specific custom styles we care about.
+        value = node.style['mso-list'];
+        if (value) {
+          callback('mso-list', value);
+        }
+      }
+    };
+
+    var token = function(node, endNode, syntheticStyles) {
+      var tokenType;
+      var tagName;
+      var tokenText;
+      var attributeStore;
+      var tokenStyles;
+      switch (node.nodeType) {
+        case 1:
+          if (endNode) {
+            tokenType = END_ELEMENT_TYPE;
+          } else {
+            tokenType = START_ELEMENT_TYPE;
+            attributeStore = attributeManager(node);
+
+            tokenStyles = {};
+            eachNativeStyle(node, syntheticStyles, function(name, value) {
+              tokenStyles[name] = value;
+            });
+          }
+          if (node.scopeName !== "HTML" && node.scopeName && node.tagName && node.tagName.indexOf(':') <= 0) {
+            tagName = (node.scopeName + ":" + node.tagName).toUpperCase();
+          } else {
+            tagName = node.tagName;
+          }
+
+          break;
+        case 3:
+          tokenType = TEXT_TYPE;
+          tokenText = node.nodeValue;
+          break;
+        case 8:
+          tokenType = COMMENT_TYPE;
+          tokenText = node.nodeValue;
+          break;
+        default:
+          Util.log("WARNING: Unsupported node type encountered: " + node.nodeType);
+          break;
+      }
+
+      var getNode = function() {
+        // Make sure all filters are applied.
+        if (attributeStore) attributeStore.getAttributes();
+        return node;
+      };
+
+      var tag = function() {
+        return tagName;
+      };
+
+      var type = function() {
+        return tokenType;
+      };
+
+      var text = function() {
+        return tokenText;
+      };
+
+      var toString = function() {
+        return "Type: " + tokenType + ", Tag: " + tagName + " Text: " + tokenText;
+      };
+
+      var getAttribute = function(name) {
+        return attributeStore.get(name.toLowerCase());
+      };
+
+      var filterAttributes = function(filter) {
+        if (tokenType === START_ELEMENT_TYPE) {
+          attributeStore.filter(filter);
+        }
+      };
+
+      var filterStyles = function(filter) {
+        if (type() === START_ELEMENT_TYPE) {
+          var css = "";
+          Util.each(tokenStyles, function(value, name) {
+            var newValue = filter(name, value);
+            if (newValue === null) {
+              if (node.style.removeProperty) {
+                node.style.removeProperty(convertStyleName(name));
+              } else {
+                node.style.removeAttribute(convertStyleName(name));
+              }
+              delete tokenStyles[name];
+            } else {
+              css += name + ': ' + newValue + '; ';
+              tokenStyles[name] = newValue;
+            }
+          });
+          css = css ? css : null;
+          filterAttributes(function(name, value) {
+            if (name === 'style') {
+              return css;
+            }
+            return value;
+          });
+          node.style.cssText = css;
+        }
+      };
+
+      var getAttributeCount = function() {
+        return attributeStore.getAttributeCount();
+      };
+
+      var attributes = function(callback) {
+        attributeStore.each(callback);
+      };
+
+      var getStyle = function(name) {
+        return tokenStyles[name];
+      };
+
+      var styles = function(callback) {
+        Util.each(tokenStyles, function(value, name) {
+          callback(name, value);
+        });
+      };
+
+      var getComputedStyle = function() {
+        return Util.ephoxGetComputedStyle(node);
+      };
+
+      var isWhitespace = function() {
+        return tokenType === TEXT_TYPE &&  /^[\s\u00A0]*$/.test(tokenText);
+      };
+
+      return {
+        getNode: getNode,
+        tag: tag,
+        type: type,
+        text: text,
+        toString: toString,
+        getAttribute: getAttribute,
+        filterAttributes: filterAttributes,
+        filterStyles: filterStyles,
+        getAttributeCount: getAttributeCount,
+        attributes: attributes,
+        getStyle: getStyle,
+        styles: styles,
+        getComputedStyle: getComputedStyle,
+        isWhitespace: isWhitespace
+      };
+    };
+
+    var createStartElement = function(tag, attributes, styles, document) {
+      var node = document.createElement(tag), css = "";
+      Util.each(attributes, function(value, name) {
+        node.setAttribute(name, value);
+      });
+      Util.each(styles, function(value, name) {
+        css += name + ":" + value + ";";
+        node.style[convertStyleName(name)] = value;
+      });
+      return token(node, false, css !== "" ? css : null);
+    };
+
+    var createEndElement = function(tag, document) {
+      return token(document.createElement(tag), true);
+    };
+
+    var createComment = function(text, document) {
+      return token(document.createComment(text), false);
+    };
+
+    var createText = function(text, document) {
+      return token(document.createTextNode(text));
+    };
+
+    var FINISHED = createEndElement('HTML', window.document);
+
+    return {
+      START_ELEMENT_TYPE: START_ELEMENT_TYPE,
+      END_ELEMENT_TYPE: END_ELEMENT_TYPE,
+      TEXT_TYPE: TEXT_TYPE,
+      COMMENT_TYPE: COMMENT_TYPE,
+      FINISHED: FINISHED,
+      token: token,
+      createStartElement: createStartElement,
+      createEndElement: createEndElement,
+      createComment: createComment,
+      createText: createText
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Filter',
+
+  [
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Token, Util) {
+
+    var createFilter = function(actualReceiver, clientReset) {
+      var filter = function(nextFilter, settings, document) {
+        var deferred;
+        var receivedTokens, emittedTokens, inTransaction = false;
+
+        var resetState = function() {
+          if (clientReset) clientReset(api);
+          inTransaction = false;
+          receivedTokens = [];
+          emittedTokens = [];
+        };
+
+        var emitTokens = function(tokens) {
+          Util.each(tokens, function(tok) {
+            nextFilter.receive(tok);
+          });
+        };
+
+        var emit = function(token) {
+          if (inTransaction) {
+            emittedTokens.push(token);
+          } else {
+            nextFilter.receive(token);
+          }
+        };
+
+        var receive = function(token) {
+          if (clientReset) receivedTokens.push(token);
+          actualReceiver(api, token);
+          if (token === Token.FINISHED) {
+            commit();
+          }
+        };
+
+        var startTransaction = function() {
+          inTransaction = true;
+        };
+
+        var rollback = function() {
+          emitTokens(receivedTokens);
+          resetState();
+        };
+
+        var commit = function() {
+          emitDeferred();
+          emitTokens(emittedTokens);
+          resetState();
+        };
+
+        var defer = function(token) {
+          deferred = deferred || [];
+          deferred.push(token);
+        };
+
+        var hasDeferred = function() {
+          return deferred && deferred.length > 0;
+        };
+
+        var emitDeferred = function() {
+          Util.each(deferred, function(token) {
+            emit(token);
+          });
+          dropDeferred();
+        };
+
+        var dropDeferred = function() {
+          deferred = [];
+        };
+
+        var api = {
+          document: document || window.document,
+          settings: settings || {},
+          emit: emit,
+          receive: receive,
+          startTransaction: startTransaction,
+          rollback: rollback,
+          commit: commit,
+          defer: defer,
+          hasDeferred: hasDeferred,
+          emitDeferred: emitDeferred,
+          dropDeferred: dropDeferred
+        };
+
+        resetState();
+        return api;
+      };
+      return filter;
+    };
+
+    var createAttributeFilter = function(filter) {
+      return createFilter(function(api, token) {
+        token.filterAttributes(Util.bind(filter, api));
+        api.emit(token);
+      });
+    };
+
+    return {
+      createFilter: createFilter,
+      createAttributeFilter: createAttributeFilter
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.FilterInlineStyles',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    var removeStyles = /^(mso-.*|tab-stops|tab-interval|language|text-underline|text-effect|text-line-through|font-color|horiz-align|list-image-[0-9]+|separator-image|table-border-color-(dark|light)|vert-align|vnd\..*)$/;
+
+    var filterFunction = function(styleFilter) {
+      return function(name, value) {
+        var preserve = false;
+        switch (styleFilter) {
+          case 'all':
+          case '*':
+            preserve = true;
+            break;
+          case 'valid':
+            preserve = !removeStyles.test(name);
+            break;
+          case undefined:
+          case 'none':
+            preserve = name === 'list-style-type';
+            break;
+          default:
+            preserve = (',' + styleFilter + ',').indexOf(',' + name + ',') >= 0;
+            break;
+        }
+        return preserve ? value : null;
+      };
+    };
+
+    return Filter.createFilter(function(api, token) {
+      var styleFilter = api.settings.get('retain_style_properties');
+      token.filterStyles(filterFunction(styleFilter));
+      api.emit(token);
+    });
+
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.InferListTags',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Token) {
+    return Filter.createFilter(function(api, token) {
+      if (api.seenList) {
+        // As soon as we see a UL or OL tag we know we're getting complete lists.
+        api.emit(token);
+      } else if (api.inferring) {
+        if (token.tag() === 'LI') {
+          if (token.type() === Token.START_ELEMENT_TYPE) {
+            api.inferring++;
+          } else {
+            api.inferring--;
+            if (!api.inferring) {
+              api.needsClosing = true;
+            }
+          }
+        }
+        api.emit(token);
+      } else {
+        if (token.tag() === 'OL' || token.tag() === 'UL') {
+          api.seenList = true;
+        } else if (token.tag() === 'LI') {
+          api.inferring = 1;
+          if (!api.needsClosing) {
+            api.emit(Token.createStartElement('UL', {}, {}, api.document));
+          }
+        }
+        if (api.needsClosing && !api.inferring && !token.isWhitespace()) {
+          api.needsClosing = false;
+          api.emit(Token.createEndElement('UL', api.document));
+        }
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripBookmarks',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      if (name === 'name' || name === 'id') {
+        return null;
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripClassAttributes',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      var classFilter;
+      if (name === 'class') {
+        classFilter = this.settings.get('strip_class_attributes');
+        switch (classFilter) {
+          case 'mso':
+            return value.indexOf('Mso') === 0 ? null : value;
+          case 'none':
+            return value;
+          default:
+            return null;
+        }
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Helper',
+
+  [
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Token) {
+    var checkSupportsCustomStyles = function() {
+      // Firefox 4 preserves these styles in the DOM, but strips them when pasting.
+      // Since we can't trigger a paste there's no way to detect this situation apart from sniffing.
+      if (navigator.userAgent.indexOf('Gecko') > 0 && navigator.userAgent.indexOf('WebKit') < 0) return false;
+      var div = document.createElement('div');
+      try {
+        div.innerHTML = '<p style="mso-list: Ignore;">&nbsp;</p>';
+      } catch (ex) {
+        // Can't set innerHTML if we're in XHTML mode so just assume we don't get custom styles.
+        return false;
+      }
+      return Token.token(div.firstChild).getStyle('mso-list') === 'Ignore';
+    };
+
+    var supportsCustomStyles = checkSupportsCustomStyles();
+
+    var spanOrA = function(token) {
+      return token.tag() === 'A' || token.tag() === 'SPAN';
+    };
+
+    var hasMsoListStyle = function(token) {
+      var style = token.getStyle('mso-list');
+      return style && style !== 'skip';
+    };
+
+    var hasNoAttributes = function(token, allowStyle) {
+      if (token.type() === Token.START_ELEMENT_TYPE) {
+        return token.getAttributeCount() === 0 ||
+          (allowStyle && token.getAttributeCount() === 1 && token.getAttribute('style') != null);
+      } else {
+        return token.type() === Token.END_ELEMENT_TYPE;
+      }
+    };
+
+    return {
+      hasNoAttributes: hasNoAttributes,
+      supportsCustomStyles: supportsCustomStyles,
+      spanOrA: spanOrA,
+      hasMsoListStyle: hasMsoListStyle
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripEmptyInlineElements',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Helper',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Helper, Token) {
+    var deferred = [];
+    var open = [];
+    var hasContent = false;
+
+    var removeMatchingSpan = function(len, pos) {
+      var j, token, opened = 1;
+      for (j = pos + 1; j < len; j++) {
+        token = deferred[j];
+        if (token && token.tag() === 'SPAN') {
+          if (token.type() === Token.START_ELEMENT_TYPE) {
+            opened++;
+          } else if (token.type() === Token.END_ELEMENT_TYPE) {
+            opened--;
+            if (opened === 0) {
+              // Save reallocating a shorter array, just null it out.
+              deferred[j] = null;
+              return;
+            }
+          }
+        }
+      }
+    };
+
+    var flushDeferred = function(api) {
+      if (hasContent) {
+        var tok, len = deferred.length, i;
+        for (i = 0; i < len; i++) {
+          tok = deferred[i];
+          if (!tok) continue;
+          if (tok.type() === Token.START_ELEMENT_TYPE && tok.tag() === 'SPAN' && Helper.hasNoAttributes(tok)) {
+            // Omit token and find the last end span and remove it too.
+            removeMatchingSpan(len, i);
+          } else {
+            api.emit(tok);
+          }
+        }
+      }
+      deferred = [];
+      open = [];
+      hasContent = false;
+    };
+
+    var internalDefer = function(api, token) {
+      deferred.push(token);
+      open = open || [];
+      if (token.type() === Token.START_ELEMENT_TYPE) {
+        open.push(token);
+      } else if (token.type() === Token.END_ELEMENT_TYPE) {
+        open.pop();
+        if (open.length === 0) {
+          // Didn't find anything to keep so dump everything.
+          flushDeferred(api, token);
+          return;
+        }
+      }
+    };
+
+    return Filter.createFilter(function(api, token) {
+      var inlineTags = ',FONT,EM,STRONG,SAMP,ACRONYM,CITE,CODE,DFN,KBD,TT,B,I,U,S,SUB,SUP,INS,DEL,VAR,SPAN,';
+
+      deferred = deferred || [];
+
+      var alwaysKeep = function(token) {
+        return !(inlineTags.indexOf(',' + token.tag() + ',') >= 0 && Helper.hasNoAttributes(token, true));
+      };
+
+      if (deferred.length === 0) {
+        if (token.type() === Token.START_ELEMENT_TYPE) {
+          if (alwaysKeep(token)) {
+            api.emit(token);
+          } else {
+            internalDefer(api, token);
+          }
+        } else {
+          api.emit(token);
+        }
+      } else {
+        if (!hasContent) hasContent = alwaysKeep(token);
+        internalDefer(api, token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripEmptyStyleAttributes',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      if (name === 'style' && value === '') {
+        return null;
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripLangAttribute',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      return name === 'lang' ? null : value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+'ephox.powerpaste.filters.StripImages',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Token) {
+    return Filter.createFilter(function(api, token) {
+      if (token.tag() === 'IMG') {
+        if (token.type() === Token.END_ELEMENT_TYPE && api.skipEnd) {
+          api.skipEnd = false;
+          return;
+        } else if (token.type() === Token.START_ELEMENT_TYPE) {
+          if (/^file:/.test(token.getAttribute('src'))) {
+            api.skipEnd = true;
+            return;
+          } else if (api.settings.get('base_64_images') && /^data:image\/.*;base64/.test(token.getAttribute('src'))) {
+            api.skipEnd = true;
+            return;
+          }
+        }
+      }
+      api.emit(token);
+    });
+  }
+);
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripMetaAndLinkElements',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createFilter(function(api, token) {
+      if (token.tag() !== 'META' && token.tag() !== 'LINK') {
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripNoAttributeA',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Helper',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Helper, Token) {
+    var keepA = function(token) {
+      return !Helper.hasNoAttributes(token) && !/^OLE_LINK/.test(token.getAttribute('name'));
+    };
+
+    var stack = [];
+
+    return Filter.createFilter(function(api, token) {
+      var open;
+      if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'A') {
+        stack.push(token);
+        if (keepA(token)) {
+          api.defer(token);
+        }
+      } else if (token.type() === Token.END_ELEMENT_TYPE && token.tag() === 'A') {
+        open = stack.pop();
+        if (keepA(open)) {
+          api.defer(token);
+        }
+        if (stack.length === 0) {
+          api.emitDeferred();
+        }
+      } else if (api.hasDeferred()) {
+        api.defer(token);
+      } else {
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripScripts',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Token) {
+    var script = false;
+    return Filter.createFilter(function(api, token) {
+      if (token.tag() === 'SCRIPT') {
+        script = token.type() === Token.START_ELEMENT_TYPE;
+      } else if (!script) {
+        token.filterAttributes(function(name, value) {
+          if (/^on/.test(name) || name === 'language') return null;
+          return value;
+        });
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.wordimport.CommonFilters',
+
+  [
+    'ephox.powerpaste.filters.FilterInlineStyles',
+    'ephox.powerpaste.filters.InferListTags',
+    'ephox.powerpaste.filters.StripBookmarks',
+    'ephox.powerpaste.filters.StripClassAttributes',
+    'ephox.powerpaste.filters.StripEmptyInlineElements',
+    'ephox.powerpaste.filters.StripEmptyStyleAttributes',
+    'ephox.powerpaste.filters.StripLangAttribute',
+    'ephox.powerpaste.filters.StripImages',
+    'ephox.powerpaste.filters.StripMetaAndLinkElements',
+    'ephox.powerpaste.filters.StripNoAttributeA',
+    'ephox.powerpaste.filters.StripScripts'
+  ],
+
+  function (FilterInlineStyles, InferListTags, StripBookmarks, StripClassAttributes, StripEmptyInlineElements, StripEmptyStyleAttributes, StripLangAttribute, StripImages, StripMetaAndLinkElements, StripNoAttributeA, StripScripts) {
+    return [
+      StripScripts,
+      StripBookmarks,
+      StripImages,
+      FilterInlineStyles,
+      StripLangAttribute,
+      StripEmptyStyleAttributes,
+      StripClassAttributes,
+      StripNoAttributeA,
+      StripEmptyInlineElements,
+      StripMetaAndLinkElements,
+      InferListTags
+    ];
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Serializer',
+
+  [
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Token) {
+    var create = function(document) {
+      var currentNode = document.createDocumentFragment();
+      var initialNode = currentNode;
+
+      var push = function(node) {
+        append(node);
+        currentNode = node;
+      };
+
+      var pop = function() {
+        currentNode = currentNode.parentNode;
+      };
+
+      var append = function(node) {
+        currentNode.appendChild(node);
+      };
+
+      var receive = function(token) {
+
+        var startElement = function(token) {
+          var node = token.getNode().cloneNode(false);
+          push(node);
+        };
+
+        var text = function(token, serializer) {
+          // IE7 will crash if you clone a text node that's a URL.
+          // IE8 throws an invalid argument error.
+          // So while cloning may be faster, we have to create a new node here.
+          var node = document.createTextNode(token.text());
+          append(node);
+        };
+
+        switch (token.type()) {
+          case Token.START_ELEMENT_TYPE:
+            startElement(token);
+            break;
+          case Token.TEXT_TYPE:
+            text(token);
+            break;
+          case Token.END_ELEMENT_TYPE:
+            pop();
+            break;
+          case Token.COMMENT_TYPE:
+            // Ignore.
+            break;
+          default:
+            throw { message: 'Unsupported token type: ' + token.type() };
+        }
+      };
+
+      return {
+        dom: initialNode,
+        receive: receive
+      };
+    };
+
+    return {
+      create: create
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.tokens.Tokenizer',
+
+  [
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Token) {
+    var tokenize = function(html, document) {
+      var container;
+      document = document || window.document;
+      container = document.createElement('div');
+      document.body.appendChild(container);
+      container.style.position = 'absolute';
+      container.style.left = '-10000px';
+      container.innerHTML = html;
+
+      nextNode = container.firstChild || Token.FINISHED;
+
+      var nodeStack = [];
+      endNode = false;
+
+      var getTokenForNode = function(node, endTag) {
+        if (node === Token.FINISHED) {
+          return node;
+        } else if (node) {
+          return Token.token(node, endTag);
+        } else {
+          return undefined;
+        }
+      };
+
+      var next = function() {
+        var currentNode = nextNode;
+        var currentEndNode = endNode;
+        if (!endNode && nextNode.firstChild) {
+          nodeStack.push(nextNode);
+          nextNode = nextNode.firstChild;
+        } else if (!endNode && nextNode.nodeType === 1) {
+          // Empty element.
+          endNode = true;
+        } else if (nextNode.nextSibling) {
+          nextNode = nextNode.nextSibling;
+          endNode = false;
+        } else {
+          nextNode = nodeStack.pop();
+          endNode = true;
+        }
+
+        if (currentNode !== Token.FINISHED && !nextNode) {
+          document.body.removeChild(container);
+          nextNode = Token.FINISHED;
+        }
+
+        return getTokenForNode(currentNode, currentEndNode);
+      };
+
+      var hasNext = function() {
+        return nextNode !== undefined;
+      };
+
+      return {
+        hasNext: hasNext,
+        next: next
+      };
+    };
+
+    return {
+      tokenize: tokenize
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.Text',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Token'
+  ],
+
+  function (Filter, Token) {
+    var lineBreakElements = /^(P|H[1-6]|T[DH]|LI|DIV|BLOCKQUOTE|PRE|ADDRESS|FIELDSET|DD|DT|CENTER)$/;
+    var causesLinebreak = function(token) {
+      return lineBreakElements.test(token.tag());
+    };
+    var removeFilter = function() {
+      return null;
+    };
+
+    var inP = false;
+
+    return Filter.createFilter(function(api, token) {
+      var ensureInP = function() {
+        if (!inP) {
+          api.emit(Token.createStartElement('P', {}, {}, api.document));
+          inP = true;
+        }
+      };
+      switch (token.type()) {
+        case Token.TEXT_TYPE:
+          ensureInP();
+          api.emit(token);
+          break;
+        case Token.END_ELEMENT_TYPE:
+          if (inP && (causesLinebreak(token) || token === Token.FINISHED)) {
+            api.emit(Token.createEndElement('P', api.document));
+            inP = false;
+          } else if (token.tag() === 'BR') {
+            api.emit(token);
+          }
+          break;
+        case Token.START_ELEMENT_TYPE:
+          if (token.tag() === 'BR') {
+            token.filterAttributes(removeFilter);
+            token.filterStyles(removeFilter);
+            api.emit(token);
+          } else if (token.tag() === 'IMG' && token.getAttribute('alt')) {
+            ensureInP();
+            api.emit(Token.createText(token.getAttribute('alt'), api.document));
+          }
+          break;
+      }
+      if (token === Token.FINISHED) {
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.list.ListTypes',
+
+  [
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Token, Util) {
+    var orderedListTypes = [
+        { regex: /^\(?[dc][\.\)]$/, type: { tag: 'OL', type: 'lower-alpha' } },
+        { regex: /^\(?[DC][\.\)]$/, type: { tag: 'OL', type: 'upper-alpha' } },
+      { regex: /^\(?M*(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})[\.\)]$/, type: { tag: 'OL', type: 'upper-roman' } },
+      { regex: /^\(?m*(cm|cd|d?c{0,3})(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})[\.\)]$/, type: { tag: 'OL', type: 'lower-roman' } },
+      { regex: /^\(?[0-9]+[\.\)]$/, type: { tag: 'OL' } },
+      { regex: /^([0-9]+\.)*[0-9]+\.?$/, type: { tag: 'OL', variant: 'outline' } },
+      { regex: /^\(?[a-z]+[\.\)]$/, type: { tag: 'OL', type: 'lower-alpha' } },
+      { regex: /^\(?[A-Z]+[\.\)]$/, type: { tag: 'OL', type: 'upper-alpha' } }
+    ];
+
+    var ulChars = {
+      '\u2022': { tag: 'UL', type: 'disc' },
+      '\u00B7': { tag: 'UL', type: 'disc' },
+      '\u00A7': { tag: 'UL', type: 'square' }
+    };
+
+    var ulNonSymbolChars = {
+      'o': { tag: 'UL', type: 'circle' },
+      '-': { tag: 'UL', type: 'disc' },
+      '\u25CF': { tag: 'UL', type: 'disc' }
+    };
+
+    var createVariant = function(type, variant) {
+      var newType = { tag: type.tag, type: type.type, variant: variant };
+      if (type.start){
+        newType.start = type.start;
+      }
+      if (!type.type) delete newType.type;
+      return newType;
+    };
+
+    var guessListType = function(bulletInfo, preferredType, originalToken) {
+      var listType = null, text, symbolFont, variant;
+      if (bulletInfo) {
+        text = bulletInfo.text;
+        symbolFont = bulletInfo.symbolFont;
+      }
+      text = Util.trim(text);
+
+      listType = ulNonSymbolChars[text];
+      if (!listType) {
+        if (symbolFont) {
+          listType = ulChars[text];
+          if (!listType) {
+            listType = { tag: 'UL', variant: text };
+          } else {
+            listType = createVariant(listType, text);
+          }
+        } else {
+
+          Util.each(orderedListTypes, function(def) {
+            if (def.regex.test(text)) {
+              if (preferredType && eqListType(def.type, preferredType, true)) {
+                listType = def.type;
+                listType.start=parseInt(text);
+                return false;
+              }
+              if (!listType) listType = def.type;
+              listType.start=parseInt(text);
+            }
+          });
+          if (listType && !listType.variant) {
+            if (text.charAt(0) === '(') variant = '()';
+            else if (text.charAt(text.length - 1) === ')') variant = ')';
+            else variant = '.';
+            listType = createVariant(listType, variant);
+          }
+        }
+      } else {
+        listType = createVariant(listType, text);
+      }
+
+      if (listType && listType.tag === 'OL' &&
+          originalToken && (originalToken.tag() !== 'P' || /^MsoHeading/.test(originalToken.getAttribute('class')))) {
+        // Don't convert numbered headings but do convert bulleted headings.
+        listType = null;
+      }
+
+      return listType;
+    };
+
+    var eqListType = function(t1, t2, ignoreVariant) {
+      return t1 === t2 ||
+        (t1 && t2 && t1.tag === t2.tag && t1.type === t2.type &&
+            (ignoreVariant || t1.variant === t2.variant));
+    };
+
+    var checkFont = function(token, symbolFont) {
+      if (token.type() == Token.START_ELEMENT_TYPE) {
+        font = token.getStyle('font-family');
+        if (font) {
+          symbolFont = (font === 'Wingdings' || font === 'Symbol');
+        } else if (/^(P|H[1-6]|DIV)$/.test(token.tag())) {
+          symbolFont = false;
+        }
+      }
+      return symbolFont;
+    };
+
+    return {
+      guessListType: guessListType,
+      eqListType: eqListType,
+      checkFont: checkFont
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.list.CommentHeuristics',
+
+  [
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.filters.list.ListTypes',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Token, ListTypes, Util) {
+    var isListWithoutCommentsOrStyles = function(token, state) {
+      var indent, cls, node, symbolFont = false, value, listType;
+      var checkFont = function(n) {
+        var font = n.style.fontFamily;
+        if (font) {
+          symbolFont = (font === 'Wingdings' || font === 'Symbol');
+        }
+      };
+      if (token.type() === Token.START_ELEMENT_TYPE && state.openedTag && token.tag() === 'SPAN') {
+        node = state.openedTag.getNode();
+        checkFont(node);
+        if (node.childNodes.length > 1 && node.firstChild.tagName === 'A' && node.firstChild.textContent === '') {
+          node = node.childNodes[1];
+        }
+        while (node.firstChild && (node.firstChild.tagName === 'SPAN' || node.firstChild.tagName === 'A')) {
+          node = node.firstChild;
+          checkFont(node);
+        }
+        node = node.firstChild;
+        if (node && node.nodeType === 3) {
+          value = node.nodeValue;
+          if (!Util.trim(value)) {
+            // This handles the case where there's a SPAN with nbsps before the bullet such as with roman numerals.
+            node = node.parentNode.nextSibling;
+            value = node ? node.nodeValue : '';
+          }
+          // Real lists have the bullet with NBSPs either side surrounded in a SPAN.  If there's anything else, it's not a list.
+          if (!node || Util.trim(node.parentNode.textContent) != value) {
+            return false;
+          }
+          listType = ListTypes.guessListType({ text: value, symbolFont: symbolFont }, null, state.originalToken);
+          if (listType) {
+            // Don't convert numbered headings to lists.
+            return node.nextSibling && node.nextSibling.tagName === 'SPAN' && /^[\u00A0\s]/.test(node.nextSibling.firstChild.nodeValue) &&
+                (state.openedTag.tag() === 'P' || listType.tag === 'UL');
+          }
+        } else {
+          return node && node.tagName === 'IMG';
+        }
+      }
+      return false;
+    };
+
+
+    var getLeftOffset = function(node, paragraph) {
+      var parent, child, offset = 0;
+      parent = node.parentNode;
+      while (parent != null && parent != paragraph.parentNode) {
+        offset += parent.offsetLeft;
+        parent = parent.offsetParent;
+      }
+      return offset;
+    };
+
+    /** A simplified memoize function which only supports one or two function parameters.
+     *
+     * @param fn
+     * @param param the funtion p
+     * @returns
+     */
+    var memoize2 = function(fn) {
+      var cache = {};
+      return function(param1, param2) {
+        var result, key = param1 + "," + param2;
+        if (cache.hasOwnProperty(key)) {
+          return cache[key];
+        }
+        result = fn.call(null, param1, param2);
+        cache[key] = result;
+        return result;
+      };
+    };
+
+    var findStyles = memoize2(function(css, className) {
+      var results, matcher = /([^{]+){([^}]+)}/g, match, el, computedStyle;
+      matcher.lastIndex = 0; // Firefox Mac reuses the same regex so we need to reset it.
+      while ((results = matcher.exec(css)) != null && !match) {
+        Util.each(results[1].split(','), function(selector) {
+          var dotIndex = selector.indexOf('.');
+          if (dotIndex >= 0 && Util.trim(selector.substring(dotIndex + 1)) === className) {
+            match = results[2];
+            return false;
+          }
+        });
+      }
+      if (match) {
+        el = document.createElement('p');
+        el.setAttribute("style", match);
+        computedStyle = Util.ephoxGetComputedStyle(el);
+        return computedStyle ? "" + computedStyle.marginLeft : false;
+      }
+      return false;
+    });
+
+    var indentGuesser = function() {
+      var listIndentAdjust;
+      var listIndentAmount;
+      var guessIndentLevel = function(currentToken, token, styles, bulletInfo) {
+        var indentAmount, itemIndent, el, level = 1;
+
+        if (bulletInfo && /^([0-9]+\.)+[0-9]+\.?$/.test(bulletInfo.text)) {
+          // Outline list type so we can just count the number of sections.
+          return bulletInfo.text.replace(/([0-9]+|\.$)/g, '').length + 1;
+        }
+        indentAmount = listIndentAmount || parseInt(findStyles(styles, token.getAttribute('class')));
+
+        itemIndent = getLeftOffset(currentToken.getNode(), token.getNode());
+        if (!indentAmount) {
+          indentAmount = 48;
+        } else {
+          // We might get a 0 item indent if the list CSS code wasn't pasted as happens on Windows.
+          if (listIndentAdjust) {
+            itemIndent += listIndentAdjust;
+          } else if (itemIndent === 0) {
+            listIndentAdjust = indentAmount;
+            itemIndent += indentAmount;
+          }
+        }
+        listIndentAmount = indentAmount = Math.min(itemIndent, indentAmount);
+        level = Math.max(1, Math.floor(itemIndent / indentAmount)) || 1;
+        return level;
+      };
+      return {
+        guessIndentLevel: guessIndentLevel
+      };
+    };
+
+    var styles = function() {
+      var inStyle = false;
+      var styles = "";
+      var check = function(token) {
+        if (inStyle && token.type() === Token.TEXT_TYPE) {
+          styles += token.text();
+          return true;
+        } else if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'STYLE') {
+          inStyle = true;
+          return true;
+        } else if (token.type() === Token.END_ELEMENT_TYPE && token.tag() === 'STYLE') {
+          inStyle = false;
+          return true;
+        }
+        return false;
+      };
+      return {
+        check: check
+      };
+    };
+
+    return {
+      isListWithoutCommentsOrStyles: isListWithoutCommentsOrStyles,
+      indentGuesser: indentGuesser,
+      styles: styles
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.list.Emitter',
+
+  [
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.filters.list.ListTypes'
+  ],
+
+  function (Token, ListTypes) {
+    var impliedULatLevel = [ 'disc', 'circle', 'square' ];
+
+    var removeImpliedListType = function(type, level) {
+      if (type.tag === 'UL') {
+        if (impliedULatLevel[level - 1] === type.type) {
+          type = { tag: 'UL' };
+        }
+      }
+      return type;
+    };
+
+    return function(api, document) {
+      var listTypes = [];
+      var itemTags = [];
+      var currentLevel = 0;
+      var currentListType;
+
+      var openList = function(type, useType) {
+        var style = {}, attributes={};
+        currentLevel++;
+        if (useType) {
+          if (type.type) {
+            style = { 'list-style-type': type.type };
+          }
+        }
+        if (type.start && type.start>1) {
+          attributes={start:type.start};
+        }
+        listTypes.push(type);
+        api.emit(Token.createStartElement(type.tag, attributes, style, document));
+        currentListType = type;
+      };
+
+      var closeList = function() {
+        api.emit(Token.createEndElement(listTypes.pop().tag, document));
+        currentLevel--;
+        currentListType = listTypes[listTypes.length - 1];
+      };
+
+      var closeAllLists = function() {
+        while (currentLevel > 0) {
+          closeItem();
+          closeList();
+        }
+        api.commit();
+      };
+
+      var closeItem = function() {
+        var tag = itemTags ? itemTags.pop() : 'P';
+        if (tag != 'P') {
+          api.emit(Token.createEndElement(tag, document));
+        }
+        api.emit(Token.createEndElement('LI', document));
+      };
+
+      var openLI = function(paragraphToken, type, skippedPara) {
+        var style = {};
+        if (!paragraphToken) {
+          style['list-style-type'] = 'none';
+        } else {
+          var leftMargin = paragraphToken.getStyle('margin-left');
+          if (leftMargin !== undefined) {
+            style['margin-left'] = leftMargin;
+          }
+        }
+        if (currentListType && !ListTypes.eqListType(currentListType, type)) {
+          closeList();
+          if (skippedPara) {
+            api.emit(Token.createStartElement('P', {}, {}, document));
+            api.emit(Token.createText('\u00A0', document));
+            api.emit(Token.createEndElement('P', document));
+          }
+          openList(type, true);
+        }
+        api.emit(Token.createStartElement('LI', {}, style, document));
+        if (paragraphToken && paragraphToken.tag() != 'P') {
+          itemTags.push(paragraphToken.tag());
+          paragraphToken.filterStyles(function() { return null; });
+          api.emit(paragraphToken);
+        } else {
+          itemTags.push('P');
+        }
+      };
+
+      var openItem = function(level, paragraphToken, type, skippedPara) {
+        var style = {}, token;
+        if (!type) return;
+        if (!currentLevel) currentLevel = 0;
+        while (currentLevel > level) {
+          closeItem();
+          closeList();
+        }
+        type = removeImpliedListType(type, level);
+        if (currentLevel == level) {
+          closeItem();
+          openLI(paragraphToken, type, skippedPara);
+        } else {
+          // If there's a heading item we opened in the list we need to close it before creating the indented list
+          if (level > 1 && itemTags.length > 0 && itemTags[itemTags.length - 1] !== 'P') {
+            api.emit(Token.createEndElement(itemTags[itemTags.length - 1], document));
+            itemTags[itemTags.length - 1] = 'P';
+          }
+          while (currentLevel < level) {
+            openList(type, currentLevel == level - 1);
+            openLI(currentLevel == level ? paragraphToken : undefined, type);
+          }
+        }
+      };
+      var getCurrentLevel = function() {
+        return currentLevel;
+      };
+      var getCurrentListType = function() {
+        return currentListType;
+      };
+      return {
+        openList: openList,
+        closelist: closeList,
+        closeAllLists: closeAllLists,
+        closeItem: closeItem,
+        openLI: openLI,
+        openItem: openItem,
+        getCurrentListType: getCurrentListType,
+        getCurrentLevel: getCurrentLevel
+      };
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.list.ListStates',
+
+  [
+    'ephox.powerpaste.data.tokens.Helper',
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.filters.list.CommentHeuristics',
+    'ephox.powerpaste.filters.list.ListTypes',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Helper, Token, CommentHeuristics, ListTypes, Util) {
+    var unexpectedToken = function(api, token) {
+      Util.log("Unexpected token in list conversion: " + token.toString());
+      api.rollback();
+    };
+
+    var preferredListType = function(currentType, currentLevel, newLevel) {
+      if (currentLevel == newLevel) {
+        return currentType;
+      }
+      return null;
+    };
+
+    var afterListState = function(api, state, token) {
+      if (token.type() === Token.TEXT_TYPE && Util.trim(token.text()) === '') {
+        // Drop whitespace that's potentially between list items.
+        api.defer(token);
+      } else if (!state.skippedPara && token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'P' && !Helper.hasMsoListStyle(token)) {
+        state.openedTag = token;
+        api.defer(token);
+        state.nextFilter = skipEmptyParaState;
+      } else {
+        noListState(api, state, token);
+      }
+    };
+
+    var skipEmptyParaState = function(api, state, token) {
+      if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'SPAN' && state.spanCount.length === 0 &&
+          (Helper.supportsCustomStyles || !CommentHeuristics.isListWithoutCommentsOrStyles(token, state)) && !Helper.hasMsoListStyle(token)) {
+        api.defer(token);
+        state.spanCount.push(token);
+      } else if (token.type() === Token.END_ELEMENT_TYPE) {
+        if (token.tag() === 'SPAN') {
+          api.defer(token);
+          state.spanCount.pop();
+        } else if (token.tag() === 'P') {
+          api.defer(token);
+          state.skippedPara = true;
+          state.openedTag = null;
+          state.nextFilter = afterListState;
+        } else {
+          // Not an empty paragraph.
+          state.nextFilter = noListState;
+          state.nextFilter(api, state, token);
+        }
+      } else if (token.isWhitespace()) {
+        api.defer(token);
+      } else {
+        state.nextFilter = noListState;
+        state.nextFilter(api, state, token);
+      }
+    };
+
+    var msoListSkipState = function(api, state, token) {
+      if (token.type() === Token.END_ELEMENT_TYPE && token.tag() === state.originalToken.tag()) {
+        state.nextFilter = afterListState;
+      } else if (token === Token.FINISHED) {
+        state.emitter.closeAllLists();
+        api.emit(token);
+      }
+      // Else drop.
+    };
+
+    var noListState = function(api, state, token) {
+      var closeOutLists = function() {
+        state.emitter.closeAllLists();
+        api.emitDeferred();
+        state.openedTag = null;
+        api.emit(token);
+        state.nextFilter = noListState;
+      };
+      if (token.type() === Token.START_ELEMENT_TYPE && Helper.hasMsoListStyle(token) && token.tag() !== 'LI') {
+        var msoList = token.getStyle('mso-list');
+        if (false && msoList === 'skip') {
+          state.nextFilter = msoListSkipState;
+          state.originalToken = token;
+        } else {
+          var lvl = / level([0-9]+)/.exec(token.getStyle('mso-list'));
+
+          if (lvl && lvl[1]) {
+            state.itemLevel = parseInt(lvl[1], 10) + state.styleLevelAdjust;
+            // Tokens between lists should be dropped (they're just whitespace anyway)
+            // however, tokens before a list should be emitted if we find an mso-list style
+            // since this is the very first token of the list.
+            if (state.nextFilter === noListState) {
+              api.emitDeferred();
+            } else {
+              api.dropDeferred();
+            }
+            state.nextFilter = listStartState;
+            api.startTransaction();
+            state.originalToken = token;
+            state.commentMode = false;
+          } else {
+            closeOutLists();
+          }
+        }
+      } else if (!Helper.supportsCustomStyles &&
+          ((token.type() === Token.COMMENT_TYPE && token.text() === '[if !supportLists]') ||
+          (CommentHeuristics.isListWithoutCommentsOrStyles(token, api)))) {
+        if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'SPAN') {
+          state.spanCount.push(token);
+        }
+        state.nextFilter = listStartState;
+        api.startTransaction();
+        state.originalToken = state.openedTag;
+        state.commentMode = true;
+        state.openedTag = null;
+        api.dropDeferred();
+      } else if (token.type() === Token.END_ELEMENT_TYPE && Helper.spanOrA(token)) {
+        api.defer(token);
+        state.spanCount.pop();
+      } else if (token.type() === Token.START_ELEMENT_TYPE) {
+        // Might be the start of an item, store it and see if we get a comment next.
+        if (Helper.spanOrA(token)) {
+          api.defer(token);
+          state.spanCount.push(token);
+        } else {
+          if (state.openedTag) {
+            state.emitter.closeAllLists();
+            api.emitDeferred();
+          }
+          state.openedTag = token;
+          api.defer(token);
+        }
+      } else {
+        closeOutLists();
+      }
+    };
+
+    var afterNoBulletListState = function(api, state, token) {
+      if (token.type() === Token.END_ELEMENT_TYPE && state.originalToken.tag() === token.tag()) {
+        state.nextFilter = afterListState;
+        state.styleLevelAdjust = -1;
+      }
+      api.emit(token);
+    };
+
+    var listStartState = function(api, state, token) {
+      if (token.type() == Token.START_ELEMENT_TYPE && token.getStyle('mso-list') === 'Ignore') {
+        state.nextFilter = findListTypeState;
+      } if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'SPAN') {
+        state.spanCount.push(token);
+        if (state.commentMode && token.getAttribute("style") === "" || token.getAttribute("style") === null) {
+          state.nextFilter = findListTypeState;
+        }
+        // Otherwise drop.
+      } else if (token.tag() === 'A') {
+        if (token.type() === Token.START_ELEMENT_TYPE) {
+          state.spanCount.push(token);
+        } else {
+          state.spanCount.pop();
+        }
+      } else if (token.type() === Token.TEXT_TYPE) {
+        if (state.commentMode) {
+          state.nextFilter = findListTypeState;
+          state.nextFilter(api, state, token);
+        } else {
+          // List type without a bullet, we should treat it as a paragraph.
+          var start = state.originalToken;
+          var spans = state.spanCount;
+          state.emitter.closeAllLists();
+          api.emit(start);
+          Util.each(spans, Util.bind(api.emit, api));
+          api.emit(token);
+          api.commit();
+          state.originalToken = start;
+          state.nextFilter = afterNoBulletListState;
+        }
+      } else if (!state.commentMode && token.type() === Token.COMMENT_TYPE) {
+        // Drop. We seem to be getting custom styles and comments.
+      } else {
+        unexpectedToken(api, token);
+      }
+    };
+
+    var findListTypeState = function(api, state, token) {
+      if (token.type() === Token.TEXT_TYPE) {
+        if (token.isWhitespace()) {
+          // Ignore whitespace node, it's padding before the actual list type.
+        } else {
+          state.nextFilter = beforeSpacerState;
+          state.bulletInfo = { text: token.text(), symbolFont: state.symbolFont };
+        }
+      } else if (Helper.spanOrA(token)) {
+        // Drop open and close span tags.
+        if (token.type() === Token.START_ELEMENT_TYPE) {
+          state.spanCount.push(token);
+        } else {
+          state.spanCount.pop();
+        }
+      } else if (token.type() === Token.START_ELEMENT_TYPE && token.tag() === 'IMG') {
+        // Custom list image type.  We can't access the image so use a normal bullet instead.
+        // EditLive! may want this to come through as a CSS reference.
+        state.nextFilter = beforeSpacerState;
+        state.bulletInfo = { text: '\u2202', symbolFont: true };
+      } else {
+        unexpectedToken(api, token);
+      }
+    };
+
+    var beforeSpacerState = function(api, state, token) {
+      if (token.type() === Token.START_ELEMENT_TYPE && Helper.spanOrA(token)) {
+        state.spanCount.push(token);
+        state.nextFilter = spacerState;
+      } else if (token.type() === Token.END_ELEMENT_TYPE && Helper.spanOrA(token)) {
+        state.spanCount.pop();
+        state.nextFilter = closeSpansState;
+      } else if (token.type() === Token.END_ELEMENT_TYPE && token.tag() === 'IMG') {
+        // Drop
+      } else {
+        unexpectedToken(api, token);
+      }
+    };
+
+    var spacerState = function(api, state, token) {
+      if (token.type() === Token.END_ELEMENT_TYPE) {
+        if (Helper.spanOrA(token)) {
+          state.spanCount.pop();
+        }
+        state.nextFilter = closeSpansState;
+      }
+      // Drop all other tokens.
+    };
+
+    var closeSpansState = function(api, state, token) {
+      var moveToItemContentState = function(includeToken) {
+        state.nextFilter = itemContentState;
+        if (state.commentMode) state.itemLevel = state.indentGuesser.guessIndentLevel(token, state.originalToken, state.styles.styles, state.bulletInfo);
+        state.listType = ListTypes.guessListType(state.bulletInfo, preferredListType(state.emitter.getCurrentListType(), state.emitter.getCurrentLevel(), state.itemLevel), state.originalToken);
+        if (state.listType) {
+          state.emitter.openItem(state.itemLevel, state.originalToken, state.listType, state.skippedPara);
+          api.emitDeferred();
+          while (state.spanCount.length > 0) {
+            api.emit(state.spanCount.shift());
+          }
+          if (includeToken) {
+            api.emit(token);
+          }
+        } else {
+          Util.log("Unknown list type: "  + state.bulletInfo.text + " Symbol font? " + state.bulletInfo.symbolFont);
+          api.rollback();
+        }
+      };
+
+      if (token.type() === Token.TEXT_TYPE || token.type() === Token.START_ELEMENT_TYPE) {
+        moveToItemContentState(true);
+      } else if (token.type() === Token.COMMENT_TYPE) {
+        moveToItemContentState(token.text() !== '[endif]');
+      } else if (token.type() === Token.END_ELEMENT_TYPE) {
+        if (Helper.spanOrA(token)) {
+          state.spanCount.pop();
+        }
+      } else {
+        unexpectedToken(api, token);
+      }
+    };
+
+    var itemContentState = function(api, state, token) {
+      if (token.type() === Token.END_ELEMENT_TYPE && token.tag() === state.originalToken.tag()) {
+        state.nextFilter = afterListState;
+        state.skippedPara = false;
+      } else {
+        api.emit(token);
+      }
+    };
+
+    var initial = noListState;
+    return {
+      initial: initial
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.list.Lists',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter',
+    'ephox.powerpaste.data.tokens.Helper',
+    'ephox.powerpaste.data.tokens.Token',
+    'ephox.powerpaste.filters.list.CommentHeuristics',
+    'ephox.powerpaste.filters.list.Emitter',
+    'ephox.powerpaste.filters.list.ListStates',
+    'ephox.powerpaste.filters.list.ListTypes',
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Filter, Helper, Token, CommentHeuristics, Emitter, ListStates, ListTypes, Util) {
+
+    var activeState = {};
+
+    var resetActiveState = function(api) {
+      //It would be nice if this was creating a fresh object, but listStartState() expects state mutation when api.commit() is called
+      activeState.nextFilter = ListStates.initial;
+      activeState.itemLevel = 0;
+      activeState.originalToken = null;
+      activeState.commentMode = false;
+      activeState.openedTag = null;
+      activeState.symbolFont = false;
+      activeState.listType = null;
+      activeState.indentGuesser = CommentHeuristics.indentGuesser();
+      activeState.emitter = Emitter(api, api.document);
+      activeState.styles = CommentHeuristics.styles();
+      activeState.spanCount = [];
+      activeState.skippedPara = false;
+      activeState.styleLevelAdjust = 0;
+      activeState.bulletInfo = undefined;
+    };
+
+    resetActiveState({});
+
+    var resetState = function(api) {
+      resetActiveState(api);
+    };
+
+    var receive = function(api, token) {
+      if (activeState.styles.check(token)) {
+        return;
+      }
+      activeState.symbolFont = ListTypes.checkFont(token, activeState.symbolFont);
+      activeState.nextFilter(api, activeState, token);
+    };
+
+    return Filter.createFilter(receive, resetState);
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+/**
+ * Source code in this file has been taken under a commercial license from tinymce/jscripts/tiny_mce/plugins/paste/editor_plugin_src.js
+ * Copyright 2009, Moxiecode Systems AB
+ */
+define(
+  'ephox.powerpaste.tinymce.BrowserFilters',
+
+  [
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Util) {
+    var trailingSpaceCharacter = function(content) {
+      var h = content;
+      // Strip a trailing non-breaking, zero-width space which Firefox tends to insert.
+      var hasCrazySpace = h.charCodeAt(h.length - 1) === 65279;
+      return hasCrazySpace ?
+        h.substring(0, h.length - 1) :
+        content;
+    };
+
+    // IE9 adds BRs before/after block elements when contents is pasted from word or for example another browser
+    var removeBrNextToBlock = function(content) {
+      return (/<(h[1-6r]|p|div|address|pre|form|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|blockquote|center|dl|dt|dd|dir|fieldset)/).test(content) ?
+        content.replace(/(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6r]|p|div|address|pre|form|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|blockquote|center|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1') :
+        content;
+    };
+
+    // Replace multiple BR elements with uppercase BR to keep them intact when collapseBr runs
+    var capitaliseMultipleBr = function(content) {
+      return content.replace(/<br><br>/g, '<BR><BR>');
+    };
+
+    // Replace single br elements with space since they are word wrapping
+    var removeSingleBr = function(content) {
+      return content.replace(/<br>/g, ' ');
+    };
+
+    // Collapse double brs into a single BR
+    var collapseBr = function(content) {
+      return content.replace(/<BR><BR>/g, '<br>');
+    };
+
+    var baseFilters = [trailingSpaceCharacter];
+
+    var filters = (tinymce.isIE && document.documentMode >= 9) ?
+       [collapseBr, removeSingleBr, capitaliseMultipleBr, removeBrNextToBlock].concat(baseFilters) :
+       baseFilters;
+
+    var allFilters = Util.compose(filters);
+
+    return {
+      all: allFilters,
+      textOnly: trailingSpaceCharacter
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripFormattingAttributes',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createFilter(function(api, token) {
+      token.filterAttributes(function(name, value) {
+        if (name === 'align') return null;
+        if ((token.tag() === 'UL' || token.tag() === 'OL') &&
+            name === 'type') return null;
+        return value;
+      });
+      api.emit(token);
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripNamespaceDeclarations',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      if (/^xmlns(:|$)/.test(name)) {
+        return null;
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripOPTags',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createFilter(function(api, token) {
+      if (!token.tag || !/^([OVWXP]|U[0-9]+|ST[0-9]+):/.test(token.tag())) {
+        api.emit(token);
+      }
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripTocLinks',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      if (name === 'href' && (value.indexOf('#_Toc') >= 0 || value.indexOf('#_mso') >= 0)) {
+        return null;
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.filters.StripVMLAttributes',
+
+  [
+    'ephox.powerpaste.data.tokens.Filter'
+  ],
+
+  function (Filter) {
+    return Filter.createAttributeFilter(function(name, value) {
+      if (/^v:/.test(name)) {
+        return null;
+      }
+      return value;
+    });
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.wordimport.WordOnlyFilters',
+
+  [
+    'ephox.powerpaste.filters.StripFormattingAttributes',
+    'ephox.powerpaste.filters.StripNamespaceDeclarations',
+    'ephox.powerpaste.filters.StripOPTags',
+    'ephox.powerpaste.filters.StripTocLinks',
+    'ephox.powerpaste.filters.StripVMLAttributes',
+    'ephox.powerpaste.filters.list.Lists'
+  ],
+
+  function (StripFormattingAttributes, StripNamespaceDeclarations, StripOPTags, StripTocLinks, StripVMLAttributes, Lists) {
+    return  [
+      StripOPTags,
+      Lists,
+      StripTocLinks,
+      StripVMLAttributes,
+      StripNamespaceDeclarations,
+      StripFormattingAttributes
+    ];
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.wordimport.WordImport',
+
+  [
+    'ephox.powerpaste.data.tokens.Serializer',
+    'ephox.powerpaste.data.tokens.Tokenizer',
+    'ephox.powerpaste.filters.Text',
+    'ephox.powerpaste.filters.list.Lists',
+    'ephox.powerpaste.tinymce.BrowserFilters',
+    'ephox.powerpaste.wordimport.CommonFilters',
+    'ephox.powerpaste.wordimport.WordOnlyFilters'
+  ],
+
+  function (Serializer, Tokenizer, Text, Lists, BrowserFilters, CommonFilters, WordOnlyFilters) {
+    var buildPipeline = function(filters, sink, settings, document) {
+      var i, filter = sink;
+      for (i = filters.length - 1; i >= 0; i--) {
+        //This is calling the function defined by Filter.createFilter().
+        //The best description I can come up with is "function composition using CPS".
+        //Filters are run in reverse order to the loop, which is reversed so the arrays below define the order.
+        //And then the sink comes last (which means it's injected on the first pass of the loop).
+        filter = filters[i](filter, settings, document);
+      }
+      return filter;
+    };
+
+    var runPipeline = function(content, settings, document, requiredFilters) {
+      var serializer = Serializer.create(document);
+      var tokenizer = Tokenizer.tokenize(content, document);
+      pipeline = buildPipeline(requiredFilters, serializer, settings, document);
+      while (tokenizer.hasNext()) {
+        pipeline.receive(tokenizer.next());
+      }
+      return serializer.dom;
+    };
+
+    /**
+     * Accepts a string of content to filter and returns a filtered DOM structure.
+     *
+     * @param inputContent the content to filter
+     * @param settings the settings object
+     * @param document the target document that the content will be inserted into
+     * @return a DOM fragment with the filtered content.
+     */
+    var filter = function(inputContent, settings, document) {
+      var content = BrowserFilters.all(inputContent);
+
+      var detectedAsWordContent = isWordContent(content);
+      settings.setWordContent(detectedAsWordContent);
+
+      var requiredFilters = CommonFilters;
+      if (detectedAsWordContent) {
+        requiredFilters = WordOnlyFilters.concat(CommonFilters);
+      }
+      return runPipeline(content, settings, document, requiredFilters);
+    };
+
+    var filterPlainText = function(inputContent, settings, document) {
+      var content = BrowserFilters.textOnly(inputContent);
+
+      return runPipeline(content, settings, document, [Text]);
+    };
+
+    var isWordContent = function(content) {
+      return content.indexOf('<o:p>') >= 0 || // IE, Safari, Opera
+        content.indexOf('p.MsoNormal, li.MsoNormal, div.MsoNormal') >= 0 || // Firefox Mac
+        content.indexOf('MsoListParagraphCxSpFirst') >= 0 || // Windows list only selection
+        content.indexOf('<w:WordDocument>') >= 0; // Firefox Windows
+    };
+
+    return {
+      filter: filter,
+      filterPlainText: filterPlainText,
+      isWordContent: isWordContent
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.data.Insert',
+
+  [
+
+  ],
+
+  function () {
+    var insert = function(fragment, editor) {
+      var document = editor.getDoc(), marker, markerId = "ephoxInsertMarker", selection = editor.selection, dom = editor.dom;
+      selection.setContent('<span id="' + markerId + '">&nbsp;</span>');
+      marker = dom.get(markerId);
+      var leadingText = document.createDocumentFragment();
+      while (fragment.firstChild && !dom.isBlock(fragment.firstChild)) {
+        leadingText.appendChild(fragment.firstChild);
+      }
+      var trailingText = document.createDocumentFragment();
+      while (fragment.lastChild && !dom.isBlock(fragment.lastChild)) {
+        trailingText.appendChild(fragment.lastChild);
+      }
+
+      marker.parentNode.insertBefore(leadingText, marker);
+      dom.insertAfter(trailingText, marker);
+
+      if (fragment.firstChild) {
+        if (dom.isBlock(fragment.firstChild)) {
+          while (!dom.isBlock(marker.parentNode) && marker.parentNode !== dom.getRoot()) {
+            marker = dom.split(marker.parentNode, marker);
+          }
+          if (!dom.is(marker.parentNode, 'td,th') && marker.parentNode !== dom.getRoot()) {
+            marker = dom.split(marker.parentNode, marker);
+          }
+        }
+
+        dom.replace(fragment, marker);
+      } else {
+        dom.remove(marker);
+      }
+    };
+
+    return {
+      insert: insert
+    };
+
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+/**
+ * Source code in this file has been taken under a commercial license from tinymce/jscripts/tiny_mce/plugins/paste/editor_plugin_src.js
+ * Copyright 2009, Moxiecode Systems AB
+ */
+define(
+  'ephox.powerpaste.tinymce.Clipboard',
+
+  [
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Util) {
+    var each = tinymce.each;
+    // Note that there is only ever one instance of this module - it's not created specifically for each editor.
+
+    // Private function that does the actual work of grabbing the clipboard content.
+    // This can then be shared between the onpaste and onKeyDown listeners.
+    var grabContent = function(ed, callback, e) {
+      var n, or, rng, sel = ed.selection, dom = ed.dom, body = ed.getBody(), posY;
+
+          // Check if browser supports direct plaintext access
+          if (e.clipboardData && e.clipboardData.getData('text/html')) {
+              e.preventDefault();
+              var data = e.clipboardData.getData('text/html');
+              var matched = data.match(/<html[\s\S]+<\/html>/i);
+              // some browsers such as firefox don't wrap the content in a html tag
+              var content = matched === null ? data : matched[0];
+              return callback(content);
+          }
+
+          if (dom.get('_mcePaste'))
+              return;
+
+          // Create container to paste into
+          n = dom.add(body, 'div', {id : '_mcePaste', 'class' : 'mcePaste'}, '\uFEFF<br _mce_bogus="1">');
+
+          // If contentEditable mode we need to find out the position of the closest element
+          if (body != ed.getDoc().body)
+              posY = dom.getPos(ed.selection.getStart(), body).y;
+          else
+            posY = body.scrollTop;
+
+          // Styles needs to be applied after the element is added to the document since WebKit will otherwise remove all styles
+          dom.setStyles(n, {
+              position : 'absolute',
+              left : -10000,
+              top : posY,
+              width : 1,
+              height : 1,
+              overflow : 'hidden'
+          });
+
+          if (tinymce.isIE) {
+              // Select the container
+              rng = dom.doc.body.createTextRange();
+              rng.moveToElementText(n);
+              rng.execCommand('Paste');
+
+              // Remove container
+              dom.remove(n);
+
+              // Check if the contents was changed, if it wasn't then clipboard extraction failed probably due
+              // to IE security settings so we pass the junk though better than nothing right
+              if (n.innerHTML === '\uFEFF') {
+                  ed.execCommand('mcePasteWord');
+                  e.preventDefault();
+                  return;
+              }
+
+              // Process contents
+              callback(n.innerHTML);
+
+              // Block the real paste event
+              return tinymce.dom.Event.cancel(e);
+          } else {
+              var block = function(e) {
+                  e.preventDefault();
+              };
+
+              // Block mousedown and click to prevent selection change
+              dom.bind(ed.getDoc(), 'mousedown', block);
+              dom.bind(ed.getDoc(), 'keydown', block);
+
+              // If pasting inside the same element and the contents is only one block
+              // remove the block and keep the text since Firefox will copy parts of pre and h1-h6 as a pre element
+              if (tinymce.isGecko) {
+                  rng = ed.selection.getRng(true);
+                  if (rng.startContainer == rng.endContainer && rng.startContainer.nodeType == 3) {
+                      nodes = dom.select('p,h1,h2,h3,h4,h5,h6,pre', n);
+
+                      if (nodes.length == 1)
+                          dom.remove(nodes.reverse(), true);
+                  }
+              }
+
+              or = ed.selection.getRng();
+
+              // Move caret into hidden div
+              n = n.firstChild;
+              rng = ed.getDoc().createRange();
+              rng.setStart(n, 0);
+              rng.setEnd(n, 1);
+              sel.setRng(rng);
+
+              // Wait a while and grab the pasted contents
+              window.setTimeout(function() {
+                  var h = '', nl = dom.select('div.mcePaste');
+
+                  // WebKit will split the div into multiple ones so this will loop through then all and join them to get the whole HTML string
+                  Util.each(nl, function(n) {
+                      var child = n.firstChild;
+
+                      // WebKit inserts a DIV container with lots of odd styles
+                      if (child && child.nodeName == 'DIV' && child.style.marginTop && child.style.backgroundColor) {
+                          dom.remove(child, 1);
+                      }
+
+                      // WebKit duplicates the divs so we need to remove them
+                      Util.each(dom.select('div.mcePaste', n), function(n) {
+                          dom.remove(n, 1);
+                      });
+
+                      // Remove apply style spans
+                      Util.each(dom.select('span.Apple-style-span', n), function(n) {
+                          dom.remove(n, 1);
+                      });
+
+                      // Remove bogus br elements
+                      Util.each(dom.select('br[_mce_bogus]', n), function(n) {
+                          dom.remove(n);
+                      });
+
+                      h += n.innerHTML;
+                  });
+
+                  // Remove the nodes
+                  Util.each(nl, function(n) {
+                      dom.remove(n);
+                  });
+
+                  // Restore the old selection
+                  if (or)
+                      sel.setRng(or);
+
+                  callback(h);
+
+                  // Unblock events ones we got the contents
+                  dom.unbind(ed.getDoc(), 'mousedown', block);
+                  dom.unbind(ed.getDoc(), 'keydown', block);
+              }, 0);
+          }
+    };
+
+    /** Creates the function to attach to the onpaste event so that the pasted content can be intercepted.
+     *
+     * The returned function should capture the pasted content and pass it as the argument to the provided callback function.
+     *
+     * @param ed the editor this function is for.
+     * @param callback the function to call with the clipboard content as the argument
+     */
+    var getOnPasteFunction = function(ed, callback) {
+      return function(e) {
+        grabContent(ed, callback, e);
+      };
+    };
+
+    /** Creates the function to attach to the onKeyDown event so that the pasted content can be intercepted. If no onKeyDown function is required in the current browser
+     * this should return null.
+     *
+     * The returned function should capture the pasted content and pass it as the argument to the provided callback function.
+     *
+     * @param ed the editor this function is for.
+     * @param callback the function to call with the clipboard content as the argument
+     */
+    var getOnKeyDownFunction = function(ed, callback) {
+      return function(e) {
+    	  //BB Code Change : removed old firefox version check and Safari check
+      };
+    };
+
+    return {
+      getOnPasteFunction: getOnPasteFunction,
+      getOnKeyDownFunction: getOnKeyDownFunction
+    };
+  });
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.tinymce.Settings',
+
+  [
+    'ephox.powerpaste.tinymce.Util'
+  ],
+
+  function (Util) {
+    var settings_clean = {
+      strip_class_attributes: 'all',
+      retain_style_properties: 'none'
+    };
+
+    var settings_inline = {
+      strip_class_attributes: 'none',
+      retain_style_properties: 'valid'
+    };
+
+    var settings_classes = {
+      strip_class_attributes: 'none',
+      retain_style_properties: 'none'
+    };
+
+    var getImportSettings = function(pasteType, defaultSettings) {
+      if (pasteType && typeof(pasteType) != 'string') {
+        return pasteType;
+      }
+      
+      switch (pasteType) {
+        case 'clean': return settings_clean;
+        case 'inline_styles': return settings_inline;
+        case 'classes': return settings_classes;
+        default: return defaultSettings;
+      }
+    };
+
+    var getSettingsFor = function(pasteWordAs, pasteHtmlAs, base64Images) {
+      var s = getImportSettings(pasteWordAs, pasteHtmlAs);
+      s = Util.extend(s, {base_64_images: base64Images});
+      return s;
+    };
+
+    var create = function(pasteWordAs, pasteHtmlAs, base64Images) {
+      var wordSettings = getSettingsFor(pasteWordAs, settings_clean, base64Images);
+      var htmlSettings = getSettingsFor(pasteHtmlAs, settings_inline, base64Images);
+  
+      var activeSettings = htmlSettings;
+
+      var setWordContent = function(wordContent) {
+        activeSettings = wordContent ? wordSettings : htmlSettings;
+      };
+
+      var get = function(name) {
+        return activeSettings[name];
+      };
+      return {
+        setWordContent: setWordContent,
+        get: get
+      };
+    };
+
+    return {
+      create: create
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.PastePlugin',
+
+  [
+    'ephox.powerpaste.data.Insert',
+    'ephox.powerpaste.tinymce.Settings',
+    'ephox.powerpaste.tinymce.Clipboard',
+    'ephox.powerpaste.wordimport.WordImport'
+  ],
+
+  function (Insert, Settings, Clipboard, WordImport) {
+    return {
+      init: function(ed, url) {
+        var t = this;
+        var filterAndInsert = function(content) {
+          var data = {content: content};
+
+          // run pre-filters
+          t.onPreProcess.dispatch(t, data);
+
+          // run main filter
+          var settings = Settings.create(ed.getParam('powerpaste_word_import'), ed.getParam('powerpaste_html_import'), ed.getParam('powerpaste_strip_base64_images'));
+          var fragment;
+          if (ed.pasteAsPlainText) {
+            fragment = WordImport.filterPlainText(data.content, settings, ed.getDoc());
+            ed.pasteAsPlainText = ed.getParam('powerpaste_text_sticky');
+          } else {
+            fragment = WordImport.filter(data.content, settings, ed.getDoc());
+          }
+
+          // run post-filters
+          t.onPostProcess.dispatch(t, fragment);
+
+          // insert the DocumentFragment object into the editor
+          Insert.insert(fragment, ed);
+        };
+
+        var handlerAdapter = function(handler) {
+          return function(ed, e) {
+            handler(e);
+          };
+        };
+
+        // Register the getClipboardContent function onpaste and with the magical keyboard shortcuts for browsers that don't support that (Opera & FF2).
+        onPaste = Clipboard.getOnPasteFunction(ed, filterAndInsert);
+        ed.onPaste.add(handlerAdapter(onPaste));
+
+        onKeyDown = Clipboard.getOnKeyDownFunction(ed, filterAndInsert);
+        ed.onKeyDown.add(handlerAdapter(onKeyDown));
+
+        ed.addCommand('mceInsertClipboardContent', function(ui, data) {
+          filterAndInsert(data.content || data);
+        });
+
+        ed.addCommand('mcePasteText', function(ui, data) {
+          ed.pasteAsPlainText = !ed.pasteAsPlainText;
+          ed.controlManager.get('pastetext').setActive(ed.pasteAsPlainText);
+        });
+
+        // Note: This is using the existing text and icon for the paste plugin which is built
+        // into TinyMCE for better theme/skin/translation compatibility.
+        ed.addButton('pastetext', {title: 'paste.paste_text_desc', cmd: 'mcePasteText'});
+
+        this.onPreProcess = new tinymce.util.Dispatcher(this);
+        this.onPostProcess = new tinymce.util.Dispatcher(this);
+
+        this.onPreProcess.add(function(plugin, html_content) {
+          // Call the paste_preprocess callback
+          ed.execCallback('paste_preprocess', plugin, html_content);
+        });
+
+        this.onPostProcess.add(function(plugin, fragment) {
+          // Call the paste_postprocess callback
+          ed.execCallback('paste_postprocess', plugin, fragment);
+        });
+
+        var blockDragEvents = function(element) {
+          ed.dom.bind(element, ['drop', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'dragdrop', 'draggesture'], function(e) {
+            return tinymce.dom.Event.cancel(e);
+          });
+        };
+
+        if (ed.getParam('powerpaste_block_drop')) {
+          ed.onInit.add(function(ed) {
+            blockDragEvents(ed.getBody());
+            blockDragEvents(ed.getDoc());
+          });
+        }
+      }
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+(function (define, require, demand) {
+define(
+  'ephox.powerpaste.PowerPaste',
+
+  [
+    'ephox.powerpaste.PastePlugin'
+  ],
+
+  function (PastePlugin) {
+    var getInfo = function() {
+      return {
+        longname : 'powerpaste.name',
+        author : 'Ephox Corporation',
+        authorurl : 'http://tinymce.ephox.com',
+        infourl : 'http://tinymce.ephox.com',
+        version : '1.0.1.22'
+      };
+    };
+
+    var pluginApi = {
+      init: PastePlugin.init,
+      getInfo: getInfo
+    };
+
+    return function() {
+      tinymce.create('tinymce.ephox.plugins.PowerPaste', pluginApi);
+      tinymce.PluginManager.add("powerpaste", tinymce.ephox.plugins.PowerPaste);
+    };
+  }
+);
+
+})(ephox.bolt.module.api.define, ephox.bolt.module.api.require, ephox.bolt.module.api.demand);
+
+
+dem("ephox.powerpaste.PowerPaste")();
+  if (this.ephox)
+    this.ephox.bolt = old;
+})();

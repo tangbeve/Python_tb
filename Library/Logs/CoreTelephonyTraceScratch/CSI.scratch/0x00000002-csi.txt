@@ -1,0 +1,958 @@
+2371.861 [I] DATA:TechDriver:enterLowPower: Entering low power mode
+3992371.861 [I] DATA:TechDriver:callbackEnteredLowPower: Calling Low Power call back
+3992371.861 [I] NOBB:NoBBRadioModule:finishEnterLowPower: 
+3992371.861 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: 
+3992371.861 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: calling low power callback, result is 1
+3992374.635 [I] xpc.watchdog: Callback Watchdog: checkin
+3992374.635 [I] xpc.watchdog: Server Watchdog: checkin
+3992599.059 [I] pwr: Telling CSI to exit low power
+3992599.059 [I] NOBB:NoBBRadioModule:exitLowPower: 
+3992599.059 [I] NOBB:NoBBRadioModule:exitLowPower_sync: 
+3992599.060 [I] evt: Sending internal notification kEventExitingLowPower (18) params={0, 0, 0x0}
+3992599.060 [I] evt: Firing event 'exitLowPower'
+3992599.060 [I] DATA:TechDriver:handleExitLowPower_sync: Exiting low power mode
+3992599.060 [I] xpc.watchdog: Callback Watchdog: checkin
+3992599.060 [I] xpc.watchdog: Server Watchdog: checkin
+3992599.727 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0f4af60
+3992599.727 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: false
+3992599.727 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: fCurrentIfName: 'en0'
+3992599.727 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity DOWN. Previous primary interface: 'en0'
+3992599.727 [I] evt: Firing event 'dataWifiAvailable': with params= 0, {}
+3992599.727 [I] DATA:TechDriver:handleWifiAvailable_sync: available = false 
+3992599.727 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+3992599.727 [I] DATA:TechContext:0:handleWifiAvailable_sync: Looking for en0 in updated interface list
+3992599.727 [I] DATA:TechContext:0:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+3992599.727 [I] DATA:TechContext:1:handleWifiAvailable_sync: Looking for en0 in updated interface list
+3992599.727 [I] DATA:TechContext:1:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+3992599.727 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from en0 to 
+3992599.727 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+3992599.727 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+3992599.727 [I|22+] 5wi: handleWifiAvailable_sync : currently available=true, new value=false
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = false
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] evt: Firing event 'bearerAvailable': with params= 0, kNoData
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] evt: Firing event 'dataModeChanged': with params= kNoData, kNoData
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] evt: Firing event 'dataNotAttached'
+3992599.727 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] evt: Firing event 'RATChanged': with params= kRatUnknown
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.727 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable false
+3992599.727 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992599.728 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+3992599.737 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+3992599.737 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+3992599.832 [I|24+] sysobs: WiFi Availability is changing from true to false
+3992599.832 [I|24] evt: Firing event 'wifiAvailable': with params= 0
+3992599.832 [I|24] sysobs: Internet availability is changing from true to false
+3992599.832 [I|24] evt: Firing event 'internetAvailable': with params= 0
+3992599.832 [I|28+] enth.ctr: Wifi availability is changing from true to false
+3992599.832 [I|31+] cb.client: Internet availability is changing from true to false
+3992599.832 [I|17+] ent.ctr: Wifi availability is changing from true to false
+3992599.832 [I] pnr.mgr: Phone number hasn't been read
+3992602.764 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0f4bb20
+3992602.764 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: false
+3992602.769 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0d6b990
+3992602.769 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: true
+3992602.769 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity UP. Current primary interface: 'en0'
+3992602.769 [I] evt: Firing event 'dataWifiAvailable': with params= 1, {en0}
+3992602.769 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+3992602.769 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+3992602.769 [I] DATA:TechDriver:handleWifiAvailable_sync: available = true  on [en0]
+3992602.769 [I|22+] 5wi.wifi: fWifiInterfaceName changes from en0 to en0
+3992602.769 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+3992602.769 [I|22+] 5wi: handleWifiAvailable_sync : currently available=false, new value=true
+3992602.769 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from  to en0
+3992602.769 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = true
+3992602.769 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable true
+3992602.769 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+3992602.769 [I] evt: Firing event 'RATChanged': with params= kRatLTE
+3992602.769 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+3992602.769 [I] evt: Firing event 'dataAttached'
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] evt: Firing event 'dataModeChanged': with params= kLTE, kLTE
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] evt: Firing event 'bearerAvailable': with params= 1, kLTE
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I|26+] server: ================================================================================================
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I|26] server: Device got PS Registered, checking to send Activation report to the server
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+3992602.769 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.769 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+3992602.769 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: 
+3992602.770 [I] data: no TechSettings dictionary can be found
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: for 0
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+3992602.770 [I] DATA:TechContext:0:stopUsing: 
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: for 1
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+3992602.770 [I] DATA:TechContext:1:stopUsing: 
+3992602.770 [I] DATA:TechDriver:refreshAllDataSettings: 
+3992602.770 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+3992602.770 [I] DATA:iRatController:subscribeLineTypes_sync: with app Types ()
+3992602.770 [I] DATA:iRatController:subscribeLineTypes_sync: Subscribe app Types not changed
+3992602.770 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+3992602.770 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Tech setup reconfigured
+3992602.770 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 1, DataServiceController activation
+3992602.770 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+3992602.770 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+3992602.770 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Tech setup reconfigured
+3992602.770 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+3992602.770 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+3992602.770 [I] DATA:ServiceController:recalculateConnectionAvailability: Internal event: If(-3), Vf(-3), Mf(-3), Ef(-3), Wf(-3), wf(-3), Pf(-3), Df(-3), Tf(-3), Of(-3), Ff(-3), ff(-3), mf(-3), of(-3), Zf(-3), $f(-3), if(-3), Sf(-3), 9f(-3), Bf(-3), Uf(-3), bf(-3) due to DataServiceController activation
+3992602.770 [I] evt: Firing event 'connectionAvailability': with params= 0, { f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3)}
+3992602.770 [I] DATA:ServiceController:recalculateConnectionAvailability: sending CT event due to DataServiceController activation
+3992602.770 [I] DATA:TechDriver:handleConnectionAvailability: cellInternetAvailable = false
+3992602.770 [I|4+] xpc.event:   --------------> kCTEventDataServiceAvailability(157) sent to 0 (of 4) clients. Full Event: {
+	"kEvent": 157,
+	"kNotificationEvent": 157,
+	"kNotificationDict": {
+		"kCTRegistrationDataConnectionServices": []
+	}
+}
+3992603.148 [I|24+] sysobs: WiFi Availability is changing from false to true
+3992603.148 [I|24] evt: Firing event 'wifiAvailable': with params= 1
+3992603.148 [I|17+] ent.ctr: Wifi availability is changing from false to true
+3992603.148 [I|28+] enth.ctr: Wifi availability is changing from false to true
+3992603.149 [I|24] sysobs: Internet availability is changing from false to true
+3992603.149 [I|24] evt: Firing event 'internetAvailable': with params= 1
+3992603.149 [I|31+] cb.client: Internet availability is changing from false to true
+3992603.149 [I|26+] server: ================================================================================================
+3992603.149 [I|26] server: Internet available, checking to send Activation report to the server
+3992603.149 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+3992603.149 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+3992603.149 [I] pnr.mgr: Phone number hasn't been read
+3992612.905 [I] xpc.watchdog: Callback Watchdog: checkin
+3992612.905 [I] xpc.watchdog: Server Watchdog: checkin
+3992627.974 [I] xpc.watchdog: Callback Watchdog: checkin
+3992627.974 [I] xpc.watchdog: Server Watchdog: checkin
+3992642.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3992642.909 [I] xpc.watchdog: Server Watchdog: checkin
+3992657.978 [I] xpc.watchdog: Callback Watchdog: checkin
+3992657.978 [I] xpc.watchdog: Server Watchdog: checkin
+3992672.920 [I] xpc.watchdog: Callback Watchdog: checkin
+3992672.920 [I] xpc.watchdog: Server Watchdog: checkin
+3992687.963 [I] xpc.watchdog: Callback Watchdog: checkin
+3992687.963 [I] xpc.watchdog: Server Watchdog: checkin
+3992702.976 [I] xpc.watchdog: Callback Watchdog: checkin
+3992702.976 [I] xpc.watchdog: Server Watchdog: checkin
+3992717.916 [I] xpc.watchdog: Callback Watchdog: checkin
+3992717.916 [I] xpc.watchdog: Server Watchdog: checkin
+3992732.906 [I] xpc.watchdog: Callback Watchdog: checkin
+3992732.906 [I] xpc.watchdog: Server Watchdog: checkin
+3992734.400 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 819, 0]
+3992744.453 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 817, 0]
+3992747.906 [I] xpc.watchdog: Callback Watchdog: checkin
+3992747.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992762.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992762.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992777.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992777.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992792.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992792.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992807.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992807.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992822.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992822.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992837.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992837.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992852.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992852.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992867.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992867.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992882.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992882.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992897.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992897.907 [I] xpc.watchdog: Server Watchdog: checkin
+3992912.907 [I] xpc.watchdog: Callback Watchdog: checkin
+3992912.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992915.943 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 827, 0]
+3992927.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3992927.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992931.202 [I] csiapp.info: Application exited: AppInfo[Install Command Line Developer Tools, com.apple.dt.commandlinetools.installondemand, false, 824, 0]
+3992942.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3992942.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992949.191 [I] csiapp.info: Application exited: AppInfo[Location Menu, com.apple.locationmenu, false, 850, 0]
+3992957.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3992957.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992965.555 [I] csiapp.info: Application exited: AppInfo[CoreLocationAgent, com.apple.corelocationagent, false, 849, 0]
+3992972.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3992972.908 [I] xpc.watchdog: Server Watchdog: checkin
+3992987.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3992987.908 [I] xpc.watchdog: Server Watchdog: checkin
+3993002.908 [I] xpc.watchdog: Callback Watchdog: checkin
+3993002.908 [I] xpc.watchdog: Server Watchdog: checkin
+3993017.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993017.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993032.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993032.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993047.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993047.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993062.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993062.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993067.457 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 820, 0]
+3993067.644 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 855, 0]
+3993068.857 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 853, 0]
+3993077.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993077.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993092.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993092.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993107.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993107.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993122.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993122.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993137.909 [I] xpc.watchdog: Callback Watchdog: checkin
+3993137.909 [I] xpc.watchdog: Server Watchdog: checkin
+3993152.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993152.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993167.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993167.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993182.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993182.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993185.242 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 856, 0]
+3993196.235 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 860, 0]
+3993197.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993197.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993212.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993212.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993227.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993227.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993242.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993242.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993257.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993257.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993272.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993272.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993287.910 [I] xpc.watchdog: Callback Watchdog: checkin
+3993287.910 [I] xpc.watchdog: Server Watchdog: checkin
+3993302.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993302.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993317.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993317.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993332.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993332.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993347.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993347.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993362.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993362.911 [I] xpc.watchdog: Server Watchdog: checkin
+3993377.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993377.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993392.911 [I] xpc.watchdog: Callback Watchdog: checkin
+3993392.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993407.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993407.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993422.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993422.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993437.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993437.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993452.934 [I] xpc.watchdog: Callback Watchdog: checkin
+3993452.934 [I] xpc.watchdog: Server Watchdog: checkin
+3993467.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993467.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993482.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993482.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993497.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993497.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993512.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993512.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993527.912 [I] xpc.watchdog: Callback Watchdog: checkin
+3993527.912 [I] xpc.watchdog: Server Watchdog: checkin
+3993542.913 [I] xpc.watchdog: Callback Watchdog: checkin
+3993542.913 [I] xpc.watchdog: Server Watchdog: checkin
+3993557.913 [I] xpc.watchdog: Callback Watchdog: checkin
+3993557.913 [I] xpc.watchdog: Server Watchdog: checkin
+3993564.991 [I] DATA:Collocation_NoBB:0:dataCollocationAssertionUpdate: tearDownNow = true
+3993564.991 [I] DATA:Collocation_NoBB:1:dataCollocationAssertionUpdate: tearDownNow = true
+3993564.991 [I] DATA:ServiceController:___ZN21DataServiceController21deactivateNonAssertedEv_block_invoke: nothing to wait for
+3993564.991 [I] DATA:ServiceController:waitForDeactivateNonAsserted: result code 0
+3993564.991 [I] pwr: Telling CSI to go low power
+3993564.991 [I] NOBB:NoBBRadioModule_NOSUPPORT:canEnterLowPower: 
+3993564.991 [I] pwr: CSI can enter low power, so now telling to do so
+3993564.991 [I] NOBB:NoBBRadioModule:enterLowPower: 
+3993564.991 [I] pwr: Will sleep.  Heard from CSI in 8.18968e-05 seconds
+3993564.991 [I] NOBB:NoBBRadioModule:enterLowPower_sync: 
+3993564.991 [I] evt: Sending internal notification kEventEnteringLowPower (17) params={0, 0, 0x0}
+3993564.991 [I] evt: Firing event 'enterLowPower'
+3993564.991 [I] DATA:TechDriver:enterLowPower: Entering low power mode
+3993564.991 [I] DATA:TechDriver:callbackEnteredLowPower: Calling Low Power call back
+3993564.991 [I] NOBB:NoBBRadioModule:finishEnterLowPower: 
+3993564.991 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: 
+3993564.991 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: calling low power callback, result is 1
+3993572.913 [I] xpc.watchdog: Callback Watchdog: checkin
+3993572.913 [I] xpc.watchdog: Server Watchdog: checkin
+4000003.077 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0e5fe60
+4000003.077 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: false
+4000003.077 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: fCurrentIfName: 'en0'
+4000003.077 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity DOWN. Previous primary interface: 'en0'
+4000003.077 [I] evt: Firing event 'dataWifiAvailable': with params= 0, {}
+4000003.077 [I] DATA:TechDriver:handleWifiAvailable_sync: available = false 
+4000003.077 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+4000003.077 [I] DATA:TechContext:0:handleWifiAvailable_sync: Looking for en0 in updated interface list
+4000003.077 [I] DATA:TechContext:0:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+4000003.077 [I] DATA:TechContext:1:handleWifiAvailable_sync: Looking for en0 in updated interface list
+4000003.077 [I|22+] 5wi: handleWifiAvailable_sync : currently available=true, new value=false
+4000003.077 [I] DATA:TechContext:1:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+4000003.077 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = false
+4000003.077 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from en0 to 
+4000003.077 [I] evt: Firing event 'bearerAvailable': with params= 0, kNoData
+4000003.077 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+4000003.078 [I] evt: Firing event 'dataModeChanged': with params= kNoData, kNoData
+4000003.078 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4000003.078 [I] evt: Firing event 'dataNotAttached'
+4000003.078 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4000003.078 [I] evt: Firing event 'RATChanged': with params= kRatUnknown
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable false
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4000003.078 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+4000003.079 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+4000003.079 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+4000003.758 [I|24+] sysobs: WiFi Availability is changing from true to false
+4000003.758 [I|24] evt: Firing event 'wifiAvailable': with params= 0
+4000003.758 [I|17+] ent.ctr: Wifi availability is changing from true to false
+4000003.758 [I|28+] enth.ctr: Wifi availability is changing from true to false
+4000003.758 [I|24] sysobs: Internet availability is changing from true to false
+4000003.758 [I|24] evt: Firing event 'internetAvailable': with params= 0
+4000003.758 [I|31+] cb.client: Internet availability is changing from true to false
+4000003.758 [I] pnr.mgr: Phone number hasn't been read
+4000006.104 [I] xpc.watchdog: Callback Watchdog: checkin
+4000006.104 [I] xpc.watchdog: Server Watchdog: checkin
+4000021.128 [I] xpc.watchdog: Callback Watchdog: checkin
+4000021.128 [I] xpc.watchdog: Server Watchdog: checkin
+4000036.104 [I] xpc.watchdog: Callback Watchdog: checkin
+4000036.104 [I] xpc.watchdog: Server Watchdog: checkin
+4000051.254 [I] xpc.watchdog: Callback Watchdog: checkin
+4000051.254 [I] xpc.watchdog: Server Watchdog: checkin
+4000248.790 [I] csiapp.info: Application exited: AppInfo[eaptlstrust, com.apple.eap8021x.eaptlstrust, false, 872, 0]
+4000253.787 [I] xpc.watchdog: Callback Watchdog: checkin
+4000253.787 [I] xpc.watchdog: Server Watchdog: checkin
+4000268.787 [I] xpc.watchdog: Callback Watchdog: checkin
+4000268.787 [I] xpc.watchdog: Server Watchdog: checkin
+4000283.866 [I] xpc.watchdog: Callback Watchdog: checkin
+4000283.866 [I] xpc.watchdog: Server Watchdog: checkin
+4000415.466 [I] csiapp.info: Application exited: AppInfo[eaptlstrust, com.apple.eap8021x.eaptlstrust, false, 877, 0]
+4000424.443 [I] xpc.watchdog: Callback Watchdog: checkin
+4000424.443 [I] xpc.watchdog: Server Watchdog: checkin
+4000439.443 [I] xpc.watchdog: Callback Watchdog: checkin
+4000439.443 [I] xpc.watchdog: Server Watchdog: checkin
+4000454.443 [I] xpc.watchdog: Callback Watchdog: checkin
+4000454.443 [I] xpc.watchdog: Server Watchdog: checkin
+4001696.058 [I] xpc.watchdog: Callback Watchdog: checkin
+4001696.059 [I] pwr: Telling CSI to exit low power
+4001696.059 [I] NOBB:NoBBRadioModule:exitLowPower: 
+4001696.059 [I] xpc.watchdog: Server Watchdog: checkin
+4001696.059 [I] NOBB:NoBBRadioModule:exitLowPower_sync: 
+4001696.059 [I] evt: Sending internal notification kEventExitingLowPower (18) params={0, 0, 0x0}
+4001696.059 [I] evt: Firing event 'exitLowPower'
+4001696.059 [I] DATA:TechDriver:handleExitLowPower_sync: Exiting low power mode
+4001710.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4001710.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001714.109 [I] csiapp.info: Application exited: AppInfo[eaptlstrust, com.apple.eap8021x.eaptlstrust, false, 881, 0]
+4001715.216 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0c3af70
+4001715.216 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: false
+4001715.225 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0d6af70
+4001715.225 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: true
+4001715.225 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity UP. Current primary interface: 'en0'
+4001715.225 [I] evt: Firing event 'dataWifiAvailable': with params= 1, {en0}
+4001715.225 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4001715.225 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4001715.225 [I|22+] 5wi.wifi: fWifiInterfaceName changes from en0 to en0
+4001715.225 [I] DATA:TechDriver:handleWifiAvailable_sync: available = true  on [en0]
+4001715.225 [I|22+] 5wi: handleWifiAvailable_sync : currently available=false, new value=true
+4001715.225 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+4001715.225 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = true
+4001715.225 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable true
+4001715.225 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from  to en0
+4001715.225 [I] evt: Firing event 'RATChanged': with params= kRatLTE
+4001715.225 [I] evt: Firing event 'dataAttached'
+4001715.225 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4001715.225 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4001715.225 [I] evt: Firing event 'dataModeChanged': with params= kLTE, kLTE
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] evt: Firing event 'bearerAvailable': with params= 1, kLTE
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I|26+] server: ================================================================================================
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I|26] server: Device got PS Registered, checking to send Activation report to the server
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+4001715.225 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.225 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: 
+4001715.226 [I] data: no TechSettings dictionary can be found
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: for 0
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4001715.226 [I] DATA:TechContext:0:stopUsing: 
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: for 1
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4001715.226 [I] DATA:TechContext:1:stopUsing: 
+4001715.226 [I] DATA:TechDriver:refreshAllDataSettings: 
+4001715.226 [I] DATA:iRatController:subscribeLineTypes_sync: with app Types ()
+4001715.226 [I] DATA:iRatController:subscribeLineTypes_sync: Subscribe app Types not changed
+4001715.226 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Tech setup reconfigured
+4001715.226 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 1, DataServiceController activation
+4001715.226 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4001715.226 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Tech setup reconfigured
+4001715.226 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4001715.226 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4001715.226 [I] DATA:ServiceController:recalculateConnectionAvailability: Internal event: If(-3), Vf(-3), Mf(-3), Ef(-3), Wf(-3), wf(-3), Pf(-3), Df(-3), Tf(-3), Of(-3), Ff(-3), ff(-3), mf(-3), of(-3), Zf(-3), $f(-3), if(-3), Sf(-3), 9f(-3), Bf(-3), Uf(-3), bf(-3) due to DataServiceController activation
+4001715.226 [I] evt: Firing event 'connectionAvailability': with params= 0, { f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3)}
+4001715.226 [I] DATA:ServiceController:recalculateConnectionAvailability: sending CT event due to DataServiceController activation
+4001715.226 [I] DATA:TechDriver:handleConnectionAvailability: cellInternetAvailable = false
+4001715.226 [I|4+] xpc.event:   --------------> kCTEventDataServiceAvailability(157) sent to 0 (of 4) clients. Full Event: {
+	"kEvent": 157,
+	"kNotificationEvent": 157,
+	"kNotificationDict": {
+		"kCTRegistrationDataConnectionServices": []
+	}
+}
+4001715.227 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+4001715.227 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4001715.227 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4001715.227 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+4001715.613 [I|24+] sysobs: WiFi Availability is changing from false to true
+4001715.613 [I|24] evt: Firing event 'wifiAvailable': with params= 1
+4001715.613 [I|24] sysobs: Internet availability is changing from false to true
+4001715.613 [I|24] evt: Firing event 'internetAvailable': with params= 1
+4001715.613 [I|17+] ent.ctr: Wifi availability is changing from false to true
+4001715.613 [I|28+] enth.ctr: Wifi availability is changing from false to true
+4001715.613 [I|26+] server: ================================================================================================
+4001715.613 [I|26] server: Internet available, checking to send Activation report to the server
+4001715.613 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+4001715.613 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+4001715.613 [I|31+] cb.client: Internet availability is changing from false to true
+4001715.613 [I] pnr.mgr: Phone number hasn't been read
+4001725.092 [I] csiapp.info: Application exited: AppInfo[SecurityAgent, com.apple.securityagent, false, 888, 0]
+4001725.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4001725.162 [I] xpc.watchdog: Server Watchdog: checkin
+4001730.834 [I] csiapp.info: Application exited: AppInfo[AppleSpell, com.apple.applespell, false, 894, 0]
+4001740.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4001740.162 [I] xpc.watchdog: Server Watchdog: checkin
+4001755.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001755.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001770.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4001770.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001785.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001785.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001800.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001800.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001806.123 [I] csiapp.info: Application exited: AppInfo[TMHelperAgent, com.apple.tmhelperagent, false, 907, 0]
+4001815.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001815.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001830.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001830.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001845.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001845.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001860.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001860.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001873.435 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 861, 0]
+4001875.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001875.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001879.592 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 916, 0]
+4001880.469 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 914, 0]
+4001890.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001890.163 [I] xpc.watchdog: Server Watchdog: checkin
+4001905.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4001905.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001920.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4001920.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001935.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4001935.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001950.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4001950.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001965.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4001965.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001980.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4001980.164 [I] xpc.watchdog: Server Watchdog: checkin
+4001994.959 [I] xpc.watchdog: Callback Watchdog: checkin
+4001994.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002009.959 [I] xpc.watchdog: Callback Watchdog: checkin
+4002009.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002024.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002024.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002039.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002039.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002054.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002054.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002069.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002069.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002084.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002084.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002099.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002099.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002114.960 [I] xpc.watchdog: Callback Watchdog: checkin
+4002114.960 [I] xpc.watchdog: Server Watchdog: checkin
+4002129.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002129.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002144.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002144.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002159.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002159.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002174.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002174.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002189.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002189.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002204.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002204.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002219.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002219.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002234.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002234.961 [I] xpc.watchdog: Server Watchdog: checkin
+4002249.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002249.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002264.961 [I] xpc.watchdog: Callback Watchdog: checkin
+4002264.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002279.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002279.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002294.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002294.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002309.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002309.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002324.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002324.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002339.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002339.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002354.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002354.962 [I] xpc.watchdog: Server Watchdog: checkin
+4002369.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002369.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002384.962 [I] xpc.watchdog: Callback Watchdog: checkin
+4002384.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002399.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002399.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002414.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002414.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002429.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002429.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002444.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002444.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002459.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002459.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002474.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002474.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002487.384 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 917, 0]
+4002489.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002489.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002490.457 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 862, 0]
+4002493.246 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 829, 0]
+4002497.251 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 821, 0]
+4002504.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002504.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002519.963 [I] xpc.watchdog: Callback Watchdog: checkin
+4002519.963 [I] xpc.watchdog: Server Watchdog: checkin
+4002534.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002534.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002549.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002549.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002564.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002564.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002571.934 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 929, 0]
+4002579.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002579.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002594.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002594.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002609.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002609.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002624.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002624.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002639.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002639.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002646.432 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 776, 0]
+4002647.267 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 782, 0]
+4002654.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002654.964 [I] xpc.watchdog: Server Watchdog: checkin
+4002669.964 [I] xpc.watchdog: Callback Watchdog: checkin
+4002669.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002684.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002684.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002699.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002699.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002714.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002714.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002729.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002729.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002744.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002744.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002759.965 [I] xpc.watchdog: Callback Watchdog: checkin
+4002759.965 [I] xpc.watchdog: Server Watchdog: checkin
+4002774.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002774.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002789.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002789.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002804.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002804.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002819.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002819.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002834.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002834.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002849.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002849.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002864.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002864.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002879.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002879.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002894.966 [I] xpc.watchdog: Callback Watchdog: checkin
+4002894.966 [I] xpc.watchdog: Server Watchdog: checkin
+4002909.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002909.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002924.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002924.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002939.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002939.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002954.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002954.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002969.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002969.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002984.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002984.967 [I] xpc.watchdog: Server Watchdog: checkin
+4002999.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4002999.967 [I] xpc.watchdog: Server Watchdog: checkin
+4003004.102 [I] DATA:Collocation_NoBB:0:dataCollocationAssertionUpdate: tearDownNow = true
+4003004.102 [I] DATA:Collocation_NoBB:1:dataCollocationAssertionUpdate: tearDownNow = true
+4003004.102 [I] DATA:ServiceController:___ZN21DataServiceController21deactivateNonAssertedEv_block_invoke: nothing to wait for
+4003004.102 [I] DATA:ServiceController:waitForDeactivateNonAsserted: result code 0
+4003004.102 [I] pwr: Telling CSI to go low power
+4003004.102 [I] NOBB:NoBBRadioModule_NOSUPPORT:canEnterLowPower: 
+4003004.102 [I] pwr: CSI can enter low power, so now telling to do so
+4003004.102 [I] NOBB:NoBBRadioModule:enterLowPower: 
+4003004.102 [I] pwr: Will sleep.  Heard from CSI in 6.2108e-05 seconds
+4003004.102 [I] NOBB:NoBBRadioModule:enterLowPower_sync: 
+4003004.102 [I] evt: Sending internal notification kEventEnteringLowPower (17) params={0, 0, 0x0}
+4003004.102 [I] evt: Firing event 'enterLowPower'
+4003004.102 [I] DATA:TechDriver:enterLowPower: Entering low power mode
+4003004.102 [I] DATA:TechDriver:callbackEnteredLowPower: Calling Low Power call back
+4003004.102 [I] NOBB:NoBBRadioModule:finishEnterLowPower: 
+4003004.102 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: 
+4003004.102 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: calling low power callback, result is 1
+4003014.967 [I] xpc.watchdog: Callback Watchdog: checkin
+4003014.967 [I] xpc.watchdog: Server Watchdog: checkin
+4003300.363 [I] xpc.watchdog: Callback Watchdog: checkin
+4003300.363 [I] xpc.watchdog: Server Watchdog: checkin
+4009967.058 [I] pwr: Telling CSI to exit low power
+4009967.058 [I] NOBB:NoBBRadioModule:exitLowPower: 
+4009967.058 [I] NOBB:NoBBRadioModule:exitLowPower_sync: 
+4009967.058 [I] evt: Sending internal notification kEventExitingLowPower (18) params={0, 0, 0x0}
+4009967.058 [I] evt: Firing event 'exitLowPower'
+4009967.058 [I] DATA:TechDriver:handleExitLowPower_sync: Exiting low power mode
+4009967.083 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0d71040
+4009967.083 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: fals

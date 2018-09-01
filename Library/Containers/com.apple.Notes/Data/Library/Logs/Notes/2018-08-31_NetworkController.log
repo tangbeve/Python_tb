@@ -1,0 +1,10 @@
+Aug 31 19:08:26  Notes[1017] <Debug>: Registered for System Configuration dynamic store notifications with keys: (State:/Network/Global/IPv4, State:/Network/Global/IPv6, State:/Network/Global/DNS) patterns: (State:/Network/Interface/[^/]+/IPv4, State:/Network/Interface/[^/]+/IPv6)
+Aug 31 19:38:40  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 19:38:40  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 19:38:46  Notes[1017] <Debug>: Network configuration changed. Network is up.
+Aug 31 20:39:38  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 20:39:38  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 20:39:43  Notes[1017] <Debug>: Network configuration changed. Network is up.
+Aug 31 20:51:42  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 20:51:42  Notes[1017] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Aug 31 20:51:47  Notes[1017] <Debug>: Network configuration changed. Network is up.

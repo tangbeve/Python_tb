@@ -1,0 +1,989 @@
+
+
+
+#nav.affix {
+    top: 44px;
+    background-color: #265562 !important;
+    z-index: 1001;
+    margin-left: 0px;
+}
+
+.affixwidth {
+    width: 1140px !important;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width:0px) and (max-width:1200px) {
+    .affixwidth {
+        width: 940px !important;
+    }
+}
+
+
+
+.nsamaincontent, .nsaul {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #555555;
+}
+
+
+#NSAHeader2 {
+    background-image: url(../images/NSA/NSA_TertPhoto.jpg);
+    background-repeat: no-repeat;
+    height: 151px;
+}
+
+
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    /* reset the text-align */
+    text-align: left;
+    /* inline-block space fix */
+    margin-right: -4px;
+}
+
+p, .readmorebtn{
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #555555;
+}
+
+.NSAHeader2 {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 20px;
+    color: #265562;
+    font-weight: bold;
+}
+
+.NSAHeaderText {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 20px;
+    color: #265562;
+}
+
+
+@media (max-width:768px) {
+    .NSAHeaderText {
+        font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+        font-size: 17px;
+        color: #555555;
+    }
+}
+
+
+.NSAHeader3 {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+.NSAHeader3-1 {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+
+.nsagutter {
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+    background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+}
+
+.nsamaincontent {
+    padding: 15px 15px 15px 15px;
+}
+
+.nsasidediv {
+    float: right;
+}
+
+.NSAVideo {
+    height: 200px;
+    width: 300px;
+}
+
+.NSAVideo2 {
+    height: 200px;
+    width: 300px;
+}
+
+.NSAVideofloat {
+    float: right;
+}
+
+.nsabrochure {
+    padding: 10px;
+}
+.tertiaryHeader2{
+font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+font-size: 20px;
+color: #636363;
+font-weight: bold;
+}
+
+@media (min-width:992px) and (max-width:1200px) {
+    .NSAVideo {
+        height: 200px;
+        width: 265px;
+    }
+
+    .NSAVideo2 {
+        height: 200px;
+        width: 300px;
+    }
+
+    .NSAVideofloat {
+        float: right;
+    }
+}
+
+
+
+.NSAVideo1 {
+    height: 200px;
+    width: 300px;
+    padding-left: 20px;
+    margin-bottom: 40px;
+}
+
+@media (min-width:992px) and (max-width:1200px) {
+    .NSAVideo1 {
+        height: 200px;
+        width: 265px;
+        padding-left: 10px;
+    }
+}
+
+
+@media (min-width:768px) and (max-width:992px) {
+    .NSAVideo1 {
+        height: 200px;
+        width: 265px;
+        padding-left: 10px;
+        float: none;
+    }
+
+    .NSAVideo2 {
+        height: 200px;
+        width: 300px;
+        float: none;
+    }
+
+    .NSAVideofloat {
+        float: none;
+    }
+}
+
+@media (min-width:0px) and (max-width:767px) {
+    .NSAVideo1 {
+        height: 200px;
+        width: 230px;
+        float: none;
+        padding-left: 0px;
+    }
+
+    .NSAVideo {
+        height: 200px;
+        width: 230px;
+    }
+
+    .NSAVideo2 {
+        height: 200px;
+        width: 230px;
+        float: none;
+    }
+
+    .NSAVideofloat {
+        float: none;
+    }
+
+    .nsasidediv {
+        float: none;
+    }
+
+    .nsabrochure {
+        float: none;
+    }
+}
+
+#accordion .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+#accordion2 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+#accordion3 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+#accordion4 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+#accordion5 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #265562;
+    font-weight: bold;
+}
+
+.accordianlinks {
+    text-decoration: underline;
+}
+
+
+
+#accordion .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion2 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion3 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion4 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion5 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion6 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion7 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion8 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+#accordion9 .ui-accordion-header {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+.NSASubHeader2 {
+    width: 100%;
+    background-image: url(../images/NSA/BlueRule.png);
+    background-repeat: repeat-x;
+    text-align: center;
+    height: 70px;
+}
+
+.NSASubHeader {
+    background-color: #FFF;
+    height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ 
+
+ @font-face {
+    src: url("../../fonts/MYRIADPRO-BOLD.OTF");
+    font-family: 'Myriad Pro Local';
+}
+
+.nsah1 {
+    font-size: 45px;
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;	
+    /* font-family: 'Myriad Pro Local', 'Myriad Pro', arial, helvetica, sans-serif; */
+    color:#314956;
+    font-weight: bold;
+}
+
+
+
+.NSASubHeader4 {
+   /* background-image: url(../images/nsa/header/LifeHead_NSA.png); background-repeat: no-repeat; */
+    display: inline-block;
+}
+
+.NSASubHeader5 {
+    /*background-image:url(../images/nsa/header/BenefitsHead_NSA.png); background-repeat: no-repeat;*/
+    display: inline-block;
+}
+
+.NSASubHeader6 {
+   /* background-image: url(../images/nsa/header/CareerDevHead_NSA.png); background-repeat: no-repeat; */
+    display: inline-block;   
+}
+
+.NSASubHeader7 {
+   /* background-image: url(../images/nsa/header/CyberHead_NSA.png);  background-repeat: no-repeat; */
+    display: inline-block;   
+}
+
+.NSASubHeader8 {
+   /* background-image: url(../images/nsa/header/DiversityHead_NSA.png); background-repeat: no-repeat; */
+    display: inline-block;
+     
+}
+
+.NSASubHeader9 {
+      /* background-image: url(../images/nsa/header/FAQsHead_NSA.png);  background-repeat: no-repeat;*/
+    display: inline-block;
+}
+
+
+@media (min-width:768px) and (max-width:991px) {
+
+    .NSASubHeaderTablet {
+        background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+    .NSASubHeader4 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image:  -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:   -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+    .NSASubHeader5 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+    .NSASubHeader6 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+
+    .NSASubHeader7 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image:  -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image:  -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+    .NSASubHeader8 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image:  -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image:  linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+
+    .NSASubHeader9 {
+        margin-left: auto;
+        margin-right: auto;
+        background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #E0E0E0), color-stop(1, #FFFFFF) );
+        background-image: -o-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -moz-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -webkit-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: -ms-linear-gradient(bottom, #E0E0E0 0%, #FFFFFF 100%);
+        background-image: linear-gradient(to bottom, #E0E0E0 0%, #FFFFFF 100%);
+    }
+}
+
+.nsagrid-block {
+    position: relative;
+    float: left;
+    width: 300px;
+	height:100%;
+    margin: 0 0 0px 0px;
+} 
+
+.nsacaption {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../images/nsa/NSAtrans.png);
+    width: 100%;
+    height: 100%;
+    /*background-color:black;*/
+}
+
+.nsagrid1-block {
+    position: relative;
+    float: left;
+    width: 200px;
+    height: 100%;
+    margin: 0 0 0px 0px;
+}
+
+
+#myModal .modal-dialog {
+    width: 85%;
+}
+
+#accordion a, #accordion2 a, #accordion3 a, #accordion4 a, #accordion5 a, #accordion6 a, #accordion7 a, #accordion8 a {
+    color: #265562;
+}
+
+    #accordion a:link, #accordion2 a:link, #accordion3 a:link, #accordion4 a:link, #accordion5 a:link, #accordion6 a:link, #accordion7 a:link, #accordion8 a:link {
+        color: #265562;
+    }
+
+    #accordion a:hover, #accordion2 a:hover, #accordion3 a:hover, #accordion4 a:hover, #accordion5 a:hover, #accordion6 a:hover, #accordion7 a:hover, #accordion8 a:hover {
+        color: #265562;
+    }
+
+
+        .tertiaryshade1  {
+           text-align: left; margin-left: 10px
+        }
+
+    
+
+        .tertiaryshade2  {
+            color: #FFF
+        }
+
+        .teriaryfilter1  {
+            text-decoration:underline;
+        }
+
+        .teriaryfilter2  {
+            font-size:13px;
+        }
+
+        .teriaryfilter3  {
+            font-size:17px;
+        }
+
+        .divleft {float:left; width:70%; vertical-align:top; 
+        }
+         .divright {float:right; vertical-align:top;  
+        }
+
+@media (min-width:992px) and (max-width:1200px) {
+        .divleft {float:left; width:60%; vertical-align:top;
+        }
+         .divright {float:right; vertical-align:top;
+        }
+}
+
+
+@media (min-width:768px) and (max-width:992px) {
+ .divleft {float:left; width:50%; vertical-align:top;
+        }
+         .divright {float:right; vertical-align:top;
+        }
+}
+
+@media (min-width:0px) and (max-width:767px) {
+   
+            .divleft {float:none; width:auto; vertical-align:top;
+        }
+         .divright {float:none; vertical-align:top;
+        }
+
+}
+
+
+/* Member Agency Boxes */
+
+.item, .item1 {
+    width: 245px;
+    height: 200px;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #969696), color-stop(1, #FFFFFF) );
+    background-image: -o-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #969696 0%, #FFFFFF 100%);
+    border: 3px solid black;
+    margin: 5px;
+    font-size: 14px;
+	cursor: default;
+}
+
+.big {
+    width: 500px;
+    height: auto;
+    padding: 5px;
+    color: #000000;
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #969696), color-stop(1, #FFFFFF) );
+    background-image: -o-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #969696 0%, #FFFFFF 100%);
+}
+
+
+@media (min-width:0px) and (max-width:768px) {
+    .big {
+        width: 95%;
+    }
+}
+
+
+.big .content_small {
+    display: none;
+}
+
+.content_big {
+    display: none;
+}
+
+.big .content_big {
+    display: block;
+}
+
+.big1 {
+    width: 230px;
+    height: 550px;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #969696), color-stop(1, #FFFFFF) );
+    padding: 5px;
+    background-image: -o-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #969696 0%, #FFFFFF 100%);
+}
+
+    .big1 .content_small {
+        display: none;
+    }
+
+.content_big1 {
+    display: none;
+}
+
+.big1 .content_big1 {
+    display: block;
+}
+
+
+
+.centerseal {
+    margin-left: 8px;
+}
+
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+    max-width: 1400px;
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
+}
+
+    .isotope .isotope-item {
+        -webkit-transition-property: -webkit-transform, opacity;
+        -moz-transition-property: -moz-transform, opacity;
+        -ms-transition-property: -ms-transform, opacity;
+        -o-transition-property: -o-transform, opacity;
+        transition-property: transform, opacity;
+    }
+
+        /**** disabling Isotope CSS3 transitions ****/
+
+        .isotope.no-transition,
+        .isotope.no-transition .isotope-item,
+        .isotope .isotope-item.no-transition {
+            -webkit-transition-duration: 0s;
+            -moz-transition-duration: 0s;
+            -ms-transition-duration: 0s;
+            -o-transition-duration: 0s;
+            transition-duration: 0s;
+        }
+
+.column-width-isotope-element {
+    width: 4px;
+}
+
+
+
+.icsealheader {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.icsealheader1 {
+    font-weight: normal;
+}
+
+/* FlipBoard Styling */
+
+
+.panel {
+    /*float: left;*/
+    width: 163px;
+    height: 163px;
+    margin: 4px;
+    position: relative;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective: 600px;
+}
+
+
+
+@media (min-width:480px) {
+    .panel1 {
+        /*float: left;*/
+        width: 340px;
+        height: 170px;
+        margin: 4px;
+        position: relative;
+        -webkit-perspective: 600px;
+        -moz-perspective: 600px;
+        perspective: 600px;
+    }
+}
+
+
+
+/* -- make sure to declare a default for every property that you want animated -- */
+/* -- general styles, including Y axis rotation -- */
+.panel .front {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    width: inherit;
+    height: inherit;
+    /*border: 1px solid #ccc;*/
+    background: #6b7077;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #969696), color-stop(1, #FFFFFF) );
+    background-image: -o-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #969696 0%, #FFFFFF 100%);
+    text-align: center;
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+    -moz-transform: rotateX(0deg) rotateY(0deg);
+    transform: rotateX(0deg) rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* -- transition is the magic sauce for animation -- */
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.panel.flip .front {
+    z-index: 900;
+    /*border-color: #eee;*/
+    background: #333;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.panel .back {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 800;
+    width: inherit;
+    height: inherit;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+    transform: rotateY(-179deg);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* -- transition is the magic sauce for animation -- */
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.panel.flip .back {
+    z-index: 1000;
+    background: #80868d;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #969696), color-stop(1, #FFFFFF) );
+    background-image: -o-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #969696 0%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #969696 0%, #FFFFFF 100%);
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+    -moz-transform: rotateX(0deg) rotateY(0deg);
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+/* -- X axis rotation for click panel -- */
+.click .front {
+    cursor: pointer;
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.click.flip .front {
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+.click .back {
+    cursor: pointer;
+    -webkit-transform: rotateX(-180deg);
+    -moz-transform: rotateX(-180deg);
+    transform: rotateX(-180deg);
+}
+
+.click.flip .back {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.odniborder {
+    border: 1px solid #29316d;
+}
+
+
+@media (min-width:768px) {
+    .sealsize {
+        width: 340px;
+        height: 170px;
+    }
+}
+
+
+
+
+.pmborder {
+    border: 1px solid #414ca0;
+}
+
+.dpborder {
+    border: 1px solid #6470cb;
+}
+
+.srborder {
+    border: 1px solid #8e9bfa;
+}
+
+
+.icstructuresize {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.icstructuresize1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 340px;
+}
+
+.icstructuresize2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
+@media (min-width:768px) and (max-width:1200px) {
+    .icstructuresize {
+        width: 550px;
+    }
+
+    .icstructuresize2 {
+        width: 350px;
+    }
+}
+
+
+
+@media (min-width:480px) and (max-width:768px) {
+    .icstructuresize {
+        width: 350px;
+    }
+
+    .icstructuresize2 {
+        width: 350px;
+    }
+}
+
+
+@media (min-width:0px) and (max-width:480px) {
+    .icstructuresize {
+        width: 100%;
+    }
+
+    .icstructuresize1 {
+        width: 100%;
+    }
+
+    .icstructuresize2 {
+        width: 100%;
+    }
+}
+
+
+.icstructuremax {
+    max-width: 163px;
+}
+
+.flippadding {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* End FlipBoard Styling */
+
+/*For NSA business page*/
+.nsabusinessol {
+    margin: 0;
+    padding: 0;
+}
+
+.nsabusinessol a{
+	color:#0000ff;
+	text-decoration: underline;
+	font-weight: normal;
+}
+.nsabusinessol > li {
+    margin-bottom: 50px;
+	margin-left: 50px;
+	color: #265562;
+	font-weight: bold;
+}
+
+.nsabusinessul{
+	list-style-type: disc;
+	color: #555555;
+	font-weight: normal;
+}
+
+.nsabusinessol2 {
+    margin: 0;
+}
+
+.nsabusinessol2 a{
+	color:#0000ff;
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+.nsabusinessol2 > li{
+	margin-left: 30px;
+	font-weight: bold;
+	line-height: 1.2em;
+}
+
+@media (min-width:0px) and (max-width:600px) {
+.nsabusinessimage {
+	width: 100%;
+	height:auto;
+}
+}
+/* End of Business page */
+
+
+
+

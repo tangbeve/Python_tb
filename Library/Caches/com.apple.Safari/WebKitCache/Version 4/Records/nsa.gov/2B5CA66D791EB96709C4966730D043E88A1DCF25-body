@@ -1,0 +1,749 @@
+baseUrl = '';
+
+$(function() {
+	
+	try {
+		console.clear();
+	} catch(e) {}
+	
+	// title update
+	try {
+		titleUpdate();
+	} catch(e) {}
+	
+	// breadcrumbs
+	try {
+		breadcrumbsLoad();
+	} catch(e) {}
+	
+	// tag links for external notice and image links to popup inline
+	try {
+		linkTagging();
+		$('body').on('click', 'a.external-link', linkExternalNotice);
+		
+		linkPopupIndicator();
+		$('a.image-popup').magnificPopup({
+			type: 'image'
+		});
+	} catch(e) {}
+	
+	// alternate table row colors
+	try {
+		tablesAlternateRowColor();
+	} catch(e) {}
+	
+	// primary navigation
+	try {
+		navigationSetup();	
+	} catch(e) {}
+	
+	// secondary navigation
+	try {
+		navigationShowActive();
+		$('.dated-entry-nav select').on('change', navigationDropdowns);
+	} catch(e) {}
+	
+	// form setup
+	try {
+		formSetup();
+	} catch(e) {}
+	
+	// date page posted
+	try {
+		datePosted();
+	} catch(e) {}
+	
+	// close menu and search on resize;
+	try {
+		$(window).resize(navigationHide);
+	} catch(e) {}
+	
+	// placeholder text for older browsers
+	try {
+		$('input,textarea').placeholder();
+	} catch(e) {}
+	
+	// back to top button
+	try {
+		backToTopSetup();
+	} catch(e) {}
+	
+	// expand/collapse content
+	try {
+		$('.expandableContent').hide();
+		$('a.collapse, a.expand').on('click', expandCollapseContent);
+	} catch(e) {}
+	
+	// popup links
+	try {
+		$('a.popup').on('click', popupLink);
+	} catch(e) {}
+	
+	// fancy anchors
+	try {
+		anchorScrollTo();
+		anchorFancyScroll();
+	} catch(e) {}
+	
+	// analytics disable if url contains underscore
+	try {
+		if(window.location.href.indexOf('_') > 0) {window['ga-disable-UA-20753548-1'] = true;}
+	} catch(e) {}
+	
+	window.onpopstate = function() {
+		formSetup();	
+	}
+});
+
+//	anchorFancyScroll()
+//	use animation for scrolling with anchors instead of normal browser jumping
+function anchorFancyScroll() {	
+	$('a[href^="#"]').on('click', function(e) {
+		var anchorMatch = $('a[name="'+$(this).attr('href').split('#')[1]+'"]');
+		var urlMatch = $(this).attr('href').indexOf('#') == 0;
+				
+		if(anchorMatch.length && urlMatch) {
+			var scrollTop = anchorMatch.offset().top;
+			
+			$('html,body').animate({scrollTop: (scrollTop > 0 ? scrollTop : 0)}, 'slow', function() {
+				anchorMatch.focus();
+				
+				try {
+					history.pushState(null, null, '#'+anchorMatch.attr('name'));
+				} 
+				catch(e) {  // IE
+					window.location.hash = anchorMatch.attr('name'); 
+					$(window).scrollTop((scrollTop > 0 ? scrollTop : 0));
+				}
+			});
+			e.preventDefault();
+		}
+	});
+}
+
+//	anchorScrollTo()
+//	scroll to anchor on load if one defined
+function anchorScrollTo() {
+	if(window.location.hash != '' && window.location.hash != '#') {
+		var anchorMatch = $('a[name="'+window.location.hash.replace(/#/g, '')+'"]');
+		
+		if(anchorMatch.length) {
+			$('html,body').animate({scrollTop: anchorMatch.offset().top}, 'slow');
+		}
+	}
+}
+
+//	backToTop()
+//	scroll user back to top
+function backToTop() {
+	$('html,body').animate({scrollTop: 0}, 'slow');
+	return false;	
+}
+
+//	backToTopSetup()
+//	setup items needed for back to top button
+function backToTopSetup() {
+	$('#back-to-top-button').data('show', $('#content').offset().top);
+	$(window).on('scroll', backToTopVisible);
+	$('#back-to-top-button a').on('click', backToTop);
+}
+
+//	backToTopVisibile()
+//	hide/show back to top button based on scroll position
+function backToTopVisible() {
+	var container = $('#back-to-top-button');
+	var position = $(this).scrollTop();
+	var start = container.data('show');
+	var visible = container.filter(':visible').length;
+	
+	if(position > start && !visible) {
+		container.fadeIn();	
+	}
+	else if(position <= start && visible) {
+		container.fadeOut();	
+	}
+}
+
+//	breadcrumbsLoad()
+//	load breadcrumbs based off URL
+function breadcrumbsLoad() {
+	var html = '';
+	var path = window.location.pathname.toLowerCase().split('/');
+	var target = $('div#content').find('.content-header:first');
+	var urlStr = window.location.protocol + '//' + window.location.hostname + '/';
+	
+	html += '<div class="container"><div class="breadcrumbs" style="display:none;"></div></div>';
+	$(html).prependTo(target);
+	target = target.find('div.breadcrumbs');
+	
+	// prevent "assets" folders from having a trail
+	if(window.location.pathname.toLowerCase().indexOf('/assets/') >= 0) {
+		path = [];	
+	}
+	
+	// if first element is empty, remove it
+	if($.trim(path[0]) == '') {	path.shift(); }
+	
+	// if last element contains filename, remove it
+	if(path.length > 0 && path[path.length-1].indexOf('.')) { path.pop(); }
+	
+	// always include homepage
+	if(path.length == 0 || $.trim(path[0]) != 'nsagov') {
+		$('<a href="/">NSA.gov</a>').appendTo(target);
+	}
+	else {
+		urlStr += path[0] + '/';
+		$('<a>NSA.gov</a>').appendTo(target).attr('href', urlStr);
+		path.shift();	
+	}
+	
+	// if at top level and nothing else, close out
+	if(path.length == 0) {
+		target.show('fast');
+		return;	
+	}
+	
+	// set baseUrl & override location (first directory name)
+	baseUrl = urlStr;
+	var overrides = path[0];
+	
+	// get any overrides & process rest of directories
+	$.ajax({
+		url: baseUrl + 'assets/includes/breadcrumbs/' + overrides + '.js',
+		cache: true,
+		complete: function(data) {	
+			if(typeof(crumbs) == 'undefined') crumbs = {};
+			
+			// parse directories
+			for(var i=0; i<path.length; i++) {
+				var linkText = (crumbs[path[i]]) ? crumbs[path[i]] : path[i].replace(/(-|_)/g, ' ');
+				linkText = linkText.replace(/<[^>]*>/gi, '');
+				
+				urlStr += path[i] + '/';
+				
+				target.append(' > ');
+				$('<a></a>').appendTo(target).attr('href', urlStr).html(linkText);
+			}
+			
+			// display
+			target.show('fast');
+		}
+	});
+}
+
+//	datePosted()
+//	post dates from meta tag onto bottom of page content
+function datePosted() {
+	var html = '';
+	var created = $('meta[property="created"]');
+	var modified = $('meta[property="modified"]');
+	var target= $('div#content').find('.body-content').find('.body-text-container');
+	
+	html += '<p class="date-modified">';
+	
+	if(created.length && $.trim(created.attr('content')) != '') {
+		html += 'Date Posted: ' + created.attr('content');
+		if(modified.length) {
+			html += ' | ';
+		}
+	}
+	
+	if(modified.length && $.trim(modified.attr('content')) != '') {
+		html += 'Last Modified: ' + modified.attr('content');
+	}
+	html += '</p>';
+	
+	if(created.length || modified.length) {
+		target.append(html);
+	}
+}
+
+//	expandCollapseContent()
+//	expand and/or collapse content on the page using data attribute of expand that matches ID attribute or the next item with the expandableContent class
+function expandCollapseContent() {
+	if($(this).data('expand')){
+		// code for expanding content has the matching expand value, looks for  data-expand=""
+		var contentToExpand = $(this).data('expand');
+		
+		// collapses content
+		if($(this).hasClass('collapse')) {
+			//img.attr('src', img.attr('src').replace(/but_expand.png/i, '/but_collapse.png'));
+			$(this).removeClass('collapse').addClass('expand');
+			$('#'+contentToExpand).toggle();
+		} 
+		
+		// expands the content
+		else {
+			$(this).removeClass('expand').addClass('collapse');
+			$('#'+contentToExpand).toggle();
+		}
+	}
+	else{	
+	
+		// collapses content
+		if($(this).hasClass('collapse')) {
+			$(this).removeClass('collapse').addClass('expand');
+			$(this).next('.expandableContent').toggle();
+		} 
+		
+		// expands the content
+		else {
+			$(this).removeClass('expand').addClass('collapse');
+			$(this).next('.expandableContent').toggle();
+		}
+	}
+	return false;
+}
+
+//	footerEqualize()
+//	ensures footer boxes maintain equal height as long as they aren't stacked
+function footerEqualize() {
+	var container = $('div#footer .footer-row');
+	var footer = container.find('> div');
+	
+	// zero out any previously set heights so they don't influence height decisions
+	$('.footer-content').outerHeight('');
+
+	if(container.find('.footer-internal').offset().top == container.find('.footer-external').offset().top) {
+		var boxHeight = 0;
+		
+		footer.each(function() {
+			if($(this).height() > boxHeight) {
+				boxHeight = $(this).height();
+			}	
+		}).find('.footer-content').outerHeight(boxHeight);
+	}
+}
+
+//	formSetup()
+//	do any pre-process form setup
+function formSetup() {
+	var itm = $('.body-text-container input[name="start"]');
+	
+	if(itm.length) {
+		$.ajax({
+			url: baseUrl + 'assets/scripts/forms.cfm?load=true',
+			cache: false,
+			complete: function(data) {
+				$('.body-text-container input[name="start"]').val(data.responseText);
+			}
+		});
+	}
+}
+
+//	linkExternalNotice()
+//	show external notice popup before proceeding to link
+function linkExternalNotice() {	
+	var href = $(this).attr('href');
+	var popup = '<div class="external-notice-popup"><h1>Exit Notice</h1><h3>You are now leaving NSA.gov and entering a site hosted by a third party.<br>Thank you for visiting our site.</h3><a href="'+ href +'">Continue to site</a></div>';
+	
+	// shouldn't happen for share buttons
+	if(!$(this).parents('.share-buttons').length > 0) {
+	
+		// open notice in popup
+		$.magnificPopup.open({
+			items: {
+				src: $(popup),
+				type: 'inline'
+			},
+			closeBtnInside: true,
+			showCloseBtn: true
+		});
+		
+		return false;
+	}	
+		
+}
+
+//	linkPopupIndicator()
+//	setup indicator for image popups, pdf image popups
+function linkPopupIndicator() {
+	$('a.image-popup').each(function() {
+		var itm = $(this);
+		if(itm.find('img').length) {
+			itm.append('<img src="/assets/img/icons/iconExpandImage.png" alt="" border="0" class="indicator">');
+		}
+	});
+	$('a.pdf-link').each(function() {
+		var itm = $(this);
+		if(itm.find('img').length) {
+			itm.append('<img src="/assets/img/icons/iconExpandPDF.png" alt="" border="0" class="indicator">');
+		}
+	});
+}
+
+//	linkTagging()
+//	tag links for external notice popup, inline image popup and/or pdf popup
+function linkTagging() {
+	var allowed = ['.gov','.mil','.fed.us'];
+	var images = ['bmp','gif','gifv','jpg','jpeg','png'];
+	
+	$('.body-content a, .body-text-container a').each(function() {
+		var href = $.trim($(this).attr('href'));
+		
+		// determine if link is external and not in one of the allowed domains, if so add class to flag it
+		if(href != '' && href.indexOf('/') != 0 && (href.indexOf('http://') >= 0 || href.indexOf('https://') >= 0)) {
+			var external = true;
+			for(var i in allowed) {
+				if(href.indexOf(allowed[i]) >= 0) {
+					external = false;
+					break;	
+				}
+			}
+			if(external) {
+				$(this).addClass('external-link');	
+			}
+		}
+		
+		var linkType = href.split('.').pop().toLowerCase();
+		if(images.indexOf(linkType) >= 0) {
+			$(this).addClass('image-popup');	
+		}
+		else if(linkType == 'pdf') {
+			$(this).addClass('pdf-link');	
+		}
+	});		
+}
+
+// navigationBreadcrumbClick()
+// selection of navigation breadcrumbs
+function navigationBreadcrumbClick(){
+	// base level menu
+	if($(this).attr('href') == ''){
+		// reset the menu
+		$('.nav a.selected').removeClass('selected');
+		$('.nav ul').removeClass('visible').removeClass('current');	
+		$('.nav ul a').show();
+		$('.nav .menu-bread-crumbs').html('');
+	}
+	else{
+		// close any open uls bellow
+		$('ul.current').removeClass('visible');
+		
+		// open correct level
+		$('.nav ul a[href="'+$(this).attr('href')+'"]').trigger('click').trigger('click');
+	}
+	return false;
+}
+
+//	navigationDropdowns()
+//	on change of navigation dropdown, redirect user to selected page
+function navigationDropdowns() {
+	var selected = $(this).find(':selected');
+	
+	if(selected.length && selected.data('page') != '') {
+		window.location.href = selected.data('page');	
+	}
+}
+
+//	navigationHamburger()
+//	handle selection of primary nav hamburger menu
+function navigationHamburger() {
+
+	// collapse/reset it, if hamburger is expanded
+	if($('.nav').hasClass('hamburger-open')){
+		
+		// reset the menu
+		$('.nav a.selected').removeClass('selected');
+		$('.nav ul').removeClass('visible').removeClass('current');	
+		$('.nav ul a').show();
+
+		// hide it
+		$('.nav .menu-bread-crumbs').html('');
+		$('.nav').removeClass('hamburger-open').hide().find('ul:first').hide();
+		$('.hamburger-menu').removeClass('hamburger-open');
+		$('.search-region').removeClass('search-hamburger');
+				
+	}
+	// expand it
+	else{		
+	
+		// reset the menu just in case it wasnt reset	
+		$('.nav a.selected').removeClass('selected');
+		$('.nav ul.visible').removeClass('visible');	
+		
+		// expand
+		$('.hamburger-menu').addClass('hamburger-open');
+		$('.nav').addClass('hamburger-open').show().find('ul:first').show();
+		$('.nav a').show();
+		navigationSearchHide();
+	}
+
+	return false;
+}
+
+//	navigationHide(e)
+//	hide navigation when user clicks out of area
+function navigationHide(e) {
+	if(!$(e.target).closest('.nav').length && !$(e.target).is('.nav') && !$(e.target).closest('.banner').length && !$(e.target).is('.banner') && !$(e.target).closest('.newsearch').length && !$(e.target).is('.newsearch')) {
+		var openElements = $('.nav').find('.selected, .visible');
+		var visible = (openElements.length > 1 || $('.hamburger-menu').hasClass('hamburger-open') && $('.hamburger-menu').is(':visible')) ? true : false; 
+		openElements.removeClass('selected').removeClass('visible');
+		
+		// fake out breadcrumbs so hamburger closes properly
+		$('.menu-bread-crumbs').text(' ');
+		
+		$('.nav').removeClass('hamburger-open').find('ul:first').css('display', '');
+		$('.hamburger-menu').removeClass('hamburger-open');
+		
+		//close the search
+		var headerElementToOpen;
+		if(window.innerWidth <= 800){
+			headerElementToOpen = $('.banner .brand');
+		}else{
+			headerElementToOpen = $('.banner .title');
+		}
+		$('.newsearch #searchbox').fadeOut(function(){headerElementToOpen.fadeIn();});
+		
+		// reset hamburger
+		if($('.nav').hasClass('hamburger-nav')) {
+			$('.nav').hide();
+			if(visible) {
+				$(window).scrollTop(0);
+			}
+		}
+	}
+}
+
+//	navigationResize()
+//	adjusts menu with browser resizes
+function navigationResize() {	
+	$('ul.subnav-lvl1.visible').each(function() {
+		var list = $(this).css('height', 'auto');
+		var height = list.height() / list.children('li').length;
+			
+		if(!$('.hamburger-menu:visible').length) {
+			list.height(list.data('maxChildren')*height);
+		}
+	});
+
+	// desktop nav
+	if(!$('.hamburger-menu:visible').length) {		
+		$('.nav').show().removeClass('hamburger-nav hamburger-open').find('ul:first').css('display', '');
+		$('.hamburger-menu, .hamburger-search').removeClass('hamburger-open');
+		$('.nav a').show();	
+		$('.nav .menu-bread-crumbs').html('');
+		navigationSearchHide();
+		$('.search-region').show();
+	}
+	// mobile nav
+	else {
+		$('.nav').addClass('hamburger-nav');
+		if($('.nav.hamburger-open').length == 0 && $('.hamburger-search .hamburger-open').length == 0) {
+			$('.nav').hide();	
+			$('.search-region').hide();
+		}
+	}
+}
+
+
+//	navigationSearch()
+//	open search menu
+function navigationSearch() {
+	var headerElementToOpen;
+	if(window.innerWidth <= 800){
+		headerElementToOpen = $('.banner .brand');
+	}else{
+		headerElementToOpen = $('.banner .title');
+	}
+
+	if(headerElementToOpen.is(':visible')){
+		headerElementToOpen.fadeToggle(
+			function(){
+				$('#searchbox').fadeToggle( 
+					function(){ $('#searchbox').focus();}
+				);
+			}
+		);
+		return false;
+	}
+}
+
+//	navigationSearchHide()
+//	hide mobile search menu
+function navigationSearchHide() {
+	$('.search-region').hide().removeClass('search-hamburger');
+	$('.nav').removeClass('search-on');	
+}
+
+//	navigationSetup()
+//	do setup work on navigation
+function navigationSetup() {
+	// remove any 5th level dropdowns; menu style only supports 4 levels
+	$('.nav ul ul ul ul ul').remove();
+	
+	// mark each subnav item
+	$('.nav a').each(function() {
+		var itm = $(this);
+		if(itm.next('ul').length) {
+			var lvl = itm.parents('ul').length;
+				itm.next('ul').prepend('<li class="subnav-header">'+itm.parent().html()+'</li>');
+				itm.append('<span class="indicator"></span>');
+			itm.addClass('subnav').addClass('subnav-lvl'+lvl).data('lvl', lvl).next('ul').addClass('subnav-lvl'+lvl);
+			itm.attr('title', 'Expand ' + itm.text() + ' category');
+		}
+	});
+	
+	// set data element on each ul with maximum number of li at one level
+	$('ul.subnav-lvl1').each(function() {
+		var maxChildren = $(this).children('li').length;
+		
+		$(this).find('ul').each(function() {
+			var children = $(this).children('li').length;
+			if(children > maxChildren) { maxChildren = children; }
+		});
+		
+		$(this).data('maxChildren', maxChildren);
+	});
+	
+	// click of item with subnav
+	$('.nav a.subnav').on('click', navigationToggle);
+	$('.hamburger-menu a.hamburger').on('click', navigationHamburger);
+	$(document).on('click', navigationHide);
+	
+	// handle resizes
+	try { 
+		$(window).on('resize', navigationResize).trigger('resize');
+		window.addEventListener('orientationchange', navigationResize, false);
+	} catch(e) {}
+	
+	// search toggle
+	//$('.newsearch .submit').on('click', navigationSearch);
+	
+	// hamburger breadcrumbs
+	$('.menu-bread-crumbs').on('click', 'a', navigationBreadcrumbClick);
+}
+
+//	navigationShowActive()
+//	add selected class on navigation tab within secondary navigation, select appropriate dropdown item in navigation dropdowns
+function navigationShowActive() {
+	var nav;
+	var path = window.location.pathname.toLowerCase(); 
+	
+	// show active tab
+	nav = $('.dated-entry-nav ul');
+	if(nav.length) {
+		nav.find('li a').each(function() {
+			var href = $(this).attr('href').toLowerCase();
+			
+			if(path.search(href) >= 0) {
+				$(this).parent('li').parent().find('li.selected').removeClass('selected');
+				$(this).parent('li').addClass('selected');	
+			}
+		});
+	}
+	
+	// show active item in dropdown
+	nav = $('.dated-entry-nav select');
+	if(nav.length) {
+		nav.find('option[data-page]').filter(function() {
+			var href = $(this).data('page').toLowerCase();
+			
+			return (path.search(href) >= 0);
+		}).prop('selected', true);
+	}
+}
+
+//	navigationToggle()
+//	toggle display of primary nav
+function navigationToggle() {
+	var lvl = $(this).data('lvl');
+	var visible = $(this).hasClass('selected') && (lvl == 1 || $('.hamburger-nav:visible').length);
+	
+	// mobile menu
+	if($('.nav').hasClass('hamburger-open')){
+		// reset the menu
+		for(var i=lvl; i<=3; i++) {
+			$('a.subnav-lvl'+i).removeClass('selected');
+			$('ul.subnav-lvl'+lvl).removeClass('visible');	
+		}
+		$('.nav ul a').show();
+		$('ul').removeClass('current');
+		$('.nav .menu-bread-crumbs').html('');
+		
+		// select newer options
+		if(!visible) {
+			$(this).addClass('selected');
+			$(this).next('ul').addClass('visible').addClass('current');
+			
+			// hide any links not under current level	
+			$('.nav ul a').not('.current a').hide();
+		}
+
+		// get the new breadcrumb
+		var parentLink = $('.nav ul.current').parents('ul:first').prev('a');
+		var breadcrumbLink = '';
+		if(parentLink.length == 0){
+			breadcrumbLink = '<a href="">Back</a>';
+		}
+		else{
+			breadcrumbLink = '<a href="'+ parentLink.attr('href')+ '">Back</a>';
+		}
+		$('.nav .menu-bread-crumbs').append(breadcrumbLink);
+		
+		// go back to the top
+		$(window).scrollTop(0);
+	}
+	
+	// desktop menu
+	else {
+						
+		// reset the menu
+		for(var i=lvl; i<=3; i++) {
+			$('a.subnav-lvl'+i).removeClass('selected');
+			$('ul.subnav-lvl'+lvl).removeClass('visible');	
+		}
+		
+		// make visible
+		if(!visible) {
+			$(this).addClass('selected');
+			$(this).next('ul').addClass('visible');		
+			
+			// adjust height of level 1 to be inclusive of taller lower levels, only if not already adjusted
+			if(lvl == 1) {
+				navigationResize();
+			}
+		}
+	}
+	return false;	
+}
+
+//	popupLink()
+//	open link in popup based on data attributes passed
+function popupLink() {
+	var height = $(this).data('height');
+	var href = $(this).attr('href');
+	var width = $(this).data('width');	
+	
+	// open notice in popup
+	$.magnificPopup.open({
+		items: {
+			src: href,
+			type: 'iframe',
+		},
+		iframe: {
+			markup: '<div class="iframe-wrapper"><div class="mfp-close"></div><iframe class="mfp-iframe" frameborder="0" allowfullscreen height="'+height+'" width="'+width+'"></iframe></div>'	
+		},
+		closeBtnInside: false,
+		showCloseBtn: true
+	});	
+	
+	return false;	
+}
+
+//	tablesAlternateRowColor()
+//	alternate table row class for styling purposes in older browsers
+function tablesAlternateRowColor() {
+	$('#content tr:odd').addClass('table-row-alt');
+}
+
+//	titleUpdate()
+//	update title to include " - NSA.gov" on all subpages
+function titleUpdate() {
+	var newTitle = document.title;
+	
+	if(newTitle != 'NSA.gov' && newTitle.indexOf('- NSA.gov') < 0) {
+		newTitle += ' - NSA.gov';
+		document.title = newTitle;
+	}
+}

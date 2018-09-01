@@ -1,0 +1,2182 @@
+if ( !window.stream )
+{
+
+  var stream =
+  {};
+
+  stream.streamViewers = [];
+
+  stream.Viewer = Class.create();
+  stream.Viewer.prototype =
+  {
+      /**
+       * <pre>
+       * Input hash params:
+       * baseurl: url to load data from for this stream (must end in /)
+       * streamName: non-localized name for this stream. Note: HTML element ids contain this.
+       * streamTitle: localized name for this stream
+       * isForOverview: is this stream viewer for the overview page; does it have an associated right-hand side page
+       * maxEntriesToDisplay: as the name suggests (0 == no limit == StreamDefinition.NO_MAX)
+       * highlightedStreamFieldValue: as the name suggests
+       * highlightedStreamFieldName: entry name to use along with fieldValue when searching for a specific stream entry
+       * filter: session sticky filter info
+       * emptyText: The text to display when there are no stream entries to display.
+       * emptyTextExtras: Extra text to display in a separate div when there are no stream entries to display. (Optional)
+       * </pre>
+       */
+      initialize : function( params )
+      {
+        this.baseurl = params.baseurl;
+        this.streamName = params.streamName;
+        this.streamTitle = params.streamTitle;
+        this.isForOverview = params.isForOverview;
+        this.maxEntriesToDisplay = params.maxEntriesToDisplay;
+        this.avatarsEnabled = params.avatarsEnabled;
+        this.avatarCallback = params.avatarCallback;
+        this.emptyText = params.emptyText;
+        this.emptyTextExtras = params.emptyTextExtras;
+        this.hasSettings = false;
+        this.pollingExecuter = null;
+
+        this.currentFilter = 'filter_type_all_' + this.streamName;
+        if ( params.filter )
+        {
+          // TODO: Investigate using page.putInSessionStorage and page.getFromSessionStorage instead of taking it as
+          // a parameter
+          // TODO: We currently filter on the overview page based on whatever was filtered on the stream. Since we can't
+          // change the filtering on
+          // the overview page this feels like a bug more than a feature... possibly skip this block if
+          // (this.isForOverview)
+          params.filter = params.filter.evalJSON( true );
+          this.currentFilter = params.filter.currentFilter;
+          this.filter_attribute = params.filter.filter_attribute;
+          this.filter_exclusive = params.filter.filter_exclusive;
+          this.filter_value = params.filter.filter_value;
+          this.initial_showMineCheckbox = params.filter.showMineCheckbox;
+        }
+
+        this.LAST_CLICKED_KEY = 'lastClickedStream' + this.streamName;
+        if ( params.highlightedStreamFieldValue && !params.highlightedStreamFieldValue.blank() && params.highlightedStreamFieldName && !params.highlightedStreamFieldName.blank() )
+        {
+          this.highlightedStreamFieldValue = params.highlightedStreamFieldValue;
+          this.highlightedStreamFieldName = params.highlightedStreamFieldName;
+        }
+        else
+        {
+          // We aren't coming here from a page such as overview where we had an explicit entry
+          // selected - look to see if we've been here before and go to the last entry we had selected by default
+          var lastId = page.getFromSessionStorage( this.LAST_CLICKED_KEY );
+          if ( lastId && !lastId.blank() )
+          {
+            this.highlightedStreamFieldValue = lastId;
+            this.highlightedStreamFieldName = 'se_id';
+          }
+        }
+
+        this.overviewModuleId = params.overviewModuleId;
+        this.toolId = params.toolId;
+
+        this.streamEntries = [];
+        this.providers =
+        {};
+        this.users =
+        {};
+        this.courses =
+        {};
+        this.filters =
+        {};
+
+        this.leftStream = $( 'left_stream_' + this.streamName );
+        this.rightStream = $( 'right_stream_' + this.streamName );
+        this.streamHeader = $( 'streamHeader_' + this.streamName );
+        this.moreMessagesId = 'moreMessagesId_' + this.streamName;
+        this.moreMessagesDivId = 'moreMessagesDivId_' + this.streamName;
+        this.errorMessageSpanId = 'errorMessageSpan_' + this.streamName;
+        this.errorDiv = $( this.errorMessageSpanId );
+        this.ALL_FILTER_NAME = 'filter_type_all_' + this.streamName;
+        this.ME_FILTER_NAME = 'filter_type_me_' + this.streamName;
+        this.DYNAMIC_FILTER_NAME = 'filter_type_dynamic_' + this.streamName;
+        this.FILTER_USER_PREFIX = 'filter_user_';
+        this.FILTER_COURSE_PREFIX = 'filter_course_';
+
+        this.hasMeEntries = false;
+        this.rightStreamLoaded = false;
+        this.timeDelta = 0;
+        this.fetchingData = false;
+        this.isInitialDisplay = true; // indicates if this the first time we are displaying the stream
+        this.isVerticalFilter = page.util.hasClassName( $( 'stream_' + this.streamName ), 'vertical_filter' );
+        
+        var currentFilterText = $( 'stream_currentFilterText_' + this.streamName );
+        if ( this.isVerticalFilter )
+        {
+          this.currentFilterText = currentFilterText;
+        }
+        else
+        {
+          // Only vertical filters need to show the current filter text - remove it from the page in other cases.
+          this.currentFilterText = null;
+          
+          if ( currentFilterText ) 
+          {
+            currentFilterText.parentNode.removeChild( currentFilterText );
+          }
+        }
+
+        this.showLoadingMessage();
+
+        // stream entries are modeled after a radio group (one can be selected at a time)
+        this._radioController = new ariaControl.RadioGroup(
+        {
+            container : this.leftStream,
+            childSelector : "div.stream_item",
+            onclick : this.openRightSideForElement.bindAsEventListener( this ),
+            // label not needed, JSP already has a hidden H2 label : page.bundle.getString( 'stream.ax.label.' +
+            // this.streamName ),
+            checkedClass : "active_stream_item",
+            doClickOnFocus : ( this.rightStream !== null ),
+            isTabGroup : ( this.rightStream !== null ),
+            isPlainList : ( this.rightStream === null )
+        } );
+
+        Event.observe( window, "resize", this.fitScrollableRegionToBrowser.bindAsEventListener( this ) );
+
+        this.fetchNewData();
+      },
+
+      fetchNewData : function( retrieveOnly )
+      {
+        if ( !this.fetchingData ) // Only allow one outstanding request for new data per stream.
+        {
+          var url = this.baseurl + "streamViewer?cmd=loadStream&streamName=" + this.streamName + "&providers=" + Object.toJSON( this.providers ) + "&forOverview=" + this.isForOverview;
+          if ( retrieveOnly )
+          {
+            url += "&retrieveOnly=" + retrieveOnly;
+          }
+          var params = url.toQueryParams();
+          url = url.split( "?" )[ 0 ];
+          new Ajax.Request( url,
+          {
+              method : 'post',
+              parameters : params,
+              onCreate : this.beforeUpdateFetch.bind( this ),
+              onSuccess : this.applyUpdates.bind( this ),
+              onFailure : this.onUpdateFailure.bind( this ),
+              onException : this.onUpdateException.bind( this ),
+              onComplete : this.onCompleteUpdate.bind( this )
+          } );
+        }
+      },
+
+      beforeUpdateFetch : function( transport )
+      {
+        this.fetchingData = true;
+      },
+
+      onCompleteUpdate : function( transport )
+      {
+        this.fetchingData = false;
+      },
+
+      onUpdateException : function( transport )
+      {
+        // No need to alert in this case - it includes things such as clicking-away while waiting for a response and we
+        // don't want an alert for that.
+        this.fetchingData = false;
+      },
+
+      onUpdateFailure : function( transport )
+      {
+        this.errorDiv.innerHTML = page.bundle.getString( "stream.generic.error" );
+        this.errorDiv.style.display = "block";
+        this.fetchingData = false;
+      },
+
+      applyUpdates : function( transport )
+      {
+        var updates = transport.responseText.evalJSON( true );
+        var entries = updates.sv_streamEntries;
+        if ( !this.leftStream )
+        {
+          this.errorDiv.innerHTML = page.bundle.getString( "stream.generic.error" );
+          this.errorDiv.style.display = "block";
+          return;
+        }
+
+        var now = new Date().getTime();
+        this.timeDelta = updates.sv_now - now;
+
+        // Process 'extras' first (so we have user info, etc.)
+        var extras = updates.sv_extras;
+        if ( extras )
+        {
+          this.applyExtras( extras );
+        }
+
+        // Blend what we know about the providers with the new data we just got
+        var providers = updates.sv_providers;
+        if ( providers && providers.length > 0 )
+        {
+          providers._each( ( function( ent )
+          {
+            var prov = this.providers[ ent.sp_provider ];
+            if ( !prov )
+            {
+              this.providers[ ent.sp_provider ] = ent;
+            }
+            else
+            {
+              if ( prov.sp_newest < ent.sp_newest )
+              {
+                prov.sp_newest = ent.sp_newest;
+              }
+              if ( prov.sp_oldest > ent.sp_oldest )
+              {
+                prov.sp_oldest = ent.sp_oldest;
+              }
+              if ( prov.sp_refreshDate < ent.sp_refreshDate )
+              {
+                prov.sp_refreshDate = ent.sp_refreshDate;
+              }
+            }
+            if ( ent.sp_flushAll )
+            {
+              this.removeProvidersEntries( ent.sp_provider );
+            }
+            this.hasSettings = this.hasSettings || ( ent.sp_settings !== null && ent.sp_settings !== undefined );
+          } ).bind( this ) );
+        }
+
+        // Blend in all the new entries - do this after the providers so that we flush old entries before blending new
+        // entry
+        if ( entries && entries.length > 0 )
+        {
+          this.streamEntries = this.streamEntries.concat( entries );
+        }
+
+        var deletedIds = updates.sv_deletedIds;
+        if ( deletedIds )
+        {
+          deletedIds._each( ( function( delid )
+          {
+            this.removeStreamEntryById( delid );
+          } ).bind( this ) );
+        }
+
+        if ( this.hasSettings )
+        {
+          this.initSettings();
+        }
+
+        // If required, start polling for more data before we update the page
+        if ( updates.sv_moreData && !this.isPolling() )
+        {
+          this.pollForMoreData( updates.sv_autoDisplayGracePeriodSeconds );
+        }
+        else if ( !updates.sv_moreData && this.isPolling() )
+        {
+          this.stopPolling();
+          this.hideMessage();
+        }
+        else if ( !updates.sv_moreData )
+        {
+          this.hideMessage();
+        }
+
+        if ( this.streamEntries.length === 0 )
+        {
+          // Only display the 'no content available' message if
+          // We don't think we have more data coming or
+          // We're waiting for more data and we're polling and we're still in the grace period.
+          // i.e. if grace period is 5 seconds and it takes 4 seconds to get some data we will never see no-data.
+          // if it takes 6 seconds before we see our first data we'll see no-data at the end of our grace period
+          if ( !updates.sv_moreData || ( !this.isPolling() || !this.inGracePeriod ) )
+          {
+            var div = new Element( "div" ).addClassName( 'stream_show_more_data' );
+            var divOne = new Element( "div" ).addClassName( 'main-message' );
+            divOne.update( this.emptyText );
+            div.appendChild( divOne );
+            if ( this.emptyTextExtras && this.emptyTextExtras.length > 0 )
+            {
+              var divTwo = new Element( "div" ).addClassName( 'extras' );
+              divTwo.update( this.emptyTextExtras );
+              div.appendChild( divTwo );
+            }
+            this.noContentAvailableDiv = div;
+            this.leftStream.update( div );
+          }
+        }
+        else
+        {
+          if ( this.noContentAvailableDiv )
+          {
+            var parent = this.noContentAvailableDiv.parentNode;
+            if ( parent )
+            {
+              parent.removeChild( this.noContentAvailableDiv );
+              this.noContentAvailableDiv = null;
+            }
+          }
+          this.streamEntries.sort( this.compareEntries );
+          this.displayStreamEntries();
+        }
+
+        if ( !this.isForOverview )
+        {
+          this.updateFilters(); // must be done after displayStreamEntries
+        }
+
+        this.fitScrollableRegionToBrowser();
+
+        if ( this.lastSelectedItem && this.leftStream.scrollBar )
+        {
+          this.leftStream.scrollBar.scrollTo( this.lastSelectedItem );
+        }
+
+      },
+
+      initSettings : function()
+      {
+        var openSettingsLink = $( 'openSettings_' + this.streamName );
+        if ( openSettingsLink && !openSettingsLink.visible() )
+        {
+          openSettingsLink.show();
+          openSettingsLink.observe( 'click', this.onClickSettings.bindAsEventListener( this ) );
+          this.settingsDiv = $( 'settingsContainer_' + this.streamName );
+          new Ajax.Updater( this.settingsDiv, this.baseurl + "streamViewer?cmd=getSettings&streamName=" + this.streamName,
+          {
+            onComplete : function()
+            {
+              this.selectAllSettings = $( 'selectAllSettings_' + this.streamName );
+              $( 'cancelSettings_' + this.streamName ).observe( 'click',
+                                                                this.onCancelSettings.bindAsEventListener( this ) );
+              $( 'updateSettings_' + this.streamName ).observe( 'click',
+                                                                this.onUpdateSettings.bindAsEventListener( this ) );
+              this.selectAllSettings.observe( 'click', this.onSelectAllSettings.bindAsEventListener( this ) );
+              $( 'showAllSettings_' + this.streamName ).observe( 'click',
+                                                                 this.onShowAllSettings.bindAsEventListener( this ) );
+              this.onShowAllSettings();
+            }.bind( this )
+          } );
+        }
+      },
+
+      onShowAllSettings : function()
+      {
+        var showAllSettings = $( 'showAllSettings_' + this.streamName ).checked;
+        var allChecked = true;
+        this.settingsDiv.select( 'li.streamSetting' ).each( function( setting )
+        {
+          var settingInEntries = this.isSettingInEntries( setting );
+          Element[ ( showAllSettings || settingInEntries ) ? 'show' : 'hide' ]( setting );
+          Element[ ( settingInEntries ) ? 'addClassName' : 'removeClassName' ]( setting, 'active' );
+          if ( allChecked && ( showAllSettings || settingInEntries ) )
+          {
+            var cb = setting.select( "input[type=checkbox]" );
+            if ( cb && !cb[ 0 ].checked )
+            {
+              allChecked = false;
+            }
+          }
+        }.bind( this ) );
+        this.selectAllSettings.checked = allChecked;
+        this.selectAllSettings.up().show();
+        this.fitScrollableRegionToBrowser();
+      },
+
+      isSettingInEntries : function( setting )
+      {
+        var attrib = setting.getAttribute( "bb:attrib" );
+        var value = setting.getAttribute( "bb:value" );
+        for ( var i = 0; i < this.streamEntries.length; i++ )
+        {
+          var entry = this.streamEntries[ i ];
+          if ( entry[ attrib ] !== undefined && entry[ attrib ] == value )
+          {
+            return true;
+          }
+        }
+        return false;
+      },
+
+      onClickSettings : function( event )
+      {
+        this.settingsDiv.toggle();
+        if ( this.settingsDiv.visible() )
+        {
+          this.onShowAllSettings();
+          this.fitScrollableRegionToBrowser();
+        }
+        Event.stop( event );
+      },
+
+      onSelectAllSettings : function( event )
+      {
+        var showAllSettings = $( 'showAllSettings_' + this.streamName ).checked;
+        var selectAll = this.selectAllSettings.checked;
+        this.settingsDiv.select( 'li.streamSetting' ).each( function( setting )
+        {
+          if ( showAllSettings || this.isSettingInEntries( setting ) )
+          {
+            var cb = setting.select( "input[type=checkbox]" );
+            if ( !cb )
+            {
+              return;
+            }
+            cb[ 0 ].checked = selectAll;
+          }
+        }.bind( this ) );
+      },
+
+      onCancelSettings : function( event )
+      {
+        this.settingsDiv.hide();
+        // Restore the checkboxes to the state as the stream knows them
+        var restore = function( setting )
+        {
+          var cb = $( setting.id );
+          if ( !cb )
+          {
+            return;
+          }
+          cb.checked = setting.checked;
+        };
+        for ( var p in this.providers )
+        {
+          var provider = this.providers[ p ];
+          if ( !provider.sp_settings )
+          {
+            continue;
+          }
+          provider.sp_settings._each( restore.bind( this ) );
+        }
+        Event.stop( event );
+      },
+
+      onUpdateSettings : function( event )
+      {
+        // update settings in this.providers
+        var update = function( setting )
+        {
+          var cb = $( setting.id );
+          if ( !cb )
+          {
+            return;
+          }
+          setting.checked = cb.checked;
+        };
+        for ( var p in this.providers )
+        {
+          var provider = this.providers[ p ];
+          if ( !provider.sp_settings )
+          {
+            continue;
+          }
+          provider.sp_settings._each( update.bind( this ) );
+
+        }
+        // submit the settings form to persist settings on the server
+        this.settingsDiv.down( 'form' ).request();
+        this.settingsDiv.hide();
+        Event.stop( event );
+        this.fetchNewData(); // Go to the server to get any new data that we may have asked for by selecting checks.
+        this.displayStreamEntries(); // Re-display the current data to hide any data they may have deselected.
+      },
+
+      removeStreamEntryById : function( id )
+      {
+        for ( var i = 0; i < this.streamEntries.length; i++ )
+        {
+          var entry = this.streamEntries[ i ];
+          if ( entry.se_id == id )
+          {
+            if ( entry.entryDiv )
+            {
+              var parent = entry.entryDiv.parentNode;
+              if ( parent )
+              {
+                parent.removeChild( entry.entryDiv );
+                entry.entryDiv = null;
+              }
+            }
+            this.streamEntries.splice( i, 1 );
+            return;
+          }
+        }
+      },
+
+      removeProvidersEntries : function( providerId )
+      {
+        for ( var i = 0; i < this.streamEntries.length; i++ )
+        {
+          var entry = this.streamEntries[ i ];
+          if ( entry.se_id.startsWith( providerId ) )
+          {
+            if ( entry.entryDiv )
+            {
+              var parent = entry.entryDiv.parentNode;
+              if ( parent )
+              {
+                parent.removeChild( entry.entryDiv );
+                entry.entryDiv = null;
+              }
+            }
+            this.streamEntries.splice( i, 1 );
+            i = i - 1;
+          }
+        }
+      },
+
+      applyExtras : function( extras )
+      {
+        var users = extras.sx_users;
+        if ( users )
+        {
+          this.blendUsers( users );
+        }
+        // NOTE: sx_filters maps directly to the class StreamFilter
+        var filters = extras.sx_filters;
+        if ( filters )
+        {
+          this.blendFilters( filters );
+        }
+        // NOTE: sx_filter_links maps directly to the class StreamFilterLink
+        this.filterLinks = extras.sx_filter_links;
+      },
+
+      blendUsers : function( users )
+      {
+        users._each( ( function( user )
+        {
+          var auser = this.users[ user.sx_id ];
+          if ( !auser )
+          {
+            auser =
+            {};
+            auser.sx_id = user.sx_id;
+            auser.sx_name = user.sx_name;
+            auser.sx_avatar = user.sx_avatar;
+            auser.lower_name = user.sx_name.toLocaleLowerCase();
+            this.users[ user.sx_id ] = auser;
+          }
+        } ).bind( this ) );
+      },
+
+      blendFilters : function( filters )
+      {
+        filters._each( ( function( filter )
+        {
+          var afilter = this.filters[ filter.attribute ];
+          if ( !afilter )
+          {
+            this.filters[ filter.attribute ] = filter;
+          }
+          else
+          {
+            Object.extend( afilter.choices, filter.choices );
+          }
+        } ).bind( this ) );
+      },
+
+      pollForMoreData : function( autoDisplayGracePeriodSeconds )
+      {
+        var gracePeriodCount = 0;
+        this.inGracePeriod = true;
+        this.pollingExecuter = new PeriodicalExecuter( function()
+        {
+          // poll for autoDisplayGracePeriodSeconds fetching new data, then if any provider is still waiting for data,
+          // poll until there is no more providers waiting for data, then show the more data button
+          if ( gracePeriodCount < autoDisplayGracePeriodSeconds )
+          {
+            gracePeriodCount++;
+            if ( gracePeriodCount >= autoDisplayGracePeriodSeconds )
+            {
+              // Make sure we display no-data (if required) after the next fetch
+              this.inGracePeriod = false;
+            }
+            this.fetchNewData( true );
+          }
+          else
+          {
+            this.checkIfAnyProviderWaitingForData();
+          }
+        }.bind( this ), 1 ); // check once per second
+      },
+
+      isPolling : function()
+      {
+        return this.pollingExecuter !== null;
+      },
+
+      stopPolling : function()
+      {
+        if ( this.isPolling() )
+        {
+          this.pollingExecuter.stop();
+          this.pollingExecuter = null;
+        }
+      },
+
+      checkIfAnyProviderWaitingForData : function()
+      {
+        var url = this.baseurl + "streamViewer?cmd=isAnyProviderWaitingForData&streamName=" + this.streamName;
+        new Ajax.Request( url,
+        {
+            method : 'get',
+            onSuccess : function( transport )
+            {
+              var resp = transport.responseText.evalJSON( true );
+              if ( !resp.sv_isAnyProviderWaitingForData )
+              {
+                this.stopPolling();
+                // TODO: Only show the more data button if there actually is more data to fetch.
+                this.showMoreDataButton();
+              }
+            }.bind( this )
+        } );
+      },
+
+      hideMessage : function()
+      {
+        Effect.Fade( this.errorMessageSpanId,
+        {
+          duration : 2
+        } );
+      },
+
+      showLoadingMessage : function()
+      {
+        /* after 1 second, if no response, then show the loading message... */
+        ( function()
+        {
+          if ( this.fetchingData || this.isPolling() )
+          {
+            this.errorDiv.innerHTML = page.bundle.getString( "stream.generic.loading" );
+          }
+        } ).bind( this ) // make sure this is the correct context
+        .delay( 1 ); // call after 1 second
+      },
+
+      showMoreDataButton : function()
+      {
+        this.hideMessage();
+        var first = this.leftStream.firstChild;
+        var div = new Element( "div" ).addClassName( 'stream_show_more_data' );
+        var button = new Element( "a" );
+        button.setAttribute( "href", "#" );
+        button.innerHTML = page.bundle.getString( "stream.more.data.ready" );
+        Event.observe( button, 'click', this.handleMoreDataclick.bindAsEventListener( this ) );
+        div.appendChild( button );
+
+        if ( first )
+        {
+          this.leftStream.insertBefore( div, first );
+        }
+        else
+        {
+          this.leftStream.appendChild( div );
+        }
+        this.moreDataAvailable = div;
+      },
+
+      compareEntries : function( a, b )
+      {
+        // TODO: Allow custom sorting for other streams - not required yet but simple and desirable from a generic
+        // perspective.
+        // Default: Sort by timestamp with newest first.
+        var result = b.se_timestamp - a.se_timestamp;
+        if ( result === 0 )
+        {
+          result = b.se_id.localeCompare( a.se_id );
+        }
+        return result;
+      },
+
+      compareFilterName : function( a, b )
+      {
+        return a.lower_name.localeCompare( b.lower_name );
+      },
+
+      buildEntryDiv : function( entry )
+      {
+        // Build the parts of the stream entry
+        entry.timerDiv = new Element( "span" ).addClassName( 'stream_datestamp' );
+        var areaNameDiv = '';
+        var filterName = entry.se_filterName;
+        var filter = this.filters[ filterName ];
+
+        if ( filter )
+        {
+          var choice = '';
+          if ( entry[ filter.attribute ] !== undefined )
+          {
+            choice = entry[ filter.attribute ];
+          }
+          else if ( entry.extraAttributes )
+          {
+            choice = entry.extraAttributes[ filter.attribute ];
+          }
+          areaNameDiv = "<span class='stream_area_name'>" + filter.choices[ choice ] + "</span>";
+        }
+        var contextHtml = this.getSafeAttrib( entry, 'se_context' );
+        // See StreamDataProvider.AREA_SUBSTITUTION_TEXT for the replacement text
+        contextHtml = contextHtml.replace( '@@X@@AREA@@X@@', areaNameDiv );
+        var context = new Element( "div" ).addClassName( 'stream_context' );
+        context.innerHTML = contextHtml;
+        
+        var details = new Element( "div" ).addClassName( 'stream_details' );
+        details.innerHTML = this.fillInDetails( entry );
+        
+        var bottomContextHtml = this.getSafeAttrib( entry, 'se_bottomContext' );
+        // See StreamDataProvider.AREA_SUBSTITUTION_TEXT for the replacement text
+        bottomContextHtml = bottomContextHtml.replace( '@@X@@AREA@@X@@', areaNameDiv );
+        var bottomContext = new Element( "div" ).addClassName( 'stream_context_bottom' );
+        bottomContext.innerHTML = bottomContextHtml;
+        
+        var avatar = this.getAvatar( entry );
+
+        var isRTL = page.util.isRTL();
+        // Put the stream entry together:
+        var entryDiv = new Element( "div",
+        {
+          id : entry.se_id
+        } ).addClassName( 'stream_item' );
+        if ( !this.avatarsEnabled )
+        {
+          if ( isRTL )
+          {
+            entryDiv.style.paddingRight = "20px";
+          }
+          else
+          {
+            entryDiv.style.paddingLeft = "20px"; // edited
+          }
+        }
+        if ( entry.se_participated )
+        {
+          entryDiv.addClassName( 'stream_participated' );
+        }
+        if ( entry.se_isNew )
+        {
+          entryDiv.addClassName( 'stream_new_entry' );
+          // accessibility req. for announcing new item
+          var invisibleNewDiv = new Element( "div" ).addClassName( 'hideoff' );
+          invisibleNewDiv.setAttribute( "role", "alert" );
+          invisibleNewDiv.update( page.bundle.getString( "stream.newitem" ) );
+          if ( context.childNodes )
+          {
+            context.insertBefore( invisibleNewDiv, context.firstChild );
+          }
+          else
+          {
+            context.appendChild( invisibleNewDiv );
+          }
+        }
+        if ( entry.se_titleEntry )
+        {
+          entryDiv.addClassName( 'stream_title_row' );
+        }
+        if ( avatar !== null )
+        {
+          try
+          {
+            entryDiv.appendChild( avatar );
+          }
+          catch ( err )
+          {
+            // Ignore - a streamdefinition might provide bad js, etc. - ignore and continue
+          }
+        }
+        // NOTE: We discussed the fact that the timer will be visually "after" the context on the page
+        // and some accessibility issues ask for things to be in the DOM in the order they are displayed
+        // so they are read in sequence, but having the timer first is 'better' for reading order regardless
+        // of how it is physically displayed
+        entryDiv.appendChild( entry.timerDiv );
+        entryDiv.appendChild( context );
+        entryDiv.appendChild( details );
+        entryDiv.appendChild( bottomContext );
+        if ( entry.se_rhs )
+        {
+          entryDiv.setAttribute( "bb:rhs", entry.se_rhs );
+          if ( this.rightStream )
+          {
+            entryDiv.setAttribute( "aria-controls", this.rightStream.id );
+          }
+        }
+        entry.entryDiv = entryDiv;
+        new page.LightboxInitializer( 'lb', entryDiv, true );
+
+      },
+
+      displayStreamEntries : function()
+      {
+        var now = new Date().getTime();
+        now = now + this.timeDelta; // Adjust the current time based on the delta between the client and the server so
+        // we are relative to the actual time the event occurred.
+        this.hasMeEntries = false;
+        var prevSiblingDiv;
+        var lastRowWasTitle = false;
+        var firstVisibleEntry = null;
+        var filters = this.getEnabledFilters();
+        var numVisibleStreamEntries = 0;
+        this.streamEntries.each( ( function( entry )
+        {
+          if ( this.passesAllFilters( entry, filters ) &&
+               ( this.maxEntriesToDisplay === 0 || numVisibleStreamEntries < this.maxEntriesToDisplay ) )
+          {
+            numVisibleStreamEntries++;
+            try
+            {
+              if ( entry.se_participated )
+              {
+                this.hasMeEntries = true;
+              }
+              // create the div if needed
+              if ( !entry.entryDiv )
+              {
+                this.buildEntryDiv( entry );
+              }
+              // update the timer
+              if ( entry.se_hideTime )
+              {
+                entry.timerDiv.innerHTML = "";
+              }
+              else
+              {
+                entry.timerDiv.innerHTML = this.getRelativeTime( now, entry.se_timestamp );
+              }
+
+              // add the div to the DOM if not already there
+              // (IE gives newly created elements a parentNode of nodeType 11 - document-fragment)
+              if ( !entry.entryDiv.parentNode || entry.entryDiv.parentNode.nodeType == 11 )
+              {
+                if ( prevSiblingDiv )
+                {
+                  $( prevSiblingDiv ).insert(
+                  {
+                    after : entry.entryDiv
+                  } );
+                }
+                else
+                {
+                  this.leftStream.insert(
+                  {
+                    top : entry.entryDiv
+                  } );
+                }
+              }
+              if ( entry.se_titleEntry )
+              {
+                // In case we filtered the title out of existence and back in again - show it.
+                $( entry.entryDiv ).show();
+                if ( lastRowWasTitle )
+                {
+                  // Do not allow two titles in a row.
+                  prevSiblingDiv.hide();
+                }
+                lastRowWasTitle = true;
+              }
+              else
+              {
+                if ( entry.se_emptyBlockOnly && !lastRowWasTitle )
+                {
+                  $( entry.entryDiv ).hide();
+                }
+                else if ( entry.se_emptyBlockOnly )
+                {
+                  // In case we filtered the emptyblock text out of existence and back in again - show it.
+                  $( entry.entryDiv ).show();
+                }
+                lastRowWasTitle = false;
+              }
+              prevSiblingDiv = entry.entryDiv;
+              if ( firstVisibleEntry === null )
+              {
+                firstVisibleEntry = entry.entryDiv;
+              }
+            }
+            catch ( except )
+            {
+              this.leftStream.insert(
+              {
+                bottom : new Element( "div" ).update( page.bundle.getString( "stream.generic.error", except ) )
+              } );
+            }
+          }
+          else if ( entry.entryDiv )
+          {
+            // Remove the active-stream flag if the currently selected item is filtered out so if you select
+            // a new item and then switch back you won't get two 'active' items.
+            if ( page.util.hasClassName( entry.entryDiv, 'active_stream_item' ) )
+            {
+              entry.entryDiv.removeClassName( 'active_stream_item' );
+              // 'logically' clear the right stream so we can reload it with the new 'first' entry in the filtered list.
+              this.rightStreamLoaded = false;
+            }
+
+            // entry does not pass filter, so remove it's div from the DOM
+            var parent = entry.entryDiv.parentNode;
+            if ( parent )
+            {
+              parent.removeChild( entry.entryDiv );
+            }
+
+          }
+        } ).bind( this ) );
+
+        if ( lastRowWasTitle )
+        {
+          // Do not allow two titles in a row.
+          prevSiblingDiv.hide();
+        }
+        if ( this._radioController )
+        {
+          this._radioController.reinit();
+        }
+
+        if ( !this.isForOverview && !this.rightStreamLoaded && this.rightStream )
+        {
+          this.chooseAndSetFocusOnAStreamEntry( firstVisibleEntry );
+        }
+
+        this.manageMoreMessagesLink();
+
+        if ( this.isInitialDisplay )
+        {
+          this.isInitialDisplay = false;
+        }
+
+        if ( this.meFilterLink )
+        {
+          Element[ this.hasMeEntries ? 'show' : 'hide' ]( this.meFilterLink.up( 'li' ) );
+        }
+        // Things can 'change' after we render everything - things like new filters, etc. - just resize after display
+        this.fitScrollableRegionToBrowser();
+      },
+
+      chooseAndSetFocusOnAStreamEntry : function( defaultEntryToView )
+      {
+        var highlightedEntry = null;
+        var streamEntry = null;
+        if ( this.isInitialDisplay && this.highlightedStreamFieldValue )
+        {
+          // first time load and we are given a stream entry to select
+          streamEntry = this
+              .findEntryByPropertyName( this.highlightedStreamFieldName, this.highlightedStreamFieldValue );
+        }
+        else if ( defaultEntryToView !== null )
+        {
+          highlightedEntry = defaultEntryToView;
+        }
+
+        if ( streamEntry )
+        {
+          highlightedEntry = streamEntry.entryDiv;
+        }
+
+        if ( highlightedEntry !== null )
+        {
+          this.openRightSideForElement( highlightedEntry );
+          if ( this._radioController )
+          {
+            this._radioController.selectElement( highlightedEntry );
+          }
+        }
+      },
+
+      /**
+       * this will search all entries looking for the propertyValue given the propertyName
+       */
+      findEntryByPropertyName : function( propertyName, propertyValue )
+      {
+        return this.streamEntries.find( function( entry )
+        {
+          return entry[ propertyName ] == propertyValue;
+        } );
+      },
+
+      manageMoreMessagesLink : function()
+      {
+        if ( this.isForOverview )
+        {
+          var numMessages = this.streamEntries.length - this.maxEntriesToDisplay;
+          if ( numMessages > 0 )
+          {
+            this.insertOrUpdateMoreMessagesLink();
+          }
+          else
+          {
+            this.removeMoreMessagesLink();
+          }
+        }
+        else
+        {
+          // TODO: Need a new flag from the server indicating that there is the remotest possibility of being able to
+          // ask for 'older' data
+          // and if there is then add the more messages button/behaviour
+        }
+      },
+
+      insertOrUpdateMoreMessagesLink : function()
+      {
+        var messageLabel = page.bundle.getString( "stream.overview.view.more.messages" );
+        var template = new Template( "<div id='" + this.moreMessagesDivId + 
+                                     "' class='streamOverview-more-items'><a href='#' id='" + this.moreMessagesId +
+                                     "'>#{messageLabel}</a></div>" );
+        var args =
+        {
+          messageLabel : messageLabel
+        };
+        var moreMessagesHtml = template.evaluate( args );
+
+        var moreMessagesDiv = $( this.moreMessagesDivId );
+        if ( !moreMessagesDiv )
+        {
+          // create the div
+          $( this.leftStream.lastChild ).insert(
+          {
+            bottom : moreMessagesHtml
+          } );
+          $( this.moreMessagesId ).onclick = this.onClickMoreMessages.bindAsEventListener( this );
+        }
+        else
+        {
+          // update the div
+          moreMessagesDiv.show();
+          $( this.leftStream.lastChild ).insert(
+          {
+            bottom : moreMessagesDiv
+          } );
+          $( this.moreMessagesId ).innerHTML = messageLabel;
+        }
+      },
+
+      removeMoreMessagesLink : function()
+      {
+        var moreMessagesDiv = $( this.moreMessagesDivId );
+        if ( moreMessagesDiv )
+        {
+          moreMessagesDiv.hide();
+        }
+      },
+
+      onClickMoreMessages : function( event )
+      {
+        if ( this.isForOverview )
+        {
+          this.gotoStreamPageFromOverview();
+        }
+        else
+        {
+          // TODO: more messages (not on overview) should instead actually hit the server to get "older" messages.
+          if ( !this.origMaxEntriesToDisplay )
+          {
+            this.origMaxEntriesToDisplay = this.maxEntriesToDisplay;
+          }
+          this.maxEntriesToDisplay += this.origMaxEntriesToDisplay;
+          this.displayStreamEntries();
+        }
+      },
+
+      gotoStreamPageFromOverview : function( event, entryIdToHighlight )
+      {
+        var url = this.baseurl + 'streamViewer?cmd=view&streamName=' + this.streamName + '&toolId=' + this.toolId +
+                  '&overviewModuleId=' + this.overviewModuleId;
+        if ( typeof entryIdToHighlight !== 'undefined' )
+        {
+          url = url + '&highlightedStreamFieldValue=' + entryIdToHighlight + "&highlightedStreamFieldName=se_id"; // use
+          // the
+          // se_id
+          // field
+          // to
+          // look
+          // up
+          // our
+          // id
+        }
+        document.location = url;
+        return false;
+      },
+
+      fillInDetails : function( entry )
+      {
+        var details = entry.se_details;
+        if ( details )
+        {
+          return details;
+        }
+        return "";
+      },
+
+      getEnabledFilters : function()
+      {
+        var enabledFilters = [];
+        if ( this.filter_attribute )
+        {
+          enabledFilters.push(
+          {
+              attrib : this.filter_attribute,
+              passIfEQ : true,
+              val : this.filter_value,
+              exclusive : this.filter_exclusive
+          } );
+        }
+        if ( this.currentFilter == this.ME_FILTER_NAME || this.filter_attribute && this.showMineCheckbox && this.showMineCheckbox.checked )
+        {
+          enabledFilters.push(
+          {
+              attrib : 'se_participated',
+              passIfEQ : true,
+              val : true,
+              exclusive : false
+          } );
+        }
+
+        // TODO: if performance of evaluating too many filters in passesAllFilters is slow, one possible optimization
+        // is to add filters for the lesser of checked vs. unchecked settings rather than add a filter for each
+        // unchecked settings as is currently done here. I.e. if there is one checked and 29 unchecked settings,
+        // it would be more efficient to have one filter for the checked setting (with passIfEQ = true) than to
+        // have 29 filters for the unchecked settings.
+
+        // add a filter for any un-checked provider settings; we want to filter them out, hence passIfEQ = false
+        var addFilter = function( setting )
+        {
+          if ( setting.checked )
+          {
+            return;
+          }
+          enabledFilters.push(
+          {
+              attrib : setting.attrib,
+              passIfEQ : false,
+              val : setting.value,
+              exclusive : false
+          } );
+        };
+        for ( var p in this.providers )
+        {
+          var provider = this.providers[ p ];
+          if ( !provider.sp_settings )
+          {
+            continue;
+          }
+          provider.sp_settings._each( addFilter.bind( this ) );
+        }
+        return enabledFilters;
+      },
+
+      passesAllFilters : function( entry, filters )
+      {
+        if ( entry.se_titleEntry || entry.se_emptyBlockOnly )
+        {
+          return true;
+        }
+        for ( var i = 0; i < filters.length; i++ )
+        {
+          var filter = filters[ i ];
+          // see if entry has an attribute that the filter cares about
+          // As part of refactoring for the REST api, stream entries now have extra attributes inside a node
+          // named 'extraAttribs' under the Json top level, so we need to check if filter.attrib is in that node
+          if ( entry[ filter.attrib ] !== undefined ||
+               ( entry.extraAttribs && entry.extraAttribs[ filter.attrib ] !== undefined ) )
+          {
+            // the filter may be a check for equality or inequality (depending on its passIfEQ)
+            // TODO: if performance of this function is slow with a large filter/data set.
+            // it may help to convert some of the filter's passIfEQ flag so that the looping
+            // is kept to a minimum.
+            var entryValEQFilterVal;
+            if ( entry[ filter.attrib ] !== undefined )
+            {
+              entryValEQFilterVal = ( entry[ filter.attrib ] == filter.val );
+            }
+            else
+            {
+              entryValEQFilterVal = ( entry.extraAttribs[ filter.attrib ] == filter.val );
+            }
+            if ( filter.passIfEQ != entryValEQFilterVal )
+            {
+              return false;
+            }
+          }
+          else
+          {
+            // The entry doesn't have the attribute to check - if it is an exclusive filter then fail now.
+            if ( filter.exclusive )
+            {
+              return false;
+            }
+          }
+        }
+        return true;
+      },
+
+      getFilterLink : function( label, title, id, href, isActive, isPermActive )
+      {
+        var listItem = new Element( "li" );
+        var button = new Element( "a" );
+        if ( id == this.currentFilter || isActive )
+        {
+          if ( isPermActive )
+          {
+            button.bb_perm_active = true;
+          }
+          button.addClassName( 'active' );
+        }
+        button.setAttribute( "href", href ? href : "#" );
+        button.setAttribute( "id", id );
+        button.setAttribute( "title", title );
+        button.setAttribute( "aria-labelledby", 'lbl_' + id );
+        button.innerHTML = label;
+        if ( !href )
+        {
+          button.setAttribute( "onClick", "return false;" );
+          Event.observe( button, 'click', this.handleFilterClick.bindAsEventListener( this ) );
+        }
+        listItem.appendChild( button );
+        listItem.appendChild( new Element( "span",
+        {
+            'id' : 'lbl_' + id,
+            'class' : 'hideoff'
+        } ).update( title ) );
+
+        this.enableAriaLabelOnSelectedFilter( button, true );
+        return listItem;
+      },
+
+      updateFilters : function()
+      {
+        var hasDynFilters = ( Object.keys( this.filters ).length > 0 );
+        if ( hasDynFilters )
+        {
+          // Make sure they're dynfilters and not view-only - if they're all view-only then don't add the filters to the
+          // top bar
+          var foundNonViewOnly = false;
+          for ( var f in this.filters )
+          {
+            if ( this.filters[ f ].type.fieldName !== 'filter_type_vao_' )
+            {
+              foundNonViewOnly = true;
+              break;
+            }
+          }
+          hasDynFilters = foundNonViewOnly;
+          if ( !hasDynFilters )
+          {
+            // Make sure we don't apply any filters by accident if we don't have any filters in this view
+            if ( this.filter_value !== null )
+            {
+              this.filter_attribute = this.filter_value = null;
+              this.currentFilter = this.ALL_FILTER_NAME;
+              this.persistFilter();
+            }
+          }
+        }
+
+        var divider;
+        var filterList = $( 'filter_by_' + this.streamName );
+        if ( !$( this.ALL_FILTER_NAME ) )
+        {
+          // Add filter links first so the order of the rest of the filter buttons is consistent.
+          if ( this.filterLinks !== undefined && this.filterLinks && this.filterLinks.length > 0 )
+          {
+            divider = new Element( "li" );
+            divider.innerText = page.bundle.getString( "stream.filter.filter" );
+            divider.addClassName( 'stream_filterlinks_divider' );
+
+            for ( var i = 0; i < this.filterLinks.length; i++ )
+            {
+              var fl = this.filterLinks[ i ];
+              var afl = this.getFilterLink( fl.text, fl.label, '', fl.url, fl.active, fl.active );
+              afl.addClassName( 'stream_filterlinks' );
+              filterList.appendChild( afl );
+            }
+            filterList.appendChild( divider );
+          }
+
+          filterList.appendChild( this.getFilterLink( page.bundle.getString( "stream.filter.all" ), page.bundle
+              .getString( "stream.filter.all.title", this.streamTitle ), this.ALL_FILTER_NAME ) );
+          filterList.appendChild( this.getFilterLink( page.bundle.getString( "stream.filter.me" ), page.bundle
+              .getString( "stream.filter.me.title", this.streamTitle ), this.ME_FILTER_NAME ) );
+          this.allFilterLink = $( this.ALL_FILTER_NAME );
+          this.meFilterLink = $( this.ME_FILTER_NAME );
+          this.setCurrentFilterText( page.bundle.getString( "stream.filter.all" ) );
+        }
+
+        if ( hasDynFilters && !this.dynFilterLink )
+        {
+          filterList.appendChild( this.getFilterLink( page.bundle.getString( "stream.filter.custom" ), page.bundle
+              .getString( "stream.filter.custom.title", this.streamTitle ), this.DYNAMIC_FILTER_NAME ) );
+
+          this.dynFilterLink = $( this.DYNAMIC_FILTER_NAME );
+          if ( this.filter_attribute && this.filter_value )
+          {
+            var filterName = this.getDynFilterName();
+            if ( filterName )
+            {
+              this.dynFilterLink.update( filterName );
+              this.setCurrentFilterText( filterName );
+            }
+            else
+            {
+              this.filter_attribute = this.filter_value = null;
+              this.currentFilter = this.ALL_FILTER_NAME;
+              $( this.DYNAMIC_FILTER_NAME ).addClassName( 'active' );
+              this.enableAriaLabelOnSelectedFilter( $( this.DYNAMIC_FILTER_NAME ), true );
+            }
+          }
+          Element[ ( !this.isVerticalFilter ) ? 'show' : 'hide' ]( this.dynFilterLink.up( 'li' ) );
+        }
+
+        // Only show the 'all' filter if the stream has 'me' entries or hasDynFilters.
+        Element[ ( this.hasMeEntries || hasDynFilters ) ? 'show' : 'hide' ]( this.allFilterLink.up( 'li' ) );
+
+        // Only actually show the 'me' filter if the stream actually has 'me' entries.
+        Element[ this.hasMeEntries ? 'show' : 'hide' ]( this.meFilterLink.up( 'li' ) );
+
+        // only display the divider if we're actually displaying either 'All' or 'Me' filters (find all elements with
+        // the class divider (only one))
+        divider = filterList.down( 'li.stream_filterlinks_divider' );
+        if ( divider )
+        {
+          Element[ ( this.hasMeEntries || hasDynFilters ) ? 'show' : 'hide' ]( divider );
+        }
+
+        this.dynFilters = $( 'dynamic_filters_' + this.streamName );
+        var dynFilterContent = this.dynFilters.down( 'div.stream_dynamic_filters_content' );
+        if ( this.dynFilters && hasDynFilters )
+        {
+          if ( !this.showMineCheckbox )
+          {
+            var span = new Element( "span" );
+            var lbl = new Element( "label",
+            {
+              'for' : 'show_mine_' + this.streamName
+            } ).update( page.bundle.getString( "stream.filter.show.only.mine" ) );
+            this.showMineCheckbox = new Element( "input",
+            {
+                id : 'show_mine_' + this.streamName,
+                type : 'checkbox'
+            } );
+            Event.observe( span, 'click', this.stopEventPropagation.bindAsEventListener( this ) );
+            Event.observe( this.dynFilters, 'click', this.stopEventPropagation.bindAsEventListener( this ) );
+            span.appendChild( this.showMineCheckbox );
+            span.appendChild( lbl );
+            dynFilterContent.appendChild( span );
+            this.showMineCheckbox.checked = ( this.initial_showMineCheckbox !== 'undefined' && this.initial_showMineCheckbox === true );
+          }
+
+          Element[ this.hasMeEntries ? 'show' : 'hide' ]( this.showMineCheckbox.up( 'span' ) );
+
+          var contdiv = new Element( "div" );
+          dynFilterContent.appendChild( contdiv );
+          dynFilterContent.setStyle({height: 'auto'}); // Reset the height of the dynamic filters to be automatic. (TODO: need to retest this with really-long dynamic filters again)
+          
+          if ( this.showAllAsCustom )
+          {
+            // Not actually used, but this would put the 'all' filter as the first item in the custom filters
+            // needs css work, but 'basically' functions... looks uglier than having all separately though
+            var allInDyn = new Element( "ul" );
+            allInDyn.appendChild( this.allFilterLink );
+            contdiv.appendChild( allInDyn );
+          }
+
+          var addedItem = false;
+          for ( var ff in this.filters )
+          {
+            if ( this.buildDynFilter( contdiv, this.filters[ ff ] ) )
+            {
+              addedItem = true;
+            }
+          }
+
+          if ( !this.menuController && !this.isVerticalFilter )
+          {
+            this.menuController = new ariaControl.Menu(
+            {
+                linkId : this.dynFilterLink,
+                menu : contdiv,
+                popup : this.dynFilters,
+                firstFocusId : this.hasMeEntries ? this.showMineCheckbox.id : null,
+                childSelector : "a",
+                restrictSize : true,
+                centerUnderLink : true
+            } );
+          }
+          else if ( addedItem && !this.isVerticalFilter )
+          {
+            this.menuController.reinit();
+          }
+        }
+        if ( this.isVerticalFilter && this.dynFilters )
+        { // My Blackboard -> Updates
+          dynFilterContent.setAttribute( "bb:dynHeightScroll", "false" );
+          this.highlightSelectedFilter();
+          this.dynFilters.show(); // Do not use page.aria.show for vertical filters
+        }
+        else if ( !this.dynFilters.style.top )
+        { // Posts or My Grades tab should change style of "Custom filter"
+          if ( this.streamName == "stream" )
+          {
+            this.dynFilters.style.top = "120px";
+          }
+          else if ( this.streamName == "mygrades" )
+          {
+            this.dynFilters.style.top = "104px";
+          }
+        }
+      },
+
+      setCurrentFilterText : function( txt )
+      {
+        if ( this.currentFilterText )
+        {
+          this.currentFilterText.update( txt );
+          this.currentFilterText.show();
+        }
+      },
+
+      persistFilter : function()
+      {
+        var filter =
+        {
+            "currentFilter" : this.currentFilter,
+            "filter_attribute" : this.filter_attribute,
+            "filter_exclusive" : this.filter_exclusive,
+            "filter_value" : this.filter_value,
+            "showMineCheckbox" : ( this.showMineCheckbox && this.showMineCheckbox.checked )
+        };
+
+        UserDataDWRFacade.setStringTempScope( this.streamName + "_filter", Object.toJSON( filter ) );
+      },
+
+      getDynFilterName : function()
+      {
+        if ( !this.filters || !this.filter_attribute || !this.filter_value )
+        {
+          return null;
+        }
+        for ( var f in this.filters )
+        {
+          if ( this.filters[ f ].attribute == this.filter_attribute )
+          {
+            for ( var c in this.filters[ f ].choices )
+            {
+              if ( c == this.filter_value )
+              {
+                return this.filters[ f ].choices[ c ];
+              }
+            }
+          }
+        }
+        return null;
+      },
+
+      buildDynFilter : function( container, filter )
+      {
+        var ulItem = $( 'filter_' + filter.name );
+        if ( !ulItem )
+        {
+          container.appendChild( new Element( "h5",
+          {
+            id : 'lbl_' + filter.name
+          } ).update( filter.name ) );
+          ulItem = new Element( "ul",
+          {
+            id : 'filter_' + filter.name
+          } );
+          ulItem.setAttribute( "role", "group" );
+          ulItem.setAttribute( "aria-labelledby", 'lbl_' + filter.name );
+          container.appendChild( ulItem );
+        }
+        var addedItem = false;
+        for ( var c in filter.choices )
+        {
+          var choiceName = filter.choices[ c ];
+          var lItem = $( 'filterChoice_' + c );
+          if ( !lItem )
+          {
+            lItem = new Element( "li",
+            {
+              id : 'filterChoice_' + c
+            } );
+            var anchor = new Element( "a",
+            {
+              href : "#"
+            } ).update( choiceName );
+            Event.observe( anchor, 'click', this.onClickFilter.bindAsEventListener( this, filter.attribute, choiceName,
+                                                                                    c, filter.exclusive ) );
+            lItem.appendChild( anchor );
+            ulItem.appendChild( lItem );
+            lItem.lowerCaseName = choiceName.toLowerCase();
+            addedItem = true;
+          }
+        }
+        if ( addedItem )
+        {
+          this.sortNodes( ulItem.childNodes );
+        }
+        return addedItem;
+      },
+
+      enableAriaLabelOnSelectedFilter : function( item, isAdd )
+      {
+        var labelId = "selected_Filter_Label";
+        var container = item.up();
+        var newAttr = '';
+        // preserve other aria labels
+        var attr = item.readAttribute( 'aria-labelledby' );
+        if ( attr )
+        {
+          attr.split( ' ' ).each( function( s )
+          {
+            if ( newAttr.length > 0 )
+              newAttr += ' ';
+            if ( s != labelId )
+              newAttr += s;
+          } );
+        }
+        if ( !isAdd )
+        {
+          container.select( 'div' ).each( function( e )
+          {
+            if ( e.id == labelId )
+              container.removeChild( e );
+          } );
+        }
+        else
+        {
+          newAttr += ' ' + labelId;
+          container.appendChild( new Element( 'div',
+          {
+              "id" : labelId,
+              "class" : "hideoff"
+          } ).update( page.bundle.getString( 'stream.filter.selected' ) ) );
+        }
+
+        item.writeAttribute( 'aria-labelledby', newAttr.trim() );
+      },
+
+      sortNodes : function( nodes )
+      {
+        // Perform a Bubble Sort on the nodes
+        for ( var i = 0; i < nodes.length - 1; i++ )
+        {
+          for ( var j = i + 1; j < nodes.length; j++ )
+          {
+            if ( nodes[ i ].lowerCaseName > nodes[ j ].lowerCaseName )
+            {
+              this.swapNodes( nodes[ i ], nodes[ j ] );
+            }
+          }
+        }
+      },
+
+      swapNodes : function( node1, node2 )
+      {
+        var tmpnode = node1.cloneNode( 1 );
+        var parent = node1.parentNode;
+        node2 = parent.replaceChild( tmpnode, node2 );
+        parent.replaceChild( node2, node1 );
+        parent.replaceChild( node1, tmpnode );
+        tmpnode = null;
+      },
+
+      highlightSelectedFilter : function()
+      {
+        if ( this.isVerticalFilter && this.filter_value && this.filter_attribute )
+        {
+          var litem = $( 'filterChoice_' + this.filter_value );
+          if ( litem )
+          {
+            var el = litem.select( 'a' )[ 0 ];
+            $( 'streamHeader_' + this.streamName ).select( 'a' ).each( function( e )
+            {
+              e.removeClassName( 'active' );
+              this.enableAriaLabelOnSelectedFilter( e, false );
+            }.bind( this ) );
+            el.addClassName( 'active' );
+            this.enableAriaLabelOnSelectedFilter( el, true );
+          }
+        }
+      },
+
+      onClickFilter : function( event, filter_attribute, choiceName, filter_value, filter_exclusive )
+      {
+        this.filter_attribute = filter_attribute;
+        this.filter_value = filter_value;
+        this.filter_exclusive = filter_exclusive;
+        this.highlightSelectedFilter();
+        this.dynFilterLink.update( choiceName );
+        this.displayStreamEntries();
+        this.persistFilter();
+        this.setCurrentFilterText( choiceName );
+      },
+
+      stopEventPropagation : function( event )
+      {
+        // need to stop propagation so document onclick handler will not close the popup
+        // can't use Event.stop() here because it prevents default action for element this handler is applied to.
+        Event.extend( event );
+        event.stopPropagation();
+        event.stopped = true;
+      },
+
+      handleFilterClick : function( event )
+      {
+        var el = Event.element( event );
+        this.currentFilter = el.id;
+        var allFiltersEl = el.up( 'ul' );
+        if ( this.isVerticalFilter )
+        {
+          allFiltersEl = allFiltersEl.up();
+        }
+        allFiltersEl.select( 'a' ).each( function( e )
+        {
+          if ( !e.bb_perm_active )
+          {
+            Element[ e.id == el.id ? 'addClassName' : 'removeClassName' ]( e, 'active' );
+            if ( e.hasClassName( 'active' ) )
+            {
+              this.enableAriaLabelOnSelectedFilter( e, true );
+            }
+            else
+              this.enableAriaLabelOnSelectedFilter( e, false );
+          }
+        }.bind( this ) );
+        if ( el.id != this.DYNAMIC_FILTER_NAME )
+        {
+          if ( this.dynFilters )
+          {
+            if ( this.isVerticalFilter )
+            {
+              this.dynFilters.hide();// Probably don't even need this for vertical? In any case, do not use
+                                      // page.aria.hide for vertical filters
+            }
+            else
+            {
+              page.aria.hide( this.dynFilters );
+            }
+            if (this.dynFilterLink)
+            {
+              this.dynFilterLink.update( page.bundle.getString( "stream.filter.custom" ) );
+            }
+            this.filter_attribute = null;
+            this.setCurrentFilterText( page.bundle.getString( "stream.filter.all" ) );
+          }
+          this.displayStreamEntries();
+          this.persistFilter();
+        }
+        else
+        {
+          if ( this.dynFilters )
+          {
+            this.fitScrollableRegionToBrowser();
+          }
+        }
+        Event.stop( event );
+      },
+
+      getAvatar : function( entry )
+      {
+        if ( this.avatarsEnabled )
+        {
+          if ( this.avatarCallback )
+          {
+            try
+            {
+              return this.avatarCallback( entry, this.isForOverview );
+            }
+            catch ( err )
+            {
+              // Ignore - a streamdefinition might provide bad js, etc. - ignore and continue
+            }
+          }
+          else
+          {
+            var userData;
+            if (entry.se_userId)
+            {
+              userData = this.users[ entry.se_userId ];
+            }
+            else if ( entry.se_extId )
+            {
+              userData = this.users[ entry.se_extId ];
+            }
+            if ( userData )
+            {
+              var av = new Element( "span" );
+              av.innerHTML = userData.sx_avatar;
+              return av;
+            }
+          }
+        }
+        return null;
+      },
+
+      getRelativeTime : function( now, then )
+      {
+        if ( then < 1 )
+        {
+          return ""; // no time specified
+        }
+        if ( !then )
+        {
+          // If we do not have a time for the event then pick 'now' to avoid an error.
+          then = now;
+        }
+        // NOTE: refer to the implementation of the calendar.util.gettimeSpan method about how it deals with negative time.
+        // As of Oct 29, 2012, it is returning the absolute value of the negative time in parentheses. For example, timeWords returned for
+        // "-2 days ago" will be "(2 days ago)". This won't actually be correct as we say "2 days ago" when it is not, but it doesn't "really"
+        // matter though because you should never actually have negative time (i.e. things that happened in the future).
+        // If we decide we want that as a real supported case one day then we have to tweak wording for future dates in the method called below.
+        return calendar.util.getTimeSpan( now, then, "stream.timespan", "stream.negative.time" ).timeWords;
+      },
+
+      getSafeAttrib : function( entry, attrib )
+      {
+        var text = entry[ attrib ];
+        if ( text )
+        {
+          return text;
+        }
+        else
+        {
+          return "";
+        }
+      },
+
+      handleMoreDataclick : function( event )
+      {
+        if ( this.moreDataAvailable ) // Remove the more-data button when it is clicked.
+        {
+          var parent = this.moreDataAvailable.parentNode;
+          if ( parent )
+          {
+            parent.removeChild( this.moreDataAvailable );
+          }
+          this.moreDataAvailable = null;
+        }
+
+        this.fetchNewData( true );
+        return false;
+      },
+
+      openRightSideForElement : function( el )
+      {
+
+        if (window.matchMedia("(max-width: 736px)").matches) {
+          $$('.stream_item').each(function(streamItem){
+            streamItem.on('click',function(){
+              $$('.stream_right').each(function(rightStream){
+                rightStream.addClassName( 'show_right_stream_mobile' );
+              });
+              $$('.stream_header').each(function(streamHeader){
+                streamHeader.addClassName( 'show_close_stream_button' );
+              });
+            });
+          });
+          $$('.stream_header').each(function(streamHeader){
+            streamHeader.on('click',function(){
+              $$('.stream_right').each(function(rightStream){
+                rightStream.removeClassName( 'show_right_stream_mobile' );
+              });
+              $$('.stream_header').each(function(streamHeader){
+                streamHeader.removeClassName( 'show_close_stream_button' );
+              });
+            });
+          });
+        }
+        var item = page.util.upToClass( el, 'stream_item' );
+        this.lastSelectedItem = item;
+        var rhsUrl = item.readAttribute( "bb:rhs" );
+        if ( rhsUrl )
+        {
+          if ( this.rightStream )
+          {
+            var iframeDoc;
+            try
+            {
+              if ( this.rightStream.contentDocument )
+              {
+                iframeDoc = this.rightStream.contentDocument;
+              }
+              else if ( this.rightStream.contentWindow )
+              {
+                iframeDoc = this.rightStream.contentWindow.document;
+              }
+              else if ( window.frames[ this.rightStream.name ] )
+              {
+                iframeDoc = window.frames[ this.rightStream.name ].document;
+              }
+              if ( iframeDoc )
+              {
+                iframeDoc.open();
+
+                iframeDoc.write( '<html>' );
+                iframeDoc.write( '<head>' );
+                iframeDoc.write( '<meta charset=utf-8>' );
+                iframeDoc.write( '<title>' );
+                iframeDoc.write( page.bundle.getString( "stream.generic.loading" ) );
+                iframeDoc.write( '</title>' );
+                iframeDoc.write( '</head>' );
+                iframeDoc.write( '<style>' );
+                iframeDoc.write( '.loadingOverlay{' );
+                iframeDoc.write( 'position:absolute;' );
+                iframeDoc.write( 'z-index: 9999;' );
+                iframeDoc.write( 'height:100%;' );
+                iframeDoc.write( 'width:100%;' );
+                iframeDoc.write( 'background: rgb(256,256,256); /* The Fallback */' );
+                iframeDoc.write( 'background: rgba(256,256,256, 0.2);' );
+                iframeDoc.write( '}' );
+                iframeDoc.write( '.loadingOverlay img{' );
+                iframeDoc.write( 'position: absolute;' );
+                iframeDoc.write( 'top:50%;' );
+                iframeDoc.write( 'left:50%;' );
+                iframeDoc.write( 'margin: -12px 0 0 -12px;' );
+                iframeDoc.write( '}' );
+
+                iframeDoc.write( '</style>' );
+                iframeDoc.write( '<body bgcolor="#ddd">' );
+                iframeDoc.write( '<div class="loadingOverlay">' );
+                iframeDoc.write( '<img src="/images/ci/misc/progress/progress_learningSystem.gif" alt="' +
+                                 page.bundle.getString( "stream.generic.loading" ).replace( /\"/, "&quot;" ) + '">' );
+                iframeDoc.write( '</div>' );
+                iframeDoc.write( '</body>' );
+                iframeDoc.close();
+              }
+            }
+            catch ( e )
+            {
+              // Ignore - if the right stream contents came from outside learn (cloud, etc.) then we do not have
+              // access to the contents to update with 'loading'.
+            }
+
+            this.rightStream.src = rhsUrl;
+            this.rightStreamLoaded = true;
+            page.putInSessionStorage( this.LAST_CLICKED_KEY, item.id );
+            return true;
+          }
+          else
+          {
+            if ( this.isForOverview )
+            {
+              // Go to stream page and highlight the selected stream entry
+              this.gotoStreamPageFromOverview( null, item.id );
+            }
+            else
+            {
+              stream.loadContentFrame( rhsUrl );
+            }
+            return true;
+          }
+        }
+        return false;
+      },
+
+      fitScrollableRegionToBrowser : function()
+      {
+        stream.fitScrollableRegionToBrowser();
+
+        if ( this.rightStream )
+        {
+          var rsh = $( 'outer_left_stream_' + this.streamName ).getLayout().get( 'margin-box-height' );
+          this.rightStream.style.height = rsh + "px";
+        }
+      }
+  };
+
+  stream.RHS = Class.create();
+  stream.RHS.prototype =
+  {
+      initialize : function()
+      {
+        this.header = $( 'streamDetailHeaderRight' );
+        Event.observe( this.header, "mouseover", this.showGoToCourseButton );
+        Event.observe( this.header, "mouseout", this.hideGoToCourseButton );
+
+        // While we want the mouseover for the whole header to show/hide the gotocourse button, we only want clicking on
+        // some of it to actually go there.
+        this.clickHeader = $( 'streamDetailHeaderRightClickable' );
+        if ( this.clickHeader )
+        {
+          Event.observe( this.clickHeader, "click", this.activateGoToCourse );
+        }
+
+        var detail = $( 'streamDetail' );
+        if ( detail )
+        {
+          new page.LightboxInitializer( 'lb', detail );
+        }
+
+        this.fitScrollableRegionToBrowser();
+        document.observe( "dom:loaded", this.fitScrollableRegionToBrowser.bindAsEventListener( this ) );
+        Event.observe( window, "resize", this.fitScrollableRegionToBrowser.bindAsEventListener( this ) );
+      },
+
+      showGoToCourseButton : function()
+      {
+        var goBut = $( 'goToCourseContent' );
+        if ( goBut )
+        {
+          goBut.show();
+        }
+      },
+
+      hideGoToCourseButton : function()
+      {
+        var goBut = $( 'goToCourseContent' );
+        if ( goBut )
+        {
+          goBut.hide();
+        }
+      },
+
+      activateGoToCourse : function()
+      {
+        var goBut = $( 'goToCourseContent' );
+        if ( goBut )
+        {
+          goBut.onclick();
+        }
+      },
+
+      fitScrollableRegionToBrowser : function()
+      {
+        $( 'streamDetailRightColumn' ).down( 'div.stream-detail-contents' ).scrollBar = null;
+        stream.fitScrollableRegionToBrowser();
+      }
+  };
+  /*
+   * Scrollbar notes: utilizing 3rd party lib: http://livepipe.net/control/scrollbar Follow the docs for specific HTML &
+   * CSS format required for scrollbar. Here we have code to auto-wire the required javascript to control the scrollbar
+   * for content containers that have scrollable class. This function be called when initially rendering the scrollbar
+   * and its content or when the page is resized. We dynamically resize the content & scrollbar to reach the bottom of
+   * the viewport so the user can interact without scrolling the page. If there is element(s) to be displayed below the
+   * content/scrollbar, specify the id of the lowest element's id by including the bb:lowestElement attribute within the
+   * content div. The dynamic resizing can be controlled with the bb:dynHeightScroll attribute; set it to true to enable
+   * resizing that will shrink the content if smaller than the viewport height.
+   */
+  stream.fitScrollableRegionToBrowser = function()
+  {
+    if (!window.matchMedia("(max-width: 736px)").matches) {
+      var vh = document.viewport.getDimensions().height;
+      
+      // set height of elements with class .scrollable to fill viewport
+      $$( '.scrollable' ).each( function( sbContent )
+      {
+        var oldsh = sbContent.getAttribute( "bb:scrollHeight" );
+        
+        // we need to temporarily expose (display but keep invisible) the content if it was hidden
+        // so scrollBar can compute its size properly
+        page.util.exposeElementForMeasurement( sbContent );
+        
+        var newsh = sbContent.scrollHeight;
+        sbContent.setAttribute( "bb:scrollHeight", newsh );
+        
+        if ( stream.last_vh == vh && newsh == oldsh)
+        {
+          page.util.unExposeElementForMeasurement( sbContent );
+        }
+        else
+        {
+          // unExposeElementForMeasurement performed in the following
+          stream.performFitScrollableRegionToBrowser( sbContent, vh );
+        }
+      } );
+      
+      stream.last_vh = vh;
+    }
+  };
+
+  stream.performFitScrollableRegionToBrowser = function( sbContent, vh )
+  {
+    sbContent.setStyle(
+    {
+      height : "auto"
+    } ); // Take off any existing height so we size appropriately
+    // find the bottom of lowest element (if any) below sbContent
+    var le = sbContent.getAttribute( "bb:lowestElement" );
+    var dhs = sbContent.getAttribute( "bb:dynHeightScroll" );
+    var lowestElement = ( le ) ? $( le ) : sbContent;
+    var bot = lowestElement.viewportOffset().top + parseInt( lowestElement.getLayout().get( 'margin-box-height' ), 10 );
+
+    // adjust sbContent height so that bottom of lowest element is at bottom of viewport
+    var oldh = sbContent.getHeight();
+    var newh = oldh - bot + vh - 10;
+    if ( ( dhs && dhs == 'true' ) && ( newh > oldh ) )
+    {
+      newh = oldh; // Don't make it bigger than it has to be unless this is marked as a full-height scroller(oldh
+      // will be accurate as we set height to auto earlier)
+    }
+    var sbTrack = sbContent.up().down( 'div.scrollbar_track' );
+    if ( newh >= 0 )
+    {
+      sbContent.setStyle(
+      {
+        height : newh + "px",
+        'overflow' : "hidden"
+      } );
+      if ( sbTrack )
+      {
+        sbTrack.setStyle(
+        {
+          height : newh + "px"
+        } );
+      }
+    }
+
+    // create/recalc scrollbar
+    if ( !sbContent.scrollBar && sbTrack )
+    {
+      sbContent.scrollBar = new Control.ScrollBar( sbContent, sbTrack );
+    }
+    else if ( sbContent.scrollBar )
+    {
+      sbContent.scrollBar.recalculateLayout();
+    }
+
+    page.util.unExposeElementForMeasurement( sbContent );
+  };
+  
+  stream.removeAllChildren = function( ele )
+  {
+    while ( ele.childNodes.length > 0 )
+    {
+      ele.removeChild( ele.firstChild );
+    }
+  };
+
+  stream.registerStreamViewer = function( params )
+  {
+    stream.streamViewers[ params.streamName ] = new stream.Viewer( params );
+  };
+  
+  // called by nautilus_stream
+  stream.removeSingleEntry = function( streamName, seqId )
+  {
+    stream.streamViewers[ streamName ].removeStreamEntryById( seqId );
+  };
+  
+  stream.getNewData = function( streamName )
+  {
+    var viewer = stream.streamViewers[ streamName ];
+    if ( viewer )
+    {
+      viewer.fetchNewData();
+    }
+  };
+
+  stream.toggleIsNewAndLoadContentFrame = function( streamName, contentUrl, provider, sequenceId )
+  {
+    var viewer = stream.streamViewers[ streamName ];
+    var streamUrl = viewer.baseurl + "streamViewer?cmd=removeNewFlag&provider=" + provider + "&sequenceId=" +
+                    sequenceId + "&streamName=" + viewer.streamName;
+    var params = streamUrl.toQueryParams();
+    streamUrl = streamUrl.split( "?" )[ 0 ];
+    new Ajax.Request( streamUrl,
+    {
+        method : 'post',
+        parameters : params,
+        onComplete : function( transport )
+        {
+          return stream.loadContentFrame( contentUrl );
+        }.bind( this )
+    } );
+    return false;
+  };
+
+  /*
+   * Reload the 'content' frame with the given url - note, since this b2 is sp16-and-newer only now, 
+   * we no longer reload a content frame but rather reload the whole page.
+   */
+  stream.loadContentFrame = function( url )
+  {
+    top.document.location = url;
+    return false;
+  };
+
+  stream.initializeRHS = function()
+  {
+    stream.rhs = new stream.RHS();
+  };
+
+  stream.updateScrollRHS = function()
+  {
+    if ( stream.rhs )
+    {
+      stream.rhs.fitScrollableRegionToBrowser();
+    }
+  };
+
+  stream.scrollRHSTo = function( elem )
+  {
+    if ( stream.rhs )
+    {
+      var rhsScroller = $( 'streamDetailBodyRight' );
+      if ( rhsScroller && rhsScroller.scrollBar )
+      {
+        rhsScroller.scrollBar.scrollTo( elem );
+      }
+      return true;
+    }
+    return false;
+  };
+
+  /**
+   * Called by the My Overview framework to load the specified stream. At this point the stream object is not initalized
+   */
+  stream.launchStreamOverview = function( toolId, userId, argMap )
+  {
+    var baseURL = argMap.baseURL;
+    var streamName = argMap.streamName;
+    var overviewModuleId = argMap.overviewModuleId;
+    var url = baseURL + "getJsonMapForStreamOverview?cmd=view&toolId=" + toolId + "&streamName=" + streamName +
+              "&overviewModuleId=" + overviewModuleId;
+    new Ajax.Request( url,
+    {
+        method : 'post',
+        onSuccess : stream.updateStreamOverview,
+        onFailure : stream.updateStreamOverviewFailure,
+        onException : stream.updateStreamOverviewFailure
+    } );
+  };
+
+  stream.updateStreamOverview = function( transport )
+  {
+    var responseMap = transport.responseText.evalJSON( true );
+    var toolId = responseMap.toolId;
+    var htmlForStream = responseMap.htmlForStream;
+    $( toolId ).innerHTML = htmlForStream;
+    page.globalEvalScripts( htmlForStream, true );
+  };
+
+  stream.updateStreamOverviewFailure = function( ajaxResponse )
+  {
+    try
+    {
+      var result = ajaxResponse.responseText.evalJSON();
+      this.errorDiv.innerHTML = page.bundle.getString( "stream.generic.error", result.message );
+      this.errorDiv.style.display = "block";
+    }
+    catch ( e )
+    {
+      // Ignore - we'll get this in cases such as navigating away from a stream page while it is loading when the
+      // browser kills the request
+    }
+  };
+
+  stream.attachEventListener = function( )
+  {
+    if (window.addEventListener){
+      addEventListener("message", stream.eventListener, false);
+    } else {
+      attachEvent("onmessage", stream.eventListener);
+    }
+  };
+  
+  stream.eventListener = function( event )
+  {
+    if( event.data == 'getNewStream')
+      stream.getNewData( 'stream' );
+    // TODO: Extend this to allow reloading of other streams - i.e. getNewStream:alerts will getnewdata for the alerts stream or something like that...
+  };
+}

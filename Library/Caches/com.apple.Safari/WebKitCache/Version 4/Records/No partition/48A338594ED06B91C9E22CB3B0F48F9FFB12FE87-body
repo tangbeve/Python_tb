@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+		<!-- HTML5 shim and Respond.js. Brings IE 8 into the 21st century. -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<title>
+			How to Generate a Random Number in Python | Python Central		</title>
+
+		<link rel="profile" href="https://gmpg.org/xfn/11" />
+		<link rel="pingback" href="https://www.pythoncentral.io/xmlrpc.php" />
+		<link rel="stylesheet" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+		
+		
+<!-- This site is optimized with the Yoast SEO plugin v6.3.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Check out these tips for generating random numbers in Python."/>
+<link rel="canonical" href="https://www.pythoncentral.io/how-to-generate-a-random-number-in-python/" />
+<link rel="publisher" href="https://plus.google.com/PythoncentralIo"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Generate a Random Number in Python | Python Central" />
+<meta property="og:description" content="Check out these tips for generating random numbers in Python." />
+<meta property="og:url" content="https://www.pythoncentral.io/how-to-generate-a-random-number-in-python/" />
+<meta property="og:site_name" content="Python Central" />
+<meta property="article:publisher" content="https://www.facebook.com/PythonCentral" />
+<meta property="article:section" content="Python How To&#039;s" />
+<meta property="article:published_time" content="2017-02-15T10:45:23+10:00" />
+<meta property="og:image" content="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="Check out these tips for generating random numbers in Python." />
+<meta name="twitter:title" content="How to Generate a Random Number in Python | Python Central" />
+<meta name="twitter:site" content="@PythonCentral" />
+<meta name="twitter:image" content="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif" />
+<meta name="twitter:creator" content="@PythonCentral" />
+<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/www.pythoncentral.io\/","name":"Python Central","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.pythoncentral.io\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s25033.pcdn.co\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.7"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='yarppWidgetCss-css'  href='https://s25033.pcdn.co/wp-content/plugins/yet-another-related-posts-plugin/style/widget.css?ver=4.9.7' type='text/css' media='all' />
+<link rel='stylesheet' id='cdv8-gdpr-cookieconsent-csslib-css'  href='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css?ver=4.9.7' type='text/css' media='all' />
+<link rel='stylesheet' id='twitter-bootstrap-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/bootstrap/css/bootstrap.min.css?ver=3.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-style-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/css/style.min.css?ver=2.1' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-style-css'  href='https://s25033.pcdn.co/wp-content/themes/pythoncentral/style.css?ver=1.0' type='text/css' media='all' />
+            <script>
+                if (document.location.protocol != "https:") {
+                    document.location = document.URL.replace(/^http:/i, "https:");
+                }
+            </script>
+            <script type='text/javascript' src='https://s25033.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/bootstrap/js/bootstrap.min.js?ver=3.1.1'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/typeahead/typeahead.jquery.min.js?ver=0.10.1'></script>
+<link rel='https://api.w.org/' href='https://www.pythoncentral.io/wp-json/' />
+<link rel='shortlink' href='https://www.pythoncentral.io/?p=4271' />
+<link rel="alternate" type="application/json+oembed" href="https://www.pythoncentral.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.pythoncentral.io%2Fhow-to-generate-a-random-number-in-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.pythoncentral.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.pythoncentral.io%2Fhow-to-generate-a-random-number-in-python%2F&#038;format=xml" />
+    <link rel="apple-touch-icon" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" type="image/png" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/favicon.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/favicons/favicon.ico">
+    <!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->		<style type="text/css" id="wp-custom-css">
+			/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+
+.container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
+margin-right: 0px;
+margin-left: 0px;
+}
+
+#div-gpt-ad-1510621959781-3 {
+margin-top:1em;
+text-align:center;
+}
+
+.ul, ol{
+overflow: hidden;
+}
+
+.alert-info{
+overflow:hidden;
+}
+		</style>
+	
+<!-- Adsense -->
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+	var width = window.outerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	if (width < 366) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [300, 250], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [300, 250], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [320, 100], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 750) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [336, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [320, 100], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 990) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [720, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [728, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else if (width < 1200) {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [940, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Sidebar_300x600', [300, 600], 'div-gpt-ad-1510621959781-2').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [940, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	} else {
+    		googletag.defineSlot('/21552082/PYT_Top_Content', [336, 280], 'div-gpt-ad-1510621959781-0').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Mid_Content', [848, 280], 'div-gpt-ad-1510621959781-1').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Sidebar_300x600', [300, 600], 'div-gpt-ad-1510621959781-2').addService(googletag.pubads());
+    		googletag.defineSlot('/21552082/PYT_Header', [940, 90], 'div-gpt-ad-1510621959781-3').addService(googletag.pubads());
+	}
+   	googletag.pubads().collapseEmptyDivs();
+    	googletag.enableServices();
+  });
+</script>
+<!-- Adsense End -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-65994140-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- TODO move out of inline, into scss -->
+<style>
+h1.bolder{
+  font-size: 21px;
+  color: #444;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+}
+
+</style>
+	</head>
+
+	<body data-rsssl=1 class="post-template-default single single-post postid-4271 single-format-standard">
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- Facebook SDK end -->
+
+		<header id="header" role="banner" class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+
+
+		        <div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<a title="Python Central" href="https://www.pythoncentral.io">
+						<img alt="Python Central Logo"
+							 src="https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.svg"
+							 onerror="this.onerror = null; this.src = 'https://s25033.pcdn.co/wp-content/themes/pythoncentral/assets/images/python-central.gif'"
+							 id="logo" class="non-responsive">
+					</a>
+		        </div>
+
+				<nav id="primary-nav" class="collapse navbar-collapse">
+					<ul id="menu-top-menu" class="nav navbar-nav"><li id="menu-item-2886" class="menu-item-2886"><a title="Python Tips &#038; Tricks" href="https://www.pythoncentral.io/category/python-tips-tricks-hacks-idioms/"><span class="glyphicon "></span>&nbsp;Tips &#038; Tricks</a></li>
+<li id="menu-item-2875" class="menu-item-2875 active"><a title="Python How Tos" href="https://www.pythoncentral.io/category/python-how-tos/"><span class="glyphicon "></span>&nbsp;How Tos</a></li>
+<li id="menu-item-2876" class="menu-item-2876 dropdown"><a href="https://www.pythoncentral.io/category/python-library-tutorials/"><span class="glyphicon "></span>&nbsp;Libraries <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3379" class="menu-item-3379"><a title="Python SQLAlchemy Tutorial" href="https://www.pythoncentral.io/series/python-sqlalchemy-database-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;SQLAlchemy</a></li>
+	<li id="menu-item-3374" class="menu-item-3374"><a title="Python Django Tutorial" href="https://www.pythoncentral.io/series/python-django-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Django</a></li>
+	<li id="menu-item-3373" class="menu-item-3373"><a title="Python PySide/PyQt Tutorial" href="https://www.pythoncentral.io/series/python-pyside-pyqt-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;PySide / PyQt</a></li>
+	<li id="menu-item-3371" class="menu-item-3371"><a title="Python SQLite Tutorial" href="https://www.pythoncentral.io/series/python-sqlite-database-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;SQLite</a></li>
+	<li id="menu-item-3369" class="menu-item-3369"><a title="Python Android Scripting Layer (SL4A) Tutorial" href="https://www.pythoncentral.io/series/python-sl4a-android-scripting-layer-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Android Scripting Layer (SL4A)</a></li>
+</ul>
+</li>
+<li id="menu-item-2867" class="menu-item-2867 dropdown"><a title="Python Tutorials" href="https://www.pythoncentral.io/category/python-tutorials/"><span class="glyphicon "></span>&nbsp;Tutorials <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3376" class="menu-item-3376"><a title="Encoding and Decoding Python Strings" href="https://www.pythoncentral.io/series/python-encoding-decoding-strings/"><span class="glyphicon glyphicon-book"></span>&nbsp;Encoding and Decoding</a></li>
+	<li id="menu-item-3375" class="menu-item-3375"><a title="Python Regular Expressions" href="https://www.pythoncentral.io/series/python-regular-expressions-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Regular Expressions</a></li>
+	<li id="menu-item-3378" class="menu-item-3378"><a title="Python Classes Tutorial" href="https://www.pythoncentral.io/series/python-classes-tutorial/"><span class="glyphicon glyphicon-book"></span>&nbsp;Classes</a></li>
+</ul>
+</li>
+<li id="menu-item-2872" class="menu-item-2872 dropdown"><a title="Python Recipes" href="https://www.pythoncentral.io/category/python-recipes/"><span class="glyphicon "></span>&nbsp;Recipes <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-3377" class="menu-item-3377"><a title="Python Recursive File and Directory Manipulation" href="https://www.pythoncentral.io/series/python-recursive-file-and-directory-manipulation/"><span class="glyphicon glyphicon-book"></span>&nbsp;Recursion</a></li>
+</ul>
+</li>
+<li id="menu-item-2887" class="menu-item-2887"><a title="Python Tools" href="https://www.pythoncentral.io/category/python-related-tools/"><span class="glyphicon "></span>&nbsp;Tools</a></li>
+<li id="menu-item-3301" class="menu-item-3301"><a title="Python API Tutorials" href="https://www.pythoncentral.io/category/python-api/"><span class="glyphicon "></span>&nbsp;API</a></li>
+<li id="menu-item-31" class="menu-item-31 dropdown"><a title="About Python Cenral" href="https://www.pythoncentral.io/about/"><span class="glyphicon "></span>&nbsp;About <span class="caret"></span></a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-874" class="menu-item-874"><a title="Python Central Frequently Asked Questions" href="https://www.pythoncentral.io/frequently-asked-questions/"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;FAQ</a></li>
+	<li id="menu-item-2854" class="menu-item-2854"><a title="Provide Feedback or Report Issues to Python Central" target="_blank" href="https://pythoncentral.uservoice.com/"><span class="glyphicon glyphicon-link"></span>&nbsp;Feedback &#038; Issues</a></li>
+</ul>
+</li>
+</ul>				</nav>
+			</div>
+
+		</header>
+
+		<div role="document" id="content">
+
+<!-- /21552082/PYT_Header -->
+<div class='container'>
+	<div id='div-gpt-ad-1510621959781-3'>
+		<script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-3'); });
+		</script>
+	</div>
+</div>
+
+			
+<div style="padding: 10px; width: 450px; margin: 0 auto;">
+
+<!-- brano ad -->
+
+</div>
+
+<div class="container">
+				<div class="row">
+<div role="main" id="main" class="col-lg-9" itemscope itemtype="http://schema.org/Article">
+	<section id="primary">
+
+
+		<div class="page-header">
+			<h1 class="single" itemprop="name"><span class="glyphicon glyphicon glyphicon-file"></span> How to Generate a Random Number in Python</h1>
+		</div>
+
+		
+		
+		<div class="article-panel hidden-print">
+			<div style="display: flex; justify-content: space-between; flex-wrap:wrap;">
+				<div style='min-width: 250px;'>
+					<span itemprop="datePublished">Published: Wednesday 15<sup>th</sup> February 2017</span>
+				</div>
+							</div>
+
+		</div>
+
+
+
+
+					<article id="post-4271" class="post-4271 post type-post status-publish format-standard hentry category-python-how-tos" itemprop="articleBody">
+
+
+
+
+<p>In Python, just like in almost any other OOP language, chances are that you'll find yourself needing to generate a random number at some point. Whether you're just completing an exercise in algorithms to better familiarize yourself with the language, or if you're trying to write more complex code, you can't call yourself a Python coder without knowing how to generate random numbers.
+		<!-- /21552082/PYT_Top_Content -->
+		<div id='div-gpt-ad-1510621959781-0' style='float: left; margin-top: 1.2em; margin-right: 1em; margin-bottom: 1em; padding-right: 1em; '>
+			<script>
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-0'); });
+			</script>
+		</div>
+
+		</p>
+<p>Check out the code snippet below to see how it works to generate a number between 1 and 100.</p>
+<pre class="lang-py prettyprint prettyprinted"><code><span class="kwd">import</span><span class="pln"> random
+</span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(1</span><span class="lit">0</span><span class="pun">):</span>
+  <span class="kwd">print</span><span class="pln"> random</span><span class="pun">.</span><span class="pln">randint</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,101</span><span class="pun">)</span>
+</code></pre>
+<p>The code above will print 10 random values of numbers between 1 and 100. The second line, for x in range(10), determines how many values will be printed (when you use range(x), the number that you use in place of x will be the amount of values that you'll have printed. if you want 20 values, use range(20). use range(5) if you only want 5 values returned, etc.). Then the third line: print random.randint(1,101) will automatically select a random integer between 1 and 100 for you. The process is fairly simple.</p>
+<p>What if, however, you wanted to select a random integer that was between 1 and 100 but also a multiple of five? This is a little more complicated. The process is the same, but you'll need to use a little more arithmetic to make sure that the random integer is in fact a multiple of five. Check out the code below:</p>
+<pre class="lang-py prettyprint prettyprinted"><code><span class="kwd">import</span><span class="pln"> random
+</span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(1</span><span class="lit">0</span><span class="pun">):</span>
+  <span class="kwd">print</span><span class="pln"> random</span><span class="pun">.</span><span class="pln">randint</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,21</span><span class="pun">)*</span><span class="lit">5</span><span class="pun">,</span>
+<span class="kwd">print</span></code></pre>
+<p>Basically this code will generate a random number between 1 and 20, and then multiply that number by 5. So not only will every number printed be a multiple of 5, but the highest number that can be printed is 100 (20*5=100). Play around with the code yourself and see if you can generate a random number between 1-100 where every number generated is a multiple of ten!</p>
+</p>
+
+
+
+
+				
+
+
+
+
+
+<!-- replace -->
+		<p><center>
+		<!-- /21552082/PYT_Mid_Content -->
+		
+			<div id='div-gpt-ad-1510621959781-1'>
+				<script>
+				googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-1'); });
+				</script>
+			</div>
+		
+		</center></p>
+			</article>
+		
+
+	</section>
+
+	
+<section id="article-downloads-navigation" class="hidden-print">
+
+
+		<div style='margin-bottom:2em;'>
+				<section id="entry-author">
+		<h3 class="title">About The Author</h3>
+		<div class="row">
+			<div class="col-xs-3 col-sm-4 col-md-3 gravatar">
+				<a href="https://www.pythoncentral.io/author/admin/">
+					<img src="https://s25033.pcdn.co/wp-content/uploads/2014/03/Jackson-Cooper.jpg" alt="Jackson Cooper">
+				</a>
+			</div>
+
+			<div class="col-xs-9 col-sm-8 col-md-9">
+				<h4 class="author-name">
+					<strong>
+						<a href="https://www.pythoncentral.io/author/admin/" itemprop="author">
+							Jackson Cooper						</a>
+					</strong>
+				</h4>
+				<div class="entry-author-desc">
+					Python developer and enthusiast. Also manager of Python Central.				</div>
+			</div>
+		</div>
+	</section>
+     		</div>
+		<ol class="breadcrumb hidden-print"><li><a  href="https://www.pythoncentral.io" title="Home">Home</a></li><li><a class="active" href="https://www.pythoncentral.io/category/python-how-tos/" title="Python How To's">Python How To's</a></li></ol></section>
+
+
+<section id="article-downloads-navigation" class="hidden-print">
+<br />
+<div id="taboola-below-article-thumbnails"></div>
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({
+    mode: 'thumbnails-a',
+    container: 'taboola-below-article-thumbnails',
+    placement: 'Below Article Thumbnails',
+    target_type: 'mix'
+  });
+</script>
+</section>
+			<div class="fb-comments" data-href="https://www.pythoncentral.io/how-to-generate-a-random-number-in-python/" data-numposts="5" data-width="100%"></div>
+
+<section id="article-downloads-navigation" class="hidden-print">
+		<div style='margin-bottom:2em;'>
+				<section id="entry-related">
+		<h3 class="title">Related Articles</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div class='yarpp-related'>
+<ul class="nav nav-list">
+<li><span class="glyphicon glyphicon-file"></span> <a href="https://www.pythoncentral.io/python-snippets-how-to-generate-random-string/" rel="bookmark" title="Python Snippets: How to Generate Random String">Python Snippets: How to Generate Random String </a></li>
+<li><span class="glyphicon glyphicon-file"></span> <a href="https://www.pythoncentral.io/pythons-random-module-to-generate-integers/" rel="bookmark" title="Using Python&#8217;s Random Module to Generate Integers">Using Python&#8217;s Random Module to Generate Integers </a></li>
+<li><span class="glyphicon glyphicon-file"></span> <a href="https://www.pythoncentral.io/catching-python-exceptions-the-try-except-else-keywords/" rel="bookmark" title="Catching Python Exceptions &#8211; The try/except/else keywords">Catching Python Exceptions &#8211; The try/except/else keywords </a></li>
+<li><span class="glyphicon glyphicon-file"></span> <a href="https://www.pythoncentral.io/select-random-item-list-tuple-data-structure-python/" rel="bookmark" title="Select a random item from a list/tuple/data stucture in Python">Select a random item from a list/tuple/data stucture in Python </a></li>
+<li><span class="glyphicon glyphicon-file"></span> <a href="https://www.pythoncentral.io/how-to-create-a-thread-in-python/" rel="bookmark" title="How to Create a Thread in Python">How to Create a Thread in Python </a></li>
+</ul>
+</div>
+			</div>
+		</div>
+	</section>
+     		</div>
+</section>
+
+
+</div>
+
+<div id='sidebar2' style='max-width=100%; overflow:hidden'>
+
+<section id="article-downloads-navigation" class="hidden-print" style='width:100%; margin: 0; padding: 0 1em 1em 1em; float: left;'>
+	<h1 class='bolder'>Signup for new content</h1>
+	<form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=PythonCentral', 'popupwindow', 'scrollbars=yes,width=550,height=520'); return true">
+			<div class="input-group">
+				<input type="email" name="email" placeholder="E-Mail address..." class="form-control">
+				<input type="hidden" value="PythonCentral" name="uri">
+				<input type="hidden" name="loc" value="en_US">
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-default">Subscribe</button>
+				</span>
+			</div>
+	</form>
+</section>
+
+
+
+<section id="article-downloads-navigation" class="hidden-print" style='width: 100%; margin: 2em 0 0 0; padding: 0 0 1em 1em; float: left;'>
+	<h1 class='bolder'>Latest Articles</h1>
+
+	<div class="lines-wrapper">
+		<ul class="nav nav-list">
+		<li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/reverse-singly-linked-list/' title='How To Reverse a Singly Linked List'>How To Reverse a Singly Linked List</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/find-remove-node-linked-lists/' title='Singly Linked List: How To Find and Remove a Node'>Singly Linked List: How To Find and Remove a Node</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/singly-linked-list-insert-node/' title='Singly Linked List: How To Insert and Print Node'>Singly Linked List: How To Insert and Print Node</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/python-reverse-list-place/' title='List in Python: How To Implement in Place Reversal'>List in Python: How To Implement in Place Reversal</a></li><li><span class="glyphicon glyphicon-file"></span><a href='https://www.pythoncentral.io/quick-sort-implementation-guide/' title='Quick Sort: A Tutorial and Implementation Guide'>Quick Sort: A Tutorial and Implementation Guide</a></li>		</ul>
+	</div>
+
+	<div class="clearfix"></div>
+</section>
+
+<br />
+
+<section class="sidebar-ad" style='width: 100%; background-color: #eef5fc; border-top: 5px solid #3774a6; border-bottom: 1px solid #ccdbe6; margin: 2em 0 0 0em; padding: 0em; float: left;'>
+	<!-- /21552082/PYT_Sidebar_300x600 -->
+	<div id='div-gpt-ad-1510621959781-2'>
+		<script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1510621959781-2'); });
+		</script>
+	</div>
+</section>
+
+<section id="article-downloads-navigation" class="hidden-print" style='width: 100%; margin: 2em 0 0 0em; padding: 0 0 1em 1em; float: left;'>
+
+	<h1 class='bolder'>Social</h1>
+	<div style="display: flex;">
+		<a href="https://twitter.com/PythonCentral" target="_blank" title="Python Central on Twitter">
+			<i style="color: #355c7c; margin-right:0.8em; margin-left:0.2em;" class="fa fa-3x fa-twitter-square" aria-hidden="true" title="Twitter"></i>
+		</a>
+		<a href="https://plus.google.com/117103316424864449594/posts" target="_blank" title="Python Central on Google Plus">
+			<i style="color: #355c7c; margin-right:0.8em;" class="fa fa-3x fa-google-plus-square" aria-hidden="true" title="Google Plus"></i>
+		</a>
+
+		<a href="https://www.facebook.com/PythonCentral" target="_blank" title="Python Central on Facebook">
+			<i style="color: #355c7c; margin-right:0.8em;" class="fa fa-3x fa-facebook-square" aria-hidden="true" title="Facebook"></i>
+		</a>
+
+		<a href="https://feeds.feedburner.com/PythonCentral" target="_blank" title="Python Central's RSS Feed">
+			<i style="color: #355c7c;" class="fa fa-3x fa-rss-square" aria-hidden="true" title="RSS"></i>
+		</a>
+	</div>
+	<div style="margin-top: 1em; padding: 10px 0px;">
+		Python is a beautiful language.
+	</div>
+</section>
+
+</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="hidden-print" id="footer">
+			<div class="container">
+				<div class="row">
+					<div id="footer-menu" class="col-md-6 col-sm-7">
+															<nav id="footer-nav">
+										<div class="menu-bottom-menu-container"><ul id="menu-bottom-menu" class="list-inline"><li id="menu-item-847" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-847"><a title="Python Central Home" href="https://www.pythoncentral.io/">Home</a></li>
+<li id="menu-item-848" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-848"><a title="About Python Central" href="https://www.pythoncentral.io/about/">About</a></li>
+<li id="menu-item-878" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-878"><a title="Frequently Asked Questions about Python Central" href="https://www.pythoncentral.io/frequently-asked-questions/">FAQ</a></li>
+<li id="menu-item-2855" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2855"><a title="Contact Python Central" target="_blank" href="/cdn-cgi/l/email-protection#573438392336342317272e233f38393432392325363b793e38">Contact</a></li>
+<li id="menu-item-4082" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4082"><a href="https://www.pythoncentral.io/python-central-privacy-policy/">Python Central Privacy Policy</a></li>
+</ul></div>									</nav>
+													</div>
+
+					<div id="copyright" class="col-md-6 col-sm-5 text-right">
+						<span>
+							&copy; Copyright 2018 - 
+							<a href="https://www.pythoncentral.io" title="Python Programming Examples, Tutorials and Recipes">Python Central</a>.
+						</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<link rel='stylesheet' id='yarppRelatedCss-css'  href='https://s25033.pcdn.co/wp-content/plugins/yet-another-related-posts-plugin/style/related.css?ver=4.9.7' type='text/css' media='all' />
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var cdv8Gdpr = {"popupBackgroundColor":"#edeff5","popupTextColor":"#838391","btnBackgroundColor":"#4b81e8","bannerMessage":"This website uses cookies to ensure you get the best experience on our website.","dismissBtnText":"Accept!","policyLinkText":"Read Our Privacy Policy","policyLinkTextURL":"https:\/\/www.pythoncentral.io\/python-central-privacy-policy\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-content/plugins/gdpr-enhancements-master/assets/js/cdv8-gdpr.js'></script>
+<script type='text/javascript' src='https://s25033.pcdn.co/wp-includes/js/wp-embed.min.js?ver=4.9.7'></script>
+
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({article:'auto'});
+  !function (e, f, u, i) {
+    if (!document.getElementById(i)){
+      e.async = 1;
+      e.src = u;
+      e.id = i;
+      f.parentNode.insertBefore(e, f);
+    }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/pythoncentral/loader.js',
+  'tb_loader_script');
+  if(window.performance && typeof window.performance.mark == 'function')
+    {window.performance.mark('tbl_ic');}
+</script>
+
+
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({flush: true});
+</script>
+
+	</body>
+</html>

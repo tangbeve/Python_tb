@@ -1,0 +1,754 @@
+/* --- Accessibility --- */
+.dropdown > a:active, .dropdown > a:focus, h2.NSAHeader2:active, h2.NSAHeader2:focus, h2.NSAHeader2:hover {outline: 1px solid #4edbf9; outline-offset: 2px;} 
+
+.NSAVideo:hover, .NSAVideo:active, .NSAVideo:focus {outline: 1px solid #4edbf9; outline-offset: 1px;}
+ 
+.nsagrid-block a:hover, .nsagrid-block a:active, .nsagrid-block a:focus, .nsagrid1-block a:hover, .nsagrid1-block a:active, .nsagrid1-block a:focus  { outline: 1px solid #4edbf9; }
+
+
+
+
+
+
+
+/* --- Sub Nav --- */
+#NSA-Navigation1 .activeSubNSA, #NSA-Navigation1 .activeSubNSA:link, #header-body .activeSubNSA, #header-body .activeSubNSA:link  { color:#f9b74d; }
+#NSA-Navigation1 .activeSubNSA:active, #NSA-Navigation1 .activeSubNSA:hover, #NSA-Navigation1 .activeSubNSA:focus,
+#header-body .activeSubNSA:active, #header-body .activeSubNSA:hover, #header-body .activeSubNSA:focus { color: #f9b74d; text-decoration: none; }
+
+
+#agenciesDropdown .dropdown-menu li a.activeSubNSA, #agenciesDropdown .dropdown-menu li a.activeSubNSA:link {color: #4edbf9;}
+#agenciesDropdown .dropdown-menu li a.activeSubNSA:active, #agenciesDropdown .dropdown-menu li a.activeSubNSA:hover, #agenciesDropdown .dropdown-menu li a.activeSubNSA:focus { color: #ffcc66!important; text-decoration: none; }
+
+.reasonbar                  { padding: 10px 0 10px 24px; overflow: hidden;
+                              width:auto; color: white; background-color: #265562; }
+
+/* ---- Top Nav  ---- */
+.navbar .nav > li > .navstyle9 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle10 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle11 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle12 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle13 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle14 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle15 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle16 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle17 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle18 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+.navbar .nav > li > .navstyle19 {font-size: 13px; text-decoration: none; color: #FFFFFF}
+
+.navbar-default .navbar-nav > li > .navstyle9:hover, .navbar-default .navbar-nav > li > .navstyle9:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle10:hover, .navbar-default .navbar-nav > li > .navstyle10:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle11:hover, .navbar-default .navbar-nav > li > .navstyle11:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle12:hover, .navbar-default .navbar-nav > li > .navstyle12:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle13:hover, .navbar-default .navbar-nav > li > .navstyle13:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle14:hover, .navbar-default .navbar-nav > li > .navstyle14:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle15:hover, .navbar-default .navbar-nav > li > .navstyle15:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle16:hover, .navbar-default .navbar-nav > li > .navstyle16:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle17:hover, .navbar-default .navbar-nav > li > .navstyle17:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle18:hover, .navbar-default .navbar-nav > li > .navstyle18:focus {color: #ffcc66;}
+.navbar-default .navbar-nav > li > .navstyle19:hover, .navbar-default .navbar-nav > li > .navstyle19:focus {color: #ffcc66;}
+
+/* ---- Header Nav  ---- */
+
+/* added for submenu dropdown */
+#sub {
+	float: none!important;
+	margin: 7.5px -20px;   
+	list-style:none;
+}
+#sub > li {
+	float: none;
+	display:block;
+	}
+#sub > li > a {
+	padding: 10px 0;
+}
+
+#sub > li {
+	float: left;
+}
+#sub > li {
+	position: relative;
+	display: block;
+}
+
+
+
+.secondarynav1 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav1:link {color: #FFFFFF;}
+.secondarynav1:visited {color: #FFFFFF;}
+.secondarynav1:hover, .secondarynav1:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav1:active {color: #FFFFFF;}
+
+/* .secondarynav1, .secondarynav1:link, .secondarynav1:active { font-size: 13px; text-decoration: none; color: #f9b74d; }
+.secondarynav1:hover, .secondarynav1:focus { color: #f9b74d; } */
+
+.secondarynav2 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav2:link {color: #FFFFFF;}
+.secondarynav2:visited {color: #FFFFFF;}
+.secondarynav2:hover, .secondarynav2:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav2:active {color: #FFFFFF;}
+
+.secondarynav3 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav3:link {color: #FFFFFF;}
+.secondarynav3:visited {color: #FFFFFF;}
+.secondarynav3:hover, .secondarynav3:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav3:active {color: #FFFFFF;}
+
+.secondarynav4 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav4:link {color: #FFFFFF;}
+.secondarynav4:visited {color: #FFFFFF;}
+.secondarynav4:hover, .secondarynav4:focus  {color: #f9b74d;text-decoration: none;}
+.secondarynav4:active {color: #FFFFFF;}
+
+.secondarynav5 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav5:link {color: #FFFFFF;}
+.secondarynav5:visited {color: #FFFFFF;}
+.secondarynav5:hover, .secondarynav5:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav5:active {color: #FFFFFF;}
+
+.secondarynav6 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav6:link {color: #FFFFFF;}
+.secondarynav6:visited {color: #FFFFFF;}
+.secondarynav6:hover, .secondarynav6:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav6:active {color: #FFFFFF;}
+
+.secondarynav7 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav7:link {color: #FFFFFF;}
+.secondarynav7:visited {color: #FFFFFF;}
+.secondarynav7:hover, .secondarynav7:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav7:active {color: #FFFFFF;}
+
+.secondarynav8 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav8:link {color: #FFFFFF;}
+.secondarynav8:visited {color: #FFFFFF;}
+.secondarynav8:hover, .secondarynav8:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav8:active {color: #FFFFFF;}
+
+.secondarynav9 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav9:link {color: #FFFFFF;}
+.secondarynav9:visited {color: #FFFFFF;}
+.secondarynav9:hover, .secondarynav9:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav9:active {color: #FFFFFF;}
+
+.secondarynav10 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav10:link {color: #FFFFFF;}
+.secondarynav10:visited {color: #FFFFFF;}
+.secondarynav10:hover, .secondarynav10:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav10:active {color: #FFFFFF;}
+
+.secondarynav11 {font-size: 13px;text-decoration: none;color: #FFFFFF;}
+.secondarynav11:link {color: #FFFFFF;}
+.secondarynav11:visited {color: #FFFFFF;}
+.secondarynav11:hover, .secondarynav11:focus {color: #f9b74d;text-decoration: none;}
+.secondarynav11:active {color: #FFFFFF;}
+
+/* ---- Header  ---- */
+#secondaryHeader {background-image: url(../images/NSA/NSA_HomePhoto.jpg); background-size: 100%; background-repeat: no-repeat; height: 445px;    }
+
+@media (min-width:992px) and (max-width:1200px)  
+{
+#secondaryHeader {background-image: url(../images/NSA/NSA_HomePhoto.jpg); background-size: 100%; background-repeat: no-repeat; height: 382px;    }
+}
+
+
+@media (min-width:768px) and (max-width:991px)  
+{
+#secondaryHeader {background-image: url(../images/NSA/NSA_HomePhoto.jpg); background-size: 100%; background-repeat: no-repeat; height: 296px;    }
+}
+
+
+@media (min-width:0px) and (max-width:767px)  
+{
+#secondaryHeader {background-image: url(../images/NSA/NSA_HomePhoto.jpg);   background-repeat: no-repeat;    }
+}
+
+#secondaryHeaderXS {background-image: url(../images/NSA/NSA_SmHomePhoto.jpg);   background-repeat: no-repeat;   min-height:125px;   }
+
+.movdiv1 {
+    left: 50px; top:15px
+}
+
+ @media (min-width:0px) and (max-width:767px) {
+.movdiv1 {
+   left: 0px; 
+ 
+}
+
+}
+ 
+/* ---- Header Pull Out Tab  ---- */
+
+.movdiv {
+    margin-top:200px
+}
+
+ @media (min-width:991px) and (max-width:1200px) {
+.movdiv {
+    margin-top:100px
+}
+
+}
+
+
+ @media (min-width:768px) and (max-width:991px) {
+.movdiv {
+    margin-top:100px
+}
+
+}
+
+ 
+.panel  {
+	width:340px;
+	float:left;
+	font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+	font-size:12px;
+	color: #000;
+	background-color:transparent;
+	float: left;  
+	height:80px; border:none;   moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px; 
+}
+
+
+panel.green { opacity:0;  }
+
+/* ----Phone / Tablet Headers  ---- */
+
+.secondaryicbox {margin-top: 10px }
+@media (min-width:0px) and (max-width:767px)  
+{
+.secondaryicbox {margin-top: 25px }
+}
+
+.secondaryicbox1 {min-height:72px;  
+            font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size:18px;
+    color: #265562; font-weight:bold;}
+
+.secondaryicbox2 {min-height:72px;  
+            font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size:18px;
+    color: #FFF; font-weight:bold; background-color:#265562}
+
+.secondaryicbox3 {min-height:72px;  
+            font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size:18px;
+    color: #FFF; font-weight:bold; background-color:#265562}
+
+ 
+
+.secondaryicboximg {max-height:50px; height:50px; margin-top: 10px }
+
+.caption {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 5px; 
+    text-align:left;
+	background: url(../images/nsa/NSAtrans.png);
+	width: 93%;
+	height: 155px;
+}
+ 
+@media (min-width:0px) and (max-width:1200px) {
+.caption {
+	height: 165px;
+ 
+ }
+}
+ 
+.caption h3, .caption p {
+	color: #fff;
+	margin: 20px;
+}
+.caption h3 {
+	margin: 20px 20px 10px;
+}
+.caption p {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size:12px;
+    color: #FFF;
+	margin: 0 20px 15px;
+}
+.caption a.learn-more {
+	padding: 3px 5px;
+	background: #21468a;
+	color: #fff;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	font-weight: bold;
+	text-decoration: none;  
+}
+.caption a.learn-more:hover {
+	background: #fff;
+	color: #08c;
+}
+
+
+.caption1 {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0px; 
+    text-align:left;
+	background: url(../images/nsa/NSAtrans.png);
+	width: 100%;
+	height: 155px;
+    font-weight: bold;
+}
+
+@media (min-width:0px) and (max-width:1200px) {
+.caption1 {
+	height: 165px;
+ 
+ }
+}
+
+.ipadcaption {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0px; 
+    text-align:left;
+	background: url(../images/nsa/NSAtrans.png);
+	width: 100%;
+	height: 150px;
+    font-weight: bold;
+}
+ 
+.ipadcaption1 {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0px; 
+    text-align:left;
+	background: url(../images/nsa/NSAtrans.png);
+	width: 100%;
+	height: 146px;
+    font-weight: bold;
+}
+
+.caption1 h3, .caption1 p {
+	color: #fff;
+	margin: 20px;
+}
+.caption1 h3 {
+	margin: 20px 20px 10px;
+}
+.caption1 p {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size:12px;
+    color: #FFF;
+	margin: 0 20px 15px;
+}
+.caption1 a.learn-more {
+	padding: 5px 10px;
+	background: #21468a;
+	color: #fff;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.caption1 a.learn-more:hover {
+	background: #fff;
+	color: #08c;
+    font-weight: bold;
+}
+
+.socialicons {padding:3px; cursor:pointer; 
+}
+
+.socialicons a:active, .socialicons a:hover, .socialicons a:focus  {display:inline-block !important;}
+
+.nsagrid-block {
+    position: relative;
+    float: left;
+    width: 130px;
+    height: 120px;
+    margin: 0 0 0px 0px;
+      
+}
+
+.blue1 {border-style: solid;
+     border-width: 2px;
+     border-color:#265562;
+       height:155px;
+    color:#265562; font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+     font-size:12px; text-align:center; font-weight: bold;
+}
+
+.blue2 {border-style: solid;
+     border-width: 2px;
+     border-color:#265562;
+     
+    color:#265562; font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+     font-size:18px; text-align:center; font-weight: bold;
+}
+
+
+@media (min-width:992px) and (max-width:1200px) {
+
+    .nsagrid-block {
+        position: relative;
+        float: left;
+        width: 106px;
+        margin: 0 0 0px 0px;
+    }
+
+.blue1 {max-width:110px;
+            height:165px;
+       font-size:12px
+     
+}
+
+}
+
+@media (min-width:768px) and (max-width:992px) {
+
+
+.blue1 {max-width:155px;
+       max-height:150px;
+       font-size:16px
+     
+}
+
+    .caption1 {width:155px;
+    }
+}
+
+ 
+
+   .element-item.icboxIpad {
+         height:150px;
+       width:300px;
+    }
+
+ .element-item.icboxIpad1 {
+         height:150px;
+       width:180px;
+    }
+
+ .element-item.icboxIpad2 {
+         height:150px;
+       width:220px;
+    }
+
+ 
+
+.icboxIpadText{ color:#265562; font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+     font-size:17px; text-align:center; font-weight: bold; padding:10px;}
+
+
+.icboxnsa {
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #265562), color-stop(1, #377e91) );
+    background-image: -o-linear-gradient(bottom, #265562 0%, #377e91 100%);
+    background-image: -moz-linear-gradient(bottom, #265562 0%, #377e91 100%);
+    background-image: -webkit-linear-gradient(bottom, #265562 0%, #377e91 100%);
+    background-image: -ms-linear-gradient(bottom, #265562 0%, #377e91 100%);
+    background-image: linear-gradient(to bottom, #265562 0%, #377e91 100%);
+}
+
+/* Collapsible header text */
+        .collapsible {
+            /* margin-bottom: 20px;
+             background: #EBEBEB;
+          border: 1px solid #CCCCCC;
+                           font: 12px Arial, Helvetica, sans-serif;
+            color: #333333; 
+                */ 
+            padding: 10px;
+            width: 340px;
+            color: #265562;
+            display: block;
+            overflow: hidden;
+            background-color:#FFF; opacity:0.8;
+
+        }
+
+            .collapsible button {
+                height: 55px;
+                float: right;
+                border: 1px solid #999999;
+                background: #56565c;
+                color: #CECECE;
+                margin-left: 10px;
+            }
+
+                .collapsible button:hover {
+                    background: #265562;
+                    border: 1px solid #265562;
+                }
+
+        .slide-wrapper {
+            overflow: hidden;
+        }
+
+ /* Icon Background Images */
+
+ 
+ .secondaryicon0 {background-image: url(../images/NSA/icons/SearchJobs_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon1 {background-image: url(../images/NSA/icons/CareerFields_Icon_NSA.png);  background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon2 {background-image: url(../images/NSA/icons/Benefits_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon3 {background-image: url(../images/NSA/icons/Culture_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon4 {background-image: url(../images/NSA/icons/Students_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon5 {background-image: url(../images/NSA/icons/CareerDev_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon6 {background-image: url(../images/NSA/icons/Cyber_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon7 {background-image: url(../images/NSA/icons/Diversity_Icon_NSA.png);   background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon8 {background-image: url(../images/NSA/icons/FAQs_Icon_NSA.png);  background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+
+ .secondaryicon9 {background-image: url(../images/NSA/icons/JET_Icon_NSA.png);  background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+ 
+  .secondaryicon10 {background-image: url(../images/NSA/icons/Awards_Icon_NSA.png);  background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; }
+  
+  .secondaryicon11 {background-image: url(../images/NSA/icons/devProg_Icon_NSA.png);  background-repeat: no-repeat; height:50px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:3px; }
+
+@media (min-width:0px) and (max-width:1200px) {
+ 
+
+  .secondaryicon9 {height:50px ;  margin-top:0px; }
+  .secondaryicon11 {height:50px ;  margin-top:12px; }
+
+ }
+
+@media (min-width:0px) and (max-width:992px) {
+
+ .secondaryicon0 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon1 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon2 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon3 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon4 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon5 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon6 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon7 {height:50px ;  margin-top:15px; }
+
+ .secondaryicon8 {height:50px ;  margin-top:15px; }
+
+  .secondaryicon9 {height:50px ;  margin-top:15px; }
+  .secondaryicon11 {height:50px ;  margin-top:-5px; }
+
+ }
+
+
+
+
+.customNavDivider2 {
+    color: #FFF;
+    margin-bottom: -2px;
+    height: 13px;
+    width: 1px;
+    border-right: solid 1px #FFF;
+    display: inline-block;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+
+.socialicons {
+    right: 70px;
+    top: 25px;
+    color: #FFF;
+}
+
+.movenav1 {
+    left: -30px;
+    padding: 10px 10px 10px 10px;
+}
+
+.movenav1spacer {
+    height: 20px;
+}
+
+nav1color {
+    background-color: #434343;
+}
+
+
+        .homenav1 {top: 20px;   padding: 10px 10px 10px 10px; background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.6);
+}
+
+                .homenav2 { margin-left: -15px;
+}
+
+.carouselheight{height:165px}
+.carouselheight1{height:72px}
+.carouselmargin{margin-top: -15px}
+.carouselpadding{padding-right:7px}
+.carouselpadding1{padding:3px}
+
+.carouselfloatright{float:right}
+
+.carouselcolor{background-color:#265562}
+.carouselcolor1{background-color:#FFFFFF}
+.carouselcolor2{color:#265562}
+.carouselspacer{height:5px;}
+ 
+ .nsasearchjobs{cursor: pointer; color:white; text-decoration:none;}
+ .nsasearchjobs1{padding:10px}
+  .nsasearchjobs2{color:black; text-decoration:none; font-weight: normal; }
+
+  
+        .mobileaccordion1 {
+            padding-top:20px;
+        }
+
+        .mobileaccordion2 {
+            cursor: pointer;
+        }
+        .mobileaccordion3 {
+            padding-right: 10px; padding-left: 10px;
+        }
+
+    #skip1 a { 
+		position:absolute; 
+		left:-10000px; 
+		top:auto; 
+		width:1px; 
+		height:1px; 
+		overflow:hidden;
+		color:#000;
+	} 
+ 
+	#skip1 a:focus { 
+		position:static; 
+		width:auto; 
+		height:auto; 
+		color:#000;
+	}
+	
+	#skip1 a:visited { 
+		position:static; 
+		width:auto; 
+		height:auto; 
+		color:#000;
+	}
+
+
+.skipnavtarget 
+{ 
+display: none;
+}
+ 
+ #sbox {
+	 display: none; 
+	 padding: 10px;
+ }
+ 
+ 
+ .studentsBlock{
+	background-color:#dfb04d;
+	width: 300px;
+	height: 200px;
+	display:block;
+	float:right;
+	/* padding:8px; */
+	/* margin:8px; */
+	text-align:center;
+	color:#335461;
+	
+ }
+ .studentsBlock .title{
+	font-size:1.2em;
+	text-align:left;
+	margin-left: 12px;
+	margin-bottom:5px;
+	margin-top:3px;
+	line-height:1.1em;
+	font-weight:bold;
+    font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+
+}
+
+ .studentsBlock li{
+	text-align:left;
+	font-size:0.8em;
+	text-decoration: underline;
+ }
+ .studentsBlock p{
+	 text-align:left;
+	 margin-left: 12px;
+	 font-size:0.8em;
+	 line-height:0.6em;
+ }
+ .studentsBlock a{
+	 color:#0000ff;
+ }
+
+ .studentsBlock ul{
+	 padding-left: 30px 
+}
+ .studentsBlock hr{
+	border-top: 2px solid #2e4c56;
+ }
+ 
+
+
+
+ .careersBlock{
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+background-color:#3a4b55;
+	width:323px;
+	display:block;
+	float:right;
+	padding:8px;
+	margin:8px;
+	text-align:left;
+	color:#fff;
+	text-align:center;
+ }
+.careersBlock img{
+text-align:center;
+}
+.careersBlock li{
+ font-size:.9em;
+/* text-decoration:underline; */
+width:100%; 
+text-align:left;
+}
+.careersBlock a {
+color:#a7eef4;
+}
+.careersBlock p {
+	font-size:1.2em;
+	color:#fff;
+}
+.tertiaryul {
+    font-family: 'Myriad Pro', arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #555555;
+}
+ 
+ @media (min-width:0px) and (max-width:767px)  
+{
+ /* .studentsBlock{
+	width:95%;  */
+
+ }
+  .careersBlock{
+	width:92%; 
+
+ }
+
+.WIMimage{
+	background-image: url(../images/NSA/WIM.jpg);   background-repeat: no-repeat; height:720px ; width:100%;  background-position: center; margin-left: auto; margin-right: auto; margin-top:15px; 
+}
+
+ 

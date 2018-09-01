@@ -1,0 +1,25 @@
+Aug 31 19:08:28  Notes[1017] <Info>: : :: Welcome to Notes logs! Process='Notes' OperationSystem='Version 10.11.2 (Build 15C50)' MainBundle='com.apple.Notes (549.10.1)' ClassBundle='com.apple.NotesShared (549.10.1)'
+Aug 31 19:08:28  Notes[1017] <Warning>: -[NSManagedObjectContext(ICLegacyContext) allVisibleNotesForAccountWithObjectID:]:68 :: Trying to get all visible notes from a nil object ID
+Aug 31 19:08:28  Notes[1017] <Warning>: -[NSManagedObjectContext(ICLegacyContext) allVisibleNotesForAccountWithObjectID:]:68 :: Trying to get all visible notes from a nil object ID
+Aug 31 19:08:28  Notes[1017] <Warning>: -[NSManagedObjectContext(ICLegacyContext) allVisibleNotesForAccountWithObjectID:]:68 :: Trying to get all visible notes from a nil object ID
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICStartupController checkStatusIfNecessaryWithDeviceCheckIndicator:]:261 :: Check device and migration status.
+Aug 31 19:08:28  Notes[1017] <Warning>: __70-[ICStartupController checkStatusIfNecessaryWithDeviceCheckIndicator:]_block_invoke185:328 :: Got migration state response.
+Aug 31 19:08:28  Notes[1017] <Error>: __149-[ICMSearchIndexerAccountMigrationHandler updateAccountsWithLegacyAccountTypeToDidChooseToMigrateAccountMap:noteInvalidationBlock:completionHandler:]_block_invoke32:68 :: Failed to find legacy account object with id (null)
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICStartupController getStartupMigrationTypeWithTimeout:]:553 :: startupMigrationType: ICStartupMigrationTypeNoICloudOrLocalAccounts
+Aug 31 19:08:28  Notes[1017] <Error>: __149-[ICMSearchIndexerAccountMigrationHandler updateAccountsWithLegacyAccountTypeToDidChooseToMigrateAccountMap:noteInvalidationBlock:completionHandler:]_block_invoke32:68 :: Failed to find legacy account object with id (null)
+Aug 31 19:08:28  Notes[1017] <Error>: __149-[ICMSearchIndexerAccountMigrationHandler updateAccountsWithLegacyAccountTypeToDidChooseToMigrateAccountMap:noteInvalidationBlock:completionHandler:]_block_invoke32:68 :: Failed to find legacy account object with id (null)
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICCloudContext syncAllCloudObjectsWithCompletionHandler:]:449 :: Trying to sync all objects, but cloud syncing is disabled
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICImportLegacyAccountOperation legacyAccount]:125 :: [ICImportLegacyAccountOperation(0x7f9b931c4480) legacyAccount] no legacy account found
+Aug 31 19:08:28  Notes[1017] <Warning>: -[NSManagedObjectContext(ICLegacyContext) allVisibleNotesForAccountWithObjectID:]:68 :: Trying to get all visible notes from a nil object ID
+Aug 31 19:08:28  Notes[1017] <Warning>: __38-[ICImportLegacyAccountOperation main]_block_invoke:153 :: Unsaved notes existed before starting migration. Saved and continuing.
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICImportLegacyAccountOperation legacyAccount]:125 :: [ICImportLegacyAccountOperation(0x7f9b931c4480) legacyAccount] no legacy account found
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICImportLegacyAccountOperation cancelIfAccountWasDeleted]:92 :: Cancelling legacy import operation because the legacy account does not exist
+Aug 31 19:08:28  Notes[1017] <Warning>: __55+[ICMigrationController migrateLocalAccountIfNecessary]_block_invoke:479 :: Failed to import the local account
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICImportLegacyAccountOperation legacyAccount]:125 :: [ICImportLegacyAccountOperation(0x7f9b931c4480) legacyAccount] no legacy account found
+Aug 31 19:08:28  Notes[1017] <Warning>: -[ICStartupController getStartupMigrationTypeWithTimeout:]:553 :: startupMigrationType: ICStartupMigrationTypeNoICloudOrLocalAccounts
+Aug 31 19:08:30  Notes[1017] <Warning>: +[ICMigrationController continueMigrationIfNecessary]:97 :: Continuing migration if necessary
+Aug 31 19:08:30  Notes[1017] <Warning>: +[ICMigrationController continueMigrationIfNecessary]:109 :: Migration state is (Unknown). Starting migration controller
+Aug 31 19:08:32  Notes[1017] <Warning>: -[ICCloudContext syncAllCloudObjectsWithCompletionHandler:]:449 :: Trying to sync all objects, but cloud syncing is disabled
+Aug 31 19:08:35  Notes[1017] <Warning>: -[ICCloudContext syncAllCloudObjectsWithCompletionHandler:]:449 :: Trying to sync all objects, but cloud syncing is disabled
+Aug 31 19:10:36  Notes[1017] <Warning>: -[ICCloudContext syncAllCloudObjectsWithCompletionHandler:]:449 :: Trying to sync all objects, but cloud syncing is disabled
+Aug 31 19:19:33  Notes[1017] <Warning>: -[ICCloudContext syncAllCloudObjectsWithCompletionHandler:]:449 :: Trying to sync all objects, but cloud syncing is disabled

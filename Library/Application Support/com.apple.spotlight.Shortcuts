@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>no</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Notes</string>
+		<key>LAST_USED</key>
+		<date>2018-08-31T23:08:26Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Notes.app/</string>
+	</dict>
+	<key>sa</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Safari</string>
+		<key>LAST_USED</key>
+		<date>2015-01-01T00:16:40Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Safari.app/</string>
+	</dict>
+	<key>ter</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Terminal</string>
+		<key>LAST_USED</key>
+		<date>2015-01-01T00:12:53Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Utilities/Terminal.app/</string>
+	</dict>
+	<key>w</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Microsoft Word</string>
+		<key>LAST_USED</key>
+		<date>2018-08-31T23:32:09Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Microsoft%20Office%202011/Microsoft%20Word.app/</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="application-layout forum-posts-show forum-posts-controller show-action has-topic has-step visitor safari webkit osx" id="layout" data-featurette="application-layout"  >
+  <head>
+    <title>Counting words in a string using a dictionary - Python Collection Challenge | Treehouse Community</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"d98036d1cc","applicationID":"1824378","transactionName":"cQ5eRRQNCQ8BFhZeWEAUXW4WDRYXF0tKUFhF","queueTime":2,"applicationTime":313,"agent":""}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VwIBVldWGwIIVlVRAAk="};window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o||n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({1:[function(t,n,e){function r(t){try{s.console&&console.log(t)}catch(n){}}var o,i=t("ee"),a=t(15),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,n,e){r(e.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,n){return t}).join(", ")))},{}],2:[function(t,n,e){function r(t,n,e,r,s){try{p?p-=1:o(s||new UncaughtException(t,n,e),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,n,e){this.message=t||"Uncaught error with no additional information",this.sourceURL=n,this.line=e}function o(t,n){var e=n?null:c.now();i("err",[t,e])}var i=t("handle"),a=t(16),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(8),t(7),"addEventListener"in window&&t(5),c.xhrWrappable&&t(9),d=!0)}s.on("fn-start",function(t,n,e){d&&(p+=1)}),s.on("fn-err",function(t,n,e){d&&!e[l]&&(f(e,l,function(){return!0}),this.thrown=!0,o(e))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,n,e){t("loader").features.ins=!0},{}],4:[function(t,n,e){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(8),s=t(7),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",y="pushState",g=t("loader");g.features.stn=!0,t(6);var b=NREUM.o.EV;o.on(m,function(t,n){var e=t[0];e instanceof b&&(this.bstStart=g.now())}),o.on(w,function(t,n){var e=t[0];e instanceof b&&i("bst",[e,n,this.bstStart,g.now()])}),a.on(m,function(t,n,e){this.bstStart=g.now(),this.bstType=e}),a.on(w,function(t,n){i(v,[n,this.bstStart,g.now(),this.bstType])}),s.on(m,function(){this.bstStart=g.now()}),s.on(w,function(t,n){i(v,[n,this.bstStart,g.now(),"requestAnimationFrame"])}),o.on(y+p,function(t){this.time=g.now(),this.startPath=location.pathname+location.hash}),o.on(y+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,n,e){function r(t){for(var n=t;n&&!n.hasOwnProperty(u);)n=Object.getPrototypeOf(n);n&&o(n)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,n){return t[1]}var a=t("ee").get("events"),s=t(18)(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";n.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,n){var e=t[1],r=c(e,"nr@wrapped",function(){function t(){if("function"==typeof e.handleEvent)return e.handleEvent.apply(e,arguments)}var n={object:t,"function":e}[typeof e];return n?s(n,"fn-",null,n.name||"anonymous"):e});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,n,e){var r=t("ee").get("history"),o=t(18)(r);n.exports=r,o.inPlace(window.history,["pushState","replaceState"],"-")},{}],7:[function(t,n,e){var r=t("ee").get("raf"),o=t(18)(r),i="equestAnimationFrame";n.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],8:[function(t,n,e){function r(t,n,e){t[0]=a(t[0],"fn-",null,e)}function o(t,n,e){this.method=e,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,e)}var i=t("ee").get("timer"),a=t(18)(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";n.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],9:[function(t,n,e){function r(t,n){d.inPlace(n,["onreadystatechange"],"fn-",s)}function o(){var t=this,n=u.context(t);t.readyState>3&&!n.resolved&&(n.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,y,"fn-",s)}function i(t){g.push(t),h&&(x?x.then(a):w?w(a):(E=-E,O.data=E))}function a(){for(var t=0;t<g.length;t++)r([],g[t]);g.length&&(g=[])}function s(t,n){return n}function c(t,n){for(var e in t)n[e]=t[e];return n}t(5);var f=t("ee"),u=f.get("xhr"),d=t(18)(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",y=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],g=[];n.exports=u;var b=window.XMLHttpRequest=function(t){var n=new p(t);try{u.emit("new-xhr",[n],n),n.addEventListener(v,o,!1)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}return n};if(c(p,b),b.prototype=p.prototype,d.inPlace(b.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,n){r(t,n),i(n)}),u.on("open-xhr-start",r),h){var x=m&&m.resolve();if(!w&&!m){var E=1,O=document.createTextNode(E);new h(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],10:[function(t,n,e){function r(t){var n=this.params,e=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<d;r++)t.removeEventListener(u[r],this.listener,!1);if(!n.aborted){if(e.duration=a.now()-this.startTime,4===t.readyState){n.status=t.status;var i=o(t,this.lastSize);if(i&&(e.rxSize=i),this.sameOrigin){var c=t.getResponseHeader("X-NewRelic-App-Data");c&&(n.cat=c.split(", ").pop())}}else n.status=0;e.cbTime=this.cbTime,f.emit("xhr-done",[t],t),s("xhr",[n,e,this.startTime])}}}function o(t,n){var e=t.responseType;if("json"===e&&null!==n)return n;var r="arraybuffer"===e||"blob"===e||"json"===e?t.response:t.responseText;return h(r)}function i(t,n){var e=c(n),r=t.params;r.host=e.hostname+":"+e.port,r.pathname=e.pathname,t.sameOrigin=e.sameOrigin}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(11),f=t("ee"),u=["load","error","abort","timeout"],d=u.length,l=t("id"),p=t(14),h=t(13),m=window.XMLHttpRequest;a.features.xhr=!0,t(9),f.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=r,n.ended=!1,n.xhrGuids={},n.lastSize=null,p&&(p>34||p<10)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),f.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),f.on("open-xhr-end",function(t,n){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&n.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),f.on("send-xhr-start",function(t,n){var e=this.metrics,r=t[0],o=this;if(e&&r){var i=h(r);i&&(e.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"===t.type&&(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof n.onload))&&o.end(n)}catch(e){try{f.emit("internal-error",[e])}catch(r){}}};for(var s=0;s<d;s++)n.addEventListener(u[s],this.listener,!1)}),f.on("xhr-cb-time",function(t,n,e){this.cbTime+=t,n?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof e.onload||this.end(e)}),f.on("xhr-load-added",function(t,n){var e=""+l(t)+!!n;this.xhrGuids&&!this.xhrGuids[e]&&(this.xhrGuids[e]=!0,this.totalCbs+=1)}),f.on("xhr-load-removed",function(t,n){var e=""+l(t)+!!n;this.xhrGuids&&this.xhrGuids[e]&&(delete this.xhrGuids[e],this.totalCbs-=1)}),f.on("addEventListener-end",function(t,n){n instanceof m&&"load"===t[0]&&f.emit("xhr-load-added",[t[1],t[2]],n)}),f.on("removeEventListener-end",function(t,n){n instanceof m&&"load"===t[0]&&f.emit("xhr-load-removed",[t[1],t[2]],n)}),f.on("fn-start",function(t,n,e){n instanceof m&&("onload"===e&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),f.on("fn-end",function(t,n){this.xhrCbStart&&f.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,n],n)})}},{}],11:[function(t,n,e){n.exports=function(t){var n=document.createElement("a"),e=window.location,r={};n.href=t,r.port=n.port;var o=n.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=n.hostname||e.hostname,r.pathname=n.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!n.protocol||":"===n.protocol||n.protocol===e.protocol,a=n.hostname===document.domain&&n.port===e.port;return r.sameOrigin=i&&(!n.hostname||a),r}},{}],12:[function(t,n,e){function r(){}function o(t,n,e){return function(){return i(t,[f.now()].concat(s(arguments)),n?null:this,e),n?void 0:this}}var i=t("handle"),a=t(15),s=t(16),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,n){u[n]=o(l+n,!0,"api")}),u.addPageAction=o(l+"addPageAction",!0),u.setCurrentRouteName=o(l+"routeName",!0),n.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,n){var e={},r=this,o="function"==typeof n;return i(p+"tracer",[f.now(),t,e],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],e),o)try{return n.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],e),t}finally{c.emit("fn-end",[f.now()],e)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,n){h[n]=o(p+n)}),newrelic.noticeError=function(t){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now()])}},{}],13:[function(t,n,e){n.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(n){return}}}},{}],14:[function(t,n,e){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),n.exports=r},{}],15:[function(t,n,e){function r(t,n){var e=[],r="",i=0;for(r in t)o.call(t,r)&&(e[i]=n(r,t[r]),i+=1);return e}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],16:[function(t,n,e){function r(t,n,e){n||(n=0),"undefined"==typeof e&&(e=t?t.length:0);for(var r=-1,o=e-n||0,i=Array(o<0?0:o);++r<o;)i[r]=t[n+r];return i}n.exports=r},{}],17:[function(t,n,e){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],18:[function(t,n,e){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(16),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;n.exports=function(t,n){function e(t,n,e,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof e?e(r,a):e||{}}catch(f){l([f,"",[r,a,o],s])}u(n+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(n+"err",[r,a,d],s),d}finally{u(n+"end",[r,a,c],s)}}return r(t)?t:(n||(n=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function u(e,r,o){if(!c||n){var i=c;c=!0;try{t.emit(e,r,o,n)}catch(a){l([a,e,r,o])}c=i}}function d(t,n){if(Object.defineProperty&&Object.keys)try{var e=Object.keys(t);return e.forEach(function(e){Object.defineProperty(n,e,{get:function(){return t[e]},set:function(n){return t[e]=n,n}})}),n}catch(r){l([r])}for(var o in t)s.call(t,o)&&(n[o]=t[o]);return n}function l(n){try{t.emit("internal-error",n)}catch(e){}}return t||(t=o),e.inPlace=f,e.flag=a,e}},{}],ee:[function(t,n,e){function r(){}function o(t){function n(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function e(e,r,o,i){if(!l.aborted||i){t&&t(e,r,o);for(var a=n(o),s=h(e),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[y[e]];return d&&d.push([g,e,r,a]),a}}function p(t,n){v[t]=h(t).concat(n)}function h(t){return v[t]||[]}function m(t){return d[t]=d[t]||o(e)}function w(t,n){f(t,function(t,e){n=n||"feature",y[e]=n,n in u||(u[n]=[])})}var v={},y={},g={on:p,emit:e,get:m,listeners:h,context:n,buffer:w,abort:a,aborted:!1};return g}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var s="nr@context",c=t("gos"),f=t(15),u={},d={},l=n.exports=o();l.backlog=u},{}],gos:[function(t,n,e){function r(t,n,e){if(o.call(t,n))return t[n];var r=e();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(t,n,e){function r(t,n,e,r){o.buffer([t],r),o.emit(t,n,e)}var o=t("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(t,n,e){function r(t){var n=typeof t;return!t||"object"!==n&&"function"!==n?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");n.exports=r},{}],loader:[function(t,n,e){function r(){if(!x++){var t=b.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&n))return u.abort();f(y,function(n,e){t[n]||(t[n]=e)}),c("mark",["onload",a()+b.offset],null,"api");var e=l.createElement("script");e.src="https://"+t.agent,n.parentNode.insertBefore(e,n)}}function o(){"complete"===l.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(15),u=t("ee"),d=window,l=d.document,p="addEventListener",h="attachEvent",m=d.XMLHttpRequest,w=m&&m.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:m,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1071.min.js"},g=m&&w&&w[p]&&!/CriOS/.test(navigator.userAgent),b=n.exports={offset:s,now:a,origin:v,features:{},xhrWrappable:g};t(12),l[p]?(l[p]("DOMContentLoaded",i,!1),d[p]("load",r,!1)):(l[h]("onreadystatechange",o),d[h]("onload",r)),c("mark",["firstbyte",s],null,"api");var x=0,E=t(17)},{}]},{},["loader",2,10,4,3]);</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="google-site-verification" content="4Ga-viQvIZUFNQXu323xpp_24RDlLooxwlpnXhinjPA" />
+    <meta name="msvalidate.01" content="F0716E70B7DD3B8C892B48891CA4B541" />
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="lZ1KErI1Wa1nSpk3FtLyuZ4SdhatVaWL7dVtQkhiBmLrX8Yt3v4JQ9iAu1bU5o/ekPbD41FsM/7acObnQFIp8A==" />
+
+      <meta name="description" content="Participate in discussions with other Treehouse members and learn." />
+      <meta name="image" content="http://teamtreehouse.com/images/logo.png" />
+      <meta name="twitter:site" content="@treehouse" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:description" content="Participate in discussions with other Treehouse members and learn." />
+      <meta name="twitter:image" content="https://static.teamtreehouse.com/assets/marketing/opengraph/logo_twitter-cd0ecb90408499f45a2191805f54362981da5a69ddcfaa6ec93556d64e289036.png" />
+
+      <meta property="fb:app_id" content="1447543992198627" />
+      <meta property="og:site_name" content="Treehouse" />
+      <meta property="og:description" content="Participate in discussions with other Treehouse members and learn." />
+      <meta property="og:image" content="https://static.teamtreehouse.com/assets/marketing/opengraph/logo_facebook-5a7642409483233360d948ca4dd6840de0a6083475af4b047d452b77b00ca68a.png" />
+
+    <script src="https://static.teamtreehouse.com/assets/head_vendor-c7c446e89edd8174e363176292fa44a6c8eb557bcb1ddd0b9d575ed833114955.js"></script>
+    <script>
+  window.bugsnagClient = bugsnag({
+    apiKey: "8251a8eb6422d59eaf410e7c1b1c7b38",
+    releaseStage: "production"
+  });
+</script>
+
+      <script src="https://cdn.cookielaw.org/consent/39d1ae64-085b-42e6-a239-a988d6530b80.js" type="text/javascript" charset="UTF-8"></script>
+
+<script type="text/javascript">
+function OptanonWrapper() { window.dataLayer.push({ event: "OneTrustGroupsUpdated" }) }
+</script>
+
+    <script>
+//<![CDATA[
+window.appData = '{\"controller_name\":\"forum_posts\",\"action_name\":\"show\",\"app_version\":\"3c96a0c9f138de4905b7ffad3adbfc97a99920bb\"}'
+//]]>
+</script>
+
+
+    <link rel="stylesheet" media="screen" href="https://static.teamtreehouse.com/assets/vendor-93b6e99baa7b7c34815ed2ccefaa32e3d3dd6f5f2074df8201178eb7f849bd76.css" />
+<link rel="stylesheet" media="screen" href="https://static.teamtreehouse.com/assets/application-396273b72f31ab0f78b004ff004d23ce01d402cfbe4d528a9a163b049d987329.css" />
+    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/7055252/762022/css/fonts.css" />
+    
+
+    <style media="print">
+      header, footer, .graph, .nav, svg {
+        display: none
+      }
+    </style>
+
+    <link rel="shortcut icon" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://static.teamtreehouse.com/assets/apple-touch-icon-60x60-precomposed-05be36fef4d37c9642a8923eb00325c9d680150d26954e868ddded6b7976a032.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://static.teamtreehouse.com/assets/apple-touch-icon-76x76-precomposed-7283cd247847d1f21be0e79c52e3524c89adabf69cfc331046319f4ab19be058.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://static.teamtreehouse.com/assets/apple-touch-icon-120x120-precomposed-dda60d87f49aa928ff86379bb50d9514d4b5f19502ff562b453e3d254730f682.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://static.teamtreehouse.com/assets/apple-touch-icon-152x152-precomposed-1f486d33d1fe181adce0689d370d7dab9e777fab99b244e15b8c785239410674.png" />
+
+    
+
+
+    
+
+    <script type="text/plain" class="optanon-category-2">
+(function() {
+  var s = document.createElement('script'),
+  e = document.getElementsByTagName('script')[0];
+  s.src = '//d3cxv97fi8q177.cloudfront.net/foundation-A187849-72ad-44c6-83bc-3d4f458b85e71.min.js';s.type = 'text/javascript';s.async = true;s.id="irfOuterTag";
+  e.parentNode.insertBefore(s, e);
+
+})();
+</script>
+<noscript><img src="//tl.r7ls.net/unscripted/187849" width="1" height="1"></noscript>
+
+
+    <script type="text/javascript">
+  window._elqQ = [];
+  function _elqInitialize() {
+    if(!window._elqInitialized) {
+      window._elqInitialized = true;
+      _elqQ.push(['elqSetSiteId', '1855842777']);
+      var s = document.createElement('script'); s.type = 'text/javascript';
+      s.src = '//img04.en25.com/i/elqCfg.min.js';
+      var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    }
+  };
+</script>
+<script type="text/plain" class="optanon-category-2">
+  _elqInitialize();
+</script>
+<script type="text/plain" class="optanon-category-4">
+  _elqInitialize();
+  _elqQ.push(['elqTrackPageView']);
+</script>
+
+  </head>
+  <body  class="osx safari webkit ">
+    <!-- Data Layer -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({"loggedIn":false,"visitorId":6916177482,"userId":null});
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PZ55S7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PZ55S7');</script>
+<!-- End Google Tag Manager -->
+
+
+
+  <header class="header" role="banner" data-header>
+    <nav class="header-nav container" role="navigation" data-nav>
+      <button class="hamburger-button hamburger-button-inverse" aria-label="Navigation Menu" data-hamburger-button>
+  <span class="hamburger"></span>
+</button>
+
+      <ul class="header-nav-list ">
+        <li class="header-nav-item  header-nav-item-primary header-nav-item-logo ">
+          <h6 class="header-nav-item-logo-container">
+            <a class="header-nav-link header-nav-item-logo-link" aria_label="Treehouse Home" data-analytics-link="Treehouse Logo" data-analytics-event="application nav link" data-analytics-path="/" data-analytics-action="clicked" href="/">
+              <svg class="logo-icon header-nav-item-logo-icon" alt="Treehouse" preserveAspectRatio="xMinYMin meet" viewBox="0 0 30 32"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#logo-icon"></use></svg>
+              <span class="header-nav-item-logo-text header-nav-item-primary">Home</span>
+</a>          </h6>
+</li>
+          <li class="header-nav-item  header-nav-item-sign-up ">
+            <a class="header-nav-link " data-analytics-event="application nav link" data-analytics-link="Free Trial" data-analytics-path="/subscribe/plans?trial=yes" data-analytics-action="clicked" href="/subscribe/plans?trial=yes">Free Trial</a>
+</li>
+          <li class="header-nav-item header-nav-item-mobile header-nav-item-sign-in ">
+            <a class="header-nav-link " data-analytics-event="application nav link" data-analytics-link="Sign In" data-analytics-path="/signin?return_to=%2Fcommunity%2Fcounting-words-in-a-string-using-a-dictionary-python-collection-challenge" data-analytics-action="clicked" href="/signin?return_to=%2Fcommunity%2Fcounting-words-in-a-string-using-a-dictionary-python-collection-challenge">Sign In</a>
+</li>
+          <li class="header-nav-item header-nav-item-tablet header-nav-item-primary header-nav-item-techdegrees ">
+            <a class="header-nav-link " data-analytics-event="application nav link" data-analytics-link="Techdegree" data-analytics-path="/techdegree" data-analytics-action="clicked" href="/techdegree">Techdegree</a>
+</li>
+        <li class="header-nav-item header-nav-item-tablet header-nav-item-primary header-nav-item-tracks ">
+          <a class="header-nav-link nav-item-tracks" data-analytics-event="application nav link" data-analytics-link="Tracks" data-analytics-path="/tracks" data-analytics-action="clicked" href="/tracks">Tracks</a>
+</li>
+        <li class="header-nav-item header-nav-item-tablet header-nav-item-primary header-nav-item-library ">
+          <a class="header-nav-link nav-item-library" data-analytics-event="application nav link" data-analytics-link="Library" data-analytics-path="/library" data-analytics-action="clicked" href="/library">Library</a>
+</li>
+        <li class="header-nav-item header-nav-item-tablet nav-item-community header-nav-item-primary header-nav-item-community header-nav-item-current">
+          <a class="header-nav-link nav-item-community" data-analytics-event="application nav link" data-analytics-link="Community" data-analytics-path="/community" data-analytics-action="clicked" href="/community">Community</a>
+</li>
+        <li class="header-nav-item header-nav-item-tablet header-nav-item-primary header-nav-item-support ">
+          <a class="header-nav-link " data-analytics-event="application nav link" data-analytics-link="Support" data-analytics-path="/support" data-analytics-action="clicked" href="/support">Support</a>
+</li>
+      </ul>
+      
+    </nav>
+  </header>
+
+  <main class="content topic-back-end" role="main" data-content="">
+      <div class="container ">
+        
+        
+        
+
+        
+          
+<div class="mixed-box">
+  <div id="forum-post-meta" class="box-header secondary has-topic-border-color add-back-end-border-color">
+    <ul id="forum-post-actions">
+        <li id="forum-post-step-cta">
+          <a id="post-step-cta" class="button primary icon-on-left" href="/library/python-collections-retired/dictionaries/word-count"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 18 18" class="code-challenge-18-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#code-challenge-18-icon"></use></svg> View Challenge</a>
+        </li>
+    </ul>
+    <p id="forum-post-breadcrumb">
+      <a id="forum-post-breadcrumb-topic" class="has-topic-color add-back-end-color has-topic-color-on-hover add-back-end-color-darker-on-hover" href="/community/topic:python">Python</a>
+      <a id="forum-post-breadcrumb-syllabus" href="/community/syllabus:622">Python Collections (Retired)</a>
+      <a id="forum-post-breadcrumb-stage" href="/community/stage:2612">Dictionaries</a>
+      <a id="forum-post-breadcrumb-step" href="/community/code-challenge:2222">Word Count</a>
+    </p>
+  </div>
+
+  <div id="forum-post-content" class="box-content">
+    
+    <div id="forum-post-question-container" class="discussion-question-container">
+	<div class="discussion-question">
+
+
+	  <div id="show-post-686782">
+    <a id="avatar-0da4b5" class="discussion-question-avatar avatar-white-bg avatar avatar-medium avatar-link user-tooltip-link" href="/zacharyvacek" data-behavior="mini-profile-trigger" data-profile-name="zacharyvacek" data-featurette="avatar" data-user-tooltip-link="">
+    
+    <div class="points-donut chart avatar-points" data-animate-points="true" data-initialize-later="true" data-featurette="points-chart" data-width="48" data-height="48" data-donut-width="9px" data-points="{&quot;html&quot;:1144,&quot;css&quot;:1380,&quot;design&quot;:0,&quot;javascript&quot;:2223,&quot;ruby&quot;:0,&quot;php&quot;:0,&quot;wordpress&quot;:218,&quot;ios&quot;:0,&quot;android&quot;:2,&quot;development-tools&quot;:165,&quot;business&quot;:0,&quot;python&quot;:2538,&quot;java&quot;:1893,&quot;digital-literacy&quot;:10,&quot;game-development&quot;:0,&quot;csharp&quot;:0,&quot;databases&quot;:0,&quot;virtual-reality&quot;:0,&quot;data-analysis&quot;:0,&quot;apis&quot;:0,&quot;security&quot;:0,&quot;go&quot;:0,&quot;quality-assurance&quot;:0}" data-points-total="9952" data-padding="1"></div>
+    <div class="avatar-container">
+      <img alt="Zachary Vacek" class="avatar-image" src="https://secure.gravatar.com/avatar/91bd85059767ed7dd718d3a5fdb2c555?s=96&amp;d=https%3A%2F%2Fstatic.teamtreehouse.com%2Fassets%2Fcontent%2Fdefault_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png&amp;r=pg" />
+    </div>
+    
+    
+      <div class="user-tooltip tooltip tooltip-top ">
+    <h6 class="user-tooltip-name">Zachary Vacek</h6>
+
+
+
+      <span class="user-tooltip-points-total">
+        9,952 Points
+      </span>
+</div>
+</a>
+  <div class="discussion-byline ">Posted <a class="discussion-byline-time" href="/community/counting-words-in-a-string-using-a-dictionary-python-collection-challenge"><time datetime="2015-05-20T01:26:59Z" data-local="time-ago">May 20, 2015  1:26am</time></a> by <a class="discussion-author user-tooltip-link" data-behavior="mini-profile-trigger" data-profile-name="zacharyvacek" data-user-tooltip-link="" href="/zacharyvacek">Zachary Vacek  <div class="user-tooltip tooltip tooltip-top ">
+    <h6 class="user-tooltip-name">Zachary Vacek</h6>
+
+
+
+      <span class="user-tooltip-points-total">
+        9,952 Points
+      </span>
+</div></a></div>
+
+  <h1>Counting words in a string using a dictionary - Python Collection Challenge</h1>
+
+  <div class="question markdown-zone">
+    <div class="highlight highlight-python"><pre><span></span><span id="line-1"><span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span><span id="line-2">  <span class="n">my_string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span id="line-3">  <span class="n">my_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="line-4">  <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_string</span><span class="p">:</span>
+</span><span id="line-5">    <span class="n">my_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="line-6">  <span class="k">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+</span><span id="line-7">
+</span><span id="line-8"><span class="n">word_count</span><span class="p">(</span><span class="s2">"I am that I am"</span><span class="p">)</span>
+</span></pre></div>
+
+<p>The program is running without any errors, but I can't figure out why it isn't properly counting the items in the string.</p>
+
+<p>It should be printing
+{'i': 2, 'am': 2, 'that': 1}</p>
+
+<p>but it's printing
+{'i': 1, 'am': 1, 'that': 1}</p>
+
+<p>Can someone help me figure out why this may be?</p>
+
+<p>Thanks!</p>
+
+<ul>
+<li>Zac</li>
+</ul>
+
+<div class="code-attachment-filename" data-behavior="file">
+  <span class="icon icon-doc"></span>
+<span>word_count.py</span>
+</div>
+<div class="highlight highlight-py"><pre><span></span><span id="line-1"><span class="c1"># E.g. word_count("I am that I am") gets back a dictionary like:</span>
+</span><span id="line-2"><span class="c1"># {'i': 2, 'am': 2, 'that': 1}</span>
+</span><span id="line-3"><span class="c1"># Lowercase the string to make it easier.</span>
+</span><span id="line-4"><span class="c1"># Using .split() on the sentence will give you a list of words.</span>
+</span><span id="line-5"><span class="c1"># In a for loop of that list, you'll have a word that you can</span>
+</span><span id="line-6"><span class="c1"># check for inclusion in the dict (with "if word in dict"-style syntax).</span>
+</span><span id="line-7"><span class="c1"># Or add it to the dict with something like word_dict[word] = 1.</span>
+</span></pre></div>
+  </div>
+</div>
+
+
+
+		
+	</div>
+</div>
+
+
+
+      <div id="forum-post-answers-container">
+
+          <div class="secondary-heading answer-count">
+            <h2>2 Answers</h2>
+          </div>
+
+        <div class="discussion-answer"
+     data-featurette="forum-voting"
+     data-answer-id="1556412"
+     data-cancel-vote-url="/community/686782/forum_answers/1556412/vote/cancel">
+
+  <div id="answer-1556412" class="discussion-highlight discussion-answer-best">
+
+    <div id="show-answer-1556412" >
+
+    <a id="avatar-c32f9d" class="avatar-moderator avatar-white-bg avatar-light-green-bg discussion-answer-avatar avatar avatar-medium avatar-link user-tooltip-link" href="/chrisfreeman3" data-behavior="mini-profile-trigger" data-profile-name="chrisfreeman3" data-featurette="avatar" data-user-tooltip-link="">
+    
+    <div class="points-donut chart avatar-points" data-animate-points="true" data-initialize-later="true" data-featurette="points-chart" data-width="48" data-height="48" data-donut-width="9px" data-points="{&quot;front-end&quot;:6441,&quot;design&quot;:28,&quot;back-end&quot;:39337,&quot;mobile&quot;:48,&quot;fundamentals&quot;:1545,&quot;data&quot;:632,&quot;experimental&quot;:0}" data-points-total="49109" data-padding="1"></div>
+    <div class="avatar-container">
+      <img alt="Chris Freeman" class="avatar-image" src="https://uploads.teamtreehouse.com/production/profile-photos/1153532/micro_image.jpg" />
+    </div>
+    
+    <div class="avatar-label"><span class="discussion-author-label">MOD</span></div>
+      <div class="user-tooltip tooltip tooltip-top user-tooltip-moderator">
+    <h6 class="user-tooltip-name">Chris Freeman</h6>
+
+
+      <span class="user-tooltip-type">
+        Treehouse Moderator
+      </span>
+
+      <span class="user-tooltip-points-total">
+        49,109 Points
+      </span>
+</div>
+</a>
+  <div class="discussion-byline "><a class="discussion-author user-tooltip-link" data-behavior="mini-profile-trigger" data-profile-name="chrisfreeman3" data-user-tooltip-link="" href="/chrisfreeman3">Chris Freeman  <div class="user-tooltip tooltip tooltip-top user-tooltip-moderator">
+    <h6 class="user-tooltip-name">Chris Freeman</h6>
+
+
+      <span class="user-tooltip-type">
+        Treehouse Moderator
+      </span>
+
+      <span class="user-tooltip-points-total">
+        49,109 Points
+      </span>
+</div></a> <span class="discussion-byline-time"><time datetime="2015-05-24T03:47:42Z" data-local="time-ago">May 24, 2015  3:47am</time></span></div>
+
+  <div class="discussion-answer-text">
+    <div class="markdown-zone">
+      <p>What your original code was doing, as you figured out, was reassigning the dictionary value each time an <code>item</code> was seen effective only counting the last time it was seen. Also, <code>item.count(item)</code> will always return 1 on any string.</p>
+
+<p>In your updated solution, you are effectively recounting an item many times, overriding the value with the last time an <code>item</code> was seen. This parses the full string for each item present. As the string gets longer this becomes much more inefficient. To count the string in a single pass, keep track if the <code>item</code> is first seen or should increment by 1:</p>
+
+<div class="highlight highlight-python"><pre><span></span><span id="line-1"><span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span><span id="line-2">    <span class="n">my_string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span id="line-3">    <span class="n">my_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="line-4">    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_string</span><span class="p">:</span>
+</span><span id="line-5">        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_dict</span><span class="p">:</span>
+</span><span id="line-6">            <span class="n">my_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="line-7">        <span class="k">else</span><span class="p">:</span>
+</span><span id="line-8">            <span class="n">my_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="line-9">    <span class="k">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+</span></pre></div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="discussion-comments-container empty">
+  <div class="discussion-answer-comments">
+    
+  </div>
+</div>
+<div class="discussion-answer"
+     data-featurette="forum-voting"
+     data-answer-id="1556352"
+     data-cancel-vote-url="/community/686782/forum_answers/1556352/vote/cancel">
+
+  <div id="answer-1556352" class="discussion-highlight ">
+
+    <div id="show-answer-1556352" >
+
+    <a id="avatar-1103d1" class="avatar-white-bg  discussion-answer-avatar avatar avatar-medium avatar-link user-tooltip-link" href="/zacharyvacek" data-behavior="mini-profile-trigger" data-profile-name="zacharyvacek" data-featurette="avatar" data-user-tooltip-link="">
+    
+    <div class="points-donut chart avatar-points" data-animate-points="true" data-initialize-later="true" data-featurette="points-chart" data-width="48" data-height="48" data-donut-width="9px" data-points="{&quot;html&quot;:1144,&quot;css&quot;:1380,&quot;design&quot;:0,&quot;javascript&quot;:2223,&quot;ruby&quot;:0,&quot;php&quot;:0,&quot;wordpress&quot;:218,&quot;ios&quot;:0,&quot;android&quot;:2,&quot;development-tools&quot;:165,&quot;business&quot;:0,&quot;python&quot;:2538,&quot;java&quot;:1893,&quot;digital-literacy&quot;:10,&quot;game-development&quot;:0,&quot;csharp&quot;:0,&quot;databases&quot;:0,&quot;virtual-reality&quot;:0,&quot;data-analysis&quot;:0,&quot;apis&quot;:0,&quot;security&quot;:0,&quot;go&quot;:0,&quot;quality-assurance&quot;:0}" data-points-total="9952" data-padding="1"></div>
+    <div class="avatar-container">
+      <img alt="Zachary Vacek" class="avatar-image" src="https://secure.gravatar.com/avatar/91bd85059767ed7dd718d3a5fdb2c555?s=96&amp;d=https%3A%2F%2Fstatic.teamtreehouse.com%2Fassets%2Fcontent%2Fdefault_avatar-ea7cf6abde4eec089a4e03cc925d0e893e428b2b6971b12405a9b118c837eaa2.png&amp;r=pg" />
+    </div>
+    
+    
+      <div class="user-tooltip tooltip tooltip-top ">
+    <h6 class="user-tooltip-name">Zachary Vacek</h6>
+
+
+
+      <span class="user-tooltip-points-total">
+        9,952 Points
+      </span>
+</div>
+</a>
+  <div class="discussion-byline "><a class="discussion-author user-tooltip-link" data-behavior="mini-profile-trigger" data-profile-name="zacharyvacek" data-user-tooltip-link="" href="/zacharyvacek">Zachary Vacek  <div class="user-tooltip tooltip tooltip-top ">
+    <h6 class="user-tooltip-name">Zachary Vacek</h6>
+
+
+
+      <span class="user-tooltip-points-total">
+        9,952 Points
+      </span>
+</div></a> <span class="discussion-byline-time"><time datetime="2015-05-20T03:12:10Z" data-local="time-ago">May 20, 2015  3:12am</time></span></div>
+
+  <div class="discussion-answer-text">
+    <div class="markdown-zone">
+      <p>Got it!</p>
+
+<div class="highlight highlight-python"><pre><span></span><span id="line-1"><span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span><span id="line-2">  <span class="n">my_string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span><span id="line-3">  <span class="n">my_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="line-4">  <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_string</span><span class="p">:</span>
+</span><span id="line-5">    <span class="n">my_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_string</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="line-6">  <span class="k">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+</span><span id="line-7">
+</span><span id="line-8"><span class="n">word_count</span><span class="p">(</span><span class="s2">"I am that I am."</span><span class="p">)</span>
+</span></pre></div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="discussion-comments-container ">
+  <div class="discussion-answer-comments">
+    <div class="comment" id="comment-927122">
+  <div class="discussion-comment" id="show-comment-927122">
+    <a id="avatar-c82ffb" class="avatar-moderator discussion-comment-avatar avatar-white-bg avatar avatar-x-small avatar-link user-tooltip-link" href="/chrisfreeman3" data-behavior="mini-profile-trigger" data-profile-name="chrisfreeman3" data-featurette="avatar" data-user-tooltip-link="">
+    
+    <div class="points-donut chart avatar-points" data-animate-points="true" data-initialize-later="true" data-featurette="points-chart" data-width="30" data-height="30" data-donut-width="9px" data-points="{&quot;front-end&quot;:6441,&quot;design&quot;:28,&quot;back-end&quot;:39337,&quot;mobile&quot;:48,&quot;fundamentals&quot;:1545,&quot;data&quot;:632,&quot;experimental&quot;:0}" data-points-total="49109" data-padding="2"></div>
+    <div class="avatar-container">
+      <img alt="Chris Freeman" class="avatar-image" src="https://uploads.teamtreehouse.com/production/profile-photos/1153532/micro_image.jpg" />
+    </div>
+    
+    
+      <div class="user-tooltip tooltip tooltip-top user-tooltip-moderator">
+    <h6 class="user-tooltip-name">Chris Freeman</h6>
+
+
+      <span class="user-tooltip-type">
+        Treehouse Moderator
+      </span>
+
+      <span class="user-tooltip-points-total">
+        49,109 Points
+      </span>
+</div>
+</a>
+  <div class="discussion-byline "><a class="discussion-author user-tooltip-link" data-behavior="mini-profile-trigger" data-profile-name="chrisfreeman3" data-user-tooltip-link="" href="/chrisfreeman3">Chris Freeman  <div class="user-tooltip tooltip tooltip-top user-tooltip-moderator">
+    <h6 class="user-tooltip-name">Chris Freeman</h6>
+
+
+      <span class="user-tooltip-type">
+        Treehouse Moderator
+      </span>
+
+      <span class="user-tooltip-points-total">
+        49,109 Points
+      </span>
+</div></a> <span class="discussion-byline-time"><time datetime="2015-05-24T03:30:57Z" data-local="time-ago">May 24, 2015  3:30am</time></span></div>
+
+  <div class="discussion-comment-text">
+    <div class="markdown-zone">
+      <p>I promoted this to an answer, but then saw this is a hidden error in the code.  See my answer.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+  </div>
+</div>
+
+      </div>
+
+      
+
+      <div id="forum-post-answer" class="">
+        
+      </div>
+  </div>
+    <div id="community-disclaimer" class="box-footer secondary">
+    <svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="info-24-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#info-24-icon"></use></svg>
+    <p>
+      Posting to the forum is only allowed for members with active accounts.<br />
+        Please <a href="/signin?return_to=%2Fcommunity%2Fcounting-words-in-a-string-using-a-dictionary-python-collection-challenge">sign in</a> or <a href="/subscribe/plans">sign up</a> to post.
+    </p>
+  </div>
+
+</div>
+
+</div></main>
+  <footer class="footer" role="contentinfo">
+  <div class="container ">
+      <dl class="footer-meta-list footer-meta-list-treehouse">
+        <dt class="footer-meta-title"><a class="footer-meta-treehouse-icon-link" href="/"><svg class="treehouse-icon footer-meta-treehouse-icon" preserveAspectRatio="xMinYMin meet" viewBox="0 0 139 32"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#treehouse-icon"></use></svg></a></dt>
+        <dd class="footer-meta-item">Our mission is to bring <a class="footer-meta-treehouse-link" href="/">affordable technology education</a> to people everywhere in order to help them achieve their dreams and change the world.</dd>
+      </dl>
+      <dl class="footer-meta-list">
+        <dt class="footer-meta-title">Our Company</dt>
+        <dd class="footer-meta-item"><a rel="nofollow" class="footer-meta-link" href="/about">About Us</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/support">Contact Us</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/community">Community</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/stories">Treehouse Stories</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/perks">Student Perks</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="http://blog.teamtreehouse.com/">Treehouse Blog</a></dd>
+        <dd class="footer-meta-item"><a rel="nofollow" class="footer-meta-link" href="https://teamtreehouse.com/affiliate-program">Affiliate Program</a></dd>
+        <dd class="footer-meta-item"><a rel="nofollow" class="footer-meta-link" href="/careers">Careers</a></dd>
+      </dl>
+      <dl class="footer-meta-list">
+        <dt class="footer-meta-title">Topics</dt>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:html">HTML</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:css">CSS</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:design">Design</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:javascript">JavaScript</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:ruby">Ruby</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:php">PHP</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:wordpress">WordPress</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:ios">iOS</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:android">Android</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:development-tools">Development Tools</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/library/topic:business">Business</a></dd>
+      </dl>
+      <dl class="footer-meta-list">
+        <dt class="footer-meta-title">Tracks</dt>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/web-design">Web Design</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/web-development">Web Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/rails-development">Rails Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/php-development">PHP Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/ios-development">iOS Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/android-development">Android Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/wordpress-development">WordPress Development</a></dd>
+        <dd class="footer-meta-item"><a class="footer-meta-link" href="/tracks/starting-a-business">Starting a Business</a></dd>
+      </dl>
+    <ul class="footer-list">
+        <li class="footer-item footer-social-item">
+          <a title="Twitter" class="footer-social-link" target="_blank" href="http://twitter.com/treehouse"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="twitter-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#twitter-icon"></use></svg></a>
+        </li>
+        <li class="footer-item footer-social-item">
+          <a title="Youtube" class="footer-social-link" target="_blank" href="http://youtube.com/user/gotreehouse"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="youtube-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#youtube-icon"></use></svg></a>
+        </li>
+        <li class="footer-item footer-social-item">
+          <a title="Facebook" class="footer-social-link" target="_blank" href="http://facebook.com/teamtreehouse"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="facebook-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#facebook-icon"></use></svg></a>
+        </li>
+        <li class="footer-item footer-social-item">
+          <a title="Google Plus" class="footer-social-link" target="_blank" href="http://plus.google.com/110278003536476194286/posts"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="google-plus-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#google-plus-icon"></use></svg></a>
+        </li>
+        <li class="footer-item footer-social-item">
+          <a title="LinkedIn" class="footer-social-link" target="_blank" href="http://linkedin.com/company/treehouse-island-inc-"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="linked-in-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#linked-in-icon"></use></svg></a>
+        </li>
+        <li class="footer-item footer-social-item">
+          <a title="Instagram" class="footer-social-link" target="_blank" href="http://instagram.com/teamtreehouse"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 24 24" class="instagram-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#instagram-icon"></use></svg></a>
+        </li>
+      <li class="footer-item footer-item-text footer-item-blog"><a class="footer-item-text-link" href="http://blog.teamtreehouse.com/">Treehouse Blog</a></li>
+      <li class="footer-item footer-item-text"><a target="_blank" class="footer-item-text-link" href="https://shop.teamtreehouse.com">Shop Treehouse</a></li>
+      <li class="footer-item footer-item-text"><a class="footer-item-text-link" href="/about">About Treehouse</a></li>
+      <li class="footer-item footer-item-text"><a rel="nofollow" class="footer-item-text-link" href="/privacy">Privacy Policy</a></li>
+      <li class="footer-item footer-item-text"><a rel="nofollow" class="footer-item-text-link" href="/terms">Terms &amp; Conditions</a></li>
+      <li class="footer-item footer-item-copyright">&copy; 2018 Treehouse Island, Inc.</li>
+    </ul>
+</div></footer>
+
+
+  
+ <!-- yields content from within treehouse-tour paths. Find helper in application.helper -->
+
+  <div id="login-modal" class="modal" data-featurette="modal" style="; display: none;">
+    <div  class="grid-container login-modal" >
+      <div  class="grid-50 grid-parent centered" >
+        <section class="contained">
+          <button class="button  modal-close x-small square secondary" data-modal-close="close"><svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 12 12" class="close-icon"><use xlink:href="/assets/icons-7da5f4b10bc24925de2f814b253834ff806c524036528ff0a3a98b4218164112.svg#close-icon"></use></svg></button>
+           <div class="grid-100 secondary-heading">
+            <h1>Sign in</h1>
+          </div>
+          <form class="new_user_session" id="new_user_session" action="https://teamtreehouse.com/person_session?secure=true" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Apb9/i/MA2xNaFPBZeZT3erQ0JgShDY+X8Bo1Et8pXR8VHHBQwdTgvKicaCn0i665DRlbe69oEtoZeNxQ0yK5g==" />
+          <input type="hidden" name="return_to" id="return_to" value="/community/counting-words-in-a-string-using-a-dictionary-python-collection-challenge" class="input-hidden" />
+          <fieldset>
+            <div class="form-item">
+            <label for="user_session_email">Email Address</label>
+            <input autofocus="autofocus" autocomplete="email" class="form-text-input input-text input-text" type="email" name="user_session[email]" id="user_session_email" />
+</div>          </fieldset>
+          <fieldset>
+            <div class="form-item">
+            <label for="user_session_password">Password</label>
+            <input autocomplete="current-password" class="form-text-input input-text input-text" type="password" name="user_session[password]" id="user_session_password" />
+</div>          </fieldset>
+          <p class="forgot-password"><a href="/password_resets"><span class="icon icon-help-mini"></span>I forgot my password</a></p>
+          <button type="submit" class="button primary">Sign in</button>
+</form>        </section>
+      </div>
+    </div>
+</div>
+
+
+<div id="mini-profile-container"></div>
+<div id="tarp" class="modal-tarp" style="display: none;" data-featurette="tarp"></div>
+
+
+
+
+    
+    <script src="https://static.teamtreehouse.com/assets/application_vendor-92028f53285c1c53432deef4f6bb0b47d34a7cdafaebe3f58fbd1092cc4ae0b6.js"></script>
+    
+    <script src="https://static.teamtreehouse.com/assets/application-f68bf989f89e2b2e39b249598735ae7e8064301ed53a59457aff9c44fbdcc3f2.js"></script>
+    
+    
+    <!-- Segment.io Analytics -->
+<script type="text/plain" class="optanon-category-2">
+  !function(){
+    var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
+    analytics.load("DMUKccVYvuuUIVSJlokCJe0YQyGm9qVb");
+
+    analytics.ready(function(){
+      window.analytics.segmentDebug = window.analytics.debug;
+      window.analytics.debug = function(state) {
+        if (state == null) { state = true; }
+        $.cookie("_treehouse_analytics_debug", state);
+        return state;
+      };
+    })
+
+    window.recordedAnalytics = []
+    function recordAnalyticsCall(callType, event, properties, options) {
+      if ($.cookie("_treehouse_analytics_debug") == "true") {
+        window.recordedAnalytics.push([callType, event, properties, options])
+        console.debug("Analytics: ", callType, ("'" + event + "'"), properties, options);
+      }
+    }
+    analytics.on('alias', function(e, p, o) { recordAnalyticsCall('alias', e, p, o)});
+    analytics.on('identify', function(e, p, o) { recordAnalyticsCall('identify', e, p, o)});
+    analytics.on('group', function(e, p, o) { recordAnalyticsCall('group', e, p, o)});
+    analytics.on('track', function(e, p, o) { recordAnalyticsCall('track', e, p, o)});
+    analytics.on('page', function(e, p, o) { recordAnalyticsCall('page', e, p, o)});
+
+    var session_id = "0b149c81-ce07-4520-94c1-a7db41d66ed0";
+    var request_id = "C655380B-B196-0A78242D-01BB-5B89ED55-1E80CF2-4E1D";
+    var visitor_id = $.cookie("vid");
+    var user_id = "";
+    var organization_id = "";
+    var composite_identity = "MGIxNDljODEtY2UwNy00NTIwLTk0YzEtYTdkYjQxZDY2ZWQwNjkxNjE3NzQ4Mg==";
+
+    function trackIdentity() {
+        window.analytics.identify({
+          visitor_id: visitor_id,
+          session_id: session_id
+        }, {
+          anonymousId: session_id,
+          Intercom : {
+            user_hash : "7e0605b1549f19ee7716c311fc1c1fc64aeeaeb036647b76c53d08882eea13a0"
+          }
+        });
+
+    }
+
+    function trackPage() {
+      window.analytics.page({
+        visitor_id: visitor_id,
+        session_id: session_id,
+        request_id: request_id
+      }, {
+        anonymousId: session_id
+      });
+    }
+
+    if ($.cookie("_analytics_composite_identity") != composite_identity) {
+      analytics.reset();
+    }
+    $.cookie("_analytics_composite_identity", composite_identity);
+
+    trackIdentity();
+    trackPage();
+
+    $(document).on("pjax:success", function(event, body, status, xhr, options) {
+      request_id = xhr.getResponseHeader("X-Request-Id");
+      trackPage();
+    });
+  }}();
+
+</script>
+
+  </body>
+</html>
+

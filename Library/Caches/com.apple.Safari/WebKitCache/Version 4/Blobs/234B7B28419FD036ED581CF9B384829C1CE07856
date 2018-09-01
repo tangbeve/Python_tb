@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="UTF-8" />
+<title>How to Generate Random Numbers in Python</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="pingback" href="https://machinelearningmastery.com/xmlrpc.php" />
+
+<!--  Mobile viewport scale -->
+<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+
+<!-- This site is optimized with the Yoast SEO plugin v8.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/" />
+<link rel="publisher" href="https://plus.google.com/u/0/b/117073416089354242117/+MachinelearningmasteryHome/"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Generate Random Numbers in Python" />
+<meta property="og:description" content="The use of randomness is an important part of the configuration and evaluation of machine learning algorithms. From the random initialization of weights in an artificial neural network, to the splitting of data into random train and test sets, to the random shuffling of a training dataset in stochastic gradient descent, generating random numbers and &hellip;" />
+<meta property="og:url" content="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/" />
+<meta property="og:site_name" content="Machine Learning Mastery" />
+<meta property="article:publisher" content="https://www.facebook.com/Machine-Learning-Mastery-1429846323896563/" />
+<meta property="article:author" content="https://www.facebook.com/jason.brownlee.39" />
+<meta property="article:section" content="Statistical Methods" />
+<meta property="article:published_time" content="2018-07-04T05:00:12+10:00" />
+<meta property="article:modified_time" content="2018-05-22T08:01:48+10:00" />
+<meta property="og:updated_time" content="2018-05-22T08:01:48+10:00" />
+<meta property="og:image" content="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/How-to-Generate-Random-Numbers-in-Python.jpg" />
+<meta property="og:image:secure_url" content="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/How-to-Generate-Random-Numbers-in-Python.jpg" />
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="424" />
+<meta property="og:image:alt" content="How to Generate Random Numbers in Python" />
+<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/machinelearningmastery.com\/","sameAs":["https:\/\/www.facebook.com\/Machine-Learning-Mastery-1429846323896563\/","https:\/\/www.linkedin.com\/in\/jasonbrownlee","https:\/\/plus.google.com\/u\/0\/b\/117073416089354242117\/+MachinelearningmasteryHome\/","https:\/\/twitter.com\/TeachTheMachine"],"@id":"https:\/\/machinelearningmastery.com\/#organization","name":"Machine Learning Mastery","logo":"https:\/\/machinelearningmastery.com\/wp-content\/uploads\/2016\/09\/cropped-icon.png"}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Machine Learning Mastery &raquo; Feed" href="https://feeds.feedburner.com/MachineLearningMastery" />
+<link rel="alternate" type="application/rss+xml" title="Machine Learning Mastery &raquo; Comments Feed" href="https://machinelearningmastery.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Machine Learning Mastery &raquo; How to Generate Random Numbers in Python Comments Feed" href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/machinelearningmastery.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<style type="text/css" media="all">
+.wpautoterms-footer{background-color:#ffffff;text-align:center;}
+.wpautoterms-footer a{color:#000000;font-family:Arial, sans-serif;font-size:14px;}
+.wpautoterms-footer .separator{color:#cccccc;font-family:Arial, sans-serif;font-size:14px;}</style>
+<link rel='stylesheet' id='crayon-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-classic-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/crayon-syntax-highlighter/themes/classic/classic.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='wpautoterms_css-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/auto-terms-of-service-and-privacy-policy/css/wpautoterms.css?ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='apss-font-awesome-css'  href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css?ver=4.2.2.0.iis7_supports_permalinks' type='text/css' media='all' />
+<link rel='stylesheet' id='apss-font-opensans-css'  href='//fonts.googleapis.com/css?family=Open+Sans&#038;ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='apss-frontend-css-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/seo-optimized-share-buttons/css/frontend.css?ver=4.2.2.0.iis7_supports_permalinks' type='text/css' media='all' />
+<link rel='stylesheet' id='ewd-ufaq-style-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/ultimate-faqs/css/ewd-ufaq-styles.css?ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='ewd-ufaq-rrssb-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/ultimate-faqs/css/rrssb-min.css?ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='woo-testimonials-css-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/includes/integrations/testimonials/css/testimonials.css?ver=4.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-stylesheet-css'  href='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/style.css?ver=5.9.21' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/css/non-responsive.css" rel="stylesheet" type="text/css" />
+<style type="text/css">.col-full, #wrapper { width: 960px; max-width: 960px; } #inner-wrapper { padding: 0; } body.full-width #header, #nav-container, body.full-width #content, body.full-width #footer-widgets, body.full-width #footer { padding-left: 0; padding-right: 0; } body.fixed-mobile #top, body.fixed-mobile #header-container, body.fixed-mobile #footer-container, body.fixed-mobile #nav-container, body.fixed-mobile #footer-widgets-container { min-width: 960px; padding: 0 1em; } body.full-width #content { width: auto; padding: 0 1em;}</style>
+<![endif]-->
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/machinelearningmastery.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/includes/js/third-party.min.js?ver=4.9.8'></script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/includes/js/modernizr.min.js?ver=2.6.2'></script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/includes/js/general.min.js?ver=4.9.8'></script>
+<link rel='https://api.w.org/' href='https://machinelearningmastery.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://machinelearningmastery.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://machinelearningmastery.com/?p=5708' />
+<link rel="alternate" type="application/json+oembed" href="https://machinelearningmastery.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmachinelearningmastery.com%2Fhow-to-generate-random-numbers-in-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://machinelearningmastery.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmachinelearningmastery.com%2Fhow-to-generate-random-numbers-in-python%2F&#038;format=xml" />
+<!-- Start Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44039733-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+    <script type="text/javascript">
+        var ajaxurl = 'https://machinelearningmastery.com/wp-admin/admin-ajax.php';
+    </script>
+
+<!-- Custom CSS Styling -->
+<style type="text/css">
+#logo .site-title, #logo .site-description { display:none; }
+body {background-repeat:no-repeat;background-position:top left;background-attachment:scroll;border-top:0px solid #000000;}
+#header {background-repeat:no-repeat;background-position:left top;margin-top:0px;margin-bottom:0px;padding-top:10px;padding-bottom:10px;border:0px solid ;}
+#logo .site-title a {font:bold 40px/1em "Helvetica Neue", Helvetica, sans-serif;color:#222222;}
+#logo .site-description {font:normal 13px/1em "Helvetica Neue", Helvetica, sans-serif;color:#999999;}
+body, p { font:normal 14px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#555555; }
+h1 { font:bold 28px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }h2 { font:bold 24px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }h3 { font:bold 20px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }h4 { font:bold 16px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }h5 { font:bold 14px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }h6 { font:bold 12px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#222222; }
+.page-title, .post .title, .page .title {font:bold 28px/1.1em "Helvetica Neue", Helvetica, sans-serif;color:#222222;}
+.post .title a:link, .post .title a:visited, .page .title a:link, .page .title a:visited {color:#222222}
+.post-meta { font:normal 12px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#999999; }
+.entry, .entry p{ font:normal 15px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#555555; }
+.post-more {font:normal 13px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:;border-top:0px solid #e6e6e6;border-bottom:0px solid #e6e6e6;}
+#post-author, #connect {border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;border-left:1px solid #e6e6e6;border-right:1px solid #e6e6e6;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:#fafafa}
+.nav-entries a, .woo-pagination { font:normal 13px/1em "Helvetica Neue", Helvetica, sans-serif;color:#888; }
+.woo-pagination a, .woo-pagination a:hover {color:#888!important}
+.widget h3 {font:bold 14px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#555555;border-bottom:1px solid #e6e6e6;}
+.widget_recent_comments li, #twitter li { border-color: #e6e6e6;}
+.widget p, .widget .textwidget { font:normal 13px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#555555; }
+.widget {font:normal 13px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#555555;border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px;}
+#tabs .inside li a, .widget_woodojo_tabs .tabbable .tab-pane li a { font:bold 12px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#555555; }
+#tabs .inside li span.meta, .widget_woodojo_tabs .tabbable .tab-pane li span.meta { font:300 11px/1.5em "Helvetica Neue", Helvetica, sans-serif;color:#999999; }
+#tabs ul.wooTabs li a, .widget_woodojo_tabs .tabbable .nav-tabs li a { font:300 11px/2em "Helvetica Neue", Helvetica, sans-serif;color:#999999; }
+@media only screen and (min-width:768px) {
+ul.nav li a, #navigation ul.rss a, #navigation ul.cart a.cart-contents, #navigation .cart-contents #navigation ul.rss, #navigation ul.nav-search, #navigation ul.nav-search a { font:normal 14px/1.2em "Helvetica Neue", Helvetica, sans-serif;color:#666666; } #navigation ul.rss li a:before, #navigation ul.nav-search a.search-contents:before { color:#666666;}
+#navigation ul.nav li ul, #navigation ul.cart > li > ul > div  { border: 0px solid #dbdbdb; }
+#navigation ul.nav > li:hover > ul  { left: 0; }
+#navigation ul.nav > li  { border-right: 0px solid #dbdbdb; }#navigation ul.nav > li:hover > ul  { left: 0; }
+#navigation { box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; }#navigation ul li:first-child, #navigation ul li:first-child a { border-radius:0px 0 0 0px; -moz-border-radius:0px 0 0 0px; -webkit-border-radius:0px 0 0 0px; }
+#navigation {border-top:0px solid #dbdbdb;border-bottom:0px solid #dbdbdb;border-left:0px solid #dbdbdb;border-right:0px solid #dbdbdb;border-radius:0px; -moz-border-radius:0px; -webkit-border-radius:0px;}
+#top ul.nav li a { font:normal 12px/1.6em "Helvetica Neue", Helvetica, sans-serif;color:#ddd; }
+}
+#footer, #footer p { font:normal 13px/1.4em "Helvetica Neue", Helvetica, sans-serif;color:#999999; }
+#footer {border-top:1px solid #dbdbdb;border-bottom:0px solid ;border-left:0px solid ;border-right:0px solid ;border-radius:0px; -moz-border-radius:0px; -webkit-border-radius:0px;}
+.magazine #loopedSlider .content h2.title a { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+.wooslider-theme-magazine .slide-title a { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+.magazine #loopedSlider .content .excerpt p { font:300 13px/1.5em Arial, sans-serif;color:#cccccc; }
+.wooslider-theme-magazine .slide-content p, .wooslider-theme-magazine .slide-excerpt p { font:300 13px/1.5em Arial, sans-serif;color:#cccccc; }
+.magazine .block .post .title a {font:bold 18px/1.2em Helvetica Neue, Helvetica, sans-serif;color:#222222; }
+#loopedSlider.business-slider .content h2 { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+#loopedSlider.business-slider .content h2.title a { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+.wooslider-theme-business .has-featured-image .slide-title { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+.wooslider-theme-business .has-featured-image .slide-title a { font:bold 24px/1em Arial, sans-serif;color:#ffffff; }
+#wrapper #loopedSlider.business-slider .content p { font:300 13px/1.5em Arial, sans-serif;color:#cccccc; }
+.wooslider-theme-business .has-featured-image .slide-content p { font:300 13px/1.5em Arial, sans-serif;color:#cccccc; }
+.wooslider-theme-business .has-featured-image .slide-excerpt p { font:300 13px/1.5em Arial, sans-serif;color:#cccccc; }
+.archive_header { font:bold 18px/1em Arial, sans-serif;color:#222222; }
+.archive_header {border-bottom:1px solid #e6e6e6;}
+.archive_header .catrss { display:none; }
+</style>
+
+<!-- Woo Shortcodes CSS -->
+<link href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/functions/css/shortcodes.css" rel="stylesheet" type="text/css" />
+
+<!-- Custom Stylesheet -->
+<link href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/themes/canvas-new/custom.css" rel="stylesheet" type="text/css" />
+
+<!-- Theme version -->
+<meta name="generator" content="Canvas 5.9.21" />
+<meta name="generator" content="WooFramework 6.2.9" />
+<link rel="icon" href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/cropped-icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/cropped-icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/cropped-icon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/cropped-icon-270x270.png" />
+</head>
+<body class="post-template-default single single-post postid-5708 single-format-standard chrome alt-style-default two-col-left width-960 two-col-left-960">
+<div id="wrapper">
+
+	<div id="inner-wrapper">
+
+	<h3 class="nav-toggle icon"><a href="#navigation">Navigation</a></h3>
+
+	<header id="header" class="col-full">
+
+		<div id="logo">
+<a href="https://machinelearningmastery.com/" title="Making developers awesome at machine learning"><img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/MachineLearningMastery.png" alt="Machine Learning Mastery" /></a>
+<span class="site-title"><a href="https://machinelearningmastery.com/">Machine Learning Mastery</a></span>
+<span class="site-description">Making developers awesome at machine learning</span>
+</div>
+	    <div class="header-widget">
+	        <div id="text-3" class="widget widget_text">			<div class="textwidget"><br />
+<div style="font-size:12pt;">
+<a href="/start-here"><strong>Start Here</strong></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/blog">Blog</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/products">Books</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/faq">FAQ</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/about">About</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/contact">Contact</a>
+</div></div>
+		</div><div id="search-3" class="widget widget_search"><div class="search_main">
+    <form method="get" class="searchform" action="https://machinelearningmastery.com/" >
+        <input type="text" class="field s" name="s" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
+		<input type="hidden" name="post_type" value="post" />
+        <button type="submit" class="fa fa-search submit" name="submit" value="Search"></button>
+    </form>
+    <div class="fix"></div>
+</div></div><div id="text-48" class="widget widget_text">			<div class="textwidget"><p>Need help with Statistics? <a href="https://machinelearningmastery.lpages.co/smfml-mini-course/">Take the FREE Mini-Course</a></p>
+</div>
+		</div>	    </div>
+	
+	</header>
+	<nav id="navigation" class="col-full" role="navigation">
+
+	
+	<section class="menus">
+
+		<a href="https://machinelearningmastery.com" class="nav-home"><span>Home</span></a>
+
+	<h3>Empty Menu</h3>	<div class="side-nav">
+		</div><!-- /#side-nav -->
+
+	</section><!-- /.menus -->
+
+	<a href="#top" class="nav-close"><span>Return to Content</span></a>
+
+</nav>
+       
+    <!-- #content Starts -->
+	    <div id="content" class="col-full">
+    
+    	<div id="main-sidebar-container">    
+
+            <!-- #main Starts -->
+                        <section id="main">                       
+<article class="post-5708 post type-post status-publish format-standard has-post-thumbnail hentry category-statistical-methods">
+	<header>
+	<h1 class="title entry-title">How to Generate Random Numbers in Python</h1>	</header>
+<div class="post-meta"><span class="small">By</span> <span class="author vcard"><span class="fn"><a href="https://machinelearningmastery.com/author/jasonb/" title="Posts by Jason Brownlee" rel="author">Jason Brownlee</a></span></span> <span class="small">on</span> <abbr class="date time published updated" title="2018-07-04T05:00:12+1000">July 4, 2018</abbr>  <span class="small">in</span> <span class="categories"><a href="https://machinelearningmastery.com/category/statistical-methods/" title="View all items in Statistical Methods">Statistical Methods</a></span>  </div>
+	<section class="entry">
+<div class='apss-social-share apss-theme-4 clearfix'>
+
+
+				<div class='apss-twitter apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://twitter.com/intent/tweet?text=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https%3A%2F%2Fmachinelearningmastery.com%2Fhow-to-generate-random-numbers-in-python%2F&amp;');" href='javascript:void(0);'  title="Share on Twitter" target=''>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-twitter'></i>
+							<span class='apss-social-text'>Share on Twitter</span><span class='apss-share'>Tweet</span>
+						</div>
+											</a>
+				</div>
+								<div class='apss-facebook apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://www.facebook.com/sharer/sharer.php?u=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/');"  title="Share on Facebook" target='' href='https://www.facebook.com/sharer/sharer.php?u=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/'>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-facebook'></i>
+							<span class='apss-social-text'>Share on Facebook</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+				
+				<div class='apss-linkedin apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'http://www.linkedin.com/shareArticle?mini=true&amp;title=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/&amp;summary=The+use+of+randomness+is+an+important+part+of+the+configuration+and+evaluation+of+machine+learning+a...');"  title="Share on LinkedIn" target='' href='http://www.linkedin.com/shareArticle?mini=true&amp;title=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/&amp;summary=The+use+of+randomness+is+an+important+part+of+the+configuration+and+evaluation+of+machine+learning+a...'>
+						<div class='apss-icon-block clearfix'><i class='fa fa-linkedin'></i>
+							<span class='apss-social-text'>Share on LinkedIn</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+								<div class='apss-google-plus apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://plus.google.com/share?url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/');"  title="Share on Google Plus" target='' href='https://plus.google.com/share?url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/'>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-google-plus'></i>
+							<span class='apss-social-text'>Share on Google Plus</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+				</div><p>The use of randomness is an important part of the configuration and evaluation of machine learning algorithms.</p>
+<p>From the random initialization of weights in an artificial neural network, to the splitting of data into random train and test sets, to the random shuffling of a training dataset in stochastic gradient descent, generating random numbers and harnessing randomness is a required skill.</p>
+<p>In this tutorial, you will discover how to generate and work with random numbers in Python.</p>
+<p>After completing this tutorial, you will know:</p>
+<ul>
+<li>That randomness can be applied in programs via the use of pseudorandom number generators.</li>
+<li>How to generate random numbers and use randomness via the Python standard library.</li>
+<li>How to generate arrays of random numbers via the NumPy library.</li>
+</ul>
+<p>Let’s get started.</p>
+<div id="attachment_5709" style="width: 650px" class="wp-caption aligncenter"><img class="size-full wp-image-5709" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/How-to-Generate-Random-Numbers-in-Python.jpg" alt="How to Generate Random Numbers in Python" width="640" height="424" srcset="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/How-to-Generate-Random-Numbers-in-Python.jpg 640w, https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/How-to-Generate-Random-Numbers-in-Python-300x199.jpg 300w" sizes="(max-width: 640px) 100vw, 640px" /><p class="wp-caption-text">How to Generate Random Numbers in Python<br />Photo by <a href="https://www.flickr.com/photos/a_little_brighter/15908996592/">Harold Litwiler</a>, some rights reserved.</p></div>
+<h2>Tutorial Overview</h2>
+<p>This tutorial is divided into 3 parts; they are:</p>
+<ol>
+<li>Pseudorandom Number Generators</li>
+<li>Random Numbers with Python</li>
+<li>Random Numbers with NumPy</li>
+</ol>
+<!-- Start shortcoder --><p><div class="woo-sc-hr"></div></p>
+<center>
+<h3>Need help with Statistics for Machine Learning?</h3>
+<p>Take my free 7-day email crash course now (with sample code).</p>
+<p>Click to sign-up and also get a free PDF Ebook version of the course.</p>
+<p><a href="https://machinelearningmastery.lpages.co/leadbox/142f75173f72a2%3A164f8be4f346dc/5750943224168448/" target="_blank" style="background: rgb(255, 206, 10); color: rgb(255, 255, 255); text-decoration: none; font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 16px; line-height: 20px; padding: 10px; display: inline-block; max-width: 300px; border-radius: 5px; text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 1px; box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 3px inset, rgba(0, 0, 0, 0.5) 0px 1px 3px;">Download Your FREE Mini-Course</a><script data-leadbox="142f75173f72a2:164f8be4f346dc" data-url="https://machinelearningmastery.lpages.co/leadbox/142f75173f72a2%3A164f8be4f346dc/5750943224168448/" data-config="%7B%7D" type="text/javascript" src="https://machinelearningmastery.lpages.co/leadbox-1526328103.js"></script></p>
+</center>
+<p><div class="woo-sc-hr"></div></p><!-- End shortcoder v4.1.7-->
+<h2>1. Pseudorandom Number Generators</h2>
+<p>The source of <a href="https://en.wikipedia.org/wiki/Randomness">randomness</a> that we inject into our programs and algorithms is a mathematical trick called a pseudorandom number generator.</p>
+<p>A random number generator is a system that generates random numbers from a true source of randomness. Often something physical, such as a Geiger counter, where the results are turned into random numbers. We do not need true randomness in machine learning. Instead we can use <a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">pseudorandomness</a>. Pseudorandomness is a sample of numbers that look close to random, but were generated using a deterministic process.</p>
+<p>Shuffling data and initializing coefficients with random values use pseudorandom number generators. These little programs are often a function that you can call that will return a random number. Called again, they will return a new random number. Wrapper functions are often also available and allow you to get your randomness as an integer, floating point, within a specific distribution, within a specific range, and so on.</p>
+<p>The numbers are generated in a sequence. The sequence is deterministic and is seeded with an initial number. If you do not explicitly seed the pseudorandom number generator, then it may use the current system time in seconds or milliseconds as the seed.</p>
+<p>The value of the seed does not matter. Choose anything you wish. What does matter is that the same seeding of the process will result in the same sequence of random numbers.</p>
+<p>Let’s make this concrete with some examples.</p>
+<h2>2. Random Numbers with Python</h2>
+<p>The Python standard library provides a module called <a href="https://docs.python.org/3/library/random.html">random</a> that offers a suite of functions for generating random numbers.</p>
+<p>Python uses a popular and robust pseudorandom number generator called the <a href="https://en.wikipedia.org/wiki/Mersenne_Twister">Mersenne Twister</a>.</p>
+<p>In this section, we will look at a number of use cases for generating and using random numbers and randomness with the standard Python API.</p>
+<h3>Seed The Random Number Generator</h3>
+<p>The pseudorandom number generator is a mathematical function that generates a sequence of nearly random numbers.</p>
+<p>It takes a parameter to start off the sequence, called the seed. The function is deterministic, meaning given the same seed, it will produce the same sequence of numbers every time. The choice of seed does not matter.</p>
+<p>The <em>seed()</em> function will seed the pseudorandom number generator, taking an integer value as an argument, such as 1 or 7. If the seed() function is not called prior to using randomness, the default is to use the current system time in milliseconds from epoch (1970).</p>
+<p>The example below demonstrates seeding the pseudorandom number generator, generates some random numbers, and shows that reseeding the generator will result in the same sequence of numbers being generated.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121c4053654579" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# seed the pseudorandom number generator
+from random import seed
+from random import random
+# seed random number generator
+seed(1)
+# generate some random numbers
+print(random(), random(), random())
+# reset the seed
+seed(1)
+# generate some random numbers
+print(random(), random(), random())</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121c4053654579-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121c4053654579-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121c4053654579-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121c4053654579-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121c4053654579-10">10</div><div class="crayon-num" data-line="crayon-5b89e235121c4053654579-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121c4053654579-1"><span class="crayon-p"># seed the pseudorandom number generator</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121c4053654579-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121c4053654579-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">random</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121c4053654579-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121c4053654579-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121c4053654579-6"><span class="crayon-p"># generate some random numbers</span></div><div class="crayon-line" id="crayon-5b89e235121c4053654579-7"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121c4053654579-8"><span class="crayon-p"># reset the seed</span></div><div class="crayon-line" id="crayon-5b89e235121c4053654579-9"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121c4053654579-10"><span class="crayon-p"># generate some random numbers</span></div><div class="crayon-line" id="crayon-5b89e235121c4053654579-11"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>Running the example seeds the pseudorandom number generator with the value 1, generates 3 random numbers, reseeds the generator, and shows that the same three random numbers are generated.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121cd347149419" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+0.13436424411240122 0.8474337369372327 0.763774618976614
+0.13436424411240122 0.8474337369372327 0.763774618976614</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121cd347149419-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121cd347149419-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121cd347149419-1">0.13436424411240122 0.8474337369372327 0.763774618976614</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121cd347149419-2">0.13436424411240122 0.8474337369372327 0.763774618976614</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p>It can be useful to control the randomness by setting the seed to ensure that your code produces the same result each time, such as in a production model.</p>
+<p>For running experiments where randomization is used to control for confounding variables, a different seed may be used for each experimental run.</p>
+<h3>Random Floating Point Values</h3>
+<p>Random floating point values can be generated using the <em>random()</em> function. Values will be generated in the range between 0 and 1, specifically in the interval [0,1).</p>
+<p>Values are drawn from a uniform distribution, meaning each value has an equal chance of being drawn.</p>
+<p>The example below generates 10 random floating point values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121d1507138005" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random floating point values
+from random import seed
+from random import random
+# seed random number generator
+seed(1)
+# generate random numbers between 0-1
+for _ in range(10):
+	value = random()
+	print(value)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121d1507138005-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d1507138005-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121d1507138005-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d1507138005-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121d1507138005-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d1507138005-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121d1507138005-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d1507138005-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121d1507138005-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121d1507138005-1"><span class="crayon-p"># generate random floating point values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d1507138005-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121d1507138005-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">random</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d1507138005-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121d1507138005-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d1507138005-6"><span class="crayon-p"># generate random numbers between 0-1</span></div><div class="crayon-line" id="crayon-5b89e235121d1507138005-7"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">_</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d1507138005-8"><span class="crayon-h">	</span><span class="crayon-v">value</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121d1507138005-9"><span class="crayon-h">	</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">value</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Running the example generates and prints each random floating point value.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121d3056402446" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+0.13436424411240122
+0.8474337369372327
+0.763774618976614
+0.2550690257394217
+0.49543508709194095
+0.4494910647887381
+0.651592972722763
+0.7887233511355132
+0.0938595867742349
+0.02834747652200631</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121d3056402446-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d3056402446-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121d3056402446-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d3056402446-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121d3056402446-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d3056402446-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121d3056402446-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d3056402446-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121d3056402446-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d3056402446-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121d3056402446-1">0.13436424411240122</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d3056402446-2">0.8474337369372327</div><div class="crayon-line" id="crayon-5b89e235121d3056402446-3">0.763774618976614</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d3056402446-4">0.2550690257394217</div><div class="crayon-line" id="crayon-5b89e235121d3056402446-5">0.49543508709194095</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d3056402446-6">0.4494910647887381</div><div class="crayon-line" id="crayon-5b89e235121d3056402446-7">0.651592972722763</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d3056402446-8">0.7887233511355132</div><div class="crayon-line" id="crayon-5b89e235121d3056402446-9">0.0938595867742349</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d3056402446-10">0.02834747652200631</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p>The floating point values could be rescaled to a desired range by multiplying them by the size of the new range and adding the min value, as follows:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121d6483328077" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+scaled value = min + (value * (max - min))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121d6483328077-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121d6483328077-1">scaled value = min + (value * (max - min))</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p>Where <em>min</em> and <em>max</em> are the minimum and maximum values of the desired range respectively, and <em>value</em> is the randomly generated floating point value in the range between 0 and 1.</p>
+<h3>Random Integer Values</h3>
+<p>Random integer values can be generated with the <em>randint()</em> function.</p>
+<p>This function takes two arguments: the start and the end of the range for the generated integer values. Random integers are generated within and including the start and end of range values, specifically in the interval [start, end]. Random values are drawn from a uniform distribution.</p>
+<p>The example below generates 10 random integer values between 0 and 10.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121d9461382585" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random integer values
+from random import seed
+from random import randint
+# seed random number generator
+seed(1)
+# generate some integers
+for _ in range(10):
+	value = randint(0, 10)
+	print(value)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121d9461382585-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d9461382585-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121d9461382585-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d9461382585-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121d9461382585-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d9461382585-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121d9461382585-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121d9461382585-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121d9461382585-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121d9461382585-1"><span class="crayon-p"># generate random integer values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d9461382585-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121d9461382585-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">randint</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d9461382585-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121d9461382585-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d9461382585-6"><span class="crayon-p"># generate some integers</span></div><div class="crayon-line" id="crayon-5b89e235121d9461382585-7"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">_</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121d9461382585-8"><span class="crayon-h">	</span><span class="crayon-v">value</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">randint</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121d9461382585-9"><span class="crayon-h">	</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">value</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Running the example generates and prints 10 random integer values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121db418922739" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+2
+9
+1
+4
+1
+7
+7
+7
+10
+6</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121db418922739-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121db418922739-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121db418922739-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121db418922739-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121db418922739-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121db418922739-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121db418922739-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121db418922739-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121db418922739-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121db418922739-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121db418922739-1">2</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121db418922739-2">9</div><div class="crayon-line" id="crayon-5b89e235121db418922739-3">1</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121db418922739-4">4</div><div class="crayon-line" id="crayon-5b89e235121db418922739-5">1</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121db418922739-6">7</div><div class="crayon-line" id="crayon-5b89e235121db418922739-7">7</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121db418922739-8">7</div><div class="crayon-line" id="crayon-5b89e235121db418922739-9">10</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121db418922739-10">6</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<h3>Random Gaussian Values</h3>
+<p>Random floating point values can be drawn from a Gaussian distribution using the <em>gauss()</em> function.</p>
+<p>This function takes two arguments that correspond to the parameters that control the size of the distribution, specifically the mean and the standard deviation.</p>
+<p>The example below generates 10 random values drawn from a Gaussian distribution with a mean of 0.0 and a standard deviation of 1.0.</p>
+<p>Note that these parameters are not the bounds on the values and that the spread of the values will be controlled by the bell shape of the distribution, in this case proportionately likely above and below 0.0.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121de155058560" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random Gaussian values
+from random import seed
+from random import gauss
+# seed random number generator
+seed(1)
+# generate some Gaussian values
+for _ in range(10):
+	value = gauss(0, 1)
+	print(value)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121de155058560-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121de155058560-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121de155058560-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121de155058560-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121de155058560-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121de155058560-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121de155058560-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121de155058560-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121de155058560-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121de155058560-1"><span class="crayon-p"># generate random Gaussian values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121de155058560-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121de155058560-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">gauss</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121de155058560-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121de155058560-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121de155058560-6"><span class="crayon-p"># generate some Gaussian values</span></div><div class="crayon-line" id="crayon-5b89e235121de155058560-7"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">_</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121de155058560-8"><span class="crayon-h">	</span><span class="crayon-v">value</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">gauss</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121de155058560-9"><span class="crayon-h">	</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">value</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Running the example generates and prints 10 Gaussian random values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121e0158506091" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+1.2881847531554629
+1.449445608699771
+0.06633580893826191
+-0.7645436509716318
+-1.0921732151041414
+0.03133451683171687
+-1.022103170010873
+-1.4368294451025299
+0.19931197648375384
+0.13337460465860485</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121e0158506091-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e0158506091-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121e0158506091-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e0158506091-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121e0158506091-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e0158506091-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121e0158506091-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e0158506091-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121e0158506091-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e0158506091-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121e0158506091-1">1.2881847531554629</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e0158506091-2">1.449445608699771</div><div class="crayon-line" id="crayon-5b89e235121e0158506091-3">0.06633580893826191</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e0158506091-4">-0.7645436509716318</div><div class="crayon-line" id="crayon-5b89e235121e0158506091-5">-1.0921732151041414</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e0158506091-6">0.03133451683171687</div><div class="crayon-line" id="crayon-5b89e235121e0158506091-7">-1.022103170010873</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e0158506091-8">-1.4368294451025299</div><div class="crayon-line" id="crayon-5b89e235121e0158506091-9">0.19931197648375384</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e0158506091-10">0.13337460465860485</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<h3>Randomly Choosing From a List</h3>
+<p>Random numbers can be used to randomly choose an item from a list.</p>
+<p>For example, if a list had 10 items with indexes between 0 and 9, then you could generate a random integer between 0 and 9 and use it to randomly select an item from the list. The <em>choice()</em> function implements this behavior for you. Selections are made with a uniform likelihood.</p>
+<p>The example below generates a list of 20 integers and gives five examples of choosing one random item from the list.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121e3300762629" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# choose a random element from a list
+from random import seed
+from random import choice
+# seed random number generator
+seed(1)
+# prepare a sequence
+sequence = [i for i in range(20)]
+print(sequence)
+# make choices from the sequence
+for _ in range(5):
+	selection = choice(sequence)
+	print(selection)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-10">10</div><div class="crayon-num" data-line="crayon-5b89e235121e3300762629-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e3300762629-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121e3300762629-1"><span class="crayon-p"># choose a random element from a list</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121e3300762629-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">choice</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121e3300762629-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-6"><span class="crayon-p"># prepare a sequence</span></div><div class="crayon-line" id="crayon-5b89e235121e3300762629-7"><span class="crayon-v">sequence</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">20</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121e3300762629-9"><span class="crayon-p"># make choices from the sequence</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-10"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">_</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5b89e235121e3300762629-11"><span class="crayon-h">	</span><span class="crayon-v">selection</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">choice</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e3300762629-12"><span class="crayon-h">	</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">selection</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>Running the example first prints the list of integer values, followed by five examples of choosing and printing a random value from the list.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121e6775130923" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+4
+18
+2
+8
+3</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121e6775130923-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e6775130923-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121e6775130923-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e6775130923-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121e6775130923-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e6775130923-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121e6775130923-1">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e6775130923-2">4</div><div class="crayon-line" id="crayon-5b89e235121e6775130923-3">18</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e6775130923-4">2</div><div class="crayon-line" id="crayon-5b89e235121e6775130923-5">8</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e6775130923-6">3</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<h3>Random Subsample From a List</h3>
+<p>We may be interested in repeating the random selection of items from a list to create a randomly chosen subset.</p>
+<p>Importantly, once an item is selected from the list and added to the subset, it should not be added again. This is called selection without replacement because once an item from the list is selected for the subset, it is not added back to the original list (i.e. is not made available for re-selection).</p>
+<p>This behavior is provided in the <em>sample()</em> function that selects a random sample from a list without replacement. The function takes both the list and the size of the subset to select as arguments. Note that items are not actually removed from the original list, only selected into a copy of the list.</p>
+<p>The example below demonstrates selecting a subset of five items from a list of 20 integers.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121e9228822272" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# select a random sample without replacement
+from random import seed
+from random import sample
+# seed random number generator
+seed(1)
+# prepare a sequence
+sequence = [i for i in range(20)]
+print(sequence)
+# select a subset without replacement
+subset = sample(sequence, 5)
+print(subset)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e9228822272-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e9228822272-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e9228822272-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e9228822272-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121e9228822272-10">10</div><div class="crayon-num" data-line="crayon-5b89e235121e9228822272-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121e9228822272-1"><span class="crayon-p"># select a random sample without replacement</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e9228822272-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121e9228822272-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">sample</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e9228822272-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121e9228822272-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e9228822272-6"><span class="crayon-p"># prepare a sequence</span></div><div class="crayon-line" id="crayon-5b89e235121e9228822272-7"><span class="crayon-v">sequence</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">20</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e9228822272-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121e9228822272-9"><span class="crayon-p"># select a subset without replacement</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121e9228822272-10"><span class="crayon-v">subset</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">sample</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121e9228822272-11"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">subset</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>Running the example first prints the list of integer values, then the random sample is chosen and printed for comparison.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121eb068458206" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[4, 18, 2, 8, 3]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121eb068458206-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121eb068458206-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121eb068458206-1">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121eb068458206-2">[4, 18, 2, 8, 3]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<h3>Randomly Shuffle a List</h3>
+<p>Randomness can be used to shuffle a list of items, like shuffling a deck of cards.</p>
+<p>The <em>shuffle()</em> function can be used to shuffle a list. The shuffle is performed in place, meaning that the list provided as an argument to the <em>shuffle()</em> function is shuffled rather than a shuffled copy of the list being made and returned.</p>
+<p>The example below demonstrates randomly shuffling a list of integer values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121ee748163476" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# randomly shuffle a sequence
+from random import seed
+from random import shuffle
+# seed random number generator
+seed(1)
+# prepare a sequence
+sequence = [i for i in range(20)]
+print(sequence)
+# randomly shuffle the sequence
+shuffle(sequence)
+print(sequence)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121ee748163476-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121ee748163476-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121ee748163476-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121ee748163476-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121ee748163476-10">10</div><div class="crayon-num" data-line="crayon-5b89e235121ee748163476-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121ee748163476-1"><span class="crayon-p"># randomly shuffle a sequence</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121ee748163476-2"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121ee748163476-3"><span class="crayon-e">from </span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">shuffle</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121ee748163476-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121ee748163476-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121ee748163476-6"><span class="crayon-p"># prepare a sequence</span></div><div class="crayon-line" id="crayon-5b89e235121ee748163476-7"><span class="crayon-v">sequence</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">20</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121ee748163476-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121ee748163476-9"><span class="crayon-p"># randomly shuffle the sequence</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121ee748163476-10"><span class="crayon-e">shuffle</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e235121ee748163476-11"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Running the example first prints the list of integers, then the same list after it has been randomly shuffled.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121f0084876138" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[11, 5, 17, 19, 9, 0, 16, 1, 15, 6, 10, 13, 14, 12, 7, 3, 8, 2, 18, 4]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121f0084876138-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f0084876138-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121f0084876138-1">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f0084876138-2">[11, 5, 17, 19, 9, 0, 16, 1, 15, 6, 10, 13, 14, 12, 7, 3, 8, 2, 18, 4]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0000 seconds] -->
+<p></p>
+<h2>3. Random Numbers with NumPy</h2>
+<p>In machine learning, you are likely using libraries such as scikit-learn and Keras.</p>
+<p>These libraries make use of NumPy under the covers, a library that makes working with vectors and matrices of numbers very efficient.</p>
+<p>NumPy also has its own implementation of a <a href="https://docs.scipy.org/doc/numpy/reference/routines.random.html">pseudorandom number generator</a> and convenience wrapper functions.</p>
+<p>NumPy also implements the Mersenne Twister pseudorandom number generator.</p>
+<p>Let&#8217;s look at a few examples of generating random numbers and using randomness with NumPy arrays.</p>
+<h3>Seed The Random Number Generator</h3>
+<p>The NumPy pseudorandom number generator is different from the Python standard library pseudorandom number generator.</p>
+<p>Importantly, seeding the Python pseudorandom number generator does not impact the NumPy pseudorandom number generator. It must be seeded and used separately.</p>
+<p>The <em>seed()</em> function can be used to seed the NumPy pseudorandom number generator, taking an integer as the seed value.</p>
+<p>The example below demonstrates how to seed the generator and how reseeding the generator will result in the same sequence of random numbers being generated.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121f4365208987" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# seed the pseudorandom number generator
+from numpy.random import seed
+from numpy.random import rand
+# seed random number generator
+seed(1)
+# generate some random numbers
+print(rand(3))
+# reset the seed
+seed(1)
+# generate some random numbers
+print(rand(3))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f4365208987-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f4365208987-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f4365208987-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f4365208987-8">8</div><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f4365208987-10">10</div><div class="crayon-num" data-line="crayon-5b89e235121f4365208987-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121f4365208987-1"><span class="crayon-p"># seed the pseudorandom number generator</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f4365208987-2"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121f4365208987-3"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">rand</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f4365208987-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121f4365208987-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f4365208987-6"><span class="crayon-p"># generate some random numbers</span></div><div class="crayon-line" id="crayon-5b89e235121f4365208987-7"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">rand</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f4365208987-8"><span class="crayon-p"># reset the seed</span></div><div class="crayon-line" id="crayon-5b89e235121f4365208987-9"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f4365208987-10"><span class="crayon-p"># generate some random numbers</span></div><div class="crayon-line" id="crayon-5b89e235121f4365208987-11"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">rand</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Running the example seeds the pseudorandom number generator, prints a sequence of random numbers, then reseeds the generator showing that the exact same sequence of random numbers is generated.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121f6314113631" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[4.17022005e-01 7.20324493e-01 1.14374817e-04]
+[4.17022005e-01 7.20324493e-01 1.14374817e-04]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121f6314113631-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f6314113631-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121f6314113631-1">[4.17022005e-01 7.20324493e-01 1.14374817e-04]</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f6314113631-2">[4.17022005e-01 7.20324493e-01 1.14374817e-04]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0000 seconds] -->
+<p></p>
+<h3>Array of Random Floating Point Values</h3>
+<p>An array of random floating point values can be generated with the <em>rand()</em> NumPy function.</p>
+<p>If no argument is provided, then a single random value is created, otherwise the size of the array can be specified.</p>
+<p>The example below creates an array of 10 random floating point values drawn from a uniform distribution.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121f9060948386" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random floating point values
+from numpy.random import seed
+from numpy.random import rand
+# seed random number generator
+seed(1)
+# generate random numbers between 0-1
+values = rand(10)
+print(values)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121f9060948386-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f9060948386-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121f9060948386-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f9060948386-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121f9060948386-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f9060948386-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121f9060948386-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121f9060948386-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121f9060948386-1"><span class="crayon-p"># generate random floating point values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f9060948386-2"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121f9060948386-3"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">rand</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f9060948386-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121f9060948386-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f9060948386-6"><span class="crayon-p"># generate random numbers between 0-1</span></div><div class="crayon-line" id="crayon-5b89e235121f9060948386-7"><span class="crayon-v">values</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">rand</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121f9060948386-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">values</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Running the example generates and prints the NumPy array of random floating point values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121fb191594986" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[4.17022005e-01 7.20324493e-01 1.14374817e-04 3.02332573e-01
+ 1.46755891e-01 9.23385948e-02 1.86260211e-01 3.45560727e-01
+ 3.96767474e-01 5.38816734e-01]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121fb191594986-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121fb191594986-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121fb191594986-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121fb191594986-1">[4.17022005e-01 7.20324493e-01 1.14374817e-04 3.02332573e-01</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121fb191594986-2"> 1.46755891e-01 9.23385948e-02 1.86260211e-01 3.45560727e-01</div><div class="crayon-line" id="crayon-5b89e235121fb191594986-3"> 3.96767474e-01 5.38816734e-01]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0000 seconds] -->
+<p></p>
+<h3>Array of Random Integer Values</h3>
+<p>An array of random integers can be generated using the <em>randint()</em> NumPy function.</p>
+<p>This function takes three arguments, the lower end of the range, the upper end of the range, and the number of integer values to generate or the size of the array. Random integers will be drawn from a uniform distribution including the lower value and excluding the upper value, e.g. in the interval [lower, upper).</p>
+<p>The example below demonstrates generating an array of random integers.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e235121fe002030356" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random integer values
+from numpy.random import seed
+from numpy.random import randint
+# seed random number generator
+seed(1)
+# generate some integers
+values = randint(0, 10, 20)
+print(values)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e235121fe002030356-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121fe002030356-2">2</div><div class="crayon-num" data-line="crayon-5b89e235121fe002030356-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121fe002030356-4">4</div><div class="crayon-num" data-line="crayon-5b89e235121fe002030356-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121fe002030356-6">6</div><div class="crayon-num" data-line="crayon-5b89e235121fe002030356-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e235121fe002030356-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e235121fe002030356-1"><span class="crayon-p"># generate random integer values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121fe002030356-2"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e235121fe002030356-3"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">randint</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121fe002030356-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e235121fe002030356-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121fe002030356-6"><span class="crayon-p"># generate some integers</span></div><div class="crayon-line" id="crayon-5b89e235121fe002030356-7"><span class="crayon-v">values</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">randint</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">20</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e235121fe002030356-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">values</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Running the example generates and prints an array of 20 random integer values between 0 and 10.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e23512200619814286" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[5 8 9 5 0 0 1 7 6 9 2 4 5 2 4 2 4 7 7 9]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e23512200619814286-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e23512200619814286-1">[5 8 9 5 0 0 1 7 6 9 2 4 5 2 4 2 4 7 7 9]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0000 seconds] -->
+<p></p>
+<h3>Array of Random Gaussian Values</h3>
+<p>An array of random Gaussian values can be generated using the <em>randn()</em> NumPy function.</p>
+<p>This function takes a single argument to specify the size of the resulting array. The Gaussian values are drawn from a standard Gaussian distribution; this is a distribution that has a mean of 0.0 and a standard deviation of 1.0.</p>
+<p>The example below shows how to generate an array of random Gaussian values.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e23512203792937669" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# generate random Gaussian values
+from numpy.random import seed
+from numpy.random import randn
+# seed random number generator
+seed(1)
+# generate some Gaussian values
+values = randn(10)
+print(values)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e23512203792937669-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e23512203792937669-2">2</div><div class="crayon-num" data-line="crayon-5b89e23512203792937669-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e23512203792937669-4">4</div><div class="crayon-num" data-line="crayon-5b89e23512203792937669-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e23512203792937669-6">6</div><div class="crayon-num" data-line="crayon-5b89e23512203792937669-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e23512203792937669-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e23512203792937669-1"><span class="crayon-p"># generate random Gaussian values</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e23512203792937669-2"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e23512203792937669-3"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">randn</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e23512203792937669-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e23512203792937669-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e23512203792937669-6"><span class="crayon-p"># generate some Gaussian values</span></div><div class="crayon-line" id="crayon-5b89e23512203792937669-7"><span class="crayon-v">values</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">randn</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e23512203792937669-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">values</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Running the example generates and prints an array of 10 random values from a standard Gaussian distribution.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e23512205765686397" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[ 1.62434536 -0.61175641 -0.52817175 -1.07296862  0.86540763 -2.3015387
+  1.74481176 -0.7612069   0.3190391  -0.24937038]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e23512205765686397-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e23512205765686397-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e23512205765686397-1">[ 1.62434536 -0.61175641 -0.52817175 -1.07296862&nbsp;&nbsp;0.86540763 -2.3015387</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e23512205765686397-2">&nbsp;&nbsp;1.74481176 -0.7612069&nbsp;&nbsp; 0.3190391&nbsp;&nbsp;-0.24937038]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p>Values from a standard Gaussian distribution can be scaled by multiplying the value by the standard deviation and adding the mean from the desired scaled distribution. For example:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e23512207074765226" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+scaled value = mean + value * stdev</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e23512207074765226-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e23512207074765226-1">scaled value = mean + value * stdev</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p>Where <em>mean</em> and <em>stdev</em> are the mean and standard deviation for the desired scaled Gaussian distribution and <em>value</em> is the randomly generated value from a standard Gaussian distribution.</p>
+<h3>Shuffle NumPy Array</h3>
+<p>A NumPy array can be randomly shuffled in-place using the <em>shuffle()</em> NumPy function.</p>
+<p>The example below demonstrates how to shuffle a NumPy array.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e2351220a044605281" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# randomly shuffle a sequence
+from numpy.random import seed
+from numpy.random import shuffle
+# seed random number generator
+seed(1)
+# prepare a sequence
+sequence = [i for i in range(20)]
+print(sequence)
+# randomly shuffle the sequence
+shuffle(sequence)
+print(sequence)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220a044605281-2">2</div><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220a044605281-4">4</div><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220a044605281-6">6</div><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220a044605281-8">8</div><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220a044605281-10">10</div><div class="crayon-num" data-line="crayon-5b89e2351220a044605281-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e2351220a044605281-1"><span class="crayon-p"># randomly shuffle a sequence</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220a044605281-2"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-e">seed</span></div><div class="crayon-line" id="crayon-5b89e2351220a044605281-3"><span class="crayon-e">from </span><span class="crayon-v">numpy</span><span class="crayon-sy">.</span><span class="crayon-e">random </span><span class="crayon-e">import </span><span class="crayon-v">shuffle</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220a044605281-4"><span class="crayon-p"># seed random number generator</span></div><div class="crayon-line" id="crayon-5b89e2351220a044605281-5"><span class="crayon-e">seed</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220a044605281-6"><span class="crayon-p"># prepare a sequence</span></div><div class="crayon-line" id="crayon-5b89e2351220a044605281-7"><span class="crayon-v">sequence</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">20</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220a044605281-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e2351220a044605281-9"><span class="crayon-p"># randomly shuffle the sequence</span></div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220a044605281-10"><span class="crayon-e">shuffle</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5b89e2351220a044605281-11"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">sequence</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>Running the example first generates a list of 20 integer values, then shuffles and prints the shuffled array.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5b89e2351220c518945611" class="crayon-syntax crayon-theme-classic crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+[3, 16, 6, 10, 2, 14, 4, 17, 7, 1, 13, 0, 19, 18, 9, 15, 8, 12, 11, 5]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5b89e2351220c518945611-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5b89e2351220c518945611-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5b89e2351220c518945611-1">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</div><div class="crayon-line crayon-striped-line" id="crayon-5b89e2351220c518945611-2">[3, 16, 6, 10, 2, 14, 4, 17, 7, 1, 13, 0, 19, 18, 9, 15, 8, 12, 11, 5]</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<h3>Further Reading</h3>
+<p>This section provides more resources on the topic if you are looking to go deeper.</p>
+<ul>
+<li><a href="https://machinelearningmastery.com/randomness-in-machine-learning/">Embrace Randomness in Machine Learning</a></li>
+<li><a href="https://docs.python.org/3/library/random.html">random &#8211; Generate pseudo-random numbers</a></li>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/routines.random.html">Random sampling in NumPy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">Pseudorandom number generator on Wikipedia</a></li>
+</ul>
+<h2>Summary</h2>
+<p>In this tutorial, you discovered how to generate and work with random numbers in Python.</p>
+<p>Specifically, you learned:</p>
+<ul>
+<li>That randomness can be applied in programs via the use of pseudorandom number generators.</li>
+<li>How to generate random numbers and use randomness via the Python standard library.</li>
+<li>How to generate arrays of random numbers via the NumPy library.</li>
+</ul>
+<p>Do you have any questions?<br />
+Ask your questions in the comments below and I will do my best to answer.</p>
+<div class="awac-wrapper"><div class="awac widget text-49">			<div class="textwidget"><p><center><div class="woo-sc-hr"></div></p>
+<h2>Get a Handle on Statistics for Machine Learning!</h2>
+<p><a href="/statistics_for_machine_learning/"><img style="border: 0;" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/Cover-220.png" alt="Statistical Methods for Machine Learning" align="left" /></a></p>
+<h4>Develop a working understanding of statistics</h4>
+<p>&#8230;by writing lines of code in python</p>
+<p>Discover how in my new Ebook:<br />
+<a href="/statistics_for_machine_learning/">Statistical Methods for Machine Learning</a></p>
+<p>It provides <strong>self-study tutorials</strong> on topics like:<br />
+<em>Hypothesis Tests, Correlation, Nonparametric Stats, Resampling</em>, and much more&#8230;</p>
+<h4>Discover how to Transform Data into Knowledge</h4>
+<p>Skip the Academics. Just Results.</p>
+<p><a href="/statistics_for_machine_learning/">Click to learn more</a>.<br />
+<div class="woo-sc-hr"></div></center></p>
+</div>
+		</div></div><div class='apss-social-share apss-theme-4 clearfix'>
+
+
+				<div class='apss-twitter apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://twitter.com/intent/tweet?text=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https%3A%2F%2Fmachinelearningmastery.com%2Fhow-to-generate-random-numbers-in-python%2F&amp;');" href='javascript:void(0);'  title="Share on Twitter" target=''>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-twitter'></i>
+							<span class='apss-social-text'>Share on Twitter</span><span class='apss-share'>Tweet</span>
+						</div>
+											</a>
+				</div>
+								<div class='apss-facebook apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://www.facebook.com/sharer/sharer.php?u=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/');"  title="Share on Facebook" target='' href='https://www.facebook.com/sharer/sharer.php?u=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/'>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-facebook'></i>
+							<span class='apss-social-text'>Share on Facebook</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+				
+				<div class='apss-linkedin apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'http://www.linkedin.com/shareArticle?mini=true&amp;title=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/&amp;summary=The+use+of+randomness+is+an+important+part+of+the+configuration+and+evaluation+of+machine+learning+a...');"  title="Share on LinkedIn" target='' href='http://www.linkedin.com/shareArticle?mini=true&amp;title=How%20to%20Generate%20Random%20Numbers%20in%20Python&amp;url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/&amp;summary=The+use+of+randomness+is+an+important+part+of+the+configuration+and+evaluation+of+machine+learning+a...'>
+						<div class='apss-icon-block clearfix'><i class='fa fa-linkedin'></i>
+							<span class='apss-social-text'>Share on LinkedIn</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+								<div class='apss-google-plus apss-single-icon'>
+					<a rel='nofollow'  onclick="apss_open_in_popup_window(event, 'https://plus.google.com/share?url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/');"  title="Share on Google Plus" target='' href='https://plus.google.com/share?url=https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/'>
+						<div class='apss-icon-block clearfix'>
+							<i class='fa fa-google-plus'></i>
+							<span class='apss-social-text'>Share on Google Plus</span>
+							<span class='apss-share'>Share</span>
+						</div>
+											</a>
+				</div>
+				</div>	</section><!-- /.entry -->
+	<div class="fix"></div>
+<aside id="post-author">
+	<div class="profile-image"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=80&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=160&#038;d=mm&#038;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' /></div>
+	<div class="profile-content">
+		<h4>About Jason Brownlee</h4>
+		Jason Brownlee, Ph.D. is a machine learning specialist who teaches developers how to get results with modern machine learning methods via hands-on tutorials.				<div class="profile-link">
+			<a href="https://machinelearningmastery.com/author/jasonb/">
+				View all posts by Jason Brownlee <span class="meta-nav">&rarr;</span>			</a>
+		</div><!--#profile-link-->
+			</div>
+	<div class="fix"></div>
+</aside>
+<div class="post-utility"></div>
+</article><!-- /.post -->
+	        <div class="post-entries">
+	            <div class="nav-prev fl"><a href="https://machinelearningmastery.com/statistics-for-evaluating-machine-learning-models/" rel="prev"><i class="fa fa-angle-left"></i> Statistics for Evaluating Machine Learning Models</a></div>
+	            <div class="nav-next fr"><a href="https://machinelearningmastery.com/statistics-in-plain-english-for-machine-learning/" rel="next">Statistics in Plain English for Machine Learning <i class="fa fa-angle-right"></i></a></div>
+	            <div class="fix"></div>
+	        </div>
+
+		<div id="comments">		 	<h3 id="comments-title">8 Responses to <em>How to Generate Random Numbers in Python</em></h3>
+		 	<ol class="commentlist">
+				
+		<li id="comment-442684" class="comment even thread-even depth-1">
+
+	      	<div id="li-comment-442684" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/ccd53e0cc58f2d74ebb6ffdd77f82139?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ccd53e0cc58f2d74ebb6ffdd77f82139?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name">Antoine Zayoun</span>
+	                <span class="date">July 5, 2018 at 5:27 am</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-442684" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>Beautiful! Thank you so much! This was just what I needed today and I found it randomly, or should I say pseudorandomly! Haha!</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-442684' onclick='return addComment.moveForm( "comment-442684", "442684", "respond", "5708" )' aria-label='Reply to Antoine Zayoun'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	<ul class="children">
+
+		<li id="comment-442714" class="comment byuser comment-author-jasonb bypostauthor odd alt depth-2">
+
+	      	<div id="li-comment-442714" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name"><a href='http://MachineLearningMastery.com' rel='external nofollow' class='url'>Jason Brownlee</a></span>
+	                <span class="date">July 5, 2018 at 8:02 am</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-442714" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>I&#8217;m glad it helped.</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-442714' onclick='return addComment.moveForm( "comment-442714", "442714", "respond", "5708" )' aria-label='Reply to Jason Brownlee'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li id="comment-442912" class="comment even thread-odd thread-alt depth-1">
+
+	      	<div id="li-comment-442912" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/14194275a0f5f38d316c4b78e7370000?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/14194275a0f5f38d316c4b78e7370000?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name">Mamta</span>
+	                <span class="date">July 7, 2018 at 8:24 pm</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-442912" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>thanks for great article &#8230; It helped  me to understand the different ways  to generate random numbers..</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-442912' onclick='return addComment.moveForm( "comment-442912", "442912", "respond", "5708" )' aria-label='Reply to Mamta'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	<ul class="children">
+
+		<li id="comment-442939" class="comment byuser comment-author-jasonb bypostauthor odd alt depth-2">
+
+	      	<div id="li-comment-442939" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name"><a href='http://MachineLearningMastery.com' rel='external nofollow' class='url'>Jason Brownlee</a></span>
+	                <span class="date">July 8, 2018 at 6:20 am</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-442939" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>Thanks.</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-442939' onclick='return addComment.moveForm( "comment-442939", "442939", "respond", "5708" )' aria-label='Reply to Jason Brownlee'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li id="comment-443363" class="comment even thread-even depth-1">
+
+	      	<div id="li-comment-443363" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/311c6e798a919146fc8bb892add19181?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/311c6e798a919146fc8bb892add19181?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name">Yaser Sakkaf</span>
+	                <span class="date">July 13, 2018 at 3:44 pm</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-443363" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>This is quite helpful Jason.<br />
+Thanks</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-443363' onclick='return addComment.moveForm( "comment-443363", "443363", "respond", "5708" )' aria-label='Reply to Yaser Sakkaf'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	<ul class="children">
+
+		<li id="comment-443419" class="comment byuser comment-author-jasonb bypostauthor odd alt depth-2">
+
+	      	<div id="li-comment-443419" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name"><a href='http://MachineLearningMastery.com' rel='external nofollow' class='url'>Jason Brownlee</a></span>
+	                <span class="date">July 14, 2018 at 6:13 am</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-443419" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>I&#8217;m glad to hear it.</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-443419' onclick='return addComment.moveForm( "comment-443419", "443419", "respond", "5708" )' aria-label='Reply to Jason Brownlee'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+		<li id="comment-445845" class="comment even thread-odd thread-alt depth-1">
+
+	      	<div id="li-comment-445845" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/b726c4e4ee7849621f1ea12b78b77dd5?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b726c4e4ee7849621f1ea12b78b77dd5?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name">Rick</span>
+	                <span class="date">August 11, 2018 at 7:48 pm</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-445845" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>Very informative blog!<br />
+I have a question:</p>
+<p>What is the significance of the number that we pass to .seed() ?<br />
+e.g. if I run following codes:</p>
+<p>#Code 1:</p>
+<p>np.random.seed(0)</p>
+<p>np.random.rand(4)</p>
+<p>#Code 2:</p>
+<p>np.random.seed(10)</p>
+<p>np.random.rand(4)</p>
+<p>Both show different output. So, what is the difference in np.random.seed(10) and np.random.seed(0) ?</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-445845' onclick='return addComment.moveForm( "comment-445845", "445845", "respond", "5708" )' aria-label='Reply to Rick'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	<ul class="children">
+
+		<li id="comment-445883" class="comment byuser comment-author-jasonb bypostauthor odd alt depth-2">
+
+	      	<div id="li-comment-445883" class="comment-container">
+
+					                <div class="avatar"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=40&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=80&#038;d=mm&#038;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' /></div>
+	            
+		      	<div class="comment-head">
+
+	                <span class="name"><a href='http://MachineLearningMastery.com' rel='external nofollow' class='url'>Jason Brownlee</a></span>
+	                <span class="date">August 12, 2018 at 6:31 am</span>
+	                <span class="perma"><a href="https://machinelearningmastery.com/how-to-generate-random-numbers-in-python/#comment-445883" title="Direct link to this comment">#</a></span>
+	                <span class="edit"></span>
+
+				</div><!-- /.comment-head -->
+
+		   		<div class="comment-entry">
+
+				<p>It is feed into the equation that starts the sequence of random numbers. The same seed will give the same sequence of randomness.</p>
+
+				
+	                <div class="reply">
+	                    <a rel='nofollow' class='comment-reply-link' href='#comment-445883' onclick='return addComment.moveForm( "comment-445883", "445883", "respond", "5708" )' aria-label='Reply to Jason Brownlee'>Reply</a>	                </div><!-- /.reply -->
+
+				</div><!-- /comment-entry -->
+
+			</div><!-- /.comment-container -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+		 	</div>	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/how-to-generate-random-numbers-in-python/#respond" style="display:none;">Click here to cancel reply.</a></small></h3>			<form action="https://machinelearningmastery.com/wp-comments-post.php?wpe-comment-post=mlmastery" method="post" id="commentform" class="comment-form">
+				<p class="comment-form-comment"><label class="hide" for="comment">Comment</label> <textarea tabindex="4" id="comment" name="comment" cols="50" rows="10" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><input id="author" name="author" type="text" class="txt" tabindex="1" value="" size="30" aria-required='true' /><label for="author">Name <span class="required">(required)</span></label> </p>
+<p class="comment-form-email"><input id="email" name="email" type="text" class="txt" tabindex="2" value="" size="30" aria-required='true' /><label for="email">Email (will not be published) <span class="required">(required)</span></label> </p>
+<p class="comment-form-url"><input id="url" name="url" type="text" class="txt" tabindex="3" value="" size="30" /><label for="url">Website</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit Comment" /> <input type='hidden' name='comment_post_ID' value='5708' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2c52fd3d08" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="117"/></p>			</form>
+			</div><!-- #respond -->
+	     
+            </section><!-- /#main -->
+                
+            <aside id="sidebar">
+<div id="woo_blogauthorinfo-2" class="widget widget_woo_blogauthorinfo"><h3>Welcome to Machine Learning Mastery</h3><span class="left"><img alt='' src='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=100&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/1d75d46040c28497f0dee5d8e100db37?s=200&#038;d=mm&#038;r=g 2x' class='avatar avatar-100 photo' height='100' width='100' /></span>
+<p>Hi, I'm Jason Brownlee, Ph.D.
+<br>
+My goal is to make developers like <em>YOU</em> awesome at applied machine learning.</p>
+<p><a href="/about">Read More</a></p>
+<div class="fix"></div>
+</div><div id="text-50" class="widget widget_text">			<div class="textwidget"><p><center></p>
+<h3>Statistics for Machine Learning</h3>
+<p><em>Skip the academic textbooks!</em><br />
+Finally understand stats by writing code in Python.</p>
+<p><a href="/statistics_for_machine_learning/">Click o Get Started With Statistics Today!</a><br />
+<a href="/statistics_for_machine_learning/"><img src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/Cover-220.png" /></a><br />
+</center></p>
+</div>
+		</div>
+		<div id="woo_tabs-2" class="widget widget_woo_tabs"> 		<div id="tabs">
+
+            <ul class="wooTabs">
+                                <li class="popular"><a href="#tab-pop">Popular</a></li>                                                            </ul>
+
+            <div class="clear"></div>
+
+            <div class="boxes box inside">
+
+	            
+                                <ul id="tab-pop" class="list">
+                    	<li>
+		<a href="https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/" title="How to Develop a Deep Learning Photo Caption Generator from Scratch"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/example-150x150.jpg" class="thumbnail wp-post-image" alt="Photo of a dog at the beach." title="How to Develop a Deep Learning Photo Caption Generator from Scratch" /></a>		<a title="How to Develop a Deep Learning Photo Caption Generator from Scratch" href="https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/">How to Develop a Deep Learning Photo Caption Generator from Scratch</a>
+		<span class="meta">November 27, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/" title="How to Use Word Embedding Layers for Deep Learning with Keras"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/How-to-Use-Word-Embedding-Layers-for-Deep-Learning-with-Keras-150x150.jpg" class="thumbnail wp-post-image" alt="How to Use Word Embedding Layers for Deep Learning with Keras" title="How to Use Word Embedding Layers for Deep Learning with Keras" /></a>		<a title="How to Use Word Embedding Layers for Deep Learning with Keras" href="https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/">How to Use Word Embedding Layers for Deep Learning with Keras</a>
+		<span class="meta">October 4, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/develop-neural-machine-translation-system-keras/" title="How to Develop a Neural Machine Translation System from Scratch"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2018/01/How-to-Develop-a-Neural-Machine-Translation-System-in-Keras-150x150.jpg" class="thumbnail wp-post-image" alt="How to Develop a Neural Machine Translation System in Keras" title="How to Develop a Neural Machine Translation System from Scratch" /></a>		<a title="How to Develop a Neural Machine Translation System from Scratch" href="https://machinelearningmastery.com/develop-neural-machine-translation-system-keras/">How to Develop a Neural Machine Translation System from Scratch</a>
+		<span class="meta">January 10, 2018</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/define-encoder-decoder-sequence-sequence-model-neural-machine-translation-keras/" title="How to Define an Encoder-Decoder Sequence-to-Sequence Model for Neural Machine Translation in Keras"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/How-to-Define-an-Encoder-Decoder-Sequence-to-Sequence-Model-for-Neural-Machine-Translation-in-Keras-150x150.jpg" class="thumbnail wp-post-image" alt="How to Define an Encoder-Decoder Sequence-to-Sequence Model for Neural Machine Translation in Keras" title="How to Define an Encoder-Decoder Sequence-to-Sequence Model for Neural Machine Translation in Keras" /></a>		<a title="How to Define an Encoder-Decoder Sequence-to-Sequence Model for Neural Machine Translation in Keras" href="https://machinelearningmastery.com/define-encoder-decoder-sequence-sequence-model-neural-machine-translation-keras/">How to Define an Encoder-Decoder Sequence-to-Sequence Model for Neural Machine Translation in Keras</a>
+		<span class="meta">October 26, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/" title="How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/How-to-Develop-an-Encoder-Decoder-Model-for-Sequence-to-Sequence-Prediction-in-Keras-150x150.jpg" class="thumbnail wp-post-image" alt="How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras" title="How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras" /></a>		<a title="How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras" href="https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/">How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras</a>
+		<span class="meta">November 2, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/" title="How to Develop an Encoder-Decoder Model with Attention for Sequence-to-Sequence Prediction in Keras"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/How-to-Develop-an-Encoder-Decoder-Model-with-Attention-for-Sequence-to-Sequence-Prediction-in-Keras-150x150.jpg" class="thumbnail wp-post-image" alt="How to Develop an Encoder-Decoder Model with Attention for Sequence-to-Sequence Prediction in Keras" title="How to Develop an Encoder-Decoder Model with Attention for Sequence-to-Sequence Prediction in Keras" /></a>		<a title="How to Develop an Encoder-Decoder Model with Attention for Sequence-to-Sequence Prediction in Keras" href="https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/">How to Develop an Encoder-Decoder Model with Attention for Sequence-to-Sequence Prediction in Keras</a>
+		<span class="meta">October 17, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/keras-functional-api-deep-learning/" title="How to Use the Keras Functional API for Deep Learning"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/multiple_inputs-150x150.png" class="thumbnail wp-post-image" alt="Neural Network Graph With Multiple Inputs" title="How to Use the Keras Functional API for Deep Learning" /></a>		<a title="How to Use the Keras Functional API for Deep Learning" href="https://machinelearningmastery.com/keras-functional-api-deep-learning/">How to Use the Keras Functional API for Deep Learning</a>
+		<span class="meta">October 27, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/develop-word-embeddings-python-gensim/" title="How to Develop Word Embeddings in Python with Gensim"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/08/Scatter-Plot-of-PCA-Projection-of-Word2Vec-Model-150x150.png" class="thumbnail wp-post-image" alt="Scatter Plot of PCA Projection of Word2Vec Model" title="How to Develop Word Embeddings in Python with Gensim" /></a>		<a title="How to Develop Word Embeddings in Python with Gensim" href="https://machinelearningmastery.com/develop-word-embeddings-python-gensim/">How to Develop Word Embeddings in Python with Gensim</a>
+		<span class="meta">October 6, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/" title="How to Develop a Word-Level Neural Language Model and Use it to Generate Text"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/11/How-to-Develop-a-Word-Level-Neural-Language-Model-and-Use-it-to-Generate-Text-150x150.jpg" class="thumbnail wp-post-image" alt="How to Develop a Word-Level Neural Language Model and Use it to Generate Text" title="How to Develop a Word-Level Neural Language Model and Use it to Generate Text" /></a>		<a title="How to Develop a Word-Level Neural Language Model and Use it to Generate Text" href="https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/">How to Develop a Word-Level Neural Language Model and Use it to Generate Text</a>
+		<span class="meta">November 10, 2017</span>
+		<div class="fix"></div>
+	</li>
+		<li>
+		<a href="https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/" title="How to Develop an N-gram Multichannel Convolutional Neural Network for Sentiment Analysis"><img width="45" height="45" src="https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/Plot-of-the-Multichannel-Convolutional-Neural-Network-For-Text-150x150.png" class="thumbnail wp-post-image" alt="Plot of the Multichannel Convolutional Neural Network For Text" title="How to Develop an N-gram Multichannel Convolutional Neural Network for Sentiment Analysis" /></a>		<a title="How to Develop an N-gram Multichannel Convolutional Neural Network for Sentiment Analysis" href="https://machinelearningmastery.com/develop-n-gram-multichannel-convolutional-neural-network-sentiment-analysis/">How to Develop an N-gram Multichannel Convolutional Neural Network for Sentiment Analysis</a>
+		<span class="meta">January 12, 2018</span>
+		<div class="fix"></div>
+	</li>
+	                </ul>
+                                                                
+            </div><!-- /.boxes -->
+
+        </div><!-- /wooTabs -->
+
+        </div>         <div id="custom_html-2" class="widget_text widget widget_custom_html"><h3>You might also like&#8230;</h3><div class="textwidget custom-html-widget"><ul>
+  <li><a href="/machine-learning-in-python-step-by-step/">Your First Machine Learning Project in Python</a></li>
+	<li><a href="/tutorial-first-neural-network-python-keras/">Your First Neural Network in Python</a></li>
+	<li><a href="/setup-python-environment-machine-learning-deep-learning-anaconda/">How to Setup a Python for Machine Learning</a></li>
+	<li><a href="/how-to-run-your-first-classifier-in-weka/">Your First Classifier in Weka</a></li>
+	<li><a href="/arima-for-time-series-forecasting-with-python/">Your First Model for Time Series Forecasting</a></li>
+</ul></div></div></aside><!-- /#sidebar -->
+
+		</div><!-- /#main-sidebar-container -->         
+
+		
+    </div><!-- /#content -->
+	
+	<footer id="footer" class="col-full">
+
+		
+		<div id="copyright" class="col-left">
+			<p>&copy; 2018 Machine Learning Mastery. All Rights Reserved. </p>		</div>
+
+		<div id="credit" class="col-right">
+			<p><p>
+<a href="/privacy/">Privacy</a> | 
+<a href="/disclaimer/">Disclaimer</a> | 
+<a href="/terms-of-service/">Terms of Service</a> | 
+<a href="/site-search/">Search</a> |
+<a href="https://www.getdrip.com/forms/387997427/submissions/new">Newsletter</a> |
+<a href="/contact/">Contact</a> |
+<a href="/about/">About</a>
+</p></p>		</div>
+
+	</footer>
+
+	
+	</div><!-- /#inner-wrapper -->
+
+</div><!-- /#wrapper -->
+
+<div class="fix"></div><!--/.fix-->
+
+<!-- Drip -->
+<script type="text/javascript">
+  var _dcq = _dcq || [];
+  var _dcs = _dcs || {};
+  _dcs.account = '9556588';
+
+  (function() {
+    var dc = document.createElement('script');
+    dc.type = 'text/javascript'; dc.async = true;
+    dc.src = '//tag.getdrip.com/9556588.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(dc, s);
+  })();
+</script>
+<!-- end Drip --><!-- Woo Tabs Widget -->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	// UL = .wooTabs
+	// Tab contents = .inside
+
+	var tag_cloud_class = '#tagcloud';
+
+	//Fix for tag clouds - unexpected height before .hide()
+	var tag_cloud_height = jQuery( '#tagcloud').height();
+
+	jQuery( '.inside ul li:last-child').css( 'border-bottom','0px' ); // remove last border-bottom from list in tab content
+	jQuery( '.wooTabs').each(function(){
+		jQuery(this).children( 'li').children( 'a:first').addClass( 'selected' ); // Add .selected class to first tab on load
+	});
+	jQuery( '.inside > *').hide();
+	jQuery( '.inside > *:first-child').show();
+
+	jQuery( '.wooTabs li a').click(function(evt){ // Init Click funtion on Tabs
+
+		var clicked_tab_ref = jQuery(this).attr( 'href' ); // Strore Href value
+
+		jQuery(this).parent().parent().children( 'li').children( 'a').removeClass( 'selected' ); //Remove selected from all tabs
+		jQuery(this).addClass( 'selected' );
+		jQuery(this).parent().parent().parent().children( '.inside').children( '*').hide();
+
+		jQuery( '.inside ' + clicked_tab_ref).fadeIn(500);
+
+		 evt.preventDefault();
+
+	})
+})
+</script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/machinelearningmastery.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var frontend_ajax_object = {"ajax_url":"https:\/\/machinelearningmastery.com\/wp-admin\/admin-ajax.php","ajax_nonce":"b76b2475d0"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/seo-optimized-share-buttons/js/frontend.js?ver=4.2.2.0.iis7_supports_permalinks'></script>
+<script type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='https://3qeqpr26caki16dnhd19sv6by6v-wpengine.netdna-ssl.com/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

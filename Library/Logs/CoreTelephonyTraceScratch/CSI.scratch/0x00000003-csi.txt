@@ -1,0 +1,1068 @@
+e
+4009967.083 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: fCurrentIfName: 'en0'
+4009967.083 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity DOWN. Previous primary interface: 'en0'
+4009967.083 [I] evt: Firing event 'dataWifiAvailable': with params= 0, {}
+4009967.083 [I] DATA:TechDriver:handleWifiAvailable_sync: available = false 
+4009967.083 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+4009967.083 [I] DATA:TechContext:0:handleWifiAvailable_sync: Looking for en0 in updated interface list
+4009967.083 [I] DATA:TechContext:0:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+4009967.083 [I] DATA:TechContext:1:handleWifiAvailable_sync: Looking for en0 in updated interface list
+4009967.083 [I] DATA:TechContext:1:handleWifiAvailable_sync: Interface en0 is gone, clear fActiveInterfaceName
+4009967.083 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from en0 to 
+4009967.083 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = false
+4009967.083 [I|22+] 5wi: handleWifiAvailable_sync : currently available=true, new value=false
+4009967.083 [I] evt: Firing event 'bearerAvailable': with params= 0, kNoData
+4009967.083 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4009967.083 [I] evt: Firing event 'dataModeChanged': with params= kNoData, kNoData
+4009967.083 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4009967.083 [I] evt: Firing event 'dataNotAttached'
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] evt: Firing event 'RATChanged': with params= kRatUnknown
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable false
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009967.083 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+4009967.084 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+4009967.084 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+4009967.688 [I|24+] sysobs: WiFi Availability is changing from true to false
+4009967.688 [I|24] evt: Firing event 'wifiAvailable': with params= 0
+4009967.688 [I|28+] enth.ctr: Wifi availability is changing from true to false
+4009967.688 [I|24] sysobs: Internet availability is changing from true to false
+4009967.688 [I|24] evt: Firing event 'internetAvailable': with params= 0
+4009967.688 [I|17+] ent.ctr: Wifi availability is changing from true to false
+4009967.688 [I|31+] cb.client: Internet availability is changing from true to false
+4009967.688 [I] pnr.mgr: Phone number hasn't been read
+4009972.569 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0e3e420
+4009972.569 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: false
+4009972.573 [I] DataNetworkMonitorOSX:handleNetworkStateChanged_sync: nwi_state: 0x7febb0c1a100
+4009972.573 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ***** ipConnectivityAvailable: true
+4009972.573 [I] DataNetworkMonitorOSX:checkIPConnectivity_sync: ipConnectivity UP. Current primary interface: 'en0'
+4009972.573 [I] evt: Firing event 'dataWifiAvailable': with params= 1, {en0}
+4009972.573 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4009972.573 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4009972.573 [I] DATA:TechDriver:handleWifiAvailable_sync: available = true  on [en0]
+4009972.573 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Wifi Changed
+4009972.573 [I|22+] 5wi.wifi: fWifiInterfaceName changes from en0 to en0
+4009972.573 [I|22+] 5wi: handleWifiAvailable_sync : currently available=false, new value=true
+4009972.573 [I] DATA:TechDriver:handleWifiAvailable_sync: fWifiInterfaceName changes from  to en0
+4009972.573 [I] NOBB:NoBBRadioModule:handleWifiAvailable: available = true
+4009972.573 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4009972.573 [I] NOBB:NoBBRadioModule:checkNoBBRadioDownCondition: fNoBBWiFiOffInAirplaneMode false. fNoBBAirplaneMode false  fWiFiAvailable true
+4009972.573 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4009972.573 [I] evt: Firing event 'RATChanged': with params= kRatLTE
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] evt: Firing event 'dataAttached'
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] evt: Firing event 'dataModeChanged': with params= kLTE, kLTE
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] evt: Firing event 'bearerAvailable': with params= 1, kLTE
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I|26+] server: ================================================================================================
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I|26] server: Device got PS Registered, checking to send Activation report to the server
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I|4+] xpc.event:   --------------> kCTEventCallManagementStateChanged(122) sent to 1 (of 4) clients. Full Event: {
+	"kEvent": 122,
+	"kNotificationEvent": 122,
+	"kNotificationDict": {
+		"kCTCallManagementIsSwappable": true,
+		"kCTCallManagementIsConferenceSideBarBlocked": true,
+		"kCTCallManagementIsEndAndAnswerAllowed": true,
+		"kCTCallManagementIsAmbiguousMultiParty": false,
+		"kCTCallManagementIsMergeable": false,
+		"kCTCallManagementIsPhoneServicesActive": false,
+		"kCTCallManagementMaxSupportedCallCount": 6,
+		"kCTCallManagementIsHardPauseSupported": true,
+		"kCTCallManagementMaxMultiPartyCallCount": 5,
+		"kCTCallManagementIsAmbiguousCallList": false,
+		"kCTCallManagementIsAddCallAllowed": true,
+		"kCTCallManagementIsHoldAllowed": true,
+		"kCTCallManagementEmergencyWifiCallCapable": false,
+		"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+	}
+}
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Wifi Changed
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: 
+4009972.573 [I] data: no TechSettings dictionary can be found
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: for 0
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4009972.573 [I] DATA:TechContext:0:stopUsing: 
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: for 1
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: APN info not present
+4009972.573 [I] DATA:TechContext:1:stopUsing: 
+4009972.573 [I] DATA:TechDriver:refreshAllDataSettings: 
+4009972.573 [I] DATA:iRatController:subscribeLineTypes_sync: with app Types ()
+4009972.573 [I] DATA:iRatController:subscribeLineTypes_sync: Subscribe app Types not changed
+4009972.573 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 0, Tech setup reconfigured
+4009972.573 [I] evt: Firing event 'recalculateConnectionAvailability': with params= 1, DataServiceController activation
+4009972.573 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4009972.573 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] DATA:ServiceController:recalculateConnectionAvailability: nothing changed due to Tech setup reconfigured
+4009972.573 [I] DATA:Connection:Bootstrap:canActivateTrigger: 
+4009972.573 [I] DATA:Connection:BootstrapRoamingInternetBypass:canActivateTrigger: isRoaming: false, canActivate: false
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.573 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.574 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.574 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.574 [I] NOBB:NoBBRadioModule_NOSUPPORT:getCellularDataIsEnabled: 
+4009972.574 [I] DATA:ServiceController:recalculateConnectionAvailability: Internal event: If(-3), Vf(-3), Mf(-3), Ef(-3), Wf(-3), wf(-3), Pf(-3), Df(-3), Tf(-3), Of(-3), Ff(-3), ff(-3), mf(-3), of(-3), Zf(-3), $f(-3), if(-3), Sf(-3), 9f(-3), Bf(-3), Uf(-3), bf(-3) due to DataServiceController activation
+4009972.574 [I] evt: Firing event 'connectionAvailability': with params= 0, { f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3), f(-3)}
+4009972.574 [I] DATA:ServiceController:recalculateConnectionAvailability: sending CT event due to DataServiceController activation
+4009972.574 [I] DATA:TechDriver:handleConnectionAvailability: cellInternetAvailable = false
+4009972.574 [I|4+] xpc.event:   --------------> kCTEventDataServiceAvailability(157) sent to 0 (of 4) clients. Full Event: {
+	"kEvent": 157,
+	"kNotificationEvent": 157,
+	"kNotificationDict": {
+		"kCTRegistrationDataConnectionServices": []
+	}
+}
+4009972.574 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) request: kCallModelGetProperty, expects reply. Full request: {
+	"kRequest": "kCallModelGetProperty",
+	"kCallManagementState": null
+}
+4009972.574 CopyIMSConfigValue: : Voice.E911OverITechSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4009972.574 CopyIMSConfigValue: : Voice.E911OverIMSSupported. = <CFBoolean 0x10bb79e50 [0x10bb79440]>{value = false}
+4009972.574 [I] xpc.client: CCXpcServer(297[callservicesd]:'callservicesd-CTTelephonyCenter'/0x7febb0f30c00) reply to request 'kCallModelGetProperty'. Full reply: {
+	"kCTCallManagementIsSwappable": true,
+	"kCTCallManagementIsConferenceSideBarBlocked": true,
+	"kCTCallManagementIsEndAndAnswerAllowed": true,
+	"kCTCallManagementIsAmbiguousMultiParty": false,
+	"kCTCallManagementIsMergeable": false,
+	"kCTCallManagementIsPhoneServicesActive": false,
+	"kCTCallManagementMaxSupportedCallCount": 6,
+	"kCTCallManagementIsHardPauseSupported": true,
+	"kCTCallManagementMaxMultiPartyCallCount": 5,
+	"kCTCallManagementIsAmbiguousCallList": false,
+	"kCTCallManagementIsAddCallAllowed": true,
+	"kCTCallManagementIsHoldAllowed": true,
+	"kCTCallManagementEmergencyWifiCallCapable": false,
+	"kCTCallManagementExpectedCallSubType": "kCTCallSubTypeTelephony"
+}
+4009973.066 [I|24+] sysobs: WiFi Availability is changing from false to true
+4009973.066 [I|24] evt: Firing event 'wifiAvailable': with params= 1
+4009973.066 [I|17+] ent.ctr: Wifi availability is changing from false to true
+4009973.066 [I|28+] enth.ctr: Wifi availability is changing from false to true
+4009973.066 [I|24] sysobs: Internet availability is changing from false to true
+4009973.066 [I|24] evt: Firing event 'internetAvailable': with params= 1
+4009973.066 [I|31+] cb.client: Internet availability is changing from false to true
+4009973.066 [I|26+] server: ================================================================================================
+4009973.066 [I|26] server: Internet available, checking to send Activation report to the server
+4009973.066 [I|26] server: Cannot send the report, Activation Activity Handler State: Service Provisioned: false, CS Registered: false, PS Registered: true, PDP Activated: false, MCC: , MNC: 
+4009973.066 [I|26] server: Activation activity report result: SendReportResult::kNotReadyToSend
+4009973.066 [I] pnr.mgr: Phone number hasn't been read
+4009980.160 [I] xpc.watchdog: Callback Watchdog: checkin
+4009980.160 [I] xpc.watchdog: Server Watchdog: checkin
+4009995.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4009995.161 [I] xpc.watchdog: Server Watchdog: checkin
+4009997.342 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 943, 0]
+4010001.972 [I] csiapp.info: Application exited: AppInfo[AppleSpell, com.apple.applespell, false, 946, 0]
+4010010.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010010.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010025.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010025.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010040.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010040.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010055.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010055.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010069.139 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 409, 0]
+4010070.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010070.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010085.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010085.161 [I] xpc.watchdog: Server Watchdog: checkin
+4010100.161 [I] xpc.watchdog: Callback Watchdog: checkin
+4010100.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010115.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010115.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010130.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010130.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010145.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010145.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010160.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010160.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010169.545 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 949, 0]
+4010175.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010175.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010178.854 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 952, 0]
+4010190.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010190.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010205.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010205.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010220.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010220.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010235.162 [I] xpc.watchdog: Callback Watchdog: checkin
+4010235.162 [I] xpc.watchdog: Server Watchdog: checkin
+4010250.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010250.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010265.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010265.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010280.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010280.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010295.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010295.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010310.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010310.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010325.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010325.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010340.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010340.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010355.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010355.163 [I] xpc.watchdog: Server Watchdog: checkin
+4010370.163 [I] xpc.watchdog: Callback Watchdog: checkin
+4010370.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010385.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010385.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010400.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010400.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010415.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010415.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010430.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010430.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010445.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010445.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010460.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010460.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010475.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010475.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010490.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010490.164 [I] xpc.watchdog: Server Watchdog: checkin
+4010505.164 [I] xpc.watchdog: Callback Watchdog: checkin
+4010505.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010520.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010520.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010535.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010535.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010550.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010550.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010565.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010565.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010580.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010580.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010595.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010595.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010610.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010610.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010625.165 [I] xpc.watchdog: Callback Watchdog: checkin
+4010625.165 [I] xpc.watchdog: Server Watchdog: checkin
+4010640.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010640.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010655.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010655.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010670.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010670.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010685.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010685.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010700.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010700.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010715.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010715.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010730.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010730.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010745.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010745.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010760.166 [I] xpc.watchdog: Callback Watchdog: checkin
+4010760.166 [I] xpc.watchdog: Server Watchdog: checkin
+4010775.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010775.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010790.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010790.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010805.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010805.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010820.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010820.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010835.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010835.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010850.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010850.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010865.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010865.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010880.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010880.167 [I] xpc.watchdog: Server Watchdog: checkin
+4010895.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010895.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010910.167 [I] xpc.watchdog: Callback Watchdog: checkin
+4010910.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010925.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010925.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010940.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010940.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010955.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010955.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010970.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010970.168 [I] xpc.watchdog: Server Watchdog: checkin
+4010985.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4010985.168 [I] xpc.watchdog: Server Watchdog: checkin
+4011000.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4011000.168 [I] xpc.watchdog: Server Watchdog: checkin
+4011015.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4011015.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011030.168 [I] xpc.watchdog: Callback Watchdog: checkin
+4011030.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011045.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011045.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011060.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011060.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011075.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011075.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011090.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011090.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011093.180 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 971, 0]
+4011093.198 [I] csiapp.info: Application exited: AppInfo[Safari Networking, com.apple.webkit.networking, false, 970, 0]
+4011105.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011105.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011106.465 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 954, 0]
+4011120.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011120.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011135.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011135.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011150.169 [I] xpc.watchdog: Callback Watchdog: checkin
+4011150.169 [I] xpc.watchdog: Server Watchdog: checkin
+4011165.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011165.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011180.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011180.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011195.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011195.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011210.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011210.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011225.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011225.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011240.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011240.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011255.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011255.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011270.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011270.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011285.170 [I] xpc.watchdog: Callback Watchdog: checkin
+4011285.170 [I] xpc.watchdog: Server Watchdog: checkin
+4011300.171 [I] xpc.watchdog: Callback Watchdog: checkin
+4011300.171 [I] xpc.watchdog: Server Watchdog: checkin
+4011315.171 [I] xpc.watchdog: Callback Watchdog: checkin
+4011315.171 [I] xpc.watchdog: Server Watchdog: checkin
+4011330.171 [I] xpc.watchdog: Callback Watchdog: checkin
+4011330.171 [I] xpc.watchdog: Server Watchdog: checkin
+4011345.171 [I] xpc.watchdog: Callback Watchdog: checkin
+4011345.171 [I] xpc.watchdog: Server Watchdog: checkin
+4011360.171 [I] xpc.watchdog: Callback Watchdog: checkin
+4011360.171 [I] xpc.watchdog: Server Watchdog: checkin
+4011376.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011376.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011391.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011391.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011406.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011406.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011421.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011421.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011436.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011436.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011451.458 [I] xpc.watchdog: Callback Watchdog: checkin
+4011451.458 [I] xpc.watchdog: Server Watchdog: checkin
+4011466.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011466.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011481.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011481.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011496.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011496.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011511.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011511.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011526.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011526.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011541.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011541.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011556.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011556.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011571.459 [I] xpc.watchdog: Callback Watchdog: checkin
+4011571.459 [I] xpc.watchdog: Server Watchdog: checkin
+4011586.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011586.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011601.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011601.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011616.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011616.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011631.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011631.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011646.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011646.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011649.860 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 953, 0]
+4011661.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011661.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011665.814 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 983, 0]
+4011676.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011676.460 [I] xpc.watchdog: Server Watchdog: checkin
+4011691.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011691.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011706.460 [I] xpc.watchdog: Callback Watchdog: checkin
+4011706.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011721.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011721.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011736.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011736.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011751.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011751.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011766.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011766.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011781.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011781.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011796.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011796.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011811.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011811.461 [I] xpc.watchdog: Server Watchdog: checkin
+4011826.461 [I] xpc.watchdog: Callback Watchdog: checkin
+4011826.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011841.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011841.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011856.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011856.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011871.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011871.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011886.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011886.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011901.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011901.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011916.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011916.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011931.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011931.462 [I] xpc.watchdog: Server Watchdog: checkin
+4011946.462 [I] xpc.watchdog: Callback Watchdog: checkin
+4011946.463 [I] xpc.watchdog: Server Watchdog: checkin
+4011961.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4011961.463 [I] xpc.watchdog: Server Watchdog: checkin
+4011976.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4011976.463 [I] xpc.watchdog: Server Watchdog: checkin
+4011991.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4011991.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012006.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4012006.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012021.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4012021.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012036.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4012036.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012051.518 [I] xpc.watchdog: Callback Watchdog: checkin
+4012051.518 [I] xpc.watchdog: Server Watchdog: checkin
+4012066.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4012066.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012081.463 [I] xpc.watchdog: Callback Watchdog: checkin
+4012081.463 [I] xpc.watchdog: Server Watchdog: checkin
+4012096.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012096.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012111.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012111.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012126.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012126.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012141.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012141.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012156.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012156.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012171.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012171.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012186.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012186.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012201.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012201.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012216.464 [I] xpc.watchdog: Callback Watchdog: checkin
+4012216.464 [I] xpc.watchdog: Server Watchdog: checkin
+4012231.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012231.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012246.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012246.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012261.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012261.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012276.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012276.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012291.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012291.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012306.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012306.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012321.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012321.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012336.465 [I] xpc.watchdog: Callback Watchdog: checkin
+4012336.465 [I] xpc.watchdog: Server Watchdog: checkin
+4012351.509 [I] xpc.watchdog: Callback Watchdog: checkin
+4012351.509 [I] xpc.watchdog: Server Watchdog: checkin
+4012366.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012366.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012381.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012381.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012396.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012396.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012411.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012411.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012426.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012426.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012441.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012441.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012456.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012456.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012471.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012471.466 [I] xpc.watchdog: Server Watchdog: checkin
+4012486.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012486.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012501.466 [I] xpc.watchdog: Callback Watchdog: checkin
+4012501.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012516.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012516.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012531.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012531.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012546.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012546.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012561.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012561.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012576.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012576.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012591.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012591.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012606.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012606.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012621.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012621.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012636.467 [I] xpc.watchdog: Callback Watchdog: checkin
+4012636.467 [I] xpc.watchdog: Server Watchdog: checkin
+4012651.510 [I] xpc.watchdog: Callback Watchdog: checkin
+4012651.510 [I] xpc.watchdog: Server Watchdog: checkin
+4012666.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012666.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012681.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012681.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012696.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012696.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012711.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012711.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012726.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012726.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012741.468 [I] xpc.watchdog: Callback Watchdog: checkin
+4012741.468 [I] xpc.watchdog: Server Watchdog: checkin
+4012756.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012756.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012771.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012771.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012786.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012786.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012801.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012801.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012816.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012816.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012831.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012831.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012846.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012846.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012861.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012861.469 [I] xpc.watchdog: Server Watchdog: checkin
+4012876.469 [I] xpc.watchdog: Callback Watchdog: checkin
+4012876.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012891.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012891.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012906.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012906.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012921.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012921.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012936.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012936.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012951.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012951.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012966.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012966.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012981.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012981.470 [I] xpc.watchdog: Server Watchdog: checkin
+4012996.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4012996.470 [I] xpc.watchdog: Server Watchdog: checkin
+4013011.470 [I] xpc.watchdog: Callback Watchdog: checkin
+4013011.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013026.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013026.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013041.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013041.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013056.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013056.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013071.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013071.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013086.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013086.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013101.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013101.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013116.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013116.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013131.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013131.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013146.471 [I] xpc.watchdog: Callback Watchdog: checkin
+4013146.471 [I] xpc.watchdog: Server Watchdog: checkin
+4013161.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013161.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013176.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013176.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013181.611 [I] DATA:Collocation_NoBB:0:dataCollocationAssertionUpdate: tearDownNow = true
+4013181.611 [I] DATA:Collocation_NoBB:1:dataCollocationAssertionUpdate: tearDownNow = true
+4013181.611 [I] DATA:ServiceController:___ZN21DataServiceController21deactivateNonAssertedEv_block_invoke: nothing to wait for
+4013181.611 [I] DATA:ServiceController:waitForDeactivateNonAsserted: result code 0
+4013181.611 [I] pwr: Telling CSI to go low power
+4013181.611 [I] NOBB:NoBBRadioModule_NOSUPPORT:canEnterLowPower: 
+4013181.611 [I] pwr: CSI can enter low power, so now telling to do so
+4013181.611 [I] NOBB:NoBBRadioModule:enterLowPower: 
+4013181.611 [I] pwr: Will sleep.  Heard from CSI in 9.20296e-05 seconds
+4013181.611 [I] NOBB:NoBBRadioModule:enterLowPower_sync: 
+4013181.611 [I] evt: Sending internal notification kEventEnteringLowPower (17) params={0, 0, 0x0}
+4013181.611 [I] evt: Firing event 'enterLowPower'
+4013181.611 [I] DATA:TechDriver:enterLowPower: Entering low power mode
+4013181.611 [I] DATA:TechDriver:callbackEnteredLowPower: Calling Low Power call back
+4013181.611 [I] NOBB:NoBBRadioModule:finishEnterLowPower: 
+4013181.611 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: 
+4013181.611 [I] NOBB:NoBBRadioModule:finishEnterLowPower_sync: calling low power callback, result is 1
+4013185.159 [I] pwr: Telling CSI to exit low power
+4013185.159 [I] NOBB:NoBBRadioModule:exitLowPower: 
+4013185.160 [I] NOBB:NoBBRadioModule:exitLowPower_sync: 
+4013185.160 [I] evt: Sending internal notification kEventExitingLowPower (18) params={0, 0, 0x0}
+4013185.160 [I] evt: Firing event 'exitLowPower'
+4013185.160 [I] DATA:TechDriver:handleExitLowPower_sync: Exiting low power mode
+4013191.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013191.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013206.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013206.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013221.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013221.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013236.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013236.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013251.547 [I] xpc.watchdog: Callback Watchdog: checkin
+4013251.547 [I] xpc.watchdog: Server Watchdog: checkin
+4013266.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013266.472 [I] xpc.watchdog: Server Watchdog: checkin
+4013281.472 [I] xpc.watchdog: Callback Watchdog: checkin
+4013281.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013296.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013296.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013311.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013311.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013326.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013326.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013341.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013341.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013356.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013356.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013371.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013371.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013386.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013386.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013401.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013401.473 [I] xpc.watchdog: Server Watchdog: checkin
+4013416.473 [I] xpc.watchdog: Callback Watchdog: checkin
+4013416.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013431.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013431.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013446.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013446.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013461.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013461.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013476.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013476.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013491.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013491.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013506.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013506.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013521.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013521.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013536.474 [I] xpc.watchdog: Callback Watchdog: checkin
+4013536.474 [I] xpc.watchdog: Server Watchdog: checkin
+4013551.549 [I] xpc.watchdog: Callback Watchdog: checkin
+4013551.550 [I] xpc.watchdog: Server Watchdog: checkin
+4013566.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013566.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013581.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013581.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013596.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013596.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013611.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013611.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013626.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013626.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013641.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013641.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013656.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013656.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013671.475 [I] xpc.watchdog: Callback Watchdog: checkin
+4013671.475 [I] xpc.watchdog: Server Watchdog: checkin
+4013686.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013686.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013701.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013701.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013716.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013716.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013731.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013731.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013746.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013746.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013761.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013761.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013776.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013776.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013791.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013791.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013806.476 [I] xpc.watchdog: Callback Watchdog: checkin
+4013806.476 [I] xpc.watchdog: Server Watchdog: checkin
+4013821.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013821.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013836.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013836.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013851.552 [I] xpc.watchdog: Callback Watchdog: checkin
+4013851.552 [I] xpc.watchdog: Server Watchdog: checkin
+4013866.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013866.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013881.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013881.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013896.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013896.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013911.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013911.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013926.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013926.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013941.477 [I] xpc.watchdog: Callback Watchdog: checkin
+4013941.477 [I] xpc.watchdog: Server Watchdog: checkin
+4013956.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4013956.478 [I] xpc.watchdog: Server Watchdog: checkin
+4013971.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4013971.478 [I] xpc.watchdog: Server Watchdog: checkin
+4013986.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4013986.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014001.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014001.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014016.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014016.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014031.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014031.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014046.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014046.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014061.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014061.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014076.478 [I] xpc.watchdog: Callback Watchdog: checkin
+4014076.478 [I] xpc.watchdog: Server Watchdog: checkin
+4014091.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014091.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014106.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014106.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014121.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014121.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014136.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014136.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014151.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014151.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014166.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014166.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014181.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014181.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014196.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014196.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014211.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014211.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014226.479 [I] xpc.watchdog: Callback Watchdog: checkin
+4014226.479 [I] xpc.watchdog: Server Watchdog: checkin
+4014236.871 [I] csiapp.info: Application exited: AppInfo[AppleSpell, com.apple.applespell, false, 993, 0]
+4014241.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014241.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014256.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014256.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014271.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014271.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014286.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014286.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014301.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014301.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014316.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014316.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014331.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014331.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014346.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014346.480 [I] xpc.watchdog: Server Watchdog: checkin
+4014361.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014361.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014376.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014376.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014391.480 [I] xpc.watchdog: Callback Watchdog: checkin
+4014391.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014406.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014406.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014421.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014421.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014436.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014436.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014451.531 [I] xpc.watchdog: Callback Watchdog: checkin
+4014451.531 [I] xpc.watchdog: Server Watchdog: checkin
+4014466.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014466.481 [I] xpc.watchdog: Server Watchdog: checkin
+4014481.481 [I] xpc.watchdog: Callback Watchdog: checkin
+4014481.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014496.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014496.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014511.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014511.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014515.162 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 996, 0]
+4014526.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014526.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014541.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014541.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014556.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014556.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014571.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014571.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014586.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014586.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014601.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014601.482 [I] xpc.watchdog: Server Watchdog: checkin
+4014616.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014616.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014631.482 [I] xpc.watchdog: Callback Watchdog: checkin
+4014631.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014646.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014646.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014661.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014661.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014676.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014676.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014691.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014691.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014706.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014706.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014721.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014721.483 [I] xpc.watchdog: Server Watchdog: checkin
+4014736.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014736.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014751.483 [I] xpc.watchdog: Callback Watchdog: checkin
+4014751.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014766.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014766.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014781.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014781.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014796.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014796.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014811.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014811.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014826.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014826.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014841.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014841.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014856.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014856.484 [I] xpc.watchdog: Server Watchdog: checkin
+4014871.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014871.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014885.445 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 984, 0]
+4014886.484 [I] xpc.watchdog: Callback Watchdog: checkin
+4014886.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014892.495 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 1003, 0]
+4014901.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014901.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014903.985 [I] csiapp.info: Application exited: AppInfo[Safari Web Content, com.apple.webkit.webcontent, false, 1001, 0]
+4014916.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014916.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014931.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014931.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014946.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014946.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014961.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014961.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014976.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014976.485 [I] xpc.watchdog: Server Watchdog: checkin
+4014991.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4014991.485 [I] xpc.watchdog: Server Watchdog: checkin
+4015006.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4015006.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015021.485 [I] xpc.watchdog: Callback Watchdog: checkin
+4015021.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015036.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015036.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015051.502 [I] xpc.watchdog: Callback Watchdog: checkin
+4015051.502 [I] xpc.watchdog: Server Watchdog: checkin
+4015066.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015066.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015081.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015081.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015096.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015096.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015111.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015111.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015126.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015126.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015141.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015141.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015156.486 [I] xpc.watchdog: Callback Watchdog: checkin
+4015156.486 [I] xpc.watchdog: Server Watchdog: checkin
+4015171.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015171.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015186.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015186.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015201.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015201.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015216.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015216.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015231.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015231.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015246.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015246.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015261.487 [I] xpc.watchdog: Callback Watchdog: checkin
+4015261.487 [I] xpc.watchdog: Server Watchdog: checkin
+4015276.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015276.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015291.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015291.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015306.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015306.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015321.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015321.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015336.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015336.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015351.510 [I] xpc.watchdog: Callback Watchdog: checkin
+4015351.511 [I] xpc.watchdog: Server Watchdog: checkin
+4015366.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015366.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015381.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015381.488 [I] xpc.watchdog: Server Watchdog: checkin
+4015396.488 [I] xpc.watchdog: Callback Watchdog: checkin
+4015396.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015411.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015411.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015426.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015426.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015441.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015441.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015456.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015456.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015471.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015471.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015486.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015486.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015501.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015501.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015516.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015516.489 [I] xpc.watchdog: Server Watchdog: checkin
+4015531.489 [I] xpc.watchdog: Callback Watchdog: checkin
+4015531.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015546.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015546.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015561.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015561.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015576.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015576.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015591.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015591.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015606.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015606.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015621.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015621.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015636.490 [I] xpc.watchdog: Callback Watchdog: checkin
+4015636.490 [I] xpc.watchdog: Server Watchdog: checkin
+4015651.493 [I] xpc.watchdog: Callback Watchdog: checkin
+4015651.493 [I] xpc.watchdog: Server Watchdog: checkin
+4015666.491 [I] xpc.watchdog: Callback Watchdog: checkin
+4015666.491 [I] xpc.watchdog: Server Watchdog: checkin
+4015681.491 [I] xpc.watchdog: Callback Watchdog: checkin
+4015681.491 [I]

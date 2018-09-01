@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+						<head>
+						<meta charset="utf-8">
+						<meta http-equiv="X-UA-Compatible" content="IE=edge">
+						<meta name="viewport" content="width=device-width, initial-scale=1">
+						<meta name="Creator" content="Intelligence Community" />
+						<meta name="Creation Date" content="Jul 21, 2015" />
+						<meta name="Last Reviewed Date" content="Jul 21, 2015" />
+						<meta name="Language" content="English" />
+						<meta name="Description" content="NSA hires STEM, foreign language analysis, business professionals and more. See sample positions for 17 different career fields, and explore how your education and experience match up">
+						<meta name="Title" content="NSA | Careers | Intelligence Careers" />
+						<title>NSA | Careers | Intelligence Careers</title>
+
+						<!-- Bootstrap -->
+						<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+						<!-- Custom Styles -->
+						<link href="../css/customstyle.css" rel="stylesheet">
+						<link href="css/NSAcustomstyle.css" rel="stylesheet">
+						<link href="css/nsatertiarycustomstyle.css" rel="stylesheet">
+						<style>
+.applysto {
+	font-size: 13px;
+	line-height: 1.2;
+}
+.hidelabels {
+	display: none;
+}
+.collapse, .collapse1 {
+	display: none;
+}
+a.readmorebtn {
+	cursor: pointer;
+	color: #555555;
+}
+a.readmorebtn:hover {
+/* border-bottom:1px black solid; */
+}
+a {
+	color: #00009d;
+}
+</style>
+
+						<!--[if lt IE 9]>
+        <link href="css/ie8customstyle.css" rel="stylesheet">
+    <![endif]-->
+
+						<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+						<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+						<!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+      <script src="../js/1.4.2.respond.min.js"></script>
+    <![endif]-->
+
+						<link rel="stylesheet" href="../jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.css">
+						
+                    <script>var w=window;if(w.performance||w.mozPerformance||w.msPerformance||w.webkitPerformance){var d=document;AKSB=w.AKSB||{},AKSB.q=AKSB.q||[],AKSB.mark=AKSB.mark||function(e,_){AKSB.q.push(["mark",e,_||(new Date).getTime()])},AKSB.measure=AKSB.measure||function(e,_,t){AKSB.q.push(["measure",e,_,t||(new Date).getTime()])},AKSB.done=AKSB.done||function(e){AKSB.q.push(["done",e])},AKSB.mark("firstbyte",(new Date).getTime()),AKSB.prof={custid:"411586",ustr:"",originlat:"0",clientrtt:"18",ghostip:"66.198.8.110",ipv6:false,pct:"10",clientip:"198.85.56.11",requestid:"45efba2",region:"20632",protocol:"h2",blver:14,akM:"dscna",akN:"ae",akTT:"O",akTX:"1",akTI:"45efba2",ai:"265410",ra:"false",pmgn:"",pmgi:"",pmp:"",qc:""},function(e){var _=d.createElement("script");_.async="async",_.src=e;var t=d.getElementsByTagName("script"),t=t[t.length-1];t.parentNode.insertBefore(_,t)}(("https:"===d.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/aksb.min.js")}</script>
+                    </head>
+
+						<body>
+<!-- NSA Header   --> 
+
+<!--/.Fixed-collapse -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation"> 
+                          <!-- Start Skip Navigation -->
+                          <div id="skip"><a href="#skipTarget">Skip to Main Content</a></div>
+                          <!-- End Skip Navigation -->
+                          
+                          <div class="container">
+    <div class="navbar-header  ">
+                              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-body"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                            </div>
+    <div class="navbar-collapse collapse" id="header-body"> </div>
+    <!--/.nav-collapse --> 
+  </div>
+                        </div>
+<div class="container">
+                          <div class="starter-template">
+    <div id="NSAHeader2">
+                              <div class="row">
+        <div class="movdiv1 col-md-6 col-sm-6"> <img src="images/NSA/NSA_Logo_Lg.png" class="img-responsive" alt="National Security Agency" /> </div>
+        <div id="NSA-Navigation3"></div>
+      </div>
+                              <div class="movenav1spacer"></div>
+                              <div class="container affixwidth" data-spy="affix" data-offset-top="115" id="nav">
+        <div class="col-md-12 visible-md visible-lg movenav1" id="NSA-Navigation1"> </div>
+      </div>
+                              <div class="clearfix"></div>
+                            </div>
+  </div>
+                        </div>
+
+<!-- Main Content --> 
+<!-- If an image needs an explanation or it it has function or direction enter alt text. --> 
+<!-- If an image is layout or decoration, use alt="". --> 
+<!-- Using headers ( H1, H2 ) helps direct screen readers.  -->
+<div class="container" id="skipTarget" role="main">
+<table class="maxwidth" role="presentation">
+                          <tr>
+    <td class="nsagutter hidden-sm hidden-xs"><img src="images/spacer.gif" class="fourtypercent" alt="" /></td>
+    <td class="maxwidth"><!-- Every Page requires an H1 to initiate the reader navigation. -->
+                              
+                              <div class="hidden-xs NSASubHeaderTablet">
+        <div class="NSASubHeader2 ">
+                                  <div class="NSASubHeader NSASubHeader8">
+            <h1 class="nsah1" tabindex="0">NSA CAREERS</h1>
+          </div>
+                                </div>
+      </div>
+                              <div class="clearfix"></div>
+                              <div class="nsamaincontent">
+        <h1 class="visible-xs NSAHeader2" tabindex="0">NSA CAREERS:</h1>
+        
+        <p class="NSAHeaderText">Computer science, engineering, mathematics and so much more</p>
+        <p>Challenging, rewarding, life-changing, history-making – there’s no single way to describe a career at NSA. From STEM professionals to foreign language experts, intelligence analysts to business managers, NSA offers extraordinary opportunities to professionals in a wide variety of fields.</p>
+        
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <iframe lang="en" alt="NSA YouTube Video - From Day One, Your Work Matters at NSA" title="NSA YouTube Video - From Day One, Your Work Matters at NSA" class="NSAVideo" frameborder="0" src="https://www.youtube.com/embed/8b3P6VigN4I?rel=0"></iframe>
+           </div> 
+           <div class="col-md-4 col-sm-12">
+            <iframe lang="en" alt="NSA YouTube Video- Bringing People Together" title="NSA YouTube Video- Bringing People Together" class="NSAVideo" frameborder="0" src="https://www.youtube.com/embed/a1gA-noShQ4?rel=0"></iframe>
+           </div>
+           <div class="col-md-4 col-sm-12">
+              <div class="nsagrid-block slide"> <a href="http://www.nxtbook.com/nxtbooks/nsa/nsacareers/index.php#/0" target="_blank" aria-label="Top 5 NSA Career Fields. Learn More.">
+                <div class="nsacaption">
+                  <div class="tertiaryshade1">
+                    <p> <br />
+                      <span class="tertiaryshade2">Top 5 NSA Career Fields. Learn More.</span> <br />
+                      <br />
+                      <span class="btn btn-primary btn-xs carouselcolor" target="_blank" title="Top 5 NSA Career Fields. Learn More.">Learn more</span> </p>
+                  </div>
+                </div>
+                <div> <img src="images/NSA/Top5_thumb.jpg" alt="Top 5 NSA Career Fields. Learn More."/> </div>
+                </a> </div>
+            </div>
+        </div>
+        
+        <p>Browse the career fields below to find your field of expertise, general qualifications and examples of specific positions. </p>
+
+        <div id="accordion" class="accordion" role="tablist" aria-live="polite"> 
+                                  
+                                  <!-- START nsaCareer1-->
+                                  <h3 id='nsaCareer1' role="tab" aria-controls="panel1" tabindex="0"> <a href="#" tabindex="-1">Intelligence Analysis</a> </h3>
+                                  <div id="panel1" aria-labelledby="nsaCareer1" role="tabpanel">
+            <p>You enjoy transforming raw information into critical reports used to understand intelligence issues within the United States and abroad. Your quick mind can analyze complex situations under pressure. You have an aptitude for identifying intelligence gaps, evaluating information from multiple sources, monitoring trends and interpreting events related to particular countries or issues. Serve among best-in-class professionals on the front lines of the nation's defense. Collect, analyze and report intelligence that uncovers the intentions of foreign governments and non-state entities worldwide.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Data Science and Analysis</li>
+                                      <li>History, Government or Political Science</li>
+                                      <li>Intelligence</li>
+                                      <li>International Affairs, International Relations or International Studies</li>
+                                      <li>Library Sciences or Information Sciences</li>
+                                      <li>National Security Studies</li>
+                                      <li>Science (e.g., Biology, Chemistry)</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Intelligence Analyst</strong><br />
+                Develops creative solutions to answer analytic questions and solve difficult problems.  Conducts research, develops query strategies, and analyzes foreign target intelligence to produce reports and recommendations.</li>
+                                      <li><strong>Intelligence Analyst (Geographic/Regional Specialization)</strong><br />
+                Uses geographic, regional and/or cultural expertise to produce analytic summaries and reports for key decision makers to safeguard personnel, information, facilities, systems operations and plans. </li>
+                                      <li><strong>Cryptologic Cyber Planner</strong><br />
+                Applies in-depth knowledge of the joint planning process to develop detailed cryptologic Functional Support Plans (FSPs), Cryptologic Support Plans (CSPs), and Concept of Operations (CONOPs) that support the Cyber Operation requirements of the DoD, the U.S. government and its allies.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer1 --> 
+                                  
+                                  <!-- START nsaCareer2-->
+                                  <h3 id='nsaCareer2' role="tab" aria-controls="panel2" tabindex="0"> <a href="#" tabindex="-1">Intelligence Collection</a> </h3>
+                                  <div id="panel2" aria-labelledby="nsaCareer2" role="tabpanel">
+            <p>As an intelligence collector, your mission is to acquire the vital information needed to produce intelligence. You may live and work anywhere in the world. You may be asked to use your proficiency in a foreign language or to learn a new language. You must be able to establish and build interpersonal relationships. The arts of persuasion, negotiation, interviewing and problem solving will serve you well. The ability to work in ambiguous and unstructured situations is critical. Contribute to a unique mission by applying your exceptional interpersonal skills, high-level training and professional talents to the collection of intelligence.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Applied Social Sciences</li>
+                                      <li>History, Government or Political Science</li>
+                                      <li>Intelligence</li>
+                                      <li>International Affairs/Relations/Studies</li>
+                                      <li>Library Sciences or Information Sciences</li>
+                                      <li>Social Sciences (e.g., Anthropology)</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Access Analyst</strong><br />
+                Collects, processes and analyzes communications signals from foreign entities using analog and digital collection and processing equipment. Performs signals and protocol analysis on collected information, as well as first-line network analysis.</li>
+                                      <li><strong>Access Manager</strong><br />
+                Participates in the development, planning and coordination of the deployment of collection systems, including identifying appropriate collection access points, collection methods and/or plans necessary to exploit target networks.</li>
+                                      <li><strong>Access System Architect</strong><br />
+                Collaborates across agency to upgrade capability to access emerging and critical foreign entities of interest, correct collection gaps and improve efficiency of intelligence collection approaches.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer2 --> 
+                                  
+                                  <!-- START nsaCareer3-->
+                                  <h3 id='nsaCareer3' role="tab" aria-controls="panel3" tabindex="0"> <a href="#" tabindex="-1">Foreign Language Analysis</a> </h3>
+                                  <div id="panel3" aria-labelledby="nsaCareer3" role="tabpanel">
+            <p>You have a passion for foreign languages, and you have strong oral communication, written communication and critical thinking skills. You enjoy research, translation, transcription, reporting and analysis. Most of all, you understand the nuance of foreign language, its context, cultural overtones and regional dialects. Serve in a position where your contributions can have a positive effect on a global scale. The Intelligence Community has many opportunities for foreign language analysts.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Foreign Language or Linguistics</li>
+                                      <li>History, Government or Political Science</li>
+                                      <li>Intelligence</li>
+                                      <li>International Affairs/Relations/Studies</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Language Analyst</strong><br />
+                Uses knowledge of foreign language and English to provide key decision makers with a complete and accurate picture of the context within which the decision is being made (i.e., provide an understanding of nuance, context, cultural overtones and dialect in which the communication occurred).</li>
+                                      <li><strong>Foreign Language Advisor</strong><br />
+                Uses knowledge of foreign language and the agency's mission needs to provide guidance to decision makers and language analysts at all levels, including recommending training/development approaches, hiring and staffing priorities, and other assistive strategies that will help accomplish the mission.</li>
+                                      <li><strong>Scientific Linguist</strong><br />
+                Applies linguistic knowledge (syntax, morphology, phonetics, phonology, semantics, discourse analysis, pragmatics, typology) and linguistic principles to address operational problems by designing, developing and/or evaluating tools used to enhance understanding of foreign languages or materials.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer3 --> 
+                                  
+                                  <!-- START nsaCareer4-->
+                                  <h3 id='nsaCareer4' role="tab" aria-controls="panel4" tabindex="0"> <a href="#" tabindex="-1">Computer Science</a> </h3>
+                                  <div id="panel4" aria-labelledby="nsaCareer4" role="tabpanel">
+            <p>As a computer scientist in the Intelligence Community, you will solve complex problems, test innovative approaches and research new solutions to storing, manipulating and presenting information. Successful candidates will know how to apply the theoretical models of computer science to complex system architecture and system software organization challenges. Apply your computer science expertise to projects that seek to create new standards for the transformation of information.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Computer Engineering</li>
+                                      <li>Computer Networking and Security</li>
+                                      <li>Computer Networking or Information Assurance</li>
+                                      <li>Computer Science</li>
+                                      <li>Computer Science or Computer Programming</li>
+                                      <li>Data Science & Analysis</li>
+                                      <li>Electrical Engineering</li>
+                                      <li>Information Assurance Certification</li>
+                                      <li>Information Technology or Information Systems</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Computer Scientist</strong><br />
+                Uses advanced technologies in computer science and related fields to accomplish ongoing NSA initiatives and programs, including developing technology, tools and testing approaches. Researches solutions and solves technical problems of national consequence.</li>
+                                      <li><strong>Network Vulnerability Analyst</strong><br />
+                Identifies vulnerabilities of and potential attacks to the design and operation of network systems by relating vulnerabilities and attacks to effects on operations and missions supported by those systems. Based on this knowledge, develops effective countermeasures to potential threats.</li>
+                                      <li><strong>Software Engineer</strong><br />
+                Analyzes, designs, verifies, validates, implements, applies and maintains software systems. Appropriately applies discrete mathematics, probability and statistics, and other relevant topics in computer science and supporting disciplines to complex software systems.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer4 --> 
+                                  
+                                  <!-- START nsaCareer5-->
+                                  <h3 id='nsaCareer5' role="tab" aria-controls="panel5" tabindex="0"> <a href="#" tabindex="-1">Cyber</a> </h3>
+                                  <div id="panel5" aria-labelledby="nsaCareer5" role="tabpanel">
+            <p>National security depends on technology as never before, and this dependence is growing at an ever increasing rate. As a cyber professional in the Intelligence Community, you will work as part of a team on the frontlines of defense against our cyber adversaries. The Intelligence Community needs cyber professionals with technical expertise and a driving desire to remain at the forefront of their field. Help protect national security interests as part of the world's most advanced team of cyber professionals.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Computer Engineering</li>
+                                      <li>Computer Networking and Security</li>
+                                      <li>Computer Networking or Information Assurance</li>
+                                      <li>Computer Science</li>
+                                      <li>Computer Programming</li>
+                                      <li>Information Assurance Certification</li>
+                                      <li>Information Technology or Information Systems</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Computer Network Defense Analyst</strong><br />
+                Uses information collected from a variety of computer network defense resources (including intrusion detection system alerts, firewall and network traffic logs, and host system logs) to identify, analyze and report events that occur or might occur within the technical environment.</li>
+                                      <li><strong>Computer Network Operator</strong><br />
+                Provides time-sensitive mission support by maintaining situational awareness of potential cyber threats. Leverages technical methods to manage, monitor and execute large-scale operations in response to national security requirements.</li>
+                                      <li><strong>Capabilities Development Specialist</strong><br />
+                Conducts comprehensive technology research to evaluate potential vulnerabilities in cyberspace systems. Detects, identifies and describes specific vulnerabilities in a system, network, component or process. Conducts software and systems engineering and software systems development in order to meet required capabilities.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer5 --> 
+                                  
+                                  <!-- START nsaCareer6-->
+                                  <h3 id='nsaCareer6' role="tab" aria-controls="panel6" tabindex="0"> <a href="#" tabindex="-1">Engineering and Physical Sciences</a> </h3>
+                                  <div id="panel6" aria-labelledby="nsaCareer6" role="tabpanel">
+            <p>As an engineering and physical science professional, you will use your skills to create the systems and tools that will be used to enhance the operation of intelligence. You will advise, administer and perform scientific projects, such as planning, designing and constructing specialized equipment, identifying and eliminating hazardous conditions and ensuring adherence to sound engineering and scientific standards and principles. The Intelligence Community offers multiple areas of focus for engineers, including computer, electrical, mechanical and structural, as well as a wide range of opportunities in the physical sciences including chemist, biologist and physicist. Apply your science and engineering skills to protecting the nation.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Applied Mathematics</li>
+                                      <li>Computer Engineering</li>
+                                      <li>Computer Science</li>
+                                      <li>Engineering (e.g., Electrical, Civil, Mechanical, Systems) or Physical Sciences</li>
+                                      <li>Mathematics or Applied Mathematical Sciences</li>
+                                      <li>Science (e.g., Biology, Chemistry)</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Environmental Engineer</strong><br />
+                Uses knowledge of the principles, methods and techniques of facilities and systems engineering for controlling pollution and protecting the quality of resources and the environment. Requires an understanding of and utilization of pertinent aspects of chemistry, biological sciences and public health sciences.</li>
+                                      <li><strong>Hardware/Software Design Engineer</strong><br />
+                Designs, develops, constructs and tests electronic hardware and software processing components that are typically subsystems of communications, collection, processing or analysis systems.</li>
+                                      <li><strong>Physicist</strong><br />
+                Conducts research into phases of phenomena, develops theories and laws on the basis of observations and experiments, and devises methods to apply theories and laws to solve technical problems, analyze proposals for feasibility, and guide technical development.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer6 --> 
+                                  
+                                  <!-- START nsaCareer7-->
+                                  <h3 id='nsaCareer7' role="tab" aria-controls="panel7" tabindex="0"> <a href="#" tabindex="-1">Mathematical Sciences</a> </h3>
+                                  <div id="panel7" aria-labelledby="nsaCareer7" role="tabpanel">
+            <p>When many just see numbers, you see new possibilities. You know how to design and analyze complex algorithms; work on interdisciplinary teams to help co-workers tackle complex mathematical problems and express difficult cryptographic problems in mathematical terms. You are educated and well versed in one or more of the following: number theory, group theory, finite field theory, linear algebra, probability theory, mathematical statistics or combinatorics. Join the Intelligence Community, expand your experience and put your skills to work for the good of the nation.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Data Science & Analysis</li>
+                                      <li>Mathematics or Applied Mathematical Sciences</li>
+                                      <li>Applied Mathematics</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Applied Research Mathematician</strong><br />
+                Applies and develops mathematical or computational methods and lines of reasoning for mission-related problems. Creates computer algorithms, data models and protocols to address critical mission needs.</li>
+                                      <li><strong>Cryptanalytic Diagnostician</strong><br />
+                Uses knowledge of cryptanalytic techniques and encryption methods to analyze and decrypt signals and/or cryptologic data. Uses this knowledge to develop tools and techniques to facilitate the collection and analysis of signals.</li>
+                                      <li><strong>Data Scientist</strong><br />
+                Uses knowledge of data, data systems and analytic techniques and tools to make sense of large volumes of information and data. Uses large scale analytics to provide key decision makers with analytic results that provide important context related to mission critical decisions.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer7 --> 
+                                  
+                                  <!-- START nsaCareer8-->
+                                  <h3 id='nsaCareer8' role="tab" aria-controls="nsaCareer8" tabindex="0"> <a href="#" tabindex="-1">Business, Accounting and Budget</a> </h3>
+                                  <div id="panel8" aria-labelledby="nsaCareer8" role="tabpanel">
+           <div class="careersBlock" style="background-color:#fff"> <div class="col-lg-4 col-md-5 col-sm-6"> <iframe alt="NSA YouTube Video- Business Careers at NSA" title="NSA YouTube Video- Business Careers at NSA" width="300" height="150" src="https://www.youtube.com/embed/tADl4JjtV54?rel=0" frameborder="0" allowfullscreen></iframe></div></div><p>As a professional in a business role, you make the business of intelligence run like clockwork. You are part of a team that supports an internal infrastructure that may be as large as the top Fortune 500 companies. You formulate and execute budget resources, develop and allocate manpower resources and even provide guidance on implementing policy on cost, finance and accounting. Start a career where you become a steward of taxpayer dollars, seeking the greatest return that money can provide: a superior intelligence service for the safety and security of our nation.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Accounting</li>
+                                      <li>Finance or Economics</li>
+                                      <li>Business Administration or Business Management</li>
+                                      <li>Business</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Accountant</strong><br />
+                Uses accounting systems and techniques to help decision makers manage cost and measure performance. Records and analyzes complex non-routine transactions; monitors financial systems operations for legal compliance and internal control purposes; prepares reports on financial status and operations for external oversight authorities.</li>
+                                      <li><strong>Business Consultant</strong><br />
+                Advises and assists organizational leadership with strategic business planning and decision-making by providing recommendations based on sound business principles and supported by detailed analyses.</li>
+                                      <li><strong>Contracting Specialist</strong><br />
+                Contracts for goods and services, conducts negotiations, reviews purchase requests and clarifies all facets of a proposed acquisition to ensure accuracy and completeness. Prepares requests for proposals and awards documentation and administers the contracts until performance is completed.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer8 --> 
+                                  
+                                  <!-- START nsaCareer9-->
+                                  <h3 id='nsaCareer9' role="tab" aria-controls="panel9" tabindex="0"> <a href="#" tabindex="-1">Inspection, Investigation and Compliance</a> </h3>
+                                  <div id="panel9" aria-labelledby="nsaCareer9" role="tabpanel">
+            <p>As an inspection, investigation and compliance professional, you will support national security by ensuring proper adherence to all appropriate standards, rules and regulations. Inspection professionals examine a wide variety of facilities, equipment and procedures to ensure compliance to standards and make recommendations for improvement. Investigation professionals conduct detailed investigations to ensure adherence to standards, rules and regulations, ranging from employment suitability to performing independent reviews of personnel-related incidents. Compliance professionals review numerous processes and procedures to ensure that all efforts adhere to the appropriate standards, rules and regulations. Bring your strong sense for rules and regulations to the Intelligence Community to keep national operations running by the book.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Criminology or Criminal Justice</li>
+                                      <li>Law or Legal Support</li>
+                                      <li>Physical Security</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Auditor</strong><br />
+                Conducts independent audits and reviews of agency programs and operations in accordance with government auditing standards, designed to ensure compliance with applicable laws, regulations and standards, and to improve efficiency and effectiveness. This includes audits of program performance, financial statements, information technology and cybersecurity areas.</li>
+                                      <li><strong>Compliance Officer</strong><br />
+                Develops and implements comprehensive mission compliance solutions to keep the government's activities consistent with the laws, policies and procedures designed to protect privacy during mission operations.</li>
+                                      <li><strong>Inspector General (IG) Investigator</strong><br />
+                Plans, conducts and reports on investigations into alleged fraud, waste, abuse and mismanagement. Researches applicable legal authorities, collects relevant official documents and other physical evidence, interviews witnesses and produces reports summarizing investigation findings and conclusions.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer9 --> 
+                                  
+                                  <!-- START nsaCareer10-->
+                                  <h3 id='nsaCareer10' role="tab" aria-controls="panel10" tabindex="0"> <a href="#" tabindex="-1">Law and Legal Services</a> </h3>
+                                  <div id="panel10" aria-labelledby="nsaCareer10" role="tabpanel">
+            <p>The Intelligence Community operates in an extremely complex arena that is governed by international and domestic laws, rules, regulations and standards. As a law and legal service professional, you will advise leadership and mission professionals on legal issues associated with intelligence operations. You will use your knowledge of the law and applicable standards, rules and regulations to advise IC leadership and guide policymakers on the legal issues facing the IC today and in the future. Bring your legal training and skills to the Intelligence Community for a career in the law like no other.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Bar Membership</li>
+                                      <li>Criminology or Criminal Justice</li>
+                                      <li>Law or Legal Support</li>
+                                      <li>Paralegal Certification</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Attorney</strong><br />
+                Protects government interests by advising government clients, advocating on behalf of government clients and educating government clients concerning legal and regulatory authorities, requirements, entitlements, obligations and oversight requirements.</li>
+                                      <li><strong>Equal Employment Opportunity (EEO) Investigator</strong><br />
+                Plans, conducts and reports on independent reviews of the government's compliance with EEO rules and regulations. Gathers data pertinent to formal allegations of discrimination, conducts statistical analyses, interviews key witnesses and writes reports of investigations.</li>
+                                      <li><strong>Paralegal</strong><br />
+                Applies legal knowledge and expertise in the analysis of the legal impact of legislative developments, administrative/judicial decisions and opinions/rulings on relevant programs. Conducts legal research, prepares for and attends hearings, interviews witnesses, manages evidence and drafts legal documents.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer10 --> 
+                                  
+                                  <!-- START nsaCareer11-->
+                                  <h3 id='nsaCareer11' role="tab" aria-controls="panel11" tabindex="0"> <a href="#" tabindex="-1">Medical and Occupational Health</a> </h3>
+                                  <div id="panel11" aria-labelledby="nsaCareer11" role="tabpanel">
+            <p>The Intelligence Community is dedicated to the safety and well-being of our employees and their families around the globe. As a medical professional in the IC, you will perform a wide variety of functions, including medical evaluations, laboratory analyses and even pharmaceutical care.  Likewise, our occupational health professionals ensure that the conditions in which our employees work are safe and will not adversely affect well-being.  You will perform a variety of functions, including evaluating work spaces to ensure conditions meet health and efficiency standards and amending issues that negatively impact an employee's health or ability to work.  This includes the provision of counseling services to employees and family members in need of assistance. Join the Intelligence Community and take care of the people who take care of the nation.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Environmental Health or Industrial Hygiene</li>
+                                      <li>Health Care or Medicine</li>
+                                      <li>Licensed Clinical Psychologist</li>
+                                      <li>Licensed Pharmacist</li>
+                                      <li>Licensed Physician</li>
+                                      <li>Licensed Professional Counselor</li>
+                                      <li>Psychology or Psychological Services</li>
+                                      <li>Registered Nurse</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Industrial Hygienist</strong><br />
+                Identifies and analyzes environmental conditions or stresses affecting the health, morale and productivity of employees to eliminate or control occupational hazards in accordance with federal and Department of Defense (DoD) regulations and consensus guidelines.</li>
+                                      <li><strong>Clinical Psychologist</strong><br />
+                Applies professional psychological knowledge and skills to conduct mission-related risk assessments, consultations and training. Provides consultation on security clearances and other adjudicative decisions. Selects individuals suitable for sensitive or high-risk assignments, and screens personnel for pre- and post-assignment processing.</li>
+                                      <li><strong>Physician</strong><br />
+                Provides clinical, consultative and administrative services in the areas of occupational health, case management, travel health, primary diagnosis and treatment. Provides medical support for health promotion and wellness, to maintain the value, integrity, quality and availability of medical services.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer11 --> 
+                                  
+                                  <!-- START nsaCareer12-->
+                                  <h3 id='nsaCareer12' role="tab" aria-controls="panel12" tabindex="0"> <a href="#" tabindex="-1">Security and Law Enforcement</a> </h3>
+                                  <div id="panel12" aria-labelledby="nsaCareer12" role="tabpanel">
+            <p>While the Intelligence Community works to protect the nation, you work to protect the Intelligence Community. If you have a knack for finding clues that uncover hidden truths, you could work in the area of personnel security, evaluating the character, background and history of employees and applicants. Or you could apply your law enforcement skills to provide counterterrorism and force protection, critical incident management, and vehicle, facility and material security inspections.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Cardiopulmonary Resuscitation (CPR)</li>
+                                      <li>Criminology or Criminal Justice</li>
+                                      <li>DoD Polygraph Institute Continuing Education Certificate</li>
+                                      <li>Military Service</li>
+                                      <li>Physical Security</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>NSA Police Officer</strong><br />
+                Provides armed and uniformed security, force protection and law enforcement functions in support of the agency's mission, assets, personnel and facilities.</li>
+                                      <li><strong>Polygraph Examiner</strong><br />
+                Helps ensure that only trustworthy individuals receive access to classified information by using structured polygraph examinations (including interviews and interrogations) to obtain information from affiliates that will assist in making adjudicative decisions.</li>
+                                      <li><strong>Security Analyst</strong><br />
+                Helps protect agency personnel, facilities and missions by collecting, analyzing, synthesizing and collating data associated with counterintelligence, 
+                counterespionage and counterterrorism as it affects agency equities worldwide.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer12 --> 
+                                  
+                                  <!-- START nsaCareer13-->
+                                  <h3 id='nsaCareer13' role="tab" aria-controls="panel13" tabindex="0"> <a href="#" tabindex="-1">Human Resources</a> </h3>
+                                  <div id="panel13" aria-labelledby="nsaCareer13" role="tabpanel">
+            <p>Intelligence Community employees operate in a high risk, high stress and high reward environment.  As such, the IC is committed to investing in its most valuable source of capital &ndash; its employees. As a human resource professional, you may get involved in all aspects of human resource management, including recruitment and job placement, employee benefits, compensation, job design, performance management and professional development. Human resources professionals are trusted, strategic partners who work with the mission and are a vital part of the IC. Play a key role in the development of the world's most advanced intelligence workforce. </p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Applied Social Sciences</li>
+                                      <li>Business Administration or Business Management</li>
+                                      <li>History, Government or Political Science</li>
+                                      <li>Human Resources or Human Capital Management</li>
+                                      <li>Law or Legal Support</li>
+                                      <li>Psychology or Psychological Services</li>
+                                      <li>Social Sciences (e.g., Anthropology)</li>
+                                      <li>Support Services</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Human Resources Professional</strong><br />
+                Provides HR services to a global workforce.  These may include recruiting; interpreting and applying HR policies; advising the agency workforce on HR-related topics and programs; addressing performance and conduct issues; processing HR-related actions; compiling and analyzing workforce data; and communicating HR information to the workforce.</li>
+                                      <li><strong>Benefits Specialist</strong><br />
+                Provides retirement and insurance services to personnel, including developing and publishing benefits policy and working aids; verifying employee retirement and insurance eligibility and coverage; counseling the workforce, assisting employees in resolving discrepancies; and providing administrative services for the benefits system.</li>
+                                      <li><strong>Human Resources Program Manager</strong><br />
+                Provides HR-related program management (e.g., student employment, training administration, training development, assessment, awards, promotion, incentive pay, field orientation) to include negotiating and executing funding; establishing and tracking program schedules; retrieving, compiling and analyzing program data; evaluating program deliverables; and recommending possible options to address program shortcomings or gaps.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer13 --> 
+                                  
+                                  <!-- START nsaCareer14-->
+                                  <h3 id='nsaCareer14' role="tab" aria-controls="panel14" tabindex="0"> <a href="#" tabindex="-1">Education and Training</a> </h3>
+                                  <div id="panel14" aria-labelledby="nsaCareer14" role="tabpanel">
+            <p>You enjoy helping people learn and grow. You have the skills to use state-of-the-art methods to develop and administer training courses and curricula that address the developmental needs of all employees. A career in training and intelligence may be in your future.  In addition to creating and presenting new courses, you will constantly review course content to ensure that our programs are up-to-date, and that we are creating a learning environment that is conducive to the success of each learner. Keep each member of our workforce on the forefront of his or her chosen field with a fulfilling career in education and training.</p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Applied Social Sciences</li>
+                                      <li>Education, Training or Instructional Design</li>
+                                      <li>Human Resources or Human Capital Management</li>
+                                      <li>Social Sciences (e.g., Anthropology)</li>
+                                      <li>Support Services</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Education and Training Program Manager</strong><br />
+                Establishes and directs education and training related programs (e.g., developmental, certification, training) by effectively organizing and prioritizing work and utilizing resources.</li>
+                                      <li><strong>Instructional Designer</strong><br />
+                Defines training   goals and objectives and determines appropriate training delivery methods and evaluation/assessment strategies. Methods may include interactive, scenario-driven, technology-based simulations, gaming training activities, demonstrations, tutorials, templates, job aids, business rules and process documents.</li>
+                                      <li><strong>Instructor</strong><br />
+                Prepares employees to accomplish mission requirements by transferring subject matter expertise through the delivery of formal and informal training. Evaluates learners and provides feedback on learning performance. Makes recommendations for modifying course content or delivery as needed.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer14 --> 
+                                  
+                                  <!-- START nsaCareer15-->
+                                  <h3 id='nsaCareer15' role="tab" aria-controls="panel15" tabindex="0"> <a href="#" tabindex="-1">General Administrative Support</a> </h3>
+                                  <div id="panel15" aria-labelledby="nsaCareer15" role="tabpanel">
+            <p>General administrative support professionals provide support to all key aspects of our mission. You will work closely with strategic and tactical leaders, manage projects and serve in staff officer positions. Apply your skills to help the Intelligence Community protect national interests around the globe. </p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Social Sciences (e.g., Anthropology)</li>
+                                      <li>Applied Social Sciences</li>
+                                      <li>Support Services</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Customer Service Advocate</strong><br />
+                Provides one-stop access to support products and services by interviewing requester to determine specifics of request, understanding customer perspective, or providing information to resolve the problem. Performs preliminary analysis of customer needs to identify the most appropriate approach for solving problems.</li>
+                                      <li><strong>Office Assistant</strong><br />
+                Perform basic office support functions such as typing, filing, answering phones, greeting visitors, operating general office equipment, timekeeping, records management and providing basic administrative services for the immediate organization.</li>
+                                      <li><strong>Program/Project Director</strong><br />
+                Performs one or more functions that contribute to the management of a project or effort (planning, resource management, scheduling, tracking and oversight, quality assurance).  Builds and motivates teams to accomplish goals, creates and sustains a strong customer focus, and maintains high expectations for performance.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer15 --> 
+                                  
+                                  <!-- START nsaCareer16-->
+                                  <h3 id='nsaCareer16' role="tab" aria-controls="panel16" tabindex="0"> <a href="#" tabindex="-1">Communication and Public Affairs</a> </h3>
+                                  <div id="panel16" aria-labelledby="nsaCareer16" role="tabpanel">
+            <p>Clear and compelling communication products are your specialty. Working in words or images, online or print, you know how to articulate ideas and craft communication products that tell a story. Whether your specialty is visual communication, writing, editing or web development, you have the opportunity to facilitate internal or external communication to achieve its intended effects. Become a part of a team that is in charge of communicating vital information to multiple audiences. Join the Intelligence Community as a communications expert. </p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Communications, Public Affairs, Journalism or Marketing</li>
+                                      <li>Digital Image Technician Apprentice</li>
+                                      <li>History, Government or Political Science</li>
+                                      <li>Publishing</li>
+                                      <li>Support Services</li>
+                                      <li>Theater/Arts/Art Design</li>
+                                      <li>Video Production</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Graphic Designer</strong><br />
+                Designs and/or creates artwork or graphics for print, electronic products, exhibits or displays. Designs communication campaigns or strategies.   Develops multimedia products, integrating text, computer graphics, conventional art, photographs or other media.</li>
+                                      <li><strong>Public Affairs Specialist</strong><br />
+                Informs and educates the public about the missions, organization, capabilities, needs, activities and performance of the Intelligence Community as instruments of national defense policy and security. Communicates between the government and members of the news media, expediting the flow of information to both internal and external audiences.</li>
+                                      <li><strong>Editor/Writer</strong><br />
+                Originates new documents and oral presentations, and improves the quality of existing materials by using journalistic principles. Edits and writes a variety of documents, correspondence and other material for publication or presentation.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer16 --> 
+                                  
+                                  <!-- START nsaCareer17-->
+                                  <h3 id='nsaCareer17' role="tab" aria-controls="panel177" tabindex="0"> <a href="#" tabindex="-1">Infrastructure and Logistics</a> </h3>
+                                  <div id="panel17" aria-labelledby="nsaCareer17" role="tabpanel">
+            <p>If you specialize in designing and maintaining facilities and infrastructure, the Intelligence Community offers a wealth of opportunity. You work on a team that performs facilities designs and technical service in support of the intelligence mission. Designing physical facilities, preparing engineering calculations and drawings, analyzing HVAC, air distribution and piping systems – these are just some of the opportunities available in the Intelligence Community. Start or continue a career where the facilities are specialized to meet a critical mission. </p>
+            <p><strong>Education/Experience</strong></p>
+            <ul class="tertiaryul">
+                                      <li>Automotive Service Excellence (ASE)</li>
+                                      <li>Engineering (e.g., Electrical, Civil, Mechanical, Systems) or Physical Sciences</li>
+                                      <li>Environmental Health or Industrial Hygiene</li>
+                                      <li>Facilities or Facilities Management</li>
+                                      <li>Operations or Logistics</li>
+                                      <li>Prepress Technical Apprentice</li>
+                                    </ul>
+            <p><strong>Example Positions</strong></p>
+            <ul class="tertiaryul">
+                                      <li><strong>Facilities Manager</strong><br />
+                Manages installation, operation, maintenance and repair of mechanical systems, including electrical, HVAC and building plumbing systems, plus general facility components, such as roofs, roads or sidewalks.</li>
+                                      <li><strong>Facilities Services Officer</strong><br />
+                Responsible for the operation, maintenance, repair, modification, design, construction and inspection of government facilities. Oversees work related to physical infrastructure, utilities, roadways and surrounding grounds as performed by a variety of employees or contractors.</li>
+                                      <li><strong>Logistics Services Officer</strong><br />
+                Oversees a wide range of logistics services to include assessing situations, interpreting policies, and developing and implementing solution sets. Administers all elements of multi-faceted programs; serves as a technical consultant to partners in areas related to logistics functions.</li>
+                                      <li><strong>Logistics Supply Specialist</strong><br />
+                Receives and examines orders for accuracy (item, quantity, damage) and creates receiving reports (copies for warehouse and finance). Warehouses and issues materials, recycles materials, processes excess items, provides storage for customer equipment and material. Delivers and picks up material within the Baltimore-Washington area.</li>
+                                    </ul>
+          </div>
+                                  <!-- close nsaCareer17 --> 
+                                  
+                                </div>
+        <!-- close accordion --> 
+        
+      </div>
+                              <!-- close maincontent --></td>
+    <!--</div>-->
+  
+                          
+    <td class="nsagutter hidden-sm hidden-xs"><img src="images/spacer.gif" class="fourtypercent" alt="" /></td>
+  </tr>
+                        </table>
+
+<!-- /container -->
+</div>
+
+<!-- IC Footer includes file (../icfooter.html) -->
+<div id="icfooter"></div>
+<!--/ IC Footer includes file (../icfooter.html) --> 
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="../js/jquery-1.11.1.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/bootstrap.min.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/jquery-ui.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+
+<!-- jQuery for includes files --> 
+<script src="../js/includesfiles.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+
+<!-- jQuery for accordion files --> 
+<script src="../js/accordion.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/accordion_508.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/accordion2_508.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/accordion3_508.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/accordion4_508.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/accordion5_508.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+
+<!-- jQuery From / Textbox script --> 
+<script src="../js/textbox.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('.slide').hover(
+                function () {
+                    $(this).find('.nsacaption, .caption1').slideDown(250);
+                },
+                function () {
+                    $(this).find('.nsacaption, .caption1').slideUp(250);
+                }
+            );
+        });
+    </script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#header-body").load("Navigation/NSA_Navigation2.html");
+            $("#NSA-Navigation1").load("Navigation/NSA_Navigation1.html");
+            $("#NSA-Navigation3").load("Navigation/NSA_Navigation3.html");
+            $("#icfooter").load("../icfooter.html");
+        });
+    </script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+<script src="../js/menubar.js"></script>
+<noscript>
+                        Your browser does not support JavaScript.
+                        </noscript>
+</body>
+</html>
